@@ -1,0 +1,4 @@
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+pipeline-runner @ git+https://github.com/mobalt/pipeline-runner@bfe426f01d345c761a4e06bbc192a1b851cb4814
+PyYAML==5.3.1
