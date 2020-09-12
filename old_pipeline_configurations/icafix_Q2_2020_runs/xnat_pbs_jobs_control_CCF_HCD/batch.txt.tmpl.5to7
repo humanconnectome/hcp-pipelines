@@ -1,0 +1,35 @@
+#
+#  Batch parameters file
+#  =====================
+#
+
+# -------------------------> General HCP settings
+
+_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_folderstructure    : hcpls
+_hcp_filename           : original
+_hcp_processing_mode    : HCPStyleData
+_log                    : study|hcp
+
+# -------------------------> Map to MNAP
+
+_hcp_cifti_tail         : _Atlas 
+
+---
+id: @@@Subject@@@
+subject: @@@SubjectPart@@@
+hcp: @@@StudyFolder@@@/subjects/@@@Subject@@@/hcp
+
+hcpready: true
+
+01: bold1:REST1a        : rfMRI_REST1a_PA               : filename(rfMRI_REST1a_PA)
+02: bold2:REST1a        : rfMRI_REST1a_AP               : filename(rfMRI_REST1a_AP)
+03: bold3:REST1b        : rfMRI_REST1b_PA               : filename(rfMRI_REST1b_PA)
+04: bold4:REST1b        : rfMRI_REST1b_AP               : filename(rfMRI_REST1b_AP)
+05: bold5:GUESSING      : tfMRI_GUESSING_PA             : filename(tfMRI_GUESSING_PA)
+06: bold6:CARIT         : tfMRI_CARIT_PA                : filename(tfMRI_CARIT_PA)
+07: bold7:EMOTION       : tfMRI_EMOTION_PA              : filename(tfMRI_EMOTION_PA)
+08: bold8:REST2a        : rfMRI_REST2a_AP               : filename(rfMRI_REST2a_AP)
+09: bold9:REST2a        : rfMRI_REST2a_PA               : filename(rfMRI_REST2a_PA)
+10: bold10:REST2b       : rfMRI_REST2b_AP               : filename(rfMRI_REST2b_AP)
+11: bold11:REST2b       : rfMRI_REST2b_PA               : filename(rfMRI_REST2b_PA)
