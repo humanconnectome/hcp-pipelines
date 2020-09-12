@@ -1,0 +1,20 @@
+{% extends "generic/clean_data.jinja2" %}
+{% block content %}
+find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
+mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
+mv $COMMON/subjects/specs $COMMON/processinginfo
+mv $COMMON/processing $COMMON/processinginfo
+mv $COMMON/info/hcpls $COMMON/processinginfo
+mv $COMMON/subjects/$SUBJ/subject_hcp.txt $COMMON/processinginfo/processing
+mv $COMMON/subjects/$SUBJ/hcpls/hcpls2nii.log $COMMON/processinginfo/processing
+find $COMMON -maxdepth 1 -mindepth 1 \
+    \( -type d -not -path "$COMMON/t1w" \
+    -a -not -path "$COMMON/processinginfo" \
+    -a -not -path "$COMMON/mninonlinear" \
+    -a -not -path "$COMMON/$SCAN" \
+    \) -exec rm -rf '{}' \;
+echo "Removing any XNAT catalog files still around."
+find $WORK_DIR -name "*_catalog.xml" -delete
+echo "Remaining files:"
+find $COMMON
+{% endblock content %}

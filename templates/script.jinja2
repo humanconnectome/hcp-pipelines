@@ -1,0 +1,14 @@
+{% include "pbs_head.jinja2" %}
+{% block pre %}
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }} {{ REQUESTED_XNAT_SERVER }}
+{% endblock pre %}
+{% include "singularity.jinja2" %}
+
+WORK_DIR="{{ WORKING_DIR }}"
+SUBJ="{{ SUBJECT_ID }}_{{ SUBJECT_CLASSIFIER }}"
+COMMON="$WORK_DIR/$SUBJ"
+SCAN="{{ SUBJECT_EXTRA }}"
+START_FILE="{{ STARTTIME_FILE_NAME }}"
+
+# Specific code
+{% block content %}{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "generic/get_data.jinja2" %}
+{% block content %}
+## Need to convert some files to symlinks as they are added to or rewritten by MSMAll
+if [ -d "$COMMON" ] ; then
+    pushd $COMMON
+    find . -type l | egrep "\.spec$|prefiltered_func_data.*clean*" | xargs -I '{}' sh -c 'cp --remove-destination $(readlink {}) {}'
+    popd
+fi
+{% endblock content %}
