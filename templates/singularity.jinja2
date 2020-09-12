@@ -1,0 +1,27 @@
+{% if SINGULARITY is defined -%}
+
+module load {{ SINGULARITY_VERSION }}
+
+singularity exec \
+{%- if SINGULARITY_BINDPATH is defined -%}
+    {%- for bindpath in SINGULARITY_BINDPATH.split(" ") %}
+    --bind {{ bindpath }} \
+    {%- endfor -%}
+{%- endif -%}
+
+{%- if SINGULARITY_NVIDIA is defined %}
+    --nv \
+{%- endif %}
+    {{ SINGULARITY_CONTAINER }} \
+    {{ SINGULARITY_RUNPATH }} \
+{%- if SINGULARITY_PARAMS is defined -%}
+{#
+    {%- for key, value in singularity.params %}
+        --{{ key }}{% if value is not none %}="{{ value }}"{% endif %} \
+    {%- endfor -endif%}
+#}
+{%- endif %}
+;
+
+
+{%- endif %}

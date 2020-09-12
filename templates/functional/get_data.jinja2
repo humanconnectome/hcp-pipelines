@@ -1,0 +1,10 @@
+{% extends "generic/get_data.jinja2" %}
+{% block content %}
+find $COMMON/unprocessed/ -maxdepth 1 -mindepth 1 \
+    \( -type d -not -path "$COMMON/unprocessed/$SCAN" \
+    -path "$COMMON/unprocessed/[rt]fMRI_*_[AP][PA]" \
+    -o -path ="$COMMON/unprocessed/T1w_*" \
+    -o -path ="$COMMON/unprocessed/T2w_*" \
+    -o -path ="$COMMON/unprocessed/Diffusion" \
+    \) -exec rm -rf '{}' \;
+{% endblock content %}

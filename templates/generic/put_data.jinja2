@@ -1,0 +1,7 @@
+{% extends "script.jinja2" %}
+{% block pre %}
+{{ super() }}
+mv {{ WORKING_DIR }}/*{{ PIPELINE_NAME }}* {{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/ProcessingInfo
+{% endblock pre %}
+{% block content %}
+{% endblock content %}
