@@ -1,4 +1,4 @@
-{% if SINGULARITY is defined -%}
+{% if SINGULARITY_CONTAINER is defined -%}
 
 module load {{ SINGULARITY_VERSION }}
 
@@ -15,11 +15,9 @@ singularity exec \
     {{ SINGULARITY_CONTAINER }} \
     {{ SINGULARITY_RUNPATH }} \
 {%- if SINGULARITY_PARAMS is defined -%}
-{#
-    {%- for key, value in singularity.params %}
+    {%- for key, value in SINGULARITY_PARAMS %}
         --{{ key }}{% if value is not none %}="{{ value }}"{% endif %} \
     {%- endfor -endif%}
-#}
 {%- endif %}
 ;
 
