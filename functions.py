@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 
 def split_subject(_1):
@@ -77,3 +78,8 @@ def set_common_variables(
         "MARK_RUNNING_STATUS_RUNPATH": MARK_RUNNING_STATUS_RUNPATH,
         "STARTTIME_FILE_NAME": STARTTIME_FILE_NAME,
     }
+
+
+def structural_create_check_data_job_script(SINGULARITY_PARAMS):
+    SINGULARITY_PARAMS["fieldmap"] = "NONE"
+    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
