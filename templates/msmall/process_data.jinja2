@@ -1,7 +1,7 @@
 {% extends "generic/process_data.jinja2" %}
 {% block pre %}
 {{ super() }}
-mkdir  -p {{ TMPDIR }}
+mkdir  -p {{ TMPDIR|default("") }}
 {% endblock pre %}
 {% block content %}
 {% endblock content %}

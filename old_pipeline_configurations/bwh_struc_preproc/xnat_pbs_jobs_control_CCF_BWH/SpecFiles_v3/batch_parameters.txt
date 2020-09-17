@@ -4,7 +4,7 @@
 
 # -------------------------> General HCP settings
 
-_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_Pipeline           : /opt/HCP/HCPpipelines
 _hcp_folderstructure    : hcpls
 _hcp_bold_boldnamekey   : name
 _hcp_mppversion         : strict
