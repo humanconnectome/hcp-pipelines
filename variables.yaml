@@ -3,8 +3,8 @@ DEFAULT: &default
   REQUESTED_XNAT_SERVER: intradb
   SINGULARITY_CONTAINER_VERSION: singularity-3.2.1
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp
+  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA/SpecFiles_v3
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_Struc/qunex_suite_0_48_19.sif
   SINGULARITY_CONTAINER_XNAT_PATH: $HOME/CONTAINER.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
@@ -26,6 +26,13 @@ DEFAULT: &default
 
   FREESURFER_LICENSE_PATH: $HOME/freesurfer/license
   HCP_RUN_UTILS: /pipeline_tools/HCPpipelinesRunUtils
+  CLEAN_OUTPUT_FIRST: false
+  WALLTIME_LIMIT_HOURS: 52
+  MEM_LIMIT_GBS: 8
+  PROCESSING_STAGE: PROCESS_DATA
+  OUTPUT_RESOURCE_SUFFIX: Structural_preproc
+  BRAIN_SIZE: 150
+  USE_PRESCAN_NORMALIZED: False
 
 functional: &functional
   <<: *default
@@ -35,7 +42,6 @@ functional: &functional
   SINGULARITY_QUNEXRUN_PATH: /export/HCP/qunex-hcp/run_scripts/run_qunex.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_Func/qunex_suite_0_49_10.sif
   XNAT_PBS_JOBS_CONTROL: $HOME/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_BWH
-  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 functional_preprocess_CCF_BWH:
@@ -57,7 +63,6 @@ hand_edit: &hand_edit
   HAND_EDIT_PROCESSING_DIR: /scratch/$USER/hand_edit_buildspace
   SINGULARITY_QUNEXRUN_PATH: $HOME/hand_edit_test/run_qunex_test.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_IcaFix/qunex_0_50_02.sif
-  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
 
 hand_edit_CCF_HCA:
   <<: *hand_edit
@@ -79,7 +84,6 @@ msmall: &msmall
   XNAT_PBS_JOBS_PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   SINGULARITY_BIND_PATH: "/NRG-data/NRG/intradb/build_ssd,/export/HCP/qunex-hcp,$HOME/pipeline_tools/HCPpipelinesXnatPbsJobs:/pipeline_tools/xnat_pbs_jobs"
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_MsmAll/qunex_0.51.1.sif
-  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 msmall_process_CCF_HCA:
@@ -98,7 +102,6 @@ multirunicafix: &multirunicafix
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd,/export/HCP/qunex-hcp
   SINGULARITY_QUNEXRUN_PATH: /export/HCP/qunex-hcp/run_scripts/run_qunex.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_IcaFix/qunex_0_50_02.sif
-  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 multirunicafix_process_CCF_HCA:
@@ -110,34 +113,34 @@ multirunicafix_process_CCF_HCD:
   <<: *multirunicafix
   XNAT_PBS_JOBS_CONTROL: $HOME/icafix_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCD
 
-structural_preprocess_CCF_BWH:
+structural_preprocess: &structural_preprocess
   <<: *default
+  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/work/hcp-pipelines/SpecFiles_v3
+
+structural_preprocess_CCF_BWH:
+  <<: *structural_preprocess
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/bwh_struc_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: bwh_struc_preproc
   SINGULARITY_BIND_PATH: "$HOME/bwh_struc_preproc/xnat_pbs_jobs_control_CCF_BWH:/opt/xnat_pbs_jobs_control,/NRG-data/NRG/intradb/build_ssd,/export/HCP/qunex-hcp"
   XNAT_PBS_JOBS_CONTROL: $HOME/bwh_struc_preproc/xnat_pbs_jobs_control_CCF_BWH
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/bwh_struc_preproc/xnat_pbs_jobs_control_CCF_BWH/SpecFiles_v3
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 structural_preprocess_CCF_HCA:
-  <<: *default
+  <<: *structural_preprocess
   SINGULARITY_BIND_PATH: "$HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA:/opt/xnat_pbs_jobs_control,/NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp"
   XNAT_PBS_JOBS_CONTROL: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA/SpecFiles_v3
 
 structural_preprocess_CCF_HCD:
-  <<: *default
+  <<: *structural_preprocess
   SINGULARITY_BIND_PATH: "$HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCD:/opt/xnat_pbs_jobs_control,/NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp"
   XNAT_PBS_JOBS_CONTROL: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCD
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCD/SpecFiles_v3
 
 structural_preprocess_CCF_MDD:
-  <<: *default
+  <<: *structural_preprocess
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/mdd_struc_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: mdd_struc_preproc
   SINGULARITY_BIND_PATH: "$HOME/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD:/opt/xnat_pbs_jobs_control,/NRG-data/NRG/intradb/build_ssd,/export/HCP/qunex-hcp"
   XNAT_PBS_JOBS_CONTROL: $HOME/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD/SpecFiles_v3
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 
@@ -158,8 +161,9 @@ get_data_script:
 
 process_data_script:
     PBS_LOG: $WORKING_DIR
+    PBS_HASWELL: False
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-    SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files $XNAT_PBS_JOBS_ARCHIVE_ROOT $SINGULARITY_BIND_PATH"
+    SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
     SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_PATH
     SINGULARITY_RUNPATH: $SINGULARITY_QUNEXRUN_PATH
     SINGULARITY_PARAMS: {
@@ -179,7 +183,7 @@ put_data_script:
     PBS_MEM: 12
     PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT $SINGULARITY_BIND_PATH
+    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
     SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
     SINGULARITY_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
     SINGULARITY_PARAMS: {
@@ -200,7 +204,7 @@ check_data_script:
     PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
     PBS_HASWELL: True
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT $SINGULARITY_BIND_PATH
+    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
     SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
     SINGULARITY_RUNPATH: $CHECK_DATA_RUNPATH
     SINGULARITY_PARAMS: {
@@ -218,7 +222,7 @@ mark_no_longer_running_script:
     PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
     PBS_HASWELL: True
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT $SINGULARITY_BIND_PATH
+    SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
     SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
     SINGULARITY_RUNPATH: $MARK_RUNNING_STATUS_RUNPATH
     SINGULARITY_PARAMS: {
@@ -232,3 +236,36 @@ mark_no_longer_running_script:
         "done": null,
         "scan": $SUBJECT_EXTRA,
     }
+
+ordered_bold_lists:
+  OBL_HCA:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold3:VISMOTOR", "tfMRI_VISMOTOR_PA"]
+    - ["04: bold4:CARIT", "tfMRI_CARIT_PA"]
+    - ["05: bold5:FACENAME", "tfMRI_FACENAME_PA"]
+    - ["06: bold6:REST2", "rfMRI_REST2_AP"]
+    - ["07: bold7:REST2", "rfMRI_REST2_PA"]
+  OBL_HCD_5TO7:
+    - ["01: bold1:REST1a", "rfMRI_REST1a_PA"]
+    - ["02: bold2:REST1a", "rfMRI_REST1a_AP"]
+    - ["03: bold3:REST1b", "rfMRI_REST1b_PA"]
+    - ["04: bold4:REST1b", "rfMRI_REST1b_AP"]
+    - ["05: bold5:GUESSING", "tfMRI_GUESSING_PA"]
+    - ["06: bold6:CARIT", "tfMRI_CARIT_PA"]
+    - ["07: bold7:EMOTION", "tfMRI_EMOTION_PA"]
+    - ["08: bold8:REST2a", "rfMRI_REST2a_AP"]
+    - ["09: bold9:REST2a", "rfMRI_REST2a_PA"]
+    - ["10: bold10:REST2b", "rfMRI_REST2b_AP"]
+    - ["11: bold11:REST2b", "rfMRI_REST2b_PA"]
+  OBL_HCD_8_AND_UP:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold3:GUESSING", "tfMRI_GUESSING_PA"]
+    - ["04: bold4:GUESSING", "tfMRI_GUESSING_AP"]
+    - ["05: bold5:CARIT", "tfMRI_CARIT_PA"]
+    - ["06: bold6:CARIT", "tfMRI_CARIT_AP"]
+    - ["07: bold7:EMOTION", "tfMRI_EMOTION_PA"]
+    - ["08: bold8:REST2", "rfMRI_REST2_AP"]
+    - ["09: bold9:REST2", "rfMRI_REST2_PA"]
+
