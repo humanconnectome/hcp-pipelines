@@ -1,10 +1,10 @@
-{% if SINGULARITY_CONTAINER is defined -%}
+{% if SINGULARITY_CONTAINER is defined and SINGULARITY_CONTAINER -%}
 
 module load {{ SINGULARITY_VERSION }}
 
 singularity exec \
 {%- if SINGULARITY_BINDPATH is defined -%}
-    {%- for bindpath in SINGULARITY_BINDPATH.split(" ") %}
+    {%- for bindpath in SINGULARITY_BINDPATH.split(",") %}
     --bind {{ bindpath }} \
     {%- endfor -%}
 {%- endif -%}
@@ -15,9 +15,9 @@ singularity exec \
     {{ SINGULARITY_CONTAINER }} \
     {{ SINGULARITY_RUNPATH }} \
 {%- if SINGULARITY_PARAMS is defined -%}
-    {%- for key, value in SINGULARITY_PARAMS %}
+    {%- for key, value in SINGULARITY_PARAMS.items() %}
         --{{ key }}{% if value is not none %}="{{ value }}"{% endif %} \
-    {%- endfor -endif%}
+    {%- endfor -%}
 {%- endif %}
 ;
 
