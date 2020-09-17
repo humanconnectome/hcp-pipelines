@@ -1,4 +1,5 @@
 import os
+import random
 
 
 def split_subject(_1):
@@ -20,8 +21,11 @@ def split_subject(_1):
     }
 
 
-def choose_node(_2):
-    pass
+def choose_node(_2, XNAT_PBS_JOBS_PUT_SERVER_LIST):
+    server_list = XNAT_PBS_JOBS_PUT_SERVER_LIST.split(" ")
+    return {
+        "PUT_SERVER": random.choice(server_list),
+    }
 
 
 def chain_jobs_on_pbs():
