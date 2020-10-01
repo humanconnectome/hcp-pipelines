@@ -1,0 +1,83 @@
+#  Batch parameters file
+#  =====================
+#
+
+# -------------------------> General HCP settings
+
+_hcp_Pipeline           : /opt/HCP/HCPpipelines
+_hcp_folderstructure    : hcpls
+_hcp_bold_boldnamekey   : name
+_hcp_mppversion         : strict
+_log                    : study|hcp
+
+
+# -------------------------> PreFS
+
+# -- Structural settings
+
+_hcp_brainsize          : 150
+_hcp_t1samplespacing    : 
+_hcp_t2samplespacing    : 
+_hcp_unwarpdir          : # Usually z
+_hcp_gdcoeffs           : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_avgrdcmethod       : NONE
+_hcp_topupconfig        : b02b0.cnf
+_hcp_prefs_template_res : 0.8
+
+# -- Spin echo settings
+
+_hcp_sephaseneg         : # AP
+_hcp_sephasepos         : # PA
+_hcp_dwelltime          : # ==> "EffectiveEchoSpacing": 0.000580009,
+_hcp_seunwarpdir        : # y
+
+
+# -------------------------> FS
+
+_hcp_freesurfer_home    : ${FREESURFER_HOME}
+ 
+
+# -------------------------> Post FS
+ 
+_hcp_grayordinatesres   : 2
+_hcp_hiresmesh          : 164
+_hcp_lowresmesh         : 32
+_hcp_regname            : MSMSulc
+_hcp_inflatescale       : # should be left to empty (default in HCPpipelines is 1)
+
+
+# -------------------------> fMRIVolume
+
+_hcp_bold_ref           : use
+_hcp_bold_stcorr        : NONE
+_hcp_bold_echospacing   : 0.0005800090  # ==> "EffectiveEchoSpacing": 0.000580009,
+_hcp_bold_unwarpdir     : PA=y|AP=y-
+_hcp_bold_correct       : TOPUP
+_hcp_bold_res           : 2
+_hcp_bold_gdcoeffs      : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+
+# -------------------------> fMRI Surface
+
+_hcp_bold_smoothFWHM    : 2
+
+
+# -------------------------> dMRI settings
+
+_hcp_dwi_dwelltime      : 0.6899980000
+_hcp_dwi_PEdir          : 2
+_hcp_dwi_gdcoeffs       : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+
+
+# -------------------------> Check settings
+
+_hcp_prefs_check        : last
+_hcp_fs_check           : last
+_hcp_postfs_check       : last
+_hcp_bold_vol_check     : last
+_hcp_bold_surf_check    : last
+_hcp_dwi_check          : last
+
+
+# -------------------------> Map to MNAP
+
+_hcp_cifti_tail         : _Atlas
