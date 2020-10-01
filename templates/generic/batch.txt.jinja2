@@ -1,0 +1,38 @@
+#
+#  Batch parameters file
+#  =====================
+#
+
+# -------------------------> General HCP settings
+
+_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_folderstructure    : hcpls
+_hcp_filename           : original
+_hcp_processing_mode    : HCPStyleData
+_log                    : study|hcp
+
+# -------------------------> Map to MNAP
+
+_hcp_cifti_tail         : _Atlas 
+
+{% block additional_params %}
+{% if MSM_ALL_BOLDS is defined %}
+# -------------------------> MSMAll parameters
+
+_hcp_msmall_bolds	: {{ MSM_ALL_BOLDS }}
+_hcp_resample_extractnames	: rfMRI_REST:{{ MSM_ALL_BOLDS }}
+_hcp_resample_extractextraregnames	: MSMSulc
+_hcp_resample_extractvolume	: TRUE
+
+{% endif %}
+{% endblock additional_params %}
+
+---
+id: {{ SUBJECT_SESSION }}
+subject: {{ SUBJECT_ID }}
+hcp: {{ STUDY_FOLDER_REPL }}/subjects/{{ SUBJECT_SESSION }}/hcp
+
+hcpready: true
+{% for XX, YY in QUNEX_BOLDLIST %}
+{{ '{:24}'.format(XX) }} : {{ '{:30}'.format(YY) }} : filename({{ YY }})
+{%- endfor %}
