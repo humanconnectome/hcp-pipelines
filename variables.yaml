@@ -143,7 +143,9 @@ structural_preprocess_CCF_MDD:
   XNAT_PBS_JOBS_CONTROL: $HOME/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
-
+##############################################
+### Scripts Section ##########################
+##############################################
 
 get_data_script:
     PBS_LOG: $WORKING_DIR
@@ -237,6 +239,9 @@ mark_no_longer_running_script:
         "scan": $SUBJECT_EXTRA,
     }
 
+##############################################
+### BOLD list Section ########################
+##############################################
 ordered_bold_lists:
   OBL_HCA:
     - ["01: bold1:REST1", "rfMRI_REST1_AP"]
