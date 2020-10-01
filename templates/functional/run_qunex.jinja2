@@ -1,0 +1,22 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+	mv ${StudyFolder}/T*w "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+
+	######################### hcp4
+	${QUNEXCOMMAND} hcp4 \
+		--sessions="${StudyFolder}/processing/batch.txt" \
+		--sessionsfolder="${StudyFolder}/subjects" \
+		--overwrite="${Overwrite}" \
+		--parsessions="${parsessions}"
+
+	######################### hcp5
+	${QUNEXCOMMAND} hcp5 \
+		--sessions="${StudyFolder}/processing/batch.txt" \
+		--sessionsfolder="${StudyFolder}/subjects" \
+		--overwrite="${Overwrite}" \
+		--parsessions="${parsessions}"
+
+
+{% endblock pipeline_specific %}
