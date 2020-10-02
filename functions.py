@@ -2,13 +2,7 @@ import glob
 import os
 import random
 import time
-
-def escape_path(text):
-    return text.replace("\\", "\\\\").replace("/", "\\/").replace("&", "\\&")
-
-
-def keep_resting_state_scans(scans):
-    return [x for x in scans if not (x.startswith("t") or x.startswith("f"))]
+from .util import escape_path, keep_resting_state_scans
 
 
 def split_subject(_1):
