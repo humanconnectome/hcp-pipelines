@@ -1,0 +1,34 @@
+hca:
+  BOLD_LIST_ORDER:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold3:VISMOTOR", "tfMRI_VISMOTOR_PA"]
+    - ["04: bold4:CARIT", "tfMRI_CARIT_PA"]
+    - ["05: bold5:FACENAME", "tfMRI_FACENAME_PA"]
+    - ["06: bold6:REST2", "rfMRI_REST2_AP"]
+    - ["07: bold7:REST2", "rfMRI_REST2_PA"]
+hcd_5_to_7:
+  BOLD_LIST_ORDER:
+    - ["01: bold1:REST1a", "rfMRI_REST1a_PA"]
+    - ["02: bold2:REST1a", "rfMRI_REST1a_AP"]
+    - ["03: bold3:REST1b", "rfMRI_REST1b_PA"]
+    - ["04: bold4:REST1b", "rfMRI_REST1b_AP"]
+    - ["05: bold5:GUESSING", "tfMRI_GUESSING_PA"]
+    - ["06: bold6:CARIT", "tfMRI_CARIT_PA"]
+    - ["07: bold7:EMOTION", "tfMRI_EMOTION_PA"]
+    - ["08: bold8:REST2a", "rfMRI_REST2a_AP"]
+    - ["09: bold9:REST2a", "rfMRI_REST2a_PA"]
+    - ["10: bold10:REST2b", "rfMRI_REST2b_AP"]
+    - ["11: bold11:REST2b", "rfMRI_REST2b_PA"]
+hcd_8_and_up:
+  BOLD_LIST_ORDER:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold3:GUESSING", "tfMRI_GUESSING_PA"]
+    - ["04: bold4:GUESSING", "tfMRI_GUESSING_AP"]
+    - ["05: bold5:CARIT", "tfMRI_CARIT_PA"]
+    - ["06: bold6:CARIT", "tfMRI_CARIT_AP"]
+    - ["07: bold7:EMOTION", "tfMRI_EMOTION_PA"]
+    - ["08: bold8:REST2", "rfMRI_REST2_AP"]
+    - ["09: bold9:REST2", "rfMRI_REST2_PA"]
+
