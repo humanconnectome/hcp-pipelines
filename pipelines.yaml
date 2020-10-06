@@ -1,8 +1,5 @@
 ---
 generic:
-  - set_variables:
-      HOME: /home/HCPpipeline
-      USER: HCPpipeline
   - load_variables: structural_preprocess_CCF_HCA
   - function: split_subject
   - function: set_common_variables
@@ -42,11 +39,11 @@ generic:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-# - generate_file:
-#     template: generic/check_data.jinja2
-#     filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
-#     variable: CHECK_DATA_JOB_SCRIPT_NAME
-  - load_variables: scripts.yaml#check_data_script
+#  - load_variables: scripts.yaml#check_data_script
+#  - generate_file:
+#      template: generic/check_data.jinja2
+#      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+#      variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -59,24 +56,56 @@ generic:
       template: msmall/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
+
+  - function: clean_output_resource
+  - function: mark_running_status
+  - function: submit_jobs
+
 structural:
-  - set_variables:
-      USER: HCPpipeline
-      HOME: /home/HCPpipeline
-      SUBJECT: "XX:YYY:ZZZ:A"
-  - load_variables: structural_preprocess_CCF_HCA
-  - function: check_required_variables
   - function: split_subject
+  - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - function: set_common_variables
+  - function: set_credentials
   - function: choose_node
-  - function: structural_create_check_data_job_script
-  - set_variables:
-      WORKING_DIR: ./temp
-  - function: make_directories
+  - function: set_study_folder
+#  - function: structural_create_check_data_job_script
+  - load_variables: scripts.yaml#get_data_script
   - generate_file:
-      template: pbs_head.jinja2
-      filepath: $WORKING_DIR/$SUBJECT_ID.PBS_HEAD.sh
-      variable: PBS_HEAD_SCRIPT
-  - function: chain_jobs_on_pbs
+      template: structural/get_data.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      variable: GET_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#process_data_script
+  - generate_file:
+      template: generic/process_data.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      variable: PROCESS_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#clean_data_script
+  - generate_file:
+      template: generic/clean_data.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      variable: CLEAN_DATA_SCRIPT_NAME
+  - load_variables: scripts.yaml#put_data_script
+  - generate_file:
+      template: generic/put_data.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      variable: PUT_DATA_SCRIPT_NAME
+  #  - load_variables: scripts.yaml#check_data_script
+  #  - generate_file:
+  #      template: generic/check_data.jinja2
+  #      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+  #      variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/mark_complete.jinja2
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: structural/run_qunex.jinja2
+      filepath: "${WORKING_DIR}/run_qunex.sh"
+      variable: RUN_QUNEX_SCRIPT
+
+  - function: clean_output_resource
+  - function: mark_running_status
+  - function: submit_jobs
 
 functional:
   - load_variables: functional
