@@ -115,7 +115,7 @@ multirunicafix_process_CCF_HCD:
 
 structural_preprocess: &structural_preprocess
   <<: *default
-  SINGULARITY_QUNEXPARAMETER_PATH: $HOME/work/hcp-pipelines/SpecFiles_v3
+  SINGULARITY_QUNEXPARAMETER_PATH: $PRUNNER_CONFIG_DIR/SpecFiles_v3
 
 structural_preprocess_CCF_BWH:
   <<: *structural_preprocess
