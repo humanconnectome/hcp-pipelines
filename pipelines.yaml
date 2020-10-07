@@ -1,66 +1,3 @@
----
-generic:
-  - load_variables: structural_preprocess_CCF_HCA
-  - function: split_subject
-  - function: set_common_variables
-  - function: set_credentials
-  - function: choose_node
-  - function: set_study_folder
-
-  # Only for msmall, multirunicafix, and diffusion
-  - function: available_bold_dirs
-  - function: set_msm_all_bolds
-  - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_boldlist
-  - generate_file:
-      template: generic/batch.txt.jinja2
-#      filepath: $STUDY_FOLDER/processing/batch.txt
-      filepath: $WORKING_DIR/processing.batch.txt
-      variable: BATCH_FILE
-
-  - load_variables: scripts.yaml#get_data_script
-  - generate_file:
-      template: generic/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
-      variable: GET_DATA_JOB_SCRIPT_NAME
-  - load_variables: scripts.yaml#process_data_script
-  - generate_file:
-      template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
-      variable: PROCESS_DATA_JOB_SCRIPT_NAME
-  - load_variables: scripts.yaml#clean_data_script
-  - generate_file:
-      template: generic/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
-      variable: CLEAN_DATA_SCRIPT_NAME
-  - load_variables: scripts.yaml#put_data_script
-  - generate_file:
-      template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
-      variable: PUT_DATA_SCRIPT_NAME
-#  - load_variables: scripts.yaml#check_data_script
-#  - generate_file:
-#      template: generic/check_data.jinja2
-#      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
-#      variable: CHECK_DATA_JOB_SCRIPT_NAME
-  - generate_file:
-      template: generic/mark_complete.jinja2
-      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
-      variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-#  - generate_file:
-#     template: generic/freesurfer.jinja2
-#     filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-#     variable: FREE_SURFER_SCRIPT_NAME
-  - generate_file:
-      template: msmall/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
-      variable: RUN_QUNEX_SCRIPT
-
-  - function: clean_output_resource
-  - function: mark_running_status
-  - function: submit_jobs
-
 StructuralPreprocessing:
   - function: split_subject
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
@@ -114,120 +51,71 @@ StructuralPreprocessing:
       template: generic/freesurfer.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
       variable: FREE_SURFER_SCRIPT_NAME
-
 #  - function: clean_output_resource
 #  - function: mark_running_status
 #  - function: submit_jobs
 
-functional:
-  - load_variables: functional
-  - function: check_required_variables
-  - function: split_subject
-  - function: choose_node
-  - dump_variables: $WORKING_DIR/$SUBJECT.ENVIRONMENT.sh
-  - generate_file:
-      input: functional/get_data.jinja2
-      output: $WORKING_DIR/$SUBJECT.XNAT_GET_DATA_job.sh
-      variable: GET_DATA_SCRIPT
-  - generate_file:
-      template: generic/process_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.PROCESS_DATA_job.sh
-      variable: PROCESS_DATA_SCRIPT
-  - generate_file:
-      template: functional/clean_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.CLEAN_DATA_job.sh
-      variable: CLEAN_DATA_SCRIPT
-  - generate_file:
-      template: generic/put_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_PUT_DATA_job.sh
-      variable: PUT_DATA_SCRIPT
-  - generate_file:
-      template: generic/check_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_CHECK_DATA_job.sh
-      variable: CHECK_DATA_SCRIPT
-  - function: chain_jobs_on_pbs
 
-msmall:
-  - load_variables: msmall
-  - function: check_required_variables
-  - function: split_subject
-  - function: choose_node
-  - dump_variables: $WORKING_DIR/$SUBJECT.ENVIRONMENT.sh
-  - generate_file:
-      input: msmall/get_data.jinja2
-      output: $WORKING_DIR/$SUBJECT.XNAT_GET_DATA_job.sh
-      variable: GET_DATA_SCRIPT
-  - generate_file:
-      template: msmall/process_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.PROCESS_DATA_job.sh
-      variable: PROCESS_DATA_SCRIPT
-  - generate_file:
-      template: msmall/clean_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.CLEAN_DATA_job.sh
-      variable: CLEAN_DATA_SCRIPT
-  - generate_file:
-      template: generic/put_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_PUT_DATA_job.sh
-      variable: PUT_DATA_SCRIPT
-  - generate_file:
-      template: generic/check_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_CHECK_DATA_job.sh
-      variable: CHECK_DATA_SCRIPT
-  - function: chain_jobs_on_pbs
 
-multirunicafix:
-  - load_variables: multirunicafix
-  - function: check_required_variables
+generic:
+  - load_variables: structural_preprocess_CCF_HCA
   - function: split_subject
+  - function: set_common_variables
+  - function: set_credentials
   - function: choose_node
-  - dump_variables: $WORKING_DIR/$SUBJECT.ENVIRONMENT.sh
+  - function: set_study_folder
+
+  # Only for msmall, multirunicafix, and diffusion
+  - function: available_bold_dirs
+  - function: set_msm_all_bolds
+  - function: set_bold_list_order
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
+  - function: set_qunex_boldlist
+  - generate_file:
+      template: generic/batch.txt.jinja2
+#      filepath: $STUDY_FOLDER/processing/batch.txt
+      filepath: $WORKING_DIR/processing.batch.txt
+      variable: BATCH_FILE
+
+  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_GET_DATA_job.sh
-      variable: GET_DATA_SCRIPT
-  - generate_file:
-      template: multirunicafix/process_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.PROCESS_DATA_job.sh
-      variable: PROCESS_DATA_SCRIPT
-  - generate_file:
-      template: multirunicafix/clean_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.CLEAN_DATA_job.sh
-      variable: CLEAN_DATA_SCRIPT
-  - generate_file:
-      template: generic/put_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_PUT_DATA_job.sh
-      variable: PUT_DATA_SCRIPT
-  - generate_file:
-      template: generic/check_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_CHECK_DATA_job.sh
-      variable: CHECK_DATA_SCRIPT
-  - function: chain_jobs_on_pbs
-
-diffusion:
-  - load_variables: diffusion
-  - function: check_required_variables
-  - function: split_subject
-  - function: choose_node
-  - dump_variables: $WORKING_DIR/$SUBJECT.ENVIRONMENT.sh
-  - generate_file:
-      template: diffusion/get_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_GET_DATA_job.sh
-      variable: GET_DATA_SCRIPT
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      variable: GET_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#process_data_script
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.PROCESS_DATA_job.sh
-      variable: PROCESS_DATA_SCRIPT
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      variable: PROCESS_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
-      template: diffusion/clean_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.CLEAN_DATA_job.sh
-      variable: CLEAN_DATA_SCRIPT
+      template: generic/clean_data.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      variable: CLEAN_DATA_SCRIPT_NAME
+  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_PUT_DATA_job.sh
-      variable: PUT_DATA_SCRIPT
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      variable: PUT_DATA_SCRIPT_NAME
+#  - load_variables: scripts.yaml#check_data_script
+#  - generate_file:
+#      template: generic/check_data.jinja2
+#      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+#      variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
-      template: generic/check_data.jinja2
-      filepath: $WORKING_DIR/$SUBJECT.XNAT_CHECK_DATA_job.sh
-      variable: CHECK_DATA_SCRIPT
-  - function: chain_jobs_on_pbs
+      template: generic/mark_complete.jinja2
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+     template: generic/freesurfer.jinja2
+     filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
+     variable: FREE_SURFER_SCRIPT_NAME
+  - generate_file:
+      template: msmall/run_qunex.jinja2
+      filepath: "${WORKING_DIR}/run_qunex.sh"
+      variable: RUN_QUNEX_SCRIPT
+
+  - function: clean_output_resource
+  - function: mark_running_status
+  - function: submit_jobs
 
