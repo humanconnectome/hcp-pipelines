@@ -61,15 +61,19 @@ generic:
   - function: mark_running_status
   - function: submit_jobs
 
-structural:
+StructuralPreprocessing:
   - function: split_subject
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - function: set_common_variables
   - function: set_credentials
   - function: choose_node
   - function: set_study_folder
-#  - function: structural_create_check_data_job_script
+  - function: make_directories
+  - dump_variables:
+      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      variable: XNAT_PBS_SETUP_SCRIPT_PATH
   - load_variables: scripts.yaml#get_data_script
+  - function: structural_get_data_job_script
   - generate_file:
       template: structural/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
@@ -89,15 +93,23 @@ structural:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-  #  - load_variables: scripts.yaml#check_data_script
-  #  - generate_file:
-  #      template: generic/check_data.jinja2
-  #      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
-  #      variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#check_data_script
+  - function: structural_create_check_data_job_script
+  - generate_file:
+      template: generic/check_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - function: copy_free_surfer_assessor_script
+  - load_variables: scripts.yaml#freesurfer_assessor_script
+  - generate_file:
+      template: generic/freesurfer.jinja2
+      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
+      variable: FREE_SURFER_SCRIPT_NAME
   - generate_file:
       template: structural/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"

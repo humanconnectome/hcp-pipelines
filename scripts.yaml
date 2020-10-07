@@ -1,7 +1,9 @@
 get_data_script:
   PBS_LOG: $WORKING_DIR
   PBS_HASWELL: True
+  SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
+  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   SINGULARITY_RUNPATH: $GET_DATA_RUNPATH
   SINGULARITY_PARAMS: {
     "project": $SUBJECT_PROJECT,
@@ -88,4 +90,19 @@ mark_no_longer_running_script:
     "resource": "RunningStatus",
     "done": null,
     "scan": $SUBJECT_EXTRA,
+  }
+
+freesurfer_assessor_script:
+  PBS_LOG: $WORKING_DIR
+  PBS_HASWELL: False
+  SINGULARITY_CONTAINER: null
+  FREESURFER_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "session": $SUBJECT_SESSION,
+    "session-classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
   }
