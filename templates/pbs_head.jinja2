@@ -1,11 +1,11 @@
 #PBS -S /bin/bash
 #PBS -l nodes={{ PBS_NODES|default(1)|int }}:ppn={{ PBS_PPN|default(1)|int }}
 
-{%- if PBS_HASWELL is defined -%}
+{%- if PBS_HASWELL is defined and PBS_HASWELL -%}
 :haswell
 {%- endif -%}
 
-{%- if PBS_GPU is defined -%}
+{%- if PBS_GPU is defined and PBS_GPU -%}
 :gpus={{ PBS_GPU|int }}
 {%- endif -%}
 
