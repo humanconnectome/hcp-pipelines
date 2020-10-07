@@ -1,0 +1,8 @@
+{% extends "script.jinja2" %}
+{% block content %}
+{{ FREESURFER_ASSESSOR_DEST_PATH }} \
+    {%- for key, value in FREESURFER_PARAMS.items() %}
+        --{{ key }}{% if value is not none %}="{{ value }}"{% endif %} \
+    {%- endfor -%}
+;
+{% endblock content %}
