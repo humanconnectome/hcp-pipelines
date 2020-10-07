@@ -196,6 +196,7 @@ def set_common_variables(
 
 def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
     SINGULARITY_PARAMS["delay-seconds"] = 120
+    del SINGULARITY_PARAMS["scan"]
     if USE_PRESCAN_NORMALIZED:
         SINGULARITY_PARAMS["use-prescan-normalized"] = None
 
@@ -293,8 +294,9 @@ def set_qunex_boldlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_boldlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_BOLDLIST": qunex_boldlist}
 
-def copy_free_surfer_assessor_script(DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR):
+def copy_free_surfer_assessor_script(DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR):
     source = F"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    source = F"{PRUNNER_CONFIG_DIR}/xnat_pbs_jobs/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
     dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
     if not DRYRUN:
         shutil.copy(source, dest)
