@@ -72,6 +72,10 @@ StructuralPreprocessing:
   - dump_variables:
       filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - generate_file:
+      template: structural/run_qunex.jinja2
+      filepath: "${WORKING_DIR}/run_qunex.sh"
+      variable: RUN_QUNEX_SCRIPT
   - load_variables: scripts.yaml#get_data_script
   - function: structural_get_data_job_script
   - generate_file:
@@ -110,10 +114,6 @@ StructuralPreprocessing:
       template: generic/freesurfer.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
       variable: FREE_SURFER_SCRIPT_NAME
-  - generate_file:
-      template: structural/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
-      variable: RUN_QUNEX_SCRIPT
 
 #  - function: clean_output_resource
 #  - function: mark_running_status
