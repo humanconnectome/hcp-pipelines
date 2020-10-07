@@ -1,5 +1,14 @@
-get_data_script:
+default_script_params: &reset_params
+  PBS_HASWELL: False
+  PBS_GPU: 0
+  PBS_WALLTIME: 4
+  PBS_MEM: 4
   PBS_LOG: $WORKING_DIR
+  SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
+  SINGULARITY_CONTAINER: null
+
+get_data_script:
+  <<: *reset_params
   PBS_HASWELL: True
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
@@ -15,8 +24,9 @@ get_data_script:
 
 
 process_data_script:
-  PBS_LOG: $WORKING_DIR
-  PBS_HASWELL: False
+  <<: *reset_params
+  PBS_WALLTIME: $WALLTIME_LIMIT_HOURS
+  PBS_MEM: $MEM_LIMIT_GBS
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_PATH
@@ -31,10 +41,11 @@ process_data_script:
   }
 
 clean_data_script:
-  PBS_LOG: $WORKING_DIR
+  <<: *reset_params
   SINGULARITY_CONTAINER: null
 
 put_data_script:
+  <<: *reset_params
   PBS_MEM: 12
   PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
@@ -56,6 +67,7 @@ put_data_script:
   }
 
 check_data_script:
+  <<: *reset_params
   PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
   PBS_HASWELL: True
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
@@ -74,6 +86,7 @@ check_data_script:
   }
 
 mark_no_longer_running_script:
+  <<: *reset_params
   PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
   PBS_HASWELL: True
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
@@ -93,9 +106,7 @@ mark_no_longer_running_script:
   }
 
 freesurfer_assessor_script:
-  PBS_LOG: $WORKING_DIR
-  PBS_HASWELL: False
-  SINGULARITY_CONTAINER: null
+  <<: *reset_params
   FREESURFER_PARAMS: {
     "user": $USERNAME,
     "password": $PASSWORD,
