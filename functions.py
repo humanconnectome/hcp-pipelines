@@ -1,6 +1,7 @@
 import glob
 import os
 import random
+import shutil
 import time
 from .util import escape_path, keep_resting_state_scans, shell_run, qsub
 
@@ -55,8 +56,11 @@ def chain_jobs_on_pbs(DRYRUN):
 
 def make_directories(DRYRUN, WORKING_DIR, CHECK_DATA_DIR, MARK_COMPLETION_DIR):
     if not DRYRUN:
+        print("Making ", WORKING_DIR)
         os.makedirs(WORKING_DIR, exist_ok=True)
+        print("Making ", CHECK_DATA_DIR)
         os.makedirs(CHECK_DATA_DIR, exist_ok=True)
+        print("Making ", MARK_COMPLETION_DIR)
         os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
@@ -190,6 +194,14 @@ def set_common_variables(
     }
 
 
+def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
+    SINGULARITY_PARAMS["delay-seconds"] = 120
+    if USE_PRESCAN_NORMALIZED:
+        SINGULARITY_PARAMS["use-prescan-normalized"] = None
+
+    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
+
+
 def structural_create_check_data_job_script(SINGULARITY_PARAMS):
     SINGULARITY_PARAMS["fieldmap"] = "NONE"
     return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
@@ -280,3 +292,14 @@ def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
 def set_qunex_boldlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_boldlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_BOLDLIST": qunex_boldlist}
+
+def copy_free_surfer_assessor_script(DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR):
+    source = F"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    if not DRYRUN:
+        shutil.copy(source, dest)
+        os.chmod(dest, 0o770)
+
+    return {
+        "FREESURFER_ASSESSOR_DEST_PATH": dest
+    }
