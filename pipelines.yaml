@@ -115,9 +115,9 @@ StructuralPreprocessing:
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
 
-  - function: clean_output_resource
-  - function: mark_running_status
-  - function: submit_jobs
+#  - function: clean_output_resource
+#  - function: mark_running_status
+#  - function: submit_jobs
 
 functional:
   - load_variables: functional
