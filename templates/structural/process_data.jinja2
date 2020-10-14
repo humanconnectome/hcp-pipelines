@@ -1,0 +1,26 @@
+{% extends "generic/process_data.jinja2" %}
+{% block pre %}
+{{ super() }}
+# TEMPORARILY MOVE PROCESSING DIRECTORY TO SCRATCH SPACE DUE TO "Cannot allocate memory" ERRORS IN BUILD SPACE
+    ORIGINAL_DIR="{{WORKING_DIR}}/{{SUBJECT_SESSION}}"
+    BACKUP_DIR="$ORIGINAL_DIR.bk"
+    TEMP_DIR="/scratch/$USER/scratch_buildspace/{{ SUBJECT_PROJECT }}/{{ SUBJECT_SESSION }}"
+
+    # copy contents to scratch space
+    mkdir -p $TEMP_DIR
+    rsync -a $ORIGINAL_DIR $TEMP_DIR
+
+    # swap original for symbolic link to scratch space
+    mv $ORIGINAL_DIR $BACKUP_DIR
+    ln -s $TEMP_DIR $ORIGINAL_DIR
+{% endblock pre %}
+{% block content %}
+    # swap symbolic link to scratch space with original name/contents
+    rm $ORIGINAL_DIR
+    mv $BACKUP_DIR $ORIGINAL_DIR
+
+    # copy updates back from scratch space
+    rsync -a $TEMP_DIR $ORIGINAL_DIR
+    rm $TEMP_DIR
+
+{% endblock content %}
