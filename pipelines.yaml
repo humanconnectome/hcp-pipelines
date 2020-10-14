@@ -21,7 +21,7 @@ StructuralPreprocessing:
       variable: GET_DATA_JOB_SCRIPT_NAME
   - load_variables: scripts.yaml#process_data_script
   - generate_file:
-      template: generic/process_data.jinja2
+      template: structural/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - load_variables: scripts.yaml#clean_data_script
