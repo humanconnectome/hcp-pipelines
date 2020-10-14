@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 generated/
 .secret
+
+# Singularity containers
+*.sif
