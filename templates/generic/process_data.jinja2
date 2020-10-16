@@ -6,8 +6,23 @@
 	# Make sure to `--bind` this to "/tmp" in the singularity invocation
 	mkdir -p $SCRATCH_TMP_DIR
   {% endif -%}
+
+  {%- if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
+	####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
+	# 1. Copy the content onto scratch dir
+	# 2. Do work on scratch dir (by binding to keep log filepaths correct)
+	# 3. Copy the changes back to the build space
+	# 4. Delete tmp from scratch space
+	mkdir -p $SCRATCH_WORK_DIR
+	rsync -a $STUDY_FOLDER/ $SCRATCH_WORK_DIR/
+  {% endif %}
 {% endblock pre %}
 
 {% block content %}
+  {% if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
+	# copy updates back from scratch space
+	rsync -a $SCRATCH_WORK_DIR/ $STUDY_FOLDER/
+	#rm $SCRATCH_WORK_DIR
 
-{% endblock %}
+  {% endif %}
+{% endblock content %}
