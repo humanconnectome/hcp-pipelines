@@ -1,0 +1,10 @@
+{% extends "generic/get_data.jinja2" %}
+{% block content %}
+rm -rf $COMMON/unprocessed/T1w_MPR_vNav_4e_RMS
+## Convert FreeSurfer output from links to files for rerun
+if [ -d "$COMMON" ] ; then
+    pushd $COMMON
+    find . -type l | xargs -I '{}' sh -c 'cp --remove-destination $(readlink {}) {}'
+    popd
+fi
+{% endblock content %}
