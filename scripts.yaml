@@ -34,12 +34,12 @@ mricafix_get_data_script:
     "scan": $SUBJECT_EXTRA,
   }
 
-process_data_script:
+process_data_script: &generic_process_data
   <<: *reset_params
   PBS_WALLTIME: $WALLTIME_LIMIT_HOURS
   PBS_MEM: $MEM_LIMIT_GBS
   PBS_HASWELL: True
-  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
+  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_PATH
 #  SINGULARITY_RUNPATH: $SINGULARITY_QUNEXRUN_PATH
   SINGULARITY_RUNPATH: $RUN_QUNEX_SCRIPT
@@ -52,6 +52,16 @@ process_data_script:
     hcppipelineprocess: $PIPELINE_NAME,
   }
 
+functional_process_data_script:
+  <<: *generic_process_data
+  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
+
+diffusion_process_data_script:
+  <<: *generic_process_data
+  PBS_HASWELL: False
+  PBS_K20X: True
+  PBS_GPU: 1
+  SINGULARITY_NVIDIA: True
 clean_data_script:
   <<: *reset_params
   SINGULARITY_CONTAINER: null
