@@ -1,0 +1,13 @@
+{% extends "generic/clean_data.jinja2" %}
+{% block content %}
+{{ super() }}
+
+echo "Removing subdirectories for other subjects and groups"
+find $WORK_DIR \
+    -maxdepth 1 \
+    -type d \
+    -not -newer $START_FILE \
+    -exec rm -rf {} \;
+echo "Remaining files:"
+find $COMMON
+{% endblock content %}

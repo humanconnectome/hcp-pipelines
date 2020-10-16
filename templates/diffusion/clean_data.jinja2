@@ -5,8 +5,8 @@ mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
 mv $COMMON/subjects/specs $COMMON/ProcessingInfo
 mv $COMMON/processing $COMMON/ProcessingInfo
 mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-mv $COMMON/subjects/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
-mv $COMMON/subjects/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
+cp $COMMON/subjects/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
+cp $COMMON/subjects/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
 find $COMMON \
     -not -path "$COMMON/T1w/*" \
     -not -path "$COMMON/ProcessingInfo/*" \
