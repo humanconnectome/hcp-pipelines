@@ -9,6 +9,10 @@
 :gpus={{ PBS_GPU|int }}
 {%- endif -%}
 
+{%- if PBS_K20X is defined and PBS_K20X -%}
+    :K20x
+{%- endif -%}
+
 ,walltime={{ PBS_WALLTIME|default(4)|int }}:00:00,mem={{ PBS_MEM|default(4)|int }}gb
 {% if PBS_LOG is defined -%}
 #PBS -o {{ PBS_LOG }}
