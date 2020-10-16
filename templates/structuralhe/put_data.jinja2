@@ -1,0 +1,8 @@
+{% extends "generic/put_data.jinja2" %}
+{% block content %}
+echo "Run structural QC on hand edited output"
+API_BASE="https://{{ PUT_SERVER }}/xapi/structuralQc/project/{{ SUBJECT_PROJECT }}/subject/{{ SUBJECT_ID }}/experiment/{{ SUBJECT_SESSION }}"
+curl -n "$API_BASE/runStructuralQcHandEditingProcessing" -X POST
+curl -n "$API_BASE/sendCompletionNotification" -X POST
+
+{% endblock content %}
