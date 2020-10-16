@@ -9,7 +9,7 @@ singularity exec \
     {%- endfor -%}
 {%- endif -%}
 
-{%- if SINGULARITY_NVIDIA is defined %}
+{%- if SINGULARITY_NVIDIA is defined and SINGULARITY_NVIDIA %}
     --nv \
 {%- endif %}
     {{ SINGULARITY_CONTAINER }} \
