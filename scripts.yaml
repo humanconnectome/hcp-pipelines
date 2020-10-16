@@ -62,6 +62,16 @@ diffusion_process_data_script:
   PBS_K20X: True
   PBS_GPU: 1
   SINGULARITY_NVIDIA: True
+
+msmall_process_data_script: &msmall_process_data_script
+  <<: *generic_process_data
+  SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
+  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_TMP_DIR:/tmp"
+
+mricafix_process_data_script:
+  <<: *msmall_process_data_script
+  PBS_HASWELL: False
+
 clean_data_script:
   <<: *reset_params
   SINGULARITY_CONTAINER: null

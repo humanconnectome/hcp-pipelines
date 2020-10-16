@@ -1,4 +1,13 @@
 {% extends "script.jinja2" %}
+{% block pre %}
+  {{ super() }}
+
+  {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
+	# Make sure to `--bind` this to "/tmp" in the singularity invocation
+	mkdir -p $SCRATCH_TMP_DIR
+  {% endif -%}
+{% endblock pre %}
+
 {% block content %}
 
 {% endblock %}
