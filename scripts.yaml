@@ -11,9 +11,8 @@ default_script_params: &reset_params
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
 
-get_data_script:
+get_data_script: &generic_get
   <<: *reset_params
-  PBS_HASWELL: True
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   SINGULARITY_RUNPATH: $GET_DATA_RUNPATH
@@ -25,6 +24,15 @@ get_data_script:
     "scan": $SUBJECT_EXTRA,
   }
 
+mricafix_get_data_script:
+  <<: *generic_get
+  SINGULARITY_PARAMS: {
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+    "scan": $SUBJECT_EXTRA,
+  }
 
 process_data_script:
   <<: *reset_params
