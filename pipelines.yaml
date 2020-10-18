@@ -1,4 +1,9 @@
 StructuralPreprocessing:
+  - set_from_env:
+      # the first positional argument is the subject string
+      SUBJECT: $_1
+      USER: HCPpipeline
+      HOME: /home/$USER
   - function: split_subject
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - function: set_common_variables
