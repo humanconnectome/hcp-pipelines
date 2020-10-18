@@ -8,7 +8,7 @@ StructuralPreprocessing:
   - function: split_subject
   - function: generate_timestamp
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - function: set_common_variables
+  - load_variables: common_vars
   - function: set_credentials
   - function: choose_node
   - function: set_study_folder
