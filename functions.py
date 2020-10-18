@@ -6,14 +6,13 @@ import time
 from .util import escape_path, keep_resting_state_scans, shell_run, qsub
 
 
-def split_subject(_1):
+def split_subject(SUBJECT):
     # the first positional argument is the subject string
-    subject = _1
-    components = subject.split(":")
+    components = SUBJECT.split(":")
     if len(components) != 4:
         raise ValueError(
             "Expecting a colon-delimited SUBJECT in the format AA:BB:CC:DD, instead got: ",
-            subject,
+            SUBJECT,
         )
 
     proj, subject_id, classifier, extra = components
@@ -21,7 +20,7 @@ def split_subject(_1):
     if "HCA" in proj:
         proj_acronym = "HCA"
     elif "HCD" in proj:
-        proj_acronym = "HCA"
+        proj_acronym = "HCD"
     elif "MDD" in proj:
         proj_acronym = "MDD"
     elif "BWH" in proj:
