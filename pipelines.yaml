@@ -4,7 +4,9 @@ StructuralPreprocessing:
       SUBJECT: $_1
       USER: HCPpipeline
       HOME: /home/$USER
+      TIMESTAMP: "999"
   - function: split_subject
+  - function: generate_timestamp
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - function: set_common_variables
   - function: set_credentials

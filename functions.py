@@ -147,6 +147,9 @@ def submit_jobs(
     # this script always goes last
     qsub(MARK_NO_LONGER_RUNNING_SCRIPT_NAME, prior_job, afterok=False)
 
+def generate_timestamp(TIMESTAMP=None):
+    if TIMESTAMP is None:
+        return {"TIMESTAMP": str(int(time.time()))}
 
 def set_common_variables(
     SINGULARITY_CONTAINER_VERSION,
