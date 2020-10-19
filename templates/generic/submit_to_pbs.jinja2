@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PRIOR_JOB=$(qsub {{ GET_DATA_JOB_SCRIPT_NAME }})
+PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PROCESS_DATA_JOB_SCRIPT_NAME }})
+{% if FREESURFER_SCRIPT_NAME is defined %}
+PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ FREESURFER_SCRIPT_NAME }})
+{% endif %}
+PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CLEAN_DATA_SCRIPT_NAME }})
+PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PUT_DATA_SCRIPT_NAME }})
+PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CHECK_DATA_JOB_SCRIPT_NAME }})
+
+
+# Don't comment out, this should always run last
+PRIOR_JOB=$(qsub -W depend=afterany:$PRIOR_JOB {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
