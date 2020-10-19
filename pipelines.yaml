@@ -70,11 +70,15 @@ StructuralPreprocessing:
       variable: FREESURFER_SCRIPT_NAME
 
   - generate_file:
+      template: generic/mark_running_status.jinja2
+      filepath: ${WORKING_DIR}/mark_running_status.sh
+      variable: MARK_RUNNING_STATUS_SCRIPT
+
+  - generate_file:
       template: generic/submit_to_pbs.jinja2
       filepath: ${WORKING_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
 
-#  - function: mark_running_status
 #  - function: submit_jobs
 
 

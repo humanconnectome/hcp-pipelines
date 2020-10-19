@@ -98,34 +98,6 @@ def copy_free_surfer_assessor_script(
     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
-def mark_running_status(
-    PIPELINE_NAME,
-    DRYRUN,
-    MARK_RUNNING_STATUS_RUNPATH,
-    USERNAME,
-    PASSWORD,
-    PUT_SERVER,
-    SUBJECT_PROJECT,
-    SUBJECT_ID,
-    SUBJECT_CLASSIFIER,
-    SUBJECT_EXTRA,
-):
-    if not DRYRUN:
-        cmd = (
-            f"{MARK_RUNNING_STATUS_RUNPATH} "
-            f"--user={USERNAME} "
-            f"--password={PASSWORD} "
-            f"--server={PUT_SERVER} "
-            f"--project={SUBJECT_PROJECT} "
-            f"--subject={SUBJECT_ID} "
-            f"--classifier={SUBJECT_CLASSIFIER} "
-            f"--resource=RunningStatus --queued"
-        )
-        if "functional" in PIPELINE_NAME.lower():
-            cmd += " --scan=" + SUBJECT_EXTRA
-
-        completed_mark_cmd_process = shell_run(cmd)
-        print(completed_mark_cmd_process)
 
 
 def submit_jobs(
