@@ -1,4 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+function delete_resource(){
+#todo: resolve actual path of delete_resource
+#todo: determine if this needs to run in singularity container (probably)
+/pipeline_tools/.../lib/utils/delete_resource.py \
+    --user="{{USERNAME}}" \
+    --password="{{PASSWORD}}" \
+    --server="{{PUT_SERVER}}" \
+    --project="{{SUBJECT_PROJECT}}" \
+    --subject="{{SUBJECT_ID}}" \
+    --session="{{SUBJECT_SESSION}}" \
+    --resource="{{SUBJECT_EXTRA}}_{{OUTPUT_RESOURCE_SUFFIX}}"
+    --force
+
+}
+{% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}
+  delete_resource
+{% else %}
+  ### Deleting the resource first has been disabled
+  ### Uncomment line below to re-enable
+  #delete_resource
+{% endif %}
 
 PRIOR_JOB=$(qsub {{ GET_DATA_JOB_SCRIPT_NAME }})
 PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PROCESS_DATA_JOB_SCRIPT_NAME }})
