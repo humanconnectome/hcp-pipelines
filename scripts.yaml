@@ -71,6 +71,10 @@ msmall_process_data_script: &msmall_process_data_script
 mricafix_process_data_script:
   <<: *msmall_process_data_script
   PBS_HASWELL: False
+  # For SINGULARITY_PARAMS:
+        ## Per MH, parameterfolder is irrelevant to MR-FIX
+        # parameter_line   = '  --parameterfolder=' + SINGULARITY_QUNEXPARAMETER_PATH
+        # script.write(parameter_line + ' \\' + "\n")
 
 structural_process_data_script: &structural_process_data_script
   <<: *generic_process_data
@@ -143,9 +147,9 @@ mark_no_longer_running_script:
     "project": $SUBJECT_PROJECT,
     "subject": $SUBJECT_ID,
     "classifier": $SUBJECT_CLASSIFIER,
+    "scan": $SUBJECT_EXTRA,
     "resource": "RunningStatus",
     "done": null,
-    "scan": $SUBJECT_EXTRA,
   }
 
 freesurfer_assessor_script:
