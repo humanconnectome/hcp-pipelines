@@ -98,24 +98,6 @@ def copy_free_surfer_assessor_script(
     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
-def clean_output_resource(DRYRUN, clean_output_resource=False):
-    # from lib.utils.delete_resource.py
-    # delete_resource.delete_resource(
-    #     self.username,
-    #     self.password,
-    #     self.server,
-    #     self.subject.project,
-    #     self.subject.subjectid,
-    #     self.session,
-    #     self.output_resource_name,
-    # )
-
-    if DRYRUN or not clean_output_resource:
-        return
-
-    # TODO: on line 361-370 of one_subject_job_submitter.py
-
-
 def mark_running_status(
     PIPELINE_NAME,
     DRYRUN,
