@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
 $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
     --user={{USERNAME}} \
     --password={{PASSWORD}} \
@@ -7,6 +8,9 @@ $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS 
     --project={{SUBJECT_PROJECT}} \
     --subject={{SUBJECT_ID}} \
     --classifier={{SUBJECT_CLASSIFIER}} \
+{% if PIPELINE_NAME == "FunctionalPreprocessing" %}
+    --scan={{SUBJECT_EXTRA}} \
+{% endif %}
     --resource=RunningStatus \
     --queued
 
