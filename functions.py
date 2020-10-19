@@ -6,7 +6,12 @@ import time
 from .util import escape_path, keep_resting_state_scans, shell_run, qsub
 
 
-def split_subject(SUBJECT):
+def generate_timestamp(TIMESTAMP=None):
+    if TIMESTAMP is None:
+        return {"TIMESTAMP": str(int(time.time()))}
+
+
+def split_subject_components(SUBJECT):
     components = SUBJECT.split(":")
     if len(components) != 4:
         raise ValueError(
@@ -16,6 +21,17 @@ def split_subject(SUBJECT):
 
     proj, subject_id, classifier, extra = components
 
+    return {
+        "SUBJECT_PROJECT": proj,
+        "SUBJECT_ID": subject_id,
+        "SUBJECT_CLASSIFIER": classifier,
+        "SUBJECT_EXTRA": extra,
+        "SUBJECT_SESSION": f"{subject_id}_{classifier}",
+    }
+
+
+def get_project_acronym(SUBJECT_PROJECT):
+    proj = SUBJECT_PROJECT
     if "HCA" in proj:
         proj_acronym = "HCA"
     elif "HCD" in proj:
@@ -28,28 +44,35 @@ def split_subject(SUBJECT):
         raise ValueError(
             "Unexpected project value. Expecting HCA, HCD, MDD, or BWH. Got: ", proj
         )
-
     return {
         "SUBJECT_PROJECT_ACRONYM": proj_acronym,
-        "SUBJECT_PROJECT": proj,
-        "SUBJECT_ID": subject_id,
-        "SUBJECT_CLASSIFIER": classifier,
-        "SUBJECT_EXTRA": extra,
-        "SUBJECT_SESSION": f"{subject_id}_{classifier}",
     }
 
 
-def choose_node(XNAT_PBS_JOBS_PUT_SERVER_LIST):
+def set_credentials_from_file():
+    with open(".secret", "r") as fd:
+        cred = fd.read().strip()
+    username, pwd = cred.split("\n")
+    return {"USERNAME": username, "PASSWORD": pwd}
+
+
+def choose_put_server(XNAT_PBS_JOBS_PUT_SERVER_LIST):
     server_list = XNAT_PBS_JOBS_PUT_SERVER_LIST.split(" ")
+    chosen = random.choice(server_list)
+
     return {
-        "PUT_SERVER": random.choice(server_list),
+        "PUT_SERVER": chosen,
     }
 
 
-def chain_jobs_on_pbs(DRYRUN):
-    if DRYRUN:
-        print("Not actually loading on PBS, since in dryrun mode.")
-    pass
+def set_study_folder(WORKING_DIR, SUBJECT_SESSION):
+    STUDY_FOLDER = os.path.join(WORKING_DIR, SUBJECT_SESSION)
+    STUDY_FOLDER_REPL = escape_path(STUDY_FOLDER)
+
+    return {
+        "STUDY_FOLDER": STUDY_FOLDER,
+        "STUDY_FOLDER_REPL": STUDY_FOLDER_REPL,
+    }
 
 
 def make_directories(DRYRUN, WORKING_DIR, CHECK_DATA_DIR, MARK_COMPLETION_DIR):
@@ -60,6 +83,19 @@ def make_directories(DRYRUN, WORKING_DIR, CHECK_DATA_DIR, MARK_COMPLETION_DIR):
         os.makedirs(CHECK_DATA_DIR, exist_ok=True)
         print("Making ", MARK_COMPLETION_DIR)
         os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
+
+
+def copy_free_surfer_assessor_script(
+    DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
+):
+    source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    source = f"{PRUNNER_CONFIG_DIR}/xnat_pbs_jobs/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+    if not DRYRUN:
+        shutil.copy(source, dest)
+        os.chmod(dest, 0o770)
+
+    return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
 def clean_output_resource(DRYRUN, clean_output_resource=False):
@@ -146,30 +182,11 @@ def submit_jobs(
     # this script always goes last
     qsub(MARK_NO_LONGER_RUNNING_SCRIPT_NAME, prior_job, afterok=False)
 
-def generate_timestamp(TIMESTAMP=None):
-    if TIMESTAMP is None:
-        return {"TIMESTAMP": str(int(time.time()))}
-
-
-def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
-    SINGULARITY_PARAMS["delay-seconds"] = 120
-    del SINGULARITY_PARAMS["scan"]
-    if USE_PRESCAN_NORMALIZED:
-        SINGULARITY_PARAMS["use-prescan-normalized"] = None
-
-    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
-
-
-def structural_create_check_data_job_script(SINGULARITY_PARAMS):
-    SINGULARITY_PARAMS["fieldmap"] = "NONE"
-    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
-
-
-def set_credentials():
-    with open(".secret", "r") as fd:
-        cred = fd.read().strip()
-    username, pwd = cred.split("\n")
-    return {"USERNAME": username, "PASSWORD": pwd}
+def load_jobs_on_pbs(DRYRUN):
+    if DRYRUN:
+        print("Not actually loading on PBS, since in dryrun mode.")
+    else:
+        print("Starting PBS_START_SCRIPT")
 
 
 def available_bold_dirs(XNAT_PBS_JOBS_ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
@@ -218,16 +235,6 @@ def set_msm_all_bolds(BOLD_LIST):
     return {"MSM_ALL_BOLDS": MSM_ALL_BOLDS}
 
 
-def set_study_folder(WORKING_DIR, SUBJECT_SESSION):
-    STUDY_FOLDER = os.path.join(WORKING_DIR, SUBJECT_SESSION)
-    STUDY_FOLDER_REPL = escape_path(STUDY_FOLDER)
-
-    return {
-        "STUDY_FOLDER": STUDY_FOLDER,
-        "STUDY_FOLDER_REPL": STUDY_FOLDER_REPL,
-    }
-
-
 def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
     # possible values for BOLD_LIST_ORDER
     BLO_HCA = "hca"
@@ -251,14 +258,19 @@ def set_qunex_boldlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_boldlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_BOLDLIST": qunex_boldlist}
 
-def copy_free_surfer_assessor_script(DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR):
-    source = F"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    source = F"{PRUNNER_CONFIG_DIR}/xnat_pbs_jobs/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    if not DRYRUN:
-        shutil.copy(source, dest)
-        os.chmod(dest, 0o770)
 
-    return {
-        "FREESURFER_ASSESSOR_DEST_PATH": dest
-    }
+
+
+
+def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
+    SINGULARITY_PARAMS["delay-seconds"] = 120
+    del SINGULARITY_PARAMS["scan"]
+    if USE_PRESCAN_NORMALIZED:
+        SINGULARITY_PARAMS["use-prescan-normalized"] = None
+
+    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
+
+
+def structural_create_check_data_job_script(SINGULARITY_PARAMS):
+    SINGULARITY_PARAMS["fieldmap"] = "NONE"
+    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
