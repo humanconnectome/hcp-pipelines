@@ -98,49 +98,14 @@ def copy_free_surfer_assessor_script(
     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
-
-
-def submit_jobs(
-    DRYRUN,
-    GET_DATA_JOB_SCRIPT_NAME=None,
-    PROCESS_DATA_JOB_SCRIPT_NAME=None,
-    CLEAN_DATA_SCRIPT_NAME=None,
-    PUT_DATA_SCRIPT_NAME=None,
-    CHECK_DATA_JOB_SCRIPT_NAME=None,
-    MARK_NO_LONGER_RUNNING_SCRIPT_NAME=None,
-    FREE_SURFER_SCRIPT_NAME=None,
-):
-    # short-circuit on dryrun mode
+def launch_main_script(DRYRUN, SUBMIT_TO_PBS_SCRIPT):
     if DRYRUN:
-        return
-
-    # all of the scripts in the order in which
-    # they should be chained together
-    script_list = [
-        GET_DATA_JOB_SCRIPT_NAME,
-        PROCESS_DATA_JOB_SCRIPT_NAME,
-        CLEAN_DATA_SCRIPT_NAME,
-        PUT_DATA_SCRIPT_NAME,
-        CHECK_DATA_JOB_SCRIPT_NAME,
-    ]
-
-    prior_job = None
-    for script in script_list:
-        # chain the jobs
-        # but break on first missing script
-        if script:
-            prior_job = qsub(script, prior_job)
-        else:
-            break
-
-    # this script always goes last
-    qsub(MARK_NO_LONGER_RUNNING_SCRIPT_NAME, prior_job, afterok=False)
-
-def load_jobs_on_pbs(DRYRUN):
-    if DRYRUN:
-        print("Not actually loading on PBS, since in dryrun mode.")
+        print(
+            "Dry-Mode is active: Skipping the launch of the main script to prevent side-effects."
+        )
     else:
-        print("Starting PBS_START_SCRIPT")
+        print("Launching main Bash script...")
+        shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
 def available_bold_dirs(XNAT_PBS_JOBS_ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
@@ -211,9 +176,6 @@ def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
 def set_qunex_boldlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_boldlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_BOLDLIST": qunex_boldlist}
-
-
-
 
 
 def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):

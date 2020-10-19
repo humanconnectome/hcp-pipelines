@@ -11,8 +11,6 @@ StructuralPreprocessing:
   - function: set_credentials_from_file
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - load_variables: common_vars
-  - dump_variables:
-      filename: common_load.sh
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
@@ -74,7 +72,7 @@ StructuralPreprocessing:
       filepath: ${WORKING_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
 
-#  - function: submit_jobs
+  - function: launch_main_script
 
 
 
