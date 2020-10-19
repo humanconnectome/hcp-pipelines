@@ -1,20 +1,39 @@
 #!/usr/bin/env bash
 
-function delete_resource(){
-#todo: resolve actual path of delete_resource
-#todo: determine if this needs to run in singularity container (probably)
-/pipeline_tools/.../lib/utils/delete_resource.py \
-    --user="{{USERNAME}}" \
-    --password="{{PASSWORD}}" \
-    --server="{{PUT_SERVER}}" \
-    --project="{{SUBJECT_PROJECT}}" \
-    --subject="{{SUBJECT_ID}}" \
-    --session="{{SUBJECT_SESSION}}" \
-    --resource="{{SUBJECT_EXTRA}}_{{OUTPUT_RESOURCE_SUFFIX}}"
-    --force
+# Load variables
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
+delete_resource(){
+  #todo: determine if this needs to run in singularity container (probably)
+  echo "Deleting the resource from the XNAT server"
+  python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
+      --user="{{USERNAME}}" \
+      --password="{{PASSWORD}}" \
+      --server="{{PUT_SERVER}}" \
+      --project="{{SUBJECT_PROJECT}}" \
+      --subject="{{SUBJECT_ID}}" \
+      --session="{{SUBJECT_SESSION}}" \
+      --resource="{{SUBJECT_EXTRA}}_{{OUTPUT_RESOURCE_SUFFIX}}"
+      --force
+}
+
+mark_running_status(){
+  echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
+  $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
+      --user={{USERNAME}} \
+      --password={{PASSWORD}} \
+      --server={{PUT_SERVER}} \
+      --project={{SUBJECT_PROJECT}} \
+      --subject={{SUBJECT_ID}} \
+      --classifier={{SUBJECT_CLASSIFIER}} \
+  {% if PIPELINE_NAME == "FunctionalPreprocessing" %}
+      --scan={{SUBJECT_EXTRA}} \
+  {% endif %}
+      --resource=RunningStatus \
+      --queued
 }
 {% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}
+  # Delete the resource first
   delete_resource
 {% else %}
   ### Deleting the resource first has been disabled
@@ -23,9 +42,10 @@ function delete_resource(){
 {% endif %}
 
 # Run Script to create running status marker file
-source {{ MARK_RUNNING_STATUS_SCRIPT }}
+mark_running_status
 
 
+# Chain the scripts onto the PBS
 PRIOR_JOB=$(qsub {{ GET_DATA_JOB_SCRIPT_NAME }})
 PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PROCESS_DATA_JOB_SCRIPT_NAME }})
 {% if FREESURFER_SCRIPT_NAME is defined %}
@@ -37,5 +57,6 @@ PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CHECK_DATA_JOB_SCRIPT_NAME }})
 
 
 # Don't comment out, this should always run last
+# This cleans up the running status marker
 PRIOR_JOB=$(qsub -W depend=afterany:$PRIOR_JOB {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
