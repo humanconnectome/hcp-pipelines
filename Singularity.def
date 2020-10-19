@@ -1,0 +1,35 @@
+Bootstrap: library
+From: centos:7.6.1810
+
+%labels
+    author Moises Baltazar
+
+%pre
+# Before install (host)
+
+%post
+# After install (guest)
+#mkdir -p /pipeline_tools/pipelines/
+yum install -y python3 git vim
+pip3 install --upgrade pip
+pip install -r /pipeline_tools/pipelines/requirements.txt
+
+%test
+# Test to run in order to ensure working environment
+    exit 0
+
+%runscript
+# Script to run when executing environment
+prunner --config=/pipeline_tools/pipelines/ "$@"
+
+%files
+# Files to copy from the host system.
+./src /pipeline_tools/pipelines
+./HCPpipelinesRunUtils /pipeline_tools/HCPpipelinesRunUtils
+./xnat_pbs_jobs /pipeline_tools/xnat_pbs_jobs
+./xnat_utilities /export/HCP/xnat_utilities
+
+%environment
+# Environment variables
+export PATH=/usr/local/torque-6.1.2/bin:/usr/local/torque-6.1.2/sbin:$HOME/bin:$PATH
+
