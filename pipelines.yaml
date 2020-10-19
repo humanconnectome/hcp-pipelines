@@ -67,7 +67,7 @@ StructuralPreprocessing:
   - generate_file:
       template: generic/freesurfer.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREE_SURFER_SCRIPT_NAME
+      variable: FREESURFER_SCRIPT_NAME
 
 #  - function: clean_output_resource
 #  - function: mark_running_status

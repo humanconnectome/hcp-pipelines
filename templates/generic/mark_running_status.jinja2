@@ -1,0 +1,12 @@
+#!/bin/bash
+
+$XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
+    --user={{USERNAME}} \
+    --password={{PASSWORD}} \
+    --server={{PUT_SERVER}} \
+    --project={{SUBJECT_PROJECT}} \
+    --subject={{SUBJECT_ID}} \
+    --classifier={{SUBJECT_CLASSIFIER}} \
+    --resource=RunningStatus \
+    --queued
+
