@@ -69,7 +69,11 @@ StructuralPreprocessing:
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
       variable: FREESURFER_SCRIPT_NAME
 
-#  - function: clean_output_resource
+  - generate_file:
+      template: generic/submit_to_pbs.jinja2
+      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      variable: SUBMIT_TO_PBS_SCRIPT
+
 #  - function: mark_running_status
 #  - function: submit_jobs
 
