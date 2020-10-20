@@ -49,8 +49,8 @@ def get_project_acronym(SUBJECT_PROJECT):
     }
 
 
-def set_credentials_from_file(HOME):
-    with open(f"{HOME}/.secret", "r") as fd:
+def set_credentials_from_file(XNAT_CREDENTIALS_FILE):
+    with open(XNAT_CREDENTIALS_FILE, "r") as fd:
         cred = fd.read().strip()
     username, pwd = cred.split("\n")
     return {"USERNAME": username, "PASSWORD": pwd}
