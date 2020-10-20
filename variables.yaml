@@ -1,4 +1,5 @@
 DEFAULT: &default
+  XNAT_CREDENTIALS_FILE: $PRUNNER_CONFIG_DIR/.secret
   XNAT_PBS_JOBS_CONTROL: $HOME/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
   REQUESTED_XNAT_SERVER: intradb
   SINGULARITY_CONTAINER_VERSION: singularity-3.2.1

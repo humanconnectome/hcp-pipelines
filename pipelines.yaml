@@ -8,9 +8,9 @@ StructuralPreprocessing:
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - function: set_credentials_from_file
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - load_variables: common_vars
+  - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
