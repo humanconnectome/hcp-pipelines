@@ -26,9 +26,9 @@ mark_running_status(){
       --project={{SUBJECT_PROJECT}} \
       --subject={{SUBJECT_ID}} \
       --classifier={{SUBJECT_CLASSIFIER}} \
-  {% if PIPELINE_NAME == "FunctionalPreprocessing" %}
+{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
       --scan={{SUBJECT_EXTRA}} \
-  {% endif %}
+{%- endif %}
       --resource=RunningStatus \
       --queued
 }
