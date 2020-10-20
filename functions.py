@@ -97,10 +97,14 @@ def copy_free_surfer_assessor_script(
     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
-def launch_main_script(DRYRUN, SUBMIT_TO_PBS_SCRIPT):
+def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
     if DRYRUN:
         print(
             "Dry-Mode is active: Skipping the launch of the main script to prevent side-effects."
+        )
+    elif not AUTOLAUNCH_AT_END:
+        print(
+            "AUTOLAUNCH_AT_END has been set to False. Change that in common_vars section of variables.yaml to autolaunch."
         )
     else:
         print("Launching main Bash script...")
