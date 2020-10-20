@@ -24,16 +24,6 @@ get_data_script: &generic_get
     "scan": $SUBJECT_EXTRA,
   }
 
-mricafix_get_data_script:
-  <<: *generic_get
-  SINGULARITY_PARAMS: {
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
-    "scan": $SUBJECT_EXTRA,
-  }
-
 process_data_script: &generic_process_data
   <<: *reset_params
   PBS_WALLTIME: $WALLTIME_LIMIT_HOURS
