@@ -2,7 +2,8 @@ StructuralPreprocessing:
   - set_from_env:
       # the first positional argument is the subject string
       SUBJECT: $_1
-      USER: HCPpipeline
+      #USER: HCPpipeline
+      USER: $USER
       HOME: /home/$USER
       TIMESTAMP: "999"
   - function: generate_timestamp
