@@ -3,10 +3,14 @@
 # Load variables
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
+module load {{ SINGULARITY_VERSION }}
+
 delete_resource(){
   #todo: determine if this needs to run in singularity container (probably)
   echo "Deleting the resource from the XNAT server"
-  python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
+  singularity exec \
+    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
+    python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
       --user="{{USERNAME}}" \
       --password="{{PASSWORD}}" \
       --server="{{PUT_SERVER}}" \
@@ -19,7 +23,9 @@ delete_resource(){
 
 mark_running_status(){
   echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
-  $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
+  singularity exec \
+    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
+    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
       --user={{USERNAME}} \
       --password={{PASSWORD}} \
       --server={{PUT_SERVER}} \
