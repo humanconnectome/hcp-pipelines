@@ -29,7 +29,7 @@ StructuralPreprocessing:
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
 
-  - load_variables: scripts.yaml#process_data_script
+  - load_variables: scripts.yaml#structural_process_data_script
   - generate_file:
       template: generic/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
