@@ -1,3 +1,8 @@
 #!/bin/bash
+module load singularity-3.5.2
 
-prunner  --dryrun --verbose StructuralPreprocessing CCF_HCA_STG:HCA1111111111:V2_MR:all
+singularity run \
+        --bind=./:/pipeline_tools/pipelines/ \
+        /export/HCP/qunex-hcp/production_containers/pipelines.sif \
+        --verbose  $@  > latest.out
+
