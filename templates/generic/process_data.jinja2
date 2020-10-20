@@ -4,6 +4,7 @@
 
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	# Make sure to `--bind` this to "/tmp" in the singularity invocation
+	SCRATCH_TMP_DIR="{{ SCRATCH_TMP_DIR }}"
 	mkdir -p $SCRATCH_TMP_DIR
   {% endif -%}
 
@@ -13,6 +14,8 @@
 	# 2. Do work on scratch dir (by binding to keep log filepaths correct)
 	# 3. Copy the changes back to the build space
 	# 4. Delete tmp from scratch space
+	STUDY_FOLDER="{{ STUDY_FOLDER }}"
+	SCRATCH_WORK_DIR="{{ SCRATCH_WORK_DIR }}"
 	mkdir -p $SCRATCH_WORK_DIR
 	rsync -a $STUDY_FOLDER/ $SCRATCH_WORK_DIR/
   {% endif %}
