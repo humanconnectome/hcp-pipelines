@@ -8,6 +8,7 @@ DEFAULT: &default
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.61.17_FSL603.sif
   SINGULARITY_CONTAINER_XNAT_PATH: /export/HCP/qunex-hcp/production_containers/Process/HCPpipelines_XNAT_1_0_5.sif
+  SINGULARITY_CONTAINER_PIPELINES_PATH: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   SEVEN_MM_TEMPLATE_PROJECTS: ('HCP_500', 'HCP_900', 'HCP_1200')
   CONNECTOME_SKYRA_SCANNER_PROJECTS: ('HCP_500', 'HCP_900', 'HCP_1200')
