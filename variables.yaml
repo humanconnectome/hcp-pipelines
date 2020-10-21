@@ -125,7 +125,7 @@ structural_preprocess: &structural_preprocess
   <<: *default
   OUTPUT_RESOURCE_SUFFIX: Structural_preproc
   SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build"
-  SINGULARITY_QUNEXPARAMETER_PATH: $PRUNNER_CONFIG_DIR/SpecFiles_v3
+  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v3
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER/ls_struc_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: ls_struc_preproc
 
