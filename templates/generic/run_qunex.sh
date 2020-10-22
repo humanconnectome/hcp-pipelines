@@ -116,7 +116,7 @@ cd ${SubjectsFolder}
 		cp ${ParameterFolder}/* "${StudyFolder}/subjects/specs"
 	fi
 
-	${QUNEXCOMMAND} HCPLSImport \
+	${QUNEXCOMMAND} importHCP \
 		--sessionsfolder="${StudyFolder}/subjects"  \
 		--inbox="${StudyFolder}/unprocessed" \
 		--action="link" \
