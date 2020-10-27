@@ -56,7 +56,11 @@ def set_credentials_from_file(XNAT_CREDENTIALS_FILE):
     return {"USERNAME": username, "PASSWORD": pwd}
 
 
-def choose_put_server(XNAT_PBS_JOBS_PUT_SERVER_LIST):
+def choose_put_server(XNAT_PBS_JOBS_PUT_SERVER_LIST, PUT_SERVER=None):
+    if PUT_SERVER is not None:
+        print("PUT_SERVER has already been set. Skipping regeneration.")
+        return
+
     server_list = XNAT_PBS_JOBS_PUT_SERVER_LIST.split(" ")
     chosen = random.choice(server_list)
 
