@@ -13,5 +13,4 @@ singularity run \
         --bind /export/HCP/qunex-hcp \
         --bind /scratch/$USER \
         /export/HCP/qunex-hcp/production_containers/pipelines.sif \
-        --verbose  $@  > latest.out
-
+        --verbose  $@  > "run.$1.$2.txt"
