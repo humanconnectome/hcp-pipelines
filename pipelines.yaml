@@ -50,9 +50,7 @@ StructuralPreprocessing:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
   - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
   - generate_file:
       template: generic/freesurfer.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"

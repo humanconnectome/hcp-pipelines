@@ -44,6 +44,30 @@ defaults: &defaults
     "scan": $SUBJECT_EXTRA,
     "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
   }
+  FREESURFER_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "session": $SUBJECT_SESSION,
+    "session-classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+  }
+  PROCESS_PBS_HASWELL: True
+  PROCESS_PBS_K20X: False
+  PROCESS_PBS_GPU: 0
+  PROCESS_NVIDIA: False
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
+  PROCESS_DATA_PARAMS: {
+    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
+    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}",
+    subjects: "${SUBJECT_SESSION}",
+    scan: $SUBJECT_EXTRA,
+    overwrite: "yes",
+    hcppipelineprocess: $PIPELINE_NAME,
+  }
+
 
 default_script_params: &reset_params
   PBS_NODES: 1
@@ -114,19 +138,6 @@ struct_handedit_process_data_script:
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
   }
 
-freesurfer_assessor_script:
-  <<: *reset_params
-  SINGULARITY_CONTAINER: null
-  FREESURFER_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "session": $SUBJECT_SESSION,
-    "session-classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
-  }
 structural:
   <<: *defaults
   GET_DATA_PARAMS: {
