@@ -77,11 +77,6 @@ struct_handedit_process_data_script:
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
   }
 
-
-clean_data_script:
-  <<: *reset_params
-  SINGULARITY_CONTAINER: null
-
 put_data_script:
   <<: *reset_params
   PBS_MEM: 12
