@@ -38,8 +38,6 @@ StructuralPreprocessing:
       template: generic/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
