@@ -1,3 +1,13 @@
+defaults: &defaults
+  GET_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  GET_DATA_PARAMS: {
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+    "scan": $SUBJECT_EXTRA,
+  }
+
 default_script_params: &reset_params
   PBS_NODES: 1
   PBS_PPN: 1
@@ -10,19 +20,6 @@ default_script_params: &reset_params
   SINGULARITY_NVIDIA: False
   SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
   SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
-
-get_data_script: &generic_get
-  <<: *reset_params
-  SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $GET_DATA_RUNPATH
-  SINGULARITY_PARAMS: {
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
-    "scan": $SUBJECT_EXTRA,
-  }
 
 process_data_script: &generic_process_data
   <<: *reset_params
@@ -150,4 +147,13 @@ freesurfer_assessor_script:
     "session": $SUBJECT_SESSION,
     "session-classifier": $SUBJECT_CLASSIFIER,
     "working-dir": $WORKING_DIR,
+  }
+structural:
+  <<: *defaults
+  GET_DATA_PARAMS: {
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+    "delay-seconds": 120
   }

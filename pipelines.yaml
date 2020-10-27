@@ -23,9 +23,7 @@ StructuralPreprocessing:
       template: structural/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
-  - function: structural_get_data_job_script
+  - load_variables: scripts.yaml#structural
   - generate_file:
       template: structural/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
