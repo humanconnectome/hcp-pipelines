@@ -46,8 +46,6 @@ StructuralPreprocessing:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
