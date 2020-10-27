@@ -42,9 +42,6 @@ StructuralPreprocessing:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
-  - function: structural_create_check_data_job_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"

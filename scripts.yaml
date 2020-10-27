@@ -7,6 +7,28 @@ defaults: &defaults
     "working-dir": $WORKING_DIR,
     "scan": $SUBJECT_EXTRA,
   }
+  CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+    "scan": $SUBJECT_EXTRA,
+  }
+  MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  MARK_RUNNING_STATUS_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "resource": "RunningStatus",
+    "done": null,
+  }
   PUT_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   PUT_DATA_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
   PUT_DATA_PARAMS: {
@@ -90,23 +112,6 @@ struct_handedit_process_data_script:
     hcppipelineprocess: $PIPELINE_NAME,
     #TODO: Figure out what that FS_EXTRA_RECONALL param does and if it is even necessary
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
-  }
-
-check_data_script:
-  <<: *reset_params
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  PBS_HASWELL: True
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $CHECK_DATA_RUNPATH
-  SINGULARITY_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $CHECK_DATA_DIR,
-    "scan": $SUBJECT_EXTRA,
   }
 
 mark_no_longer_running_script:
