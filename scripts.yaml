@@ -7,6 +7,21 @@ defaults: &defaults
     "working-dir": $WORKING_DIR,
     "scan": $SUBJECT_EXTRA,
   }
+  PUT_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  PUT_DATA_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
+  PUT_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "session": $SUBJECT_SESSION,
+    "reason": $PIPELINE_NAME,
+    "working-dir": $WORKING_DIR,
+    "leave-subject-id-level": null,
+    "scan": $SUBJECT_EXTRA,
+    "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
+  }
 
 default_script_params: &reset_params
   PBS_NODES: 1
@@ -75,26 +90,6 @@ struct_handedit_process_data_script:
     hcppipelineprocess: $PIPELINE_NAME,
     #TODO: Figure out what that FS_EXTRA_RECONALL param does and if it is even necessary
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
-  }
-
-put_data_script:
-  <<: *reset_params
-  PBS_MEM: 12
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
-  SINGULARITY_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "session": $SUBJECT_SESSION,
-    "reason": $PIPELINE_NAME,
-    "working-dir": $WORKING_DIR,
-    "leave-subject-id-level": null,
-    "scan": $SUBJECT_EXTRA,
-    "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
   }
 
 check_data_script:
