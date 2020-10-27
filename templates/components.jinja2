@@ -1,0 +1,54 @@
+{% macro pbs_head(log_dir, nodes=1, ppn=1, haswell=False, gpu=0, k20x=False, walltime=4, mem=4) -%}
+#PBS -S /bin/bash
+#PBS -l nodes={{ nodes|int }}:ppn={{ ppn|int }}
+
+{%- if haswell -%}
+:haswell
+{%- endif -%}
+
+{%- if gpu -%}
+:gpus={{ gpu|int }}
+{%- endif -%}
+
+{%- if k20x -%}
+    :K20x
+{%- endif -%}
+
+,walltime={{ walltime|int }}:00:00,mem={{ mem|int }}gb
+#PBS -o {{ log_dir }}
+#PBS -e {{ log_dir }}
+{%- endmacro %}
+
+
+
+{% macro cmd_options(params, terminal_slash=False) %}
+{%- if params is defined and params %} \
+    {%- for key, value in params.items() %}
+        --{{ key }}
+        {%- if value is not none -%}
+            ="{{ value }}"
+        {%- endif -%}
+        {%- if not loop.last or terminal_slash %} \{% endif -%}
+    {%- endfor -%}
+{%- endif %}
+{%- endmacro %}
+
+
+
+
+{% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.2.1") -%}
+module load singularity-{{ version }}
+
+singularity exec \
+{%- if bindpath|trim -%}
+    {%- for path in bindpath.split(",") %}
+    --bind {{ path }} \
+    {%- endfor -%}
+{%- endif -%}
+
+{%- if nvidia %}
+    --nv \
+{%- endif %}
+    {{ container }} \
+    {{ runpath }}{{ cmd_options(params) }}
+{%- endmacro %}
