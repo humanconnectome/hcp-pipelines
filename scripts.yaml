@@ -134,7 +134,6 @@ mark_no_longer_running_script:
     "project": $SUBJECT_PROJECT,
     "subject": $SUBJECT_ID,
     "classifier": $SUBJECT_CLASSIFIER,
-    "scan": $SUBJECT_EXTRA,
     "resource": "RunningStatus",
     "done": null,
   }
