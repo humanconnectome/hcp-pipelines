@@ -10,7 +10,7 @@ def keep_resting_state_scans(scans):
 
 
 def shell_run(cmd):
-    return subprocess.check_output(cmd, shell=True, text=True).strip()
+    return subprocess.check_output(cmd, shell=True, universal_newlines=True).strip()
 
 
 def qsub(cmd, prior_job=None, afterok=True):
