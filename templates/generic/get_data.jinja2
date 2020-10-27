@@ -1,4 +1,17 @@
-{% extends "script.jinja2" %}
-{% block content %}
+{% from 'components.jinja2' import pbs_head, singularity -%}
+{{ pbs_head(log_dir=WORKING_DIR) }}
 
-{% endblock %}
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+
+{{ singularity(
+        container=SINGULARITY_CONTAINER_XNAT_PATH,
+        runpath=GET_DATA_RUNPATH,
+        bindpath=GET_DATA_BINDPATH,
+        params=GET_DATA_PARAMS
+) }}
+
+WORK_DIR="{{ WORKING_DIR }}"
+SUBJ="{{ SUBJECT_ID }}_{{ SUBJECT_CLASSIFIER }}"
+COMMON="$WORK_DIR/$SUBJ"
+
+{% block content %}{% endblock %}
