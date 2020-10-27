@@ -114,22 +114,6 @@ struct_handedit_process_data_script:
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
   }
 
-mark_no_longer_running_script:
-  <<: *reset_params
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $MARK_RUNNING_STATUS_RUNPATH
-  SINGULARITY_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "resource": "RunningStatus",
-    "done": null,
-  }
-
 freesurfer_assessor_script:
   <<: *reset_params
   SINGULARITY_CONTAINER: null
