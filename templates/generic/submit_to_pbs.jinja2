@@ -3,11 +3,17 @@
 # Load variables
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
-module load {{ SINGULARITY_VERSION }}
+if [ -z "$SINGULARITY_CONTAINER" ]; then
+	module load {{ SINGULARITY_VERSION }}
+else 
+	echo "Sourcing Python Setup."
+	source /pipeline_tools/HCPpipelinesRunUtils/ToolSetupScripts/epd-python_setup.sh
+fi
 
 delete_resource(){
   #todo: determine if this needs to run in singularity container (probably)
   echo "Deleting the resource from the XNAT server"
+if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
     {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
@@ -19,10 +25,22 @@ delete_resource(){
       --session="{{SUBJECT_SESSION}}" \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
+else 
+    python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
+      --user="{{USERNAME}}" \
+      --password="{{PASSWORD}}" \
+      --server="{{PUT_SERVER}}" \
+      --project="{{SUBJECT_PROJECT}}" \
+      --subject="{{SUBJECT_ID}}" \
+      --session="{{SUBJECT_SESSION}}" \
+      --resource="{{OUTPUT_RESOURCE_NAME}}"
+      --force
+fi
 }
 
 mark_running_status(){
   echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
+if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
     {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
     $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
@@ -37,6 +55,20 @@ mark_running_status(){
 {%- endif %}
       --resource=RunningStatus \
       --queued
+else
+    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
+      --user={{USERNAME}} \
+      --password={{PASSWORD}} \
+      --server={{PUT_SERVER}} \
+      --project={{SUBJECT_PROJECT}} \
+      --subject={{SUBJECT_ID}} \
+      --classifier={{SUBJECT_CLASSIFIER}} \
+{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
+      --scan={{SUBJECT_EXTRA}} \
+{%- endif %}
+      --resource=RunningStatus \
+      --queued
+fi
 }
 {% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}
   # Delete the resource first
@@ -50,19 +82,17 @@ mark_running_status(){
 # Run Script to create running status marker file
 mark_running_status
 
-
 # Chain the scripts onto the PBS
-PRIOR_JOB=$(qsub {{ GET_DATA_JOB_SCRIPT_NAME }})
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PROCESS_DATA_JOB_SCRIPT_NAME }})
+{% if PROCESSING_STAGE not in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub {{ GET_DATA_JOB_SCRIPT_NAME }})
+{% if PROCESSING_STAGE not in [ "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PROCESS_DATA_JOB_SCRIPT_NAME }})
 {% if FREESURFER_SCRIPT_NAME is defined %}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ FREESURFER_SCRIPT_NAME }})
+{% if PROCESSING_STAGE not in [ "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ FREESURFER_SCRIPT_NAME }})
 {% endif %}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CLEAN_DATA_SCRIPT_NAME }})
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PUT_DATA_SCRIPT_NAME }})
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CHECK_DATA_JOB_SCRIPT_NAME }})
-
+{% if PROCESSING_STAGE not in [ "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CLEAN_DATA_SCRIPT_NAME }})
+{% if PROCESSING_STAGE not in [ "PUT_DATA", "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ PUT_DATA_SCRIPT_NAME }})
+{% if PROCESSING_STAGE not in [ "CHECK_DATA" ] %}# {% endif %}PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB {{ CHECK_DATA_JOB_SCRIPT_NAME }})
 
 # Don't comment out, this should always run last
 # This cleans up the running status marker
-PRIOR_JOB=$(qsub -W depend=afterany:$PRIOR_JOB {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
+PRIOR_JOB=$(qsub {% if PROCESSING_STAGE in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %} -W depend=afterany:$PRIOR_JOB {% endif %} {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
