@@ -1,13 +1,13 @@
 DEFAULT: &default
   XNAT_CREDENTIALS_FILE: $PRUNNER_CONFIG_DIR/.secret
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
   REQUESTED_XNAT_SERVER: intradb
   SINGULARITY_CONTAINER_VERSION: singularity-3.2.1
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.61.17_FSL603.sif
-  SINGULARITY_CONTAINER_XNAT_PATH: /export/HCP/qunex-hcp/production_containers/Process/HCPpipelines_XNAT_1_0_5.sif
+  SINGULARITY_CONTAINER_XNAT_PATH: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   SINGULARITY_CONTAINER_PIPELINES_PATH: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   SEVEN_MM_TEMPLATE_PROJECTS: ('HCP_500', 'HCP_900', 'HCP_1200')
@@ -45,16 +45,16 @@ functional: &functional
 
 functional_preprocess_CCF_BWH:
   <<: *functional
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_BWH
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_BWH
 
 functional_preprocess_CCF_HCA:
   <<: *functional
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_HCA
 
 functional_preprocess_CCF_HCD:
   <<: *functional
   WALLTIME_LIMIT_HOURS: 48
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_HCD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/pipeline_tools_production_n_func/xnat_pbs_jobs_control_CCF_HCD
 
 hand_edit: &hand_edit
   <<: *default
@@ -63,21 +63,21 @@ hand_edit: &hand_edit
   XNAT_PBS_JOBS_SHADOWS_SUBDIR:
   XNAT_PBS_JOBS_PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   HAND_EDIT_PROCESSING_DIR: /scratch/$USER/hand_edit_buildspace
-  SINGULARITY_QUNEXRUN_PATH: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/hand_edit_test/run_qunex_test.sh
+  SINGULARITY_QUNEXRUN_PATH: $HOME/processing/hand_edit_test/run_qunex_test.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_IcaFix/qunex_0_50_02.sif
 
 hand_edit_CCF_HCA:
   <<: *hand_edit
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER
   SINGULARITY_BIND_PATH: "/NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp,/scratch/$USER/hand_edit_buildspace,$HOME/pipeline_tools/HCPpipelinesXnatPbsJobs:/pipeline_tools/xnat_pbs_jobs,$HOME/pipeline_tools/HCPpipelinesRunUtils:/pipeline_tools/xnat_pbs_jobs"
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/hand_edit_test/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/hand_edit_test/xnat_pbs_jobs_control_CCF_HCA
   WALLTIME_LIMIT_HOURS: 120
 
 hand_edit_CCF_HCD:
   <<: *hand_edit
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd,/export/HCP/qunex-hcp,/scratch/$USER/hand_edit_buildspace
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/hand_edit_test/xnat_pbs_jobs_control_CCF_HCD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/hand_edit_test/xnat_pbs_jobs_control_CCF_HCD
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
 
 msmall: &msmall
@@ -93,11 +93,11 @@ msmall: &msmall
 
 msmall_process_CCF_HCA:
   <<: *msmall
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/msmall_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/msmall_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCA
 
 msmall_process_CCF_HCD:
   <<: *msmall
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/msmall_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/msmall_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCD
 
 multirunicafix: &multirunicafix
   <<: *default
@@ -114,12 +114,12 @@ multirunicafix: &multirunicafix
 
 multirunicafix_process_CCF_HCA:
   <<: *multirunicafix
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/icafix_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/icafix_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCA
 
 
 multirunicafix_process_CCF_HCD:
   <<: *multirunicafix
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/icafix_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/icafix_Q2_2020_runs/xnat_pbs_jobs_control_CCF_HCD
 
 structural_preprocess: &structural_preprocess
   <<: *default
@@ -133,23 +133,23 @@ structural_preprocess_CCF_BWH:
   <<: *structural_preprocess
   SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build_ssd"
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/bwh_struc_preproc
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/bwh_struc_preproc/xnat_pbs_jobs_control_CCF_BWH
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/bwh_struc_preproc/xnat_pbs_jobs_control_CCF_BWH
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: bwh_struc_preproc
 
 structural_preprocess_CCF_HCA:
   <<: *structural_preprocess
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
 
 structural_preprocess_CCF_HCD:
   <<: *structural_preprocess
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCD
 
 structural_preprocess_CCF_MDD:
   <<: *structural_preprocess
   SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build_ssd"
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/mdd_struc_preproc
-  XNAT_PBS_JOBS_CONTROL: $PRUNNER_CONFIG_DIR/old_pipeline_configurations/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: mdd_struc_preproc
 
