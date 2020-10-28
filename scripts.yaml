@@ -1,97 +1,37 @@
-default_script_params: &reset_params
-  PBS_NODES: 1
-  PBS_PPN: 1
-  PBS_HASWELL: False
-  PBS_K20X: False
-  PBS_GPU: 0
-  PBS_WALLTIME: 4
-  PBS_MEM: 4
-  PBS_LOG: $WORKING_DIR
-  SINGULARITY_NVIDIA: False
-  SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-  SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_XNAT_PATH
-
-get_data_script: &generic_get
-  <<: *reset_params
-  SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $GET_DATA_RUNPATH
-  SINGULARITY_PARAMS: {
+defaults: &defaults
+  GET_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  GET_DATA_PARAMS: {
     "project": $SUBJECT_PROJECT,
     "subject": $SUBJECT_ID,
     "classifier": $SUBJECT_CLASSIFIER,
     "working-dir": $WORKING_DIR,
     "scan": $SUBJECT_EXTRA,
   }
-
-process_data_script: &generic_process_data
-  <<: *reset_params
-  PBS_WALLTIME: $WALLTIME_LIMIT_HOURS
-  PBS_MEM: $MEM_LIMIT_GBS
-  PBS_HASWELL: True
-  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
-  SINGULARITY_CONTAINER: $SINGULARITY_CONTAINER_PATH
-#  SINGULARITY_RUNPATH: $SINGULARITY_QUNEXRUN_PATH
-  SINGULARITY_RUNPATH: $RUN_QUNEX_SCRIPT
-  SINGULARITY_PARAMS: {
-    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}",
-    subjects: "${SUBJECT_SESSION}",
-    scan: $SUBJECT_EXTRA,
-    overwrite: "yes",
-    hcppipelineprocess: $PIPELINE_NAME,
+  CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+    "scan": $SUBJECT_EXTRA,
   }
-
-functional_process_data_script:
-  <<: *generic_process_data
-  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
-
-diffusion_process_data_script:
-  <<: *generic_process_data
-  PBS_HASWELL: False
-  PBS_K20X: True
-  PBS_GPU: 1
-  SINGULARITY_NVIDIA: True
-
-msmall_process_data_script: &msmall_process_data_script
-  <<: *generic_process_data
-  SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
-  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_TMP_DIR:/tmp"
-
-mricafix_process_data_script:
-  <<: *msmall_process_data_script
-  PBS_HASWELL: False
-
-structural_process_data_script: &structural_process_data_script
-  <<: *generic_process_data
-  SCRATCH_WORK_DIR: /scratch/$USER/buildspace/$SUBJECT_PROJECT/$SUBJECT_SESSION
-  SINGULARITY_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_WORK_DIR:$STUDY_FOLDER"
-
-struct_handedit_process_data_script:
-  <<: *structural_process_data_script
-  SINGULARITY_PARAMS: {
-    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}", #TODO: figure this out lines 106-110
-    subjects: "${SUBJECT_SESSION}",
-    scan: $SUBJECT_EXTRA,
-    overwrite: "yes",
-    hcppipelineprocess: $PIPELINE_NAME,
-    #TODO: Figure out what that FS_EXTRA_RECONALL param does and if it is even necessary
-    #"fs-extra-reconall": $FS_EXTRA_RECONALL
+  MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  MARK_RUNNING_STATUS_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "resource": "RunningStatus",
+    "done": null,
   }
-
-
-clean_data_script:
-  <<: *reset_params
-  SINGULARITY_CONTAINER: null
-
-put_data_script:
-  <<: *reset_params
-  PBS_MEM: 12
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
-  SINGULARITY_PARAMS: {
+  PUT_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
+  PUT_DATA_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
+  PUT_DATA_PARAMS: {
     "user": $USERNAME,
     "password": $PASSWORD,
     "server": $PUT_SERVER,
@@ -104,43 +44,6 @@ put_data_script:
     "scan": $SUBJECT_EXTRA,
     "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
   }
-
-check_data_script:
-  <<: *reset_params
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  PBS_HASWELL: True
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $CHECK_DATA_RUNPATH
-  SINGULARITY_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $CHECK_DATA_DIR,
-    "scan": $SUBJECT_EXTRA,
-  }
-
-mark_no_longer_running_script:
-  <<: *reset_params
-  PBS_LOG: $XNAT_PBS_JOBS_LOG_DIR
-  SINGULARITY_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  SINGULARITY_RUNPATH: $MARK_RUNNING_STATUS_RUNPATH
-  SINGULARITY_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "resource": "RunningStatus",
-    "done": null,
-  }
-
-freesurfer_assessor_script:
-  <<: *reset_params
-  SINGULARITY_CONTAINER: null
   FREESURFER_PARAMS: {
     "user": $USERNAME,
     "password": $PASSWORD,
@@ -151,3 +54,66 @@ freesurfer_assessor_script:
     "session-classifier": $SUBJECT_CLASSIFIER,
     "working-dir": $WORKING_DIR,
   }
+  PROCESS_PBS_HASWELL: True
+  PROCESS_PBS_K20X: False
+  PROCESS_PBS_GPU: 0
+  PROCESS_NVIDIA: False
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
+  PROCESS_DATA_PARAMS: {
+    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
+    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}",
+    subjects: "${SUBJECT_SESSION}",
+    scan: $SUBJECT_EXTRA,
+    overwrite: "yes",
+    hcppipelineprocess: $PIPELINE_NAME,
+  }
+
+structural_process: &structural_process
+  SCRATCH_WORK_DIR: /scratch/$USER/buildspace/$SUBJECT_PROJECT/$SUBJECT_SESSION
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_WORK_DIR:$STUDY_FOLDER"
+
+structural:
+  <<: *defaults
+  <<: *structural_process
+  GET_DATA_PARAMS: {
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+    "delay-seconds": 120
+  }
+
+struct_handedit:
+  <<: *defaults
+  <<: *structural_process
+  PROCESS_DATA_PARAMS: {
+    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
+    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}", #TODO: figure this out lines 106-110
+    subjects: "${SUBJECT_SESSION}",
+    scan: $SUBJECT_EXTRA,
+    overwrite: "yes",
+    hcppipelineprocess: $PIPELINE_NAME,
+    #TODO: Figure out what that FS_EXTRA_RECONALL param does and if it is even necessary
+    #"fs-extra-reconall": $FS_EXTRA_RECONALL
+  }
+
+functional:
+  <<: *defaults
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
+
+diffusion:
+  <<: *defaults
+  PROCESS_PBS_HASWELL: False
+  PROCESS_PBS_K20X: True
+  PROCESS_PBS_GPU: 1
+  PROCESS_NVIDIA: True
+
+msmall: &ms_mall
+  <<: *defaults
+  SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_TMP_DIR:/tmp"
+
+mr_icafix:
+  <<: *ms_mall
+  PROCESS_PBS_HASWELL: False
+

@@ -1,4 +1,13 @@
-{% extends "script.jinja2" %}
-{% block content %}
+{% from 'components.jinja2' import pbs_head, singularity -%}
+{{ pbs_head(log_dir=XNAT_PBS_JOBS_LOG_DIR, haswell=True) }}
 
-{% endblock %}
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+
+{{ singularity(
+        container=SINGULARITY_CONTAINER_XNAT_PATH,
+        runpath=CHECK_DATA_RUNPATH,
+        bindpath=CHECK_DATA_BINDPATH,
+        params=CHECK_DATA_PARAMS
+) }}
+
+{% block content %}{% endblock %}
