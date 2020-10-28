@@ -6,7 +6,6 @@ StructuralPreprocessing:
       USER: $USER
       HOME: /home/$USER
       TIMESTAMP: "999"
-      PUT_SERVER: hcpi-shadow13.nrg.wustl.edu
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
