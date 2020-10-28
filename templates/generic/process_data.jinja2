@@ -3,8 +3,7 @@
 
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
-
-{% block pre %}
+{% block pre -%}
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	# Make sure to `--bind` this to "/tmp" in the singularity invocation
 	SCRATCH_TMP_DIR="{{ SCRATCH_TMP_DIR }}"
@@ -22,9 +21,9 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 	mkdir -p $SCRATCH_WORK_DIR
 	rsync -a $STUDY_FOLDER/ $SCRATCH_WORK_DIR/
   {% endif %}
-{% endblock pre %}
+{%- endblock pre -%}
 
-#  prior runpath was: {{ SINGULARITY_QUNEXRUN_PATH }}
+
 {{ singularity(
         container=SINGULARITY_CONTAINER_PATH,
         runpath=RUN_QUNEX_SCRIPT,
@@ -32,6 +31,10 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
         params=PROCESS_DATA_PARAMS,
 		nvidia=PROCESS_NVIDIA
 ) }}
+
+# prior version qunex runpath was: {{ SINGULARITY_QUNEXRUN_PATH }}
+#   instead of: {{ RUN_QUNEX_SCRIPT }}
+# TODO: should all instances of SINGULARITY_QUNEXRUN_PATH be replaced by RUN_QUNEX_SCRIPT
 
 {% block content %}
   {% if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
