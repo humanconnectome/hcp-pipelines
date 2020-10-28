@@ -1,8 +1,8 @@
-{% extends "script.jinja2" %}
+{% from 'components.jinja2' import pbs_head, cmd_options -%}
+{{ pbs_head(log_dir=WORKING_DIR) }}
+
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+
 {% block content %}
-{{ FREESURFER_ASSESSOR_DEST_PATH }} \
-    {%- for key, value in FREESURFER_PARAMS.items() %}
-        --{{ key }}{% if value is not none %}="{{ value }}"{% endif %} \
-    {%- endfor -%}
-;
+{{ FREESURFER_ASSESSOR_DEST_PATH }}{{ cmd_options(FREESURFER_PARAMS) }}
 {% endblock content %}
