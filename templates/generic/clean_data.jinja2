@@ -1,13 +1,9 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=WORKING_DIR) }}
 
-source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
-
 WORK_DIR="{{ WORKING_DIR }}"
 SUBJ="{{ SUBJECT_ID }}_{{ SUBJECT_CLASSIFIER }}"
 COMMON="$WORK_DIR/$SUBJ"
-SCAN="{{ SUBJECT_EXTRA }}"
-START_FILE="{{ STARTTIME_FILE_NAME }}"
 
 {% block content %}
 mv $COMMON/$SUBJ/MNINonLinear $COMMON
