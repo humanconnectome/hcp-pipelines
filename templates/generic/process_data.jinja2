@@ -1,7 +1,10 @@
-{% extends "script.jinja2" %}
-{% block pre %}
-  {{ super() }}
+{% from 'components.jinja2' import pbs_head, singularity -%}
+{{ pbs_head(log_dir=WORKING_DIR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
+source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+
+
+{% block pre %}
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	# Make sure to `--bind` this to "/tmp" in the singularity invocation
 	SCRATCH_TMP_DIR="{{ SCRATCH_TMP_DIR }}"
@@ -21,6 +24,15 @@
   {% endif %}
 {% endblock pre %}
 
+#  prior runpath was: {{ SINGULARITY_QUNEXRUN_PATH }}
+{{ singularity(
+        container=SINGULARITY_CONTAINER_PATH,
+        runpath=RUN_QUNEX_SCRIPT,
+        bindpath=PROCESS_DATA_BINDPATH,
+        params=PROCESS_DATA_PARAMS,
+		nvidia=PROCESS_NVIDIA
+) }}
+
 {% block content %}
   {% if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
 	# copy updates back from scratch space
@@ -28,4 +40,4 @@
 	#rm $SCRATCH_WORK_DIR
 
   {% endif %}
-{% endblock content %}
+{% endblock %}
