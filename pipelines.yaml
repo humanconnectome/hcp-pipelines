@@ -16,7 +16,7 @@ StructuralPreprocessing:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
   - generate_file:
       template: structural/run_qunex.jinja2
