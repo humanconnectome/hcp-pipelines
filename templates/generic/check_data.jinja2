@@ -2,6 +2,7 @@
 {{ pbs_head(log_dir=XNAT_PBS_JOBS_LOG_DIR, haswell=True) }}
 
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+{% block pre %}{% endblock %}
 
 {{ singularity(
         container=SINGULARITY_CONTAINER_XNAT_PATH,
