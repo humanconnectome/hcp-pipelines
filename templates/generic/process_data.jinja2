@@ -10,17 +10,15 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 	mkdir -p $SCRATCH_TMP_DIR
   {% endif -%}
 
-  {%- if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
-	####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
-	# 1. Copy the content onto scratch dir
-	# 2. Do work on scratch dir (by binding to keep log filepaths correct)
-	# 3. Copy the changes back to the build space
-	# 4. Delete tmp from scratch space
-	STUDY_FOLDER="{{ STUDY_FOLDER }}"
-	SCRATCH_WORK_DIR="{{ SCRATCH_WORK_DIR }}"
-	mkdir -p $SCRATCH_WORK_DIR
-	rsync -a $STUDY_FOLDER/ $SCRATCH_WORK_DIR/
-  {% endif %}
+  {%- if USE_SCRATCH_FOR_PROCESSING %}
+####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
+  BASE="{{ WORKING_DIR_BASENAME }}"
+  SCRATCH="{{ SCRATCH_SPACE }}"
+  ORIGINAL="{{ BUILD_SPACE }}"
+
+  mv $ORIGINAL/$BASE $SCRATCH
+
+{% endif %}
 {%- endblock pre -%}
 
 
@@ -37,10 +35,7 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 # TODO: should all instances of SINGULARITY_QUNEXRUN_PATH be replaced by RUN_QUNEX_SCRIPT
 
 {% block content %}
-  {% if SCRATCH_WORK_DIR is defined and SCRATCH_WORK_DIR %}
-	# copy updates back from scratch space
-	rsync -a $SCRATCH_WORK_DIR/ $STUDY_FOLDER/
-	#rm $SCRATCH_WORK_DIR
-
-  {% endif %}
+{% if USE_SCRATCH_FOR_PROCESSING %}
+mv $SCRATCH/$BASE $ORIGINAL
+{% endif %}
 {% endblock %}

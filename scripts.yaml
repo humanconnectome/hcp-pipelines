@@ -61,7 +61,7 @@ defaults: &defaults
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
   PROCESS_DATA_PARAMS: {
     parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}",
+    studyfolder: $STUDY_FOLDER,
     subjects: "${SUBJECT_SESSION}",
     scan: $SUBJECT_EXTRA,
     overwrite: "yes",
@@ -69,8 +69,7 @@ defaults: &defaults
   }
 
 structural_process: &structural_process
-#  SCRATCH_WORK_DIR: /scratch/$USER/buildspace/$SUBJECT_PROJECT/$SUBJECT_SESSION
-  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_BUILD_DIR"
+  PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
 
 structural:
   <<: *defaults
