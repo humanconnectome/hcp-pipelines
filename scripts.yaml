@@ -81,6 +81,15 @@ structural:
     "working-dir": $WORKING_DIR,
     "delay-seconds": 120
   }
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+  }
 
 struct_handedit:
   <<: *defaults
