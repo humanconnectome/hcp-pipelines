@@ -9,6 +9,7 @@ singularity run \
         --bind /NRG-data/NRG/intradb/archive \
         --bind /act/ \
         --bind /NRG-data/NRG/intradb/build \
+        --bind /NRG-data/NRG/intradb/build_ssd \
         --bind /usr/local/torque-6.1.2 \
         --bind /export/HCP/qunex-hcp \
         --bind /scratch/$USER \
