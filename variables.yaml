@@ -131,6 +131,7 @@ structural_preprocess: &structural_preprocess
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER/ls_struc_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: ls_struc_preproc
   USE_SCRATCH_FOR_PROCESSING: True
+  PROCESSING_STAGE: CHECK_DATA
 
 structural_preprocess_CCF_BWH:
   <<: *structural_preprocess
