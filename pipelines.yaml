@@ -16,11 +16,11 @@ StructuralPreprocessing:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - load_variables: scripts.yaml#structural
   - generate_file:
       template: structural/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-  - load_variables: scripts.yaml#structural
   - generate_file:
       template: structural/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
@@ -62,10 +62,8 @@ StructuralPreprocessingHandEdit:
   - set_from_env:
       # the first positional argument is the subject string
       SUBJECT: $_1
-      #USER: HCPpipeline
       USER: $USER
       HOME: /home/$USER
-      TIMESTAMP: "999"
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
@@ -76,61 +74,46 @@ StructuralPreprocessingHandEdit:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - load_variables: scripts.yaml#structural_handedit
   - generate_file:
       template: structural/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: generic/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#struct_handedit_process_data_script
   - generate_file:
       template: generic/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
       template: generic/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
-  - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
-  - generate_file:
-      template: generic/freesurfer.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREESURFER_SCRIPT_NAME
-
+# - function: copy_free_surfer_assessor_script
+# - generate_file:
+#     template: generic/freesurfer.jinja2
+#     filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
+#     variable: FREESURFER_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
-      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
 
 
@@ -139,7 +122,6 @@ FunctionalPreprocessing:
       SUBJECT: $_1
       USER: $USER
       HOME: /home/$USER
-      TIMESTAMP: "999"
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
@@ -150,60 +132,40 @@ FunctionalPreprocessing:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-
+  - load_variables: scripts.yaml#functional
   - generate_file:
       template: functional/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: functional/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#functional_process_data_script
   - generate_file:
       template: generic/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
       template: functional/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
-  - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
-  - generate_file:
-      template: generic/freesurfer.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREESURFER_SCRIPT_NAME
-
   - generate_file:
       template: generic/submit_to_pbs.jinja2
-      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
 
   - function: launch_main_script
@@ -215,7 +177,6 @@ MultiRunIcaFixProcessing:
       SUBJECT: $_1
       USER: $USER
       HOME: /home/$USER
-      TIMESTAMP: "999"
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
@@ -226,8 +187,9 @@ MultiRunIcaFixProcessing:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - load_variables: scripts.yaml#multirunicafix
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -245,53 +207,33 @@ MultiRunIcaFixProcessing:
       template: multirunicafix/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: generic/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mricafix_process_data_script
   - generate_file:
       template: generic/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
       template: multirunicafix/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
-  - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
-  - generate_file:
-      template: generic/freesurfer.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREESURFER_SCRIPT_NAME
-
   - generate_file:
       template: generic/submit_to_pbs.jinja2
-      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
 
   - function: launch_main_script
@@ -304,7 +246,6 @@ MsmAllProcessing:
       SUBJECT: $_1
       USER: $USER
       HOME: /home/$USER
-      TIMESTAMP: "999"
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
@@ -315,8 +256,9 @@ MsmAllProcessing:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - load_variables: scripts.yaml#msmall
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -334,53 +276,33 @@ MsmAllProcessing:
       template: msmall/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: msmall/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#msmall_process_data_script
   - generate_file:
       template: generic/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
       template: msmall/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
-  - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
-  - generate_file:
-      template: generic/freesurfer.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREESURFER_SCRIPT_NAME
-
   - generate_file:
       template: generic/submit_to_pbs.jinja2
-      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
 
   - function: launch_main_script
@@ -392,7 +314,6 @@ DiffusionPreprocessing:
       SUBJECT: $_1
       USER: $USER
       HOME: /home/$USER
-      TIMESTAMP: "999"
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
@@ -403,8 +324,9 @@ DiffusionPreprocessing:
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
-      filename: "${WORKING_DIR}/xnat_pbs_setup.sh"
+      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
+  - load_variables: scripts.yaml#diffusion
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -422,54 +344,33 @@ DiffusionPreprocessing:
       template: diffusion/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
-
-  - load_variables: scripts.yaml#get_data_script
   - generate_file:
       template: diffusion/get_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#diffusion_process_data_script
   - generate_file:
       template: diffusion/process_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#clean_data_script
   - generate_file:
       template: diffusion/clean_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#put_data_script
   - generate_file:
       template: generic/put_data.jinja2
       filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#check_data_script
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
-
-  - load_variables: scripts.yaml#mark_no_longer_running_script
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
-
-  - function: copy_free_surfer_assessor_script
-  - load_variables: scripts.yaml#freesurfer_assessor_script
-  - generate_file:
-      template: generic/freesurfer.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
-      variable: FREESURFER_SCRIPT_NAME
-
   - generate_file:
       template: generic/submit_to_pbs.jinja2
-      filepath: ${WORKING_DIR}/submit_to_pbs.sh
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
 
