@@ -5,7 +5,7 @@ defaults: &defaults
     "subject": $SUBJECT_ID,
     "classifier": $SUBJECT_CLASSIFIER,
     "working-dir": $WORKING_DIR,
-#   "scan": $SUBJECT_EXTRA,
+    "scan": $SUBJECT_EXTRA,
   }
   CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   CHECK_DATA_PARAMS: {
@@ -16,7 +16,7 @@ defaults: &defaults
     "subject": $SUBJECT_ID,
     "classifier": $SUBJECT_CLASSIFIER,
     "working-dir": $CHECK_DATA_DIR,
-#   "scan": $SUBJECT_EXTRA,
+    "scan": $SUBJECT_EXTRA,
   }
   MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   MARK_RUNNING_STATUS_PARAMS: {
@@ -41,7 +41,7 @@ defaults: &defaults
     "reason": $PIPELINE_NAME,
     "working-dir": $WORKING_DIR,
     "leave-subject-id-level": null,
-#   "scan": $SUBJECT_EXTRA,
+    "scan": $SUBJECT_EXTRA,
     "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
   }
   FREESURFER_PARAMS: {
@@ -68,15 +68,49 @@ defaults: &defaults
     hcppipelineprocess: $PIPELINE_NAME,
   }
 
+scanless: &scanless
+  GET_DATA_PARAMS: {
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $WORKING_DIR,
+#   "scan": $SUBJECT_EXTRA,
+}
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+#   "scan": $SUBJECT_EXTRA,
+  }
+  PUT_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "session": $SUBJECT_SESSION,
+    "reason": $PIPELINE_NAME,
+    "working-dir": $WORKING_DIR,
+    "leave-subject-id-level": null,
+#   "scan": $SUBJECT_EXTRA,
+    "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
+  }
+
 structural_process: &structural_process
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
 
 structural:
   <<: *defaults
+  <<: *scanless
   <<: *structural_process
 
 struct_handedit:
   <<: *defaults
+  <<: *scanless
   <<: *structural_process
   PROCESS_DATA_PARAMS: {
     parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
