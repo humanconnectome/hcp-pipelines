@@ -1,5 +1,7 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
+SCAN="{{ SUBJECT_EXTRA }}"
+
 find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
 mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
 mv $COMMON/processing $COMMON/ProcessingInfo
