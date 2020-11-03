@@ -267,9 +267,8 @@ MsmAllProcessing:
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
   - function: set_qunex_boldlist
   - generate_file:
-      template: generic/batch.txt.jinja2
-#      filepath: $STUDY_FOLDER/processing/batch.txt
-      filepath: $WORKING_DIR/processing.batch.txt
+      template: msmall/batch.txt.jinja2
+      filepath: $STUDY_FOLDER/processing/batch.txt
       variable: BATCH_FILE
 
   - generate_file:
