@@ -1,0 +1,28 @@
+{% extends "generic/run_qunex.old.sh" %}
+{% block qunex_setup %}
+## This pipeline uses a template-based approach to generate batch.txt rather than 'createBatch', et al.
+{% endblock qunex_setup %}
+{% block pipeline_specific %}
+
+	mkdir -p "${StudyFolder}/subjects/${Subject}/hcp/${Subject}"
+	mv ${StudyFolder}/T*w "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+
+	######################### hcp_MSMAll
+	#--hcp_msmall_bolds="rfMRI_CONCAT:${MsmAllBolds}" \
+	#--hcp_icafix_bolds="fMRI_CONCAT_ALL:${IcaFixBolds}" \
+	#--hcp_msmall_bolds="${MsmAllBolds}" \
+	${QUNEXCOMMAND} hcp_MSMAll \
+		--sessions="${StudyFolder}/processing/batch.txt" \
+		--subjectsfolder="${StudyFolder}/subjects" \
+		--overwrite="${Overwrite}" \
+		--hcp_matlab_mode="compiled" \
+		--cores="${parsessions}"
+		#--test
+		#--hcp_resample_extractnames="rfMRI_REST:rfMRI_REST1_AP,rfMRI_REST1_PA,rfMRI_REST2_AP,rfMRI_REST2_PA" \
+		#--hcp_resample_extractextraregnames="MSMSulc" \
+		#--hcp_resample_extractvolume="TRUE" \
+
+
+{% endblock pipeline_specific %}
