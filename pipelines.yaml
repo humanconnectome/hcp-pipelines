@@ -180,7 +180,7 @@ MultiRunIcaFixProcessing:
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: multirunicafix_process_CCF_${SUBJECT_PROJECT_ACRONYM}
   - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
@@ -249,7 +249,7 @@ MsmAllProcessing:
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: msmall_process_CCF_${SUBJECT_PROJECT_ACRONYM}
   - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
@@ -317,7 +317,7 @@ DiffusionPreprocessing:
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: diffusion_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
   - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
