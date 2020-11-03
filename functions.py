@@ -126,7 +126,7 @@ def available_bold_dirs(XNAT_PBS_JOBS_ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PRO
     archive_root = f"{XNAT_PBS_JOBS_ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
     functional_preproc_dir = f"{archive_root}/{SUBJECT_SESSION}/RESOURCES/*fMRI*preproc"
     dir_list = sorted(glob.glob(functional_preproc_dir))
-    available_bolds = [d[d.rindex("/") : d.index("_preproc")] for d in dir_list]
+    available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
 
     def fmrisort(x):
         priority = [
