@@ -46,6 +46,8 @@ functional: &functional
   SINGULARITY_QUNEXRUN_PATH: /export/HCP/qunex-hcp/run_scripts/run_qunex.sh
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/HCA_HCD_Func/qunex_suite_0_49_10.sif
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
+  PROCESSING_STAGE: CHECK_DATA
+  AUTOLAUNCH_AT_END: True
 
 functional_preprocess_CCF_BWH:
   <<: *functional
