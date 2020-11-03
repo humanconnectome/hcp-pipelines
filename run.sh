@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 module load singularity-3.5.2
 
 # The first bind statement should be removed in production.
@@ -14,4 +14,4 @@ singularity run \
         --bind /export/HCP/qunex-hcp \
         --bind /scratch/$USER \
         /export/HCP/qunex-hcp/production_containers/pipelines.sif \
-        --verbose  $@  > "run.$1.$2.txt"
+        --verbose  $@  &> "log.$1.$2.txt"
