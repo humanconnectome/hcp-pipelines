@@ -87,10 +87,14 @@ def set_study_folder(
     }
 
 
-def make_directories(DRYRUN, WORKING_DIR, CHECK_DATA_DIR, MARK_COMPLETION_DIR):
+def make_directories(
+    DRYRUN, WORKING_DIR, STUDY_FOLDER, CHECK_DATA_DIR, MARK_COMPLETION_DIR
+):
     if not DRYRUN:
         print("Making ", WORKING_DIR)
         os.makedirs(WORKING_DIR, exist_ok=True)
+        print("Making study folder: ", WORKING_DIR)
+        os.makedirs(f"{STUDY_FOLDER}/processing", exist_ok=True)
         print("Making ", CHECK_DATA_DIR)
         os.makedirs(CHECK_DATA_DIR, exist_ok=True)
         print("Making ", MARK_COMPLETION_DIR)
@@ -175,7 +179,7 @@ def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
-    if SUBJECT_PROJECT == "CCF_HCA_STG":
+    if SUBJECT_PROJECT == "CCF_HCA_STG" or "CCF_HCA_TST":
         bold_list_order = BLO_HCA
     else:
         if SUBJECT_EXTRA == "YOUNGER":
