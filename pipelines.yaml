@@ -196,7 +196,7 @@ MultiRunIcaFixProcessing:
   - function: set_msm_all_bolds
   - function: set_bold_list_order
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_boldlist
+  - function: set_qunex_scanlist
   - generate_file:
       template: multirunicafix/batch.txt.jinja2
       filepath: $STUDY_FOLDER/processing/batch.txt
@@ -264,7 +264,7 @@ MsmAllProcessing:
   - function: set_msm_all_bolds
   - function: set_bold_list_order
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_boldlist
+  - function: set_qunex_scanlist
   - generate_file:
       template: msmall/batch.txt.jinja2
       filepath: $STUDY_FOLDER/processing/batch.txt
@@ -327,11 +327,7 @@ DiffusionPreprocessing:
   - load_variables: scripts.yaml#diffusion
 
   # Only for msmall, multirunicafix, and diffusion
-  - function: available_bold_dirs
-  - function: set_msm_all_bolds
-  - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_boldlist
+  - function: set_qunex_scanlist_dwi
   - generate_file:
       template: diffusion/batch.txt.jinja2
 #      filepath: $STUDY_FOLDER/processing/batch.txt
@@ -339,7 +335,7 @@ DiffusionPreprocessing:
       variable: BATCH_FILE
 
   - generate_file:
-      template: diffusion/run_qunex.old.jinja2
+      template: diffusion/run_qunex.jinja2
       filepath: "${WORKING_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:

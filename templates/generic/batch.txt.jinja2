@@ -33,6 +33,6 @@ subject: {{ SUBJECT_ID }}
 hcp: {{ STUDY_FOLDER }}/subjects/{{ SUBJECT_SESSION }}/hcp
 
 hcpready: true
-{% for XX, YY in QUNEX_BOLDLIST %}
+{% for XX, YY in QUNEX_SCANLIST %}
 {{ '{:24}'.format(XX) }} : {{ '{:30}'.format(YY) }} : filename({{ YY }})
 {%- endfor %}

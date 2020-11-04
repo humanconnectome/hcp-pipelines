@@ -192,10 +192,19 @@ def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
     return {"BOLD_LIST_ORDER": bold_list_order}
 
 
-def set_qunex_boldlist(BOLD_LIST_ORDER, BOLD_LIST):
-    qunex_boldlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
-    return {"QUNEX_BOLDLIST": qunex_boldlist}
+def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
+    qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
+    return {"QUNEX_SCALIST": qunex_scanlist}
 
+def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
+    if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG'] :
+        qunex_scanlist = [
+            ['01: DWI:dir98_AP','dMRI_dir98_AP'],
+            ['02: DWI:dir98_AP','dMRI_dir98_PA'],
+            ['03: DWI:dir99_AP','dMRI_dir99_AP'],
+            ['04: DWI:dir99_AP','dMRI_dir99_PA']
+        ]
+    return {"QUNEX_SCANLIST": qunex_scanlist}
 
 def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
     SINGULARITY_PARAMS["delay-seconds"] = 120
