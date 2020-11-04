@@ -140,7 +140,8 @@ msmall: &ms_mall
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_TMP_DIR:/tmp"
 
-mr_icafix:
-  <<: *ms_mall
+multirunicafix:
+  <<: *defaults
+  <<: *scanless
   PROCESS_PBS_HASWELL: False
 
