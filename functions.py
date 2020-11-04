@@ -197,7 +197,7 @@ def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
     return {"QUNEX_SCALIST": qunex_scanlist}
 
 def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
-    if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG'] :
+    if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG','CCF_HCA_TST','CCF_HCD_TST'] :
         qunex_scanlist = [
             ['01: DWI:dir98_AP','dMRI_dir98_AP'],
             ['02: DWI:dir98_AP','dMRI_dir98_PA'],
