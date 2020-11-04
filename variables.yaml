@@ -2,7 +2,7 @@ DEFAULT: &default
   XNAT_CREDENTIALS_FILE: $PRUNNER_CONFIG_DIR/.secret
   XNAT_PBS_JOBS_CONTROL: $HOME/processing/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
   REQUESTED_XNAT_SERVER: intradb
-  SINGULARITY_CONTAINER_VERSION: singularity-3.2.1
+  SINGULARITY_CONTAINER_VERSION: singularity-3.5.2
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
@@ -165,6 +165,22 @@ structural_preprocess_CCF_MDD:
   XNAT_PBS_JOBS_CONTROL: $HOME/processing/mdd_struc_preproc/xnat_pbs_jobs_control_CCF_MDD
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: mdd_struc_preproc
+
+diffusion_preprocess: &diffusion_preprocess
+  <<: *default
+  OUTPUT_RESOURCE_SUFFIX: Diffusion_preproc
+  SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build"
+  SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v3
+  XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_UILD_DIR/$USER/diffusion_preproc
+  XNAT_PBS_JOBS_SHADOWS_SUBDIR: diffusion_preproc
+  USE_SCRATCH_FOR_PROCESSING: False
+  PROCESSING_STAGE: PREPARE_SCRIPTS
+  AUTOLAUNCH_AT_END: True
+
+diffusion_preprocess_CCF_HCA:
+  <<: *diffusion_preprocess
+  # This setting is no longer necessary
+  #XNAT_PBS_JOBS_CONTROL: $HOME/processing/diffusion_Q3_2020_runs/xnat_pbs_jobs_control_CCF_HCA
 
 common_vars:
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
