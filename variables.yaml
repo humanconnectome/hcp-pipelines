@@ -171,16 +171,19 @@ diffusion_preprocess: &diffusion_preprocess
   OUTPUT_RESOURCE_SUFFIX: Diffusion_preproc
   SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build"
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v3
-  XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_UILD_DIR/$USER/diffusion_preproc
+  XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/diffusion_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: diffusion_preproc
   USE_SCRATCH_FOR_PROCESSING: False
-  PROCESSING_STAGE: PREPARE_SCRIPTS
+  PROCESSING_STAGE: GET_DATA
   AUTOLAUNCH_AT_END: True
 
 diffusion_preprocess_CCF_HCA:
   <<: *diffusion_preprocess
-  # This setting is no longer necessary
-  #XNAT_PBS_JOBS_CONTROL: $HOME/processing/diffusion_Q3_2020_runs/xnat_pbs_jobs_control_CCF_HCA
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/diffusion_Q3_2020_runs/xnat_pbs_jobs_control_CCF_HCA
+
+diffusion_preprocess_CCF_HCD:
+  <<: *diffusion_preprocess
+  XNAT_PBS_JOBS_CONTROL: $HOME/processing/diffusion_Q3_2020_runs/xnat_pbs_jobs_control_CCF_HCA
 
 common_vars:
     SINGULARITY_VERSION: $SINGULARITY_CONTAINER_VERSION
