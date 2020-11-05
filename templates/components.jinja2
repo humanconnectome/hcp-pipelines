@@ -36,7 +36,7 @@
 
 
 
-{% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.2.1") -%}
+{% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.5.2") -%}
 module load singularity-{{ version }}
 
 singularity exec \
