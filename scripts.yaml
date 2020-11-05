@@ -129,6 +129,7 @@ functional:
 
 diffusion:
   <<: *defaults
+  <<: *scanless
   PROCESS_PBS_HASWELL: False
   PROCESS_PBS_K20X: True
   PROCESS_PBS_GPU: 1
