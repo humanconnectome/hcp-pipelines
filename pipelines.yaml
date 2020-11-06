@@ -330,8 +330,7 @@ DiffusionPreprocessing:
   - function: set_qunex_scanlist_dwi
   - generate_file:
       template: diffusion/batch.txt.jinja2
-#      filepath: $STUDY_FOLDER/processing/batch.txt
-      filepath: $WORKING_DIR/processing.batch.txt
+      filepath: $STUDY_FOLDER/processing/batch.txt
       variable: BATCH_FILE
 
   - generate_file:
