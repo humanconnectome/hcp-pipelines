@@ -4,12 +4,12 @@
 
 # -------------------------> General HCP settings
 
-_hcp_Pipeline           : /opt/HCP/HCPpipelines
+_hcp_Pipeline           : ${HCPPIPEDIR}
 _hcp_folderstructure    : hcpls
 _hcp_bold_boldnamekey   : name
 _hcp_mppversion         : strict
 _log                    : study|hcp
-
+_hcp_regname            : MSMSulc
 
 # -------------------------> PreFS
 
@@ -42,7 +42,6 @@ _hcp_freesurfer_home    : ${FREESURFER_HOME}
 _hcp_grayordinatesres   : 2
 _hcp_hiresmesh          : 164
 _hcp_lowresmesh         : 32
-_hcp_regname            : MSMSulc
 _hcp_inflatescale       : # should be left to empty (default in HCPpipelines is 1)
 
 
@@ -55,6 +54,9 @@ _hcp_bold_unwarpdir     : PA=y|AP=y-
 _hcp_bold_correct       : TOPUP
 _hcp_bold_res           : 2
 _hcp_bold_gdcoeffs      : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_bold_usejacobian	:
+
+
 
 # -------------------------> fMRI Surface
 
