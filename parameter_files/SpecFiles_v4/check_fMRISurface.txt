@@ -1,0 +1,38 @@
+MNINonLinear Results {scan} {scan}_Atlas.dtseries.nii
+MNINonLinear Results {scan} {scan}_Atlas_nonzero.dscalar.nii
+MNINonLinear Results {scan} {scan}_Atlas_nonzero.stats.txt
+MNINonLinear Results {scan} {scan}.L.native.func.gii
+MNINonLinear Results {scan} {scan}.R.native.func.gii
+
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_norm_modulate.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_norm_modulate_ribbon.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon_norm.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon_norm_s5.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping goodvoxels.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.goodvoxels.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.goodvoxels.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping mask.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping mean.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.goodvoxels.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.goodvoxels.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping ribbon_only.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping SmoothNorm.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping std.nii.gz
