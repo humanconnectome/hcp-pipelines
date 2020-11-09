@@ -9,24 +9,19 @@ log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
 log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
 
 
-g_scan="{{ USERNAME }}"    #functional
-g_project="{{ USERNAME }}"
-g_subject="{{ USERNAME }}"
+g_scan="{{ SUBJECT_EXTRA }}"    # used in functional only
+g_project="{{ SUBJECT_PROJECT }}"
+g_subject="{{ SUBJECT_ID }}"
 g_classifier="{{ SUBJECT_CLASSIFIER }}"
 g_working_dir="{{ WORKING_DIR }}"
-{% if structural %}
-#   --use-prescan-normalized  : Use the prescan normalized versions of the T1w and T2w scans 
-g_use_prescan_normalized="FALSE"   # "TRUE" if present
-g_delay_seconds=0
-{% endif %}
-
-
-PHASE="diff_preproc_prereqs"
-PHASE="func_preproc_prereqs"
-PHASE="msmall_prereqs"
-PHASE="multirunicafix_prereqs"
-PHASE="struct_preproc_prereqs"
-PHASE="struct_preproc_hand_edit_prereqs"
+{% if PIPELINE_NAME == "StructuralPreprocessing" -%}
+# Use the prescan normalized versions of the T1w and T2w scans
+{% if USE_PRESCAN_NORMALIZED -%}
+g_use_prescan_normalized="TRUE"
+{%- else -%}
+g_use_prescan_normalized="FALSE"
+{%- endif %}
+{%- endif %}
 
 
 
@@ -49,14 +44,14 @@ ${XNAT_PBS_JOBS}/lib/ccf/get_cinab_style_data.py \
     --project=${g_project} \
     --subject=${g_subject} \
     --classifier=${g_classifier} \
-{% if functional %}
+{% if PIPELINE_NAME == "FunctionalPreprocessing" -%}
     --scan=${g_scan} \
-{% endif %}
+{%- endif %}
     --study-dir=${g_working_dir}/tmp \
-    --phase=func_preproc_prereqs \
+    --phase=${GET_PHASE} \
     --remove-non-subdirs
 
-{% if not structural %}
+{% if PIPELINE_NAME != "StructuralPreprocessing" -%}
 find  ${g_working_dir}/tmp/${g_subject}_${g_classifier}/* -maxdepth 0 -type d ! -name "ProcessingInfo" -exec mv {} ${g_working_dir}/${g_subject}_${g_classifier} \;
 rm -r ${g_working_dir}/tmp
 {% else %}

@@ -30,7 +30,6 @@ DEFAULT: &default
   WALLTIME_LIMIT_HOURS: 52
   MEM_LIMIT_GBS: 8
   BRAIN_SIZE: 150
-  USE_PRESCAN_NORMALIZED: False
 
   USE_SCRATCH_FOR_PROCESSING: False
   AUTOLAUNCH_AT_END: False
@@ -38,6 +37,7 @@ DEFAULT: &default
 
 functional: &functional
   <<: *default
+  GET_PHASE: func_preproc_prereqs
   OUTPUT_RESOURCE_NAME: ${SUBJECT_EXTRA}_preproc
   WALLTIME_LIMIT_HOURS: 24
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER
@@ -63,6 +63,7 @@ functional_preprocess_CCF_HCD:
 
 hand_edit: &hand_edit
   <<: *default
+  GET_PHASE: struct_preproc_hand_edit_prereqs
   MEM_LIMIT_GBS: 64
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
   XNAT_PBS_JOBS_SHADOWS_SUBDIR:
@@ -86,6 +87,7 @@ hand_edit_CCF_HCD:
 
 msmall: &msmall
   <<: *default
+  GET_PHASE: msmall_prereqs
   WALLTIME_LIMIT_HOURS: 20
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/msmall_Q2_2020_runs
@@ -106,6 +108,7 @@ msmall_process_CCF_HCD:
 
 multirunicafix: &multirunicafix
   <<: *default
+  GET_PHASE: multirunicafix_prereqs
   WALLTIME_LIMIT_HOURS: 48
   MEM_LIMIT_GBS: 48
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
@@ -129,8 +132,10 @@ multirunicafix_process_CCF_HCD:
 
 structural_preprocess: &structural_preprocess
   <<: *default
-  OUTPUT_RESOURCE_SUFFIX: Structural_preproc
-  SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build,/scratch/$USER"
+  GET_PHASE: struct_preproc_prereqs
+  USE_PRESCAN_NORMALIZED: False
+  OUTPUT_RESOURCE_NAME: Structural_preproc
+  SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build"
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v3
   XNAT_PBS_JOBS_BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER/ls_struc_preproc
   XNAT_PBS_JOBS_SHADOWS_SUBDIR: ls_struc_preproc
@@ -164,6 +169,7 @@ structural_preprocess_CCF_MDD:
 
 diffusion_preprocess: &diffusion_preprocess
   <<: *default
+  GET_PHASE: diff_preproc_prereqs
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
   SINGULARITY_BIND_PATH: "$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,/export/HCP/qunex-hcp,/NRG-data/NRG/intradb/build_ssd"
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v3
