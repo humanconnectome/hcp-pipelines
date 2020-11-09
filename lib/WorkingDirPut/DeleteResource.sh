@@ -11,8 +11,9 @@ if [ -z "${HCP_RUN_UTILS}" ]; then
 	exit 1
 fi
 
-source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
-source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+source ${HCP_LIB_DIR}/shlib/request.shlib      # API requests
+source ${HCP_LIB_DIR}/shlib/log.shlib          # Logging related functions
+source ${HCP_LIB_DIR}/shlib/utils.shlib        # Utility functions
 log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
 log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
 
@@ -223,16 +224,16 @@ main()
 					while_i=60
 					log_Msg "switching to a New shadow Server: ${g_server}"
 					break
-				fi		
+				fi
 			done
-			while_i=$[$while_i + 1]	
+			while_i=$[$while_i + 1]
 			if [ "$while_i" -lt 60 ]; then
 				log_Msg "Sleeping for 1 minute to Check shadow servers again"
 				sleep 1m
 			elif [ "$while_i" -eq 60 ]; then
 				log_Msg "all shadow servers are down"
 				exit 3
-			fi			
+			fi
 		done
 	fi
 

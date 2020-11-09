@@ -11,8 +11,9 @@ if [ -z "${HCP_RUN_UTILS}" ]; then
 	exit 1
 fi
 
-source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
-source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+source ${HCP_LIB_DIR}/shlib/request.shlib      # API requests
+source ${HCP_LIB_DIR}/shlib/log.shlib          # Logging related functions
+source ${HCP_LIB_DIR}/shlib/utils.shlib        # Utility functions
 log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
 log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
 
@@ -32,13 +33,13 @@ Removes a file from a resource
 
 Example invocation when file is available on the server
 
-  ./RemoveFileFromResource.sh 
-	--user=tbbrown 
-	--password=<some_password> 
-	--project=PipelineTest 
-	--subject=100307 
-	--session=100307_3T 
-	--resource=Structural_preproc 
+  ./RemoveFileFromResource.sh
+	--user=tbbrown
+	--password=<some_password>
+	--project=PipelineTest
+	--subject=100307
+	--session=100307_3T
+	--resource=Structural_preproc
 	--file-path-within-resource=T1w/wmparc.nii.gz	  # Should not start with a slash "/"
 
 EOF
@@ -60,7 +61,7 @@ get_options()
 	unset g_file_path_within_resource # should not start with a slash
 
 	# default values
-	
+
 	# parse arguments
 	local num_args=${#arguments[@]}
 	local argument
@@ -116,7 +117,7 @@ get_options()
 				;;
 		esac
 	done
-	
+
 	local default_server="${XNAT_PBS_JOBS_XNAT_SERVER}"
 
 	local error_count=0
@@ -152,45 +153,45 @@ get_options()
 		log_Err "Unrecognized protocol: ${g_protocol}"
 		error_count=$(( error_count + 1 ))
 	fi
-	
+
 	log_Msg "g_protocol: ${g_protocol}"
 	log_Msg "g_server: ${g_server}"
-	
+
 	if [ -z "${g_project}" ]; then
 		log_Err "project (--project=) required"
 		error_count=$(( error_count + 1 ))
 	else
 		log_Msg "g_project: ${g_project}"
 	fi
-	
+
 	if [ -z "${g_subject}" ]; then
 		log_Err "subject (--subject=) required"
 		error_count=$(( error_count + 1 ))
 	else
 		log_Msg "g_subject: ${g_subject}"
 	fi
-	
+
 	if [ -z "${g_session}" ]; then
 		log_Err "session (--session=) required"
 		error_count=$(( error_count + 1 ))
 	else
 		log_Msg "g_session: ${g_session}"
 	fi
-	
+
 	if [ -z "${g_resource}" ]; then
 		log_Err "resource (--resource=) required"
 		error_count=$(( error_count + 1 ))
 	else
 		log_Msg "g_resource: ${g_resource}"
 	fi
-	
+
 	if [ -z "${g_file_path_within_resource}" ]; then
 		log_Err "file path within resource (--file-path-within-resource=) required"
 		error_count=$(( error_count + 1 ))
 	else
 		log_Msg "g_file_path_within_resource: ${g_file_path_within_resource}"
 	fi
-	
+
 	if [ ${error_count} -gt 0 ]; then
 		usage
 		exit 1
@@ -228,19 +229,19 @@ main()
 					while_i=60
 					log_Msg "switching to a New shadow Server: ${g_server}"
 					break
-				fi		
+				fi
 			done
-			while_i=$[$while_i + 1]	
+			while_i=$[$while_i + 1]
 			if [ "$while_i" -lt 60 ]; then
 				log_Msg "Sleeping for 1 minute to Check shadow servers again"
 				sleep 1m
 			elif [ "$while_i" -eq 60 ]; then
 				log_Msg "all shadow servers are down"
 				exit 3
-			fi			
+			fi
 		done
 	fi
-	
+
 	# Get XNAT Session ID (a.k.a. the experiment ID, e.g ConnectomeDB_E1234)
 	get_session_id_cmd="python ${get_session_id_script}"
 	get_session_id_cmd+=" --server=${g_server}"
@@ -253,7 +254,7 @@ main()
 	#log_Msg "get_session_id_cmd: ${get_session_id_cmd}"
 	sessionID=$(${get_session_id_cmd})
 	log_Msg "XNAT session ID: ${sessionID}"
-	
+
 	resource_url=""
 	resource_url+="${g_protocol}:"
 	resource_url+="//${g_server}"

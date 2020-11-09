@@ -12,8 +12,9 @@ if [ -z "${HCP_RUN_UTILS}" ]; then
 	exit 1
 fi
 
-source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
-source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+source ${HCP_LIB_DIR}/shlib/request.shlib      # API requests
+source ${HCP_LIB_DIR}/shlib/log.shlib          # Logging related functions
+source ${HCP_LIB_DIR}/shlib/utils.shlib        # Utility functions
 log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
 log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
 
@@ -64,35 +65,35 @@ Options: [ ] = optional, < > = user-supplied value
                              If the reason is not specified, then a "reason" of
                              "Unspecified" is used.
 
-  --dir=<directory>        : Directory containing data to be placed in the 
-                             XNAT DB resource. 
+  --dir=<directory>        : Directory containing data to be placed in the
+                             XNAT DB resource.
 
-                             If --use-http is NOT specified, then this should be 
-                             the path to the directory of data as it is accessed 
-                             from the system running the XNAT SERVER (i.e. the 
+                             If --use-http is NOT specified, then this should be
+                             the path to the directory of data as it is accessed
+                             from the system running the XNAT SERVER (i.e. the
                              path to the directory as seen from the XNAT SERVER).
 
                              If --use-http is specified, then this should be the
                              path to the directory of data as it is accessed from
-                             the system on which this command is running (i.e. 
+                             the system on which this command is running (i.e.
                              the local path).
 
  [--force]                 : If --force is NOT specified, then the user is prompted
                              to confirm that the data should truly be uploaded
-                             before the data is put in the XNAT DB. 
+                             before the data is put in the XNAT DB.
 
-                             If --force is specified, no prior prompting is done 
+                             If --force is specified, no prior prompting is done
                              before data is put/uploaded to the XNAT DB.
 
  [--use-http]              : If --use-http is NOT specified, then it is assumed that
-                             the specified directory (--dir=) is an accessible path 
-                             on the system running the XNAT SERVER to which the data 
+                             the specified directory (--dir=) is an accessible path
+                             on the system running the XNAT SERVER to which the data
                              is being sent.
 
                              If --use-http is specified, then there is no assumption
                              that the specified directory (--dir=) is an accessible
                              path on the system running the XNAT SERVER to which the
-                             data is being sent. Instead the directory must be 
+                             data is being sent. Instead the directory must be
                              an accessible path on the system on which this command
                              is being run. The directory's contents are zipped up
                              and the resulting zip file is sent to the XNAT SERVER
@@ -119,13 +120,13 @@ get_options()
     unset g_force
     unset g_use_http
 	unset g_java_mem
-	
+
     # default values
     g_use_http="FALSE"
     g_reason="Unspecified"
     g_force="FALSE"
 	g_java_mem="1024"
-	    
+
     # parse arguments
     local num_args=${#arguments[@]}
     local argument
@@ -233,7 +234,7 @@ get_options()
         log_Err "Unrecognized protocol: ${g_protocol}"
         error_count=$(( error_count + 1 ))
     fi
-    
+
     log_Msg "g_protocol: ${g_protocol}"
     log_Msg "g_server: ${g_server}"
 
@@ -320,10 +321,10 @@ main()
 
     data_client_jar="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/XnatDataClient-1.7.6-SNAPSHOT-all.jar"
     get_session_id_script="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/catalog/ToolsHCP/resources/scripts/sessionid.py"
-    
+
     # Set up to run Python
     source_script ${HCP_RUN_UTILS}/ToolSetupScripts/epd-python_setup.sh
-	
+
 	HTTP_CODE=`curl https://${g_server} -o /dev/null -w "%{http_code}\n" -s`
 	if [ "$HTTP_CODE" != "302" ] ; then
 		numberofservers=($XNAT_PBS_JOBS_PUT_SERVER_LIST)
@@ -345,16 +346,16 @@ main()
 					while_i=60
 					log_Msg "switching to a New shadow Server: ${g_server}"
 					break
-				fi		
+				fi
 			done
-			while_i=$[$while_i + 1]	
+			while_i=$[$while_i + 1]
 			if [ "$while_i" -lt 60 ]; then
 				log_Msg "Sleeping for 1 minute to Check shadow servers again"
 				sleep 1m
 			elif [ "$while_i" -eq 60 ]; then
 				log_Msg "all shadow servers are down"
 				exit 3
-			fi			
+			fi
 		done
 	fi
 
@@ -367,7 +368,7 @@ main()
     get_session_id_cmd+=" --subject=${g_subject}"
     get_session_id_cmd+=" --session=${g_session}"
     # Since this command contains a password, it should only be logged in debugging mode.
-    #log_Msg "get_session_id_cmd: ${get_session_id_cmd}" 
+    #log_Msg "get_session_id_cmd: ${get_session_id_cmd}"
     sessionID=$(${get_session_id_cmd})
     log_Msg "XNAT session ID: ${sessionID}"
 
@@ -418,14 +419,14 @@ main()
             log_Msg "Using java -Xmx${g_java_mem}m -jar ${data_client_jar} to PUT the file: ${zipped_file} into the resource: ${resource_uri}"
             ${java_cmd}
 
-            rm ${zipped_file}           
+            rm ${zipped_file}
             popd
-            
+
         else
             log_Msg "Did not attempt to put to resource: ${resource_uri}"
 
         fi
-        
+
     else
         # The specified directory is available on the server, so upload it "by reference"
 	workfolder=$(basename ${g_dir})
@@ -442,9 +443,9 @@ main()
         variable_values+="?overwrite=true"
         variable_values+="&replace=true"
         variable_values+="&event_reason=${g_reason}"
-	if [ -z "${XNAT_PBS_JOBS_SHADOWS_SUBDIR}" ]; then 
+	if [ -z "${XNAT_PBS_JOBS_SHADOWS_SUBDIR}" ]; then
         	variable_values+="&reference=${XNAT_PBS_JOBS_SHADOWS_ROOT}/chpc/BUILD/${USER}/${g_project}/${workfolder}"
-	else 
+	else
         	variable_values+="&reference=${XNAT_PBS_JOBS_SHADOWS_ROOT}/chpc/BUILD/${USER}/${XNAT_PBS_JOBS_SHADOWS_SUBDIR}/${g_project}/${workfolder}"
 	fi
 
