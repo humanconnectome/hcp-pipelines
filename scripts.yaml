@@ -8,16 +8,6 @@ defaults: &defaults
     "scan": $SUBJECT_EXTRA,
   }
   CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  CHECK_DATA_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $CHECK_DATA_DIR,
-    "scan": $SUBJECT_EXTRA,
-  }
   MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   MARK_RUNNING_STATUS_PARAMS: {
     "user": $USERNAME,
@@ -76,16 +66,6 @@ scanless: &scanless
     "working-dir": $WORKING_DIR,
 #   "scan": $SUBJECT_EXTRA,
 }
-  CHECK_DATA_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $CHECK_DATA_DIR,
-#   "scan": $SUBJECT_EXTRA,
-  }
   PUT_DATA_PARAMS: {
     "user": $USERNAME,
     "password": $PASSWORD,
