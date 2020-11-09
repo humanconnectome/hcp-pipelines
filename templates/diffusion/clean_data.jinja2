@@ -1,6 +1,6 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
+find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer {{ STARTTIME_FILE_NAME }} -delete
 mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
 mv $COMMON/subjects/specs $COMMON/ProcessingInfo
 mv $COMMON/processing $COMMON/ProcessingInfo
