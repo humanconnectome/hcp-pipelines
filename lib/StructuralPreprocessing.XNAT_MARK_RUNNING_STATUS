@@ -1,0 +1,275 @@
+#!/bin/bash
+
+g_script_name=$(basename "${0}")
+
+if [ -z "${XNAT_PBS_JOBS}" ]; then
+	echo "${g_script_name}: ABORTING: XNAT_PBS_JOBS environment variable must be set"
+	exit 1
+fi
+
+if [ -z "${HCP_RUN_UTILS}" ]; then
+	echo "${g_script_name}: ABORTING: HCP_RUN_UTILS environment variable must be set"
+	exit 1
+fi
+
+source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
+source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
+log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
+
+if [ -z "${XNAT_PBS_JOBS_BUILD_DIR}" ]; then
+	log_Err_Abort "XNAT_PBS_JOBS_BUILD_DIR environment variable must be set"
+else
+	log_Msg "XNAT_PBS_JOBS_BUILD_DIR: ${XNAT_PBS_JOBS_BUILD_DIR}"
+fi
+
+if [ -z "${XNAT_PBS_JOBS_ARCHIVE_ROOT}" ]; then
+	log_Err_Abort "XNAT_PBS_JOBS_ARCHIVE_ROOT environment variable must be set"
+else
+	log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
+fi
+
+usage()
+{
+	cat <<EOF
+
+Mark that Structural Preprocessing is queued/running or no longer queued/running
+
+Usage: ${g_script_name} PARAMETER..."
+
+PARAMETERs are [ ] = optional; < > = user supplied value
+  [--help]				: show usage information and exit with non-zero return code
+   --user=<usernaem>			: XNAT user name 
+   --password=<password>		: XNAT user password 
+   --server=<server>			: XNAT server name (e.g. connectomedb or intradb)
+   --project=<project>			: XNAT project (e.g. HCP_500)
+   --subject=<subject>			: XNAT subject ID within project (e.g. 100307)
+   --classifier=<classifier>		: XNAT session classifier (e.g. 3T, 7T, MR, V1, V2, etc.)
+   --resource=<resource>		: XNAT resource (e.g. RunningStatus)
+  {
+	one of the following must be specified
+
+	--submitted			: all these mean the same thing
+	--queued			:  jobs have been submitted and are either queued up or
+	--running			:  running
+
+	--not-running			: all these mean the same thing
+	--not-queued			:  jobs are not queued, submitted, running 
+	--done				:  jobs may have completed successfully or not
+  }
+
+EOF
+}
+
+get_options()
+{
+	local arguments=($@)
+
+	# initialize global output variables
+	unset g_user
+	unset g_password
+	unset g_server
+	unset g_project
+	unset g_subject
+	unset g_classifier
+	unset g_resource
+	unset g_reason
+	unset g_running	
+	
+	# parse arguments
+	local num_args=${#arguments[@]}
+	local argument
+	local index=0
+
+	while [ ${index} -lt ${num_args} ]; do
+		argument=${arguments[index]}
+
+		case ${argument} in
+			--help)
+				usage
+				exit 1
+				;;
+			--user=*)
+				g_user=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--password=*)
+				g_password=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--server=*)
+				g_server=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--project=*)
+				g_project=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--subject=*)
+				g_subject=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--classifier=*)
+				g_classifier=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--resource=*)
+				g_resource=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--submitted)
+				g_running="TRUE"
+				g_reason="submitted"
+				index=$(( index + 1 ))
+				;;
+			--queued)
+				g_running="TRUE"
+				g_reason="queued"
+				index=$(( index + 1 ))
+				;;
+			--running)
+				g_running="TRUE"
+				g_reason="running"
+				index=$(( index + 1 ))
+				;;
+			--not-running)
+				g_running="FALSE"
+				g_reason="not running"
+				index=$(( index + 1 ))
+				;;
+			--not-queued)
+				g_running="FALSE"
+				g_reason="not queued"
+				index=$(( index + 1 ))
+				;;
+			--done)
+				g_running="FALSE"
+				g_reason="done"
+				index=$(( index + 1 ))
+				;;
+			*)
+				usage
+				log_Err_Abort "unrecognized option ${argument}"
+				;;
+		esac
+	done
+
+	local error_count=0
+	
+	# check required parameters
+	if [ -z "${g_user}" ]; then
+		log_Err "user (--user=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "user: ${g_user}"
+	fi
+
+	if [ -z "${g_password}" ]; then
+		log_Err "password (--password=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "password: *******"
+	fi
+
+	if [ -z "${g_server}" ]; then
+		log_Err "server (--server=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "server: ${g_server}"
+	fi
+
+	if [ -z "${g_project}" ]; then
+		log_Err "project (--project=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "project: ${g_project}"
+	fi
+
+	if [ -z "${g_subject}" ]; then
+		log_Err "subject (--subject=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "subject: ${g_subject}"
+	fi
+
+	if [ -z "${g_classifier}" ]; then
+		log_Err "classifier (--classifier=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "classifier: ${g_classifier}"
+	fi
+
+	if [ -z "${g_resource}" ]; then
+		log_Err "resource (--resource=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "resource: ${g_resource}"
+	fi
+
+	if [ -z "${g_running}" ]; then
+		log_Err "running status must be specified"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "running status: ${g_running}"
+		log_Msg "reason: ${g_reason}"
+	fi
+	
+	if [ ${error_count} -gt 0 ]; then
+		log_Err_Abort "For usage information, use --help"
+	fi
+}
+
+main()
+{
+	show_job_start
+
+	show_platform_info
+
+	get_options "$@"
+
+	local directory="${XNAT_PBS_JOBS_BUILD_DIR}/${g_project}/StructuralPreprocessing.${g_subject}_${g_classifier}_RUNNING_STATUS"
+	local file="StructuralPreprocessing.${g_subject}_${g_classifier}.RUNNING"
+
+	local existing_file="${XNAT_PBS_JOBS_ARCHIVE_ROOT}/${g_project}/arc001/${g_subject}_${g_classifier}/RESOURCES/RunningStatus/${file}"	
+	local path=${directory}/${file}
+	
+	if [ "${g_running}" = "TRUE" ]; then
+		mkdir -p ${directory}
+		echo "User: ${g_user}, Reason: ${g_reason}" > ${path}
+		${XNAT_PBS_JOBS}/WorkingDirPut/PutDirIntoResource.sh \
+					--user=${g_user} \
+					--password=${g_password} \
+					--server=${g_server} \
+					--project=${g_project} \
+					--subject=${g_subject} \
+					--session=${g_subject}_${g_classifier} \
+					--resource=${g_resource} \
+					--mem="256" \
+					--reason=${g_reason} \
+					--dir=${directory} \
+					--use-http \
+					--protocol="https" \
+					--force	
+			rm -rf ${directory}
+	
+	else
+		if [ -e "${existing_file}" ]; then
+			${XNAT_PBS_JOBS}/WorkingDirPut/RemoveFileFromResource.sh \
+						--user=${g_user} \
+						--password=${g_password} \
+						--protocol="https" \
+						--server=${g_server} \
+						--project=${g_project} \
+						--subject=${g_subject} \
+						--session=${g_subject}_${g_classifier} \
+						--resource=${g_resource} \
+						--file-path-within-resource=${file}
+		fi
+
+	fi
+
+	log_Msg "Complete"
+}
+
+# Invoke the main function to get things started
+main "$@"

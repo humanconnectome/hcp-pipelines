@@ -1,0 +1,372 @@
+#!/bin/bash
+
+g_script_name=$(basename "${0}")
+
+if [ -z "${XNAT_PBS_JOBS}" ]; then
+	echo "${g_script_name}: ABORTING: XNAT_PBS_JOBS environment variable must be set"
+	exit 1
+fi
+
+if [ -z "${HCP_RUN_UTILS}" ]; then
+	echo "${g_script_name}: ABORTING: HCP_RUN_UTILS environment variable must be set"
+	exit 1
+fi
+
+source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
+source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
+log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
+
+if [ -z "${NRG_PACKAGES}" ]; then
+	log_Err_Abort "NRG_PACKAGES environment variable must be set"
+else
+	log_Msg "NRG_PACKAGES: ${NRG_PACKAGES}"
+fi
+
+#if [ -z "${XNAT_PBS_JOBS_XNAT_SERVER}" ]; then
+#	log_Err_Abort "XNAT_PBS_JOBS_XNAT_SERVER environment variable must be set"
+#else
+#	log_Msg "XNAT_PBS_JOBS_XNAT_SERVER: ${XNAT_PBS_JOBS_XNAT_SERVER}"
+#fi
+
+#if [ -z "${XNAT_PBS_JOBS_ARCHIVE_ROOT}" ]; then
+#	log_Err_Abort "XNAT_PBS_JOBS_ARCHIVE_ROOT environment variable must be set"
+#else
+#	log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
+#fi
+
+#if [ -z "${XNAT_UTILS_HOME}" ]; then
+#	log_Err_Abort "XNAT_UTILS_HOME environment variable must be set"
+#else
+#	log_Msg "XNAT_UTILS_HOME: ${XNAT_UTILS_HOME}"
+#fi
+
+if [ -z "${XNAT_PBS_JOBS_PIPELINE_ENGINE}" ]; then
+	log_Err_Abort "XNAT_PBS_JOBS_PIPELINE_ENGINE environment variable must be set"
+else
+	log_Msg "XNAT_PBS_JOBS_PIPELINE_ENGINE: ${XNAT_PBS_JOBS_PIPELINE_ENGINE}"
+fi
+
+# Show script usage information
+usage()
+{
+	cat <<EOF
+
+Create the FreeSurfer Assessor
+
+
+Usage: ${g_script_name} <options>
+
+  Options: [ ] = optional, < > = user-supplied-value
+
+  [--help] : show usage information and exit
+   --user=<username>        : XNAT DB username
+   --password=<password>    : XNAT DB password
+   --server=<server>        : XNAT server 
+   --project=<project>      : XNAT project (e.g. HCP_500)
+   --subject=<subject>      : XNAT subject ID within project (e.g. 100307)
+   --session=<session>      : XNAT session ID within project (e.g. 100307_3T)
+   --working-dir=<dir>      : Working directory in which to place retrieved data
+                              and in which to produce results
+   --session-classifier=<classifier>
+EOF
+}
+
+# Parse specified command line options and verify that required options are 
+# specified. "Return" the options to use in global variables
+get_options()
+{
+	local arguments=($@)
+
+	# initialize global output variables
+	unset g_user
+	unset g_password
+	unset g_server
+	unset g_project
+	unset g_subject
+	unset g_session
+	unset g_working_dir
+	unset g_session_classifier
+
+	# set default values
+	
+	# parse arguments
+	local num_args=${#arguments[@]}
+	local argument
+	local index=0
+
+	while [ ${index} -lt ${num_args} ]; do
+		argument=${arguments[index]}
+
+		case ${argument} in
+			--help)
+				usage
+				exit 1
+				;;
+			--user=*)
+				g_user=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--password=*)
+				g_password=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--server=*)
+				g_server=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--project=*)
+				g_project=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--subject=*)
+				g_subject=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--session=*)
+				g_session=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--session-classifier=*)
+				g_session_classifier=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			--working-dir=*)
+				g_working_dir=${argument/*=/""}
+				index=$(( index + 1 ))
+				;;
+			*)
+				usage
+				log_Err_Abort "unrecognized option: ${argument}"
+				;;
+		esac
+	done
+
+ 	local error_count=0
+
+ 	# check parameters
+ 	if [ -z "${g_user}" ]; then
+ 		log_Err "user (--user=) required"
+ 		error_count=$(( error_count + 1 ))
+ 	else
+ 		log_Msg "g_user: ${g_user}"
+ 	fi
+
+ 	if [ -z "${g_password}" ]; then
+ 		log_Err "password (--password=) required"
+ 		error_count=$(( error_count + 1 ))
+ 	else
+ 		log_Msg "g_password: *******"
+ 	fi
+
+	if [ -z "${g_server}" ]; then
+		log_Err "server (--server=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_server: ${g_server}"
+	fi
+
+	if [ -z "${g_project}" ]; then
+		log_Err "project (--project=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_project: ${g_project}"
+	fi
+
+	if [ -z "${g_subject}" ]; then
+		log_Err "subject (--subject=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_subject: ${g_subject}"
+	fi
+
+	if [ -z "${g_session}" ]; then
+		log_Err "session (--session=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_session: ${g_session}"
+	fi
+
+	if [ -z "${g_session_classifier}" ]; then
+		log_Err "session classifier (--session-classifier=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_session_classifier: ${g_session_classifier}"
+	fi
+	
+	if [ -z "${g_working_dir}" ]; then
+		log_Err "working directory (--working-dir=) required"
+		error_count=$(( error_count + 1 ))
+	else
+		log_Msg "g_working_dir: ${g_working_dir}"
+	fi
+
+ 	if [ ${error_count} -gt 0 ]; then
+ 		log_Err_Abort "For usage information, use --help"
+ 	fi
+}
+
+# Main processing
+#   Carry out the necessary steps to:
+#   - get prerequisite data for the Strucutral Preprocessing pipeline 
+#   - run the scripts
+main()
+{
+	show_job_start
+
+	show_platform_info
+	
+	get_options "$@"
+
+	source_script ${HCP_RUN_UTILS}/ToolSetupScripts/epd-python_setup.sh
+
+	# GENERATE_SNAPSHOT
+
+	# use a sub-shell so that freesurfer53_setup.sh only affects the snap_montage_cmd 
+	(
+		source "${HCP_RUN_UTILS}/shlib/log.shlib"  # Logging related functions
+		
+		snap_montage_cmd=""
+		snap_montage_cmd+="/export/HCP/bin/xvfb_wrapper.sh ${NRG_PACKAGES}/tools/HCP/Freesurfer/freesurfer_includes/snap_montage_fs5.csh"
+		snap_montage_cmd+=" ${g_subject}"
+		snap_montage_cmd+=" ${g_working_dir}/${g_subject}/T1w"
+		
+		log_Msg ""
+		log_Msg "snap_montage_cmd: ${snap_montage_cmd}"
+		log_Msg ""
+		
+		pushd ${g_working_dir}/${g_subject}
+		source ${XNAT_PBS_JOBS}/ToolSetupScripts/freesurfer53_setup.sh
+		${snap_montage_cmd}
+		return_code=$?
+		if [ ${return_code} -ne 0 ]; then
+			log_Err_Abort "snap_montage command non-zero return code: ${return_code}"
+		fi
+		popd
+	)
+
+	# Show created .gif files
+	log_Msg "Show the GIF files created by the snap_montage_fs5.csh script"
+	pushd ${g_working_dir}/${g_subject}
+	find . -name "*.gif"
+	popd
+	
+	# CREATE_ASSESSOR
+
+	# Get XNAT Session ID (a.k.a. the experiment ID, e.g. ConnectomeDB_E1234)
+	log_Msg "Getting XNAT Session ID"
+	get_session_id_script="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/catalog/ToolsHCP/resources/scripts/sessionid.py"
+	get_session_id_cmd="python ${get_session_id_script}"
+	get_session_id_cmd+=" --server=${g_server}"
+	get_session_id_cmd+=" --username=${g_user}"
+	get_session_id_cmd+=" --password=${g_password}"
+	get_session_id_cmd+=" --project=${g_project} "
+	get_session_id_cmd+=" --subject=${g_subject} "
+	get_session_id_cmd+=" --session=${g_session}"
+	sessionID=`${get_session_id_cmd}`
+	log_Msg "XNAT session ID: ${sessionID}"
+
+ 	# Generate XNAT XML from FreeSurfer stats files	
+	stats2xml_cmd=""
+	stats2xml_cmd+="${NRG_PACKAGES}/tools/HCP/Freesurfer/freesurfer_includes/stats2xml_mrh.pl"
+	stats2xml_cmd+=" -p ${g_project}"
+	stats2xml_cmd+=" -x ${sessionID}"
+	stats2xml_cmd+=" -t Freesurfer"
+	stats2xml_cmd+=" -d ${g_session_classifier}"
+	stats2xml_cmd+=" -o ${g_working_dir}/${g_subject}/"
+	stats2xml_cmd+=" ${g_working_dir}/${g_subject}/T1w/${g_subject}/stats"
+
+	log_Msg "stats2xml_cmd: ${stats2xml_cmd}"
+
+	pushd ${g_working_dir}/${g_subject}
+	${stats2xml_cmd}
+	return_code=$?
+	if [ ${return_code} -ne 0 ]; then
+		log_Err_Abort "stats2xml_cmd non-zero return code: ${return_code}"
+	fi
+	popd
+
+	# Show created *freesurfer5.xml file
+	log_Msg "Show freesurfer5.xml file created by stats2xml_mrh.pl"
+	pushd ${g_working_dir}/${g_subject}
+	find . -name "${sessionID}_freesurfer5.xml"
+	popd
+	
+	# Put generated FreeSurfer stats file in DB
+
+	resource_uri="https://${g_server}/data/archive/projects/${g_project}/subjects/${g_subject}"
+	resource_uri+="/experiments/${sessionID}"
+	resource_uri+="/assessors/${sessionID}_freesurfer_${g_session_classifier}"
+	resource_uri+="?allowDataDeletion=true&inbody=true"
+	
+	java_cmd="java -Xmx1024m -jar ${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/xnat-data-client-1.6.4-SNAPSHOT-jar-with-dependencies.jar"
+	java_cmd+=" -u ${g_user}"
+	java_cmd+=" -p ${g_password}"
+	java_cmd+=" -r ${resource_uri}"	
+	java_cmd+=" -l ${g_working_dir}/${g_subject}/${sessionID}_freesurfer5.xml"
+	java_cmd+=" -m PUT"
+
+	log_Msg ""
+	log_Msg "java_cmd: ${java_cmd}"
+	log_Msg ""
+
+	pushd ${g_working_dir}/${g_subject}
+	${java_cmd}
+	return_code=$?
+	if [ ${return_code} -ne 0 ]; then
+		log_Err_Abort "java_cmd non-zero return code: ${return_code}"
+	fi
+	popd
+
+	# Put snapshots in DB and remove local copies
+	db_resource="https://${g_server}/data/archive/projects/${g_project}/subjects/${g_subject}/experiments/${sessionID}/assessors/${sessionID}_freesurfer_${g_session_classifier}/resources/SNAPSHOTS"
+	log_Msg "db_resource: ${db_resource}"
+	
+	local_resource="${g_working_dir}/${g_subject}/T1w/${g_subject}/snapshots"
+	log_Msg "local_resource: ${local_resource}"
+
+	# show files in local_resource
+	log_Msg "Files in ${local_resource}"
+	find ${local_resource} -print
+	
+	# create zip file to send to DB
+	zipped_file=$(basename ${local_resource}).zip
+	log_Msg "zipped_file: ${zipped_file}"
+
+	pushd ${local_resource}
+
+	zip_cmd="zip --recurse-paths --test ${zipped_file} ."
+	log_Msg "zip_cmd: ${zip_cmd}"
+	${zip_cmd}
+	
+	resource_uri="${db_resource}/files?overwrite=true&replace=true&extract=true"
+
+	java_cmd="java -Xmx1024m -jar ${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/xnat-data-client-1.6.4-SNAPSHOT-jar-with-dependencies.jar"
+	java_cmd+=" -u ${g_user}"
+	java_cmd+=" -p ${g_password}"
+	java_cmd+=" -m PUT"
+	java_cmd+=" -r ${resource_uri}"	
+	java_cmd+=" -l ${zipped_file}"
+	
+	log_Msg ""
+	log_Msg "java_cmd: ${java_cmd}"
+	log_Msg ""
+	${java_cmd}
+	return_code=$?
+	if [ ${return_code} -ne 0 ]; then
+		log_Err_Abort "java_cmd non-zero return code: ${return_code}"
+	fi
+
+	popd
+	
+	rm_cmd="rm -r ${local_resource}"
+	log_Msg ""
+	log_Msg "rm_cmd: ${rm_cmd}"
+	log_Msg ""
+	${rm_cmd}
+
+	log_Msg "Complete"
+}
+
+# Invoke the main function to get things started
+main "$@"
