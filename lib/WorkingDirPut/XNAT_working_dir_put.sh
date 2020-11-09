@@ -40,7 +40,8 @@ if [ -z "${HCP_RUN_UTILS}" ]; then
 	exit 1
 fi
 
-source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
+source ${HCP_LIB_DIR}/shlib/request.shlib      # API requests
+source ${HCP_LIB_DIR}/shlib/utils.shlib        # Utility functions
 log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
 log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
 
@@ -54,18 +55,18 @@ usage()
 	cat <<EOF
 
 ${g_script_name} - Push data from a working directory into a resource in an
-				   XNAT database. 
+				   XNAT database.
 
 				   Overwrites any data currently in the resource.
 
-				   Masks any use of the specified password (--password=) found 
-				   in files in the working directory (--working-dir=). Only 
+				   Masks any use of the specified password (--password=) found
+				   in files in the working directory (--working-dir=). Only
 				   instances of the password found in files at the main
-				   level (the working directory) are masked, not all uses of 
-				   the password anywhere in all the sub-directories of the 
-				   working directory. The masking operation may have the 
+				   level (the working directory) are masked, not all uses of
+				   the password anywhere in all the sub-directories of the
+				   working directory. The masking operation may have the
 				   side-effect of changing the permissions on the files that
-				   have had the password masked out of them.				   
+				   have had the password masked out of them.
 
 Usage: ${g_script_name} <options>
 
@@ -110,33 +111,33 @@ Options: [ ] = optional, < > = user-supplied-value
 
  [--use-http]				: If --use-http is specified:
 
-								  There is NO assumption that the specified working 
-								  directory (--working-dir=) is available on the system 
+								  There is NO assumption that the specified working
+								  directory (--working-dir=) is available on the system
 								  running the XNAT SERVER.
 
 							   If --use-http is NOT specified:
 
-								  It is assumed that the specified working directory 
-								  (--working-dir=) (containing the files to be pushed to 
-								  the XNAT DB archive) is also available on the XNAT 
-								  SERVER to which the files are being pushed. 
+								  It is assumed that the specified working directory
+								  (--working-dir=) (containing the files to be pushed to
+								  the XNAT DB archive) is also available on the XNAT
+								  SERVER to which the files are being pushed.
 
-								  It is also assumed that the path to the working directory 
+								  It is also assumed that the path to the working directory
 								  on the server (a.k.a. the SERVER_PATH) is related to the
-								  path to the working directory on the CLIENT (a.k.a. the 
-								  CLIENT_PATH) such that the SERVER_PATH can be formed by 
+								  path to the working directory on the CLIENT (a.k.a. the
+								  CLIENT_PATH) such that the SERVER_PATH can be formed by
 								  replacing the first instance of a CLIENT_STRING found
 								  in the CLIENT_PATH with a SERVER_STRING.
 
 								  The CLIENT_PATH (which is specified as the --working-dir=
 								  value) is where the directory resides on the CLIENT. The
 								  SERVER_PATH is where the directory resides on the SERVER.
-								  The SERVER_PATH is formed by looking for the first 
+								  The SERVER_PATH is formed by looking for the first
 								  instance of CLIENT_STRING in the CLIENT_PATH and replacing
 								  it with the SERVER_STRING.
 
-								  For example, if the CLIENT_PATH is 
-								  '/HCP/hcpdb/build_ssd/chpc/BUILD/HCP_1200/this', the 
+								  For example, if the CLIENT_PATH is
+								  '/HCP/hcpdb/build_ssd/chpc/BUILD/HCP_1200/this', the
 								  CLIENT_STRING is 'HCP', and the SERVER_STRING is 'data',
 								  then replacing the first instance of 'HCP' (the CLIENT_STRING)
 								  in the CLIENT_PATH, yields a SERVER_PATH of
@@ -147,21 +148,21 @@ Options: [ ] = optional, < > = user-supplied-value
 								  below. Each of these options has default values.
 
  [--client-string=<cli_str>] : Specification of CLIENT_STRING to replace with SERVER_STRING
-							   in the working directory path (CLIENT_PATH) to form the 
+							   in the working directory path (CLIENT_PATH) to form the
 							   SERVER_PATH (See --use-http above.)
 
 							   This value is only used if --use-http is NOT specified.
 
 							   Defaults to 'HCP'
 
- [--server-string=<ser_str>] : Specification of SERVER_STRING to put in place of the 
+ [--server-string=<ser_str>] : Specification of SERVER_STRING to put in place of the
 							   CLIENT_STRING in the working directory path (CLIENT_PATH) to
 							   form the SERVER_PATH (See --use-http above.)
 
 							   This value is only used if --use-http is NOT specified.
 
 							   Defaults to 'data'
- 
+
 EOF
 }
 
@@ -184,7 +185,7 @@ get_options()
 	unset g_use_http
 	unset g_client_string
 	unset g_server_string
-	
+
 	# default values
 	g_leave_subject_id_level="FALSE"
 	g_use_http="FALSE"
@@ -402,8 +403,8 @@ main()
 	then
 		log_Msg "EXIT: all shadow servers are down".
 		exit 1
-	fi	
-	
+	fi
+
 	# Make processing job log files readable so they can be pushed into the database
 	chmod --recursive a+r ${g_working_dir}/*
 
@@ -449,7 +450,7 @@ main()
 		# Build the SERVER_PATH (server_working_dir) based upon the CLIENT_PATH
 		# (g_working_dir) replacing the first instance of g_client_string with
 		# g_working_string
-		
+
 		#server_working_dir=${g_working_dir/HCP/data}
 		server_working_dir=${g_working_dir/${g_client_string}/${g_server_string}}
 
@@ -480,7 +481,7 @@ main()
 		log_Msg "-------------------------------------------------"
 		log_Msg "Removing g_working_dir: ${g_working_dir}"
 		rm -rf ${g_working_dir}
-	fi	
+	fi
 }
 
 # Invoke the main function to get things started
