@@ -10,21 +10,20 @@ log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
 
 
 g_user="{{ USERNAME }}"
-g_password="{{ USERNAME }}"
-g_server="{{ USERNAME }}"
-g_project="{{ USERNAME }}"
-g_scan="{{ USERNAME }}"
-g_subject="{{ USERNAME }}"
+g_password="{{ PASSWORD }}"
+g_server="{{ PUT_SERVER }}"
+g_project="{{ SUBJECT_PROJECT }}"
+g_scan="{{ SUBJECT_EXTRA }}"
+g_subject="{{ SUBJECT_ID }}"
 g_classifier="{{ SUBJECT_CLASSIFIER }}"
-g_fieldmap="{{ FIELDMAP }}"
-g_working_dir="{{ WORKING_DIR }}"
+g_working_dir="{{ CHECK_DATA_DIR }}"
 
-RESOURCE="${g_scan}_preproc"    #functional
-RESOURCE="Diffusion_preproc"
-RESOURCE="MsmAll_proc"
-RESOURCE="MultiRunIcaFix_proc"
-RESOURCE="Structural_preproc"
-RESOURCE="Structural_preproc_handedit"
+{% if PIPELINE_NAME == "DiffusionPreprocessing" -%}
+g_fieldmap="NONE"
+{%- else -%}
+g_fieldmap="SpinEcho"
+{%- endif %}
+OUTPUT_RESOURCE_NAME="{{ OUTPUT_RESOURCE_NAME }}"
 
 
 
@@ -48,28 +47,10 @@ check_cmd+="${XNAT_PBS_JOBS}/lib/ccf/diffusion_preprocessing/one_subject_complet
 check_cmd+=" --project=${g_project}"
 check_cmd+=" --subject=${g_subject}"
 check_cmd+=" --classifier=${g_classifier}"
-{% if funcational all %}
+{% if PIPELINE_NAME == "FunctionalPreprocessing" -%}
 	check_cmd+=" --scan=${g_scan}"
-
-	if [ -z "${g_fieldmap}" ]; then
-		check_cmd+=" --fieldmap=SpinEcho"
-	else
-		check_cmd+=" --fieldmap=${g_fieldmap}"
-	fi
-{% elif diffusion %}
-if [ -z "${g_fieldmap}" ]; then
-    check_cmd+=" --fieldmap=NONE"
-else
-    check_cmd+=" --fieldmap=${g_fieldmap}"
-fi
-{% else %}
-if [ -z "${g_fieldmap}" ]; then
-		check_cmd+=" --fieldmap=SpinEcho"
-else
-    check_cmd+=" --fieldmap=${g_fieldmap}"
-fi
-{% endif %}
-
+{%- endif %}
+check_cmd+=" --fieldmap=${g_fieldmap}"
 check_cmd+=" --verbose"
 check_cmd+=" --output=${log_file_name}"
 check_cmd+=" --check-all"
@@ -97,7 +78,7 @@ if [ "${check_cmd_ret_code}" -eq 0 ]; then
     put_success_file_cmd+=" --project=${g_project}"
     put_success_file_cmd+=" --subject=${g_subject}"
     put_success_file_cmd+=" --session=${g_subject}_${g_classifier}"
-    put_success_file_cmd+=" --resource=$RESOURCE"
+	put_success_file_cmd+=" --resource=${OUTPUT_RESOURCE_NAME}"
     put_success_file_cmd+=" --file=${success_file_name}"
     put_success_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
     put_success_file_cmd+=" --force"
@@ -112,7 +93,7 @@ else
     success_file_in_archive=""
     success_file_in_archive+="${XNAT_PBS_JOBS_ARCHIVE_ROOT}/${g_project}"
     success_file_in_archive+="/arc001/${g_subject}_${g_classifier}/RESOURCES"
-    success_file_in_archive+="/${RESOURCE}/${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
+    success_file_in_archive+="/${OUTPUT_RESOURCE_NAME}/${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
 
     if [ -e ${success_file_in_archive} ] ; then
         remove_file_cmd=""
@@ -124,7 +105,7 @@ else
         remove_file_cmd+=" --project=${g_project}"
         remove_file_cmd+=" --subject=${g_subject}"
         remove_file_cmd+=" --session=${g_subject}_${g_classifier}"
-        remove_file_cmd+=" --resource=${RESOURCE}"
+        remove_file_cmd+=" --resource=${OUTPUT_RESOURCE_NAME}"
         remove_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
 
         ${remove_file_cmd}
@@ -141,7 +122,7 @@ put_log_file_cmd+=" --server=${g_server}"
 put_log_file_cmd+=" --project=${g_project}"
 put_log_file_cmd+=" --subject=${g_subject}"
 put_log_file_cmd+=" --session=${g_subject}_${g_classifier}"
-put_log_file_cmd+=" --resource=${RESOURCE}"
+put_log_file_cmd+=" --resource=${OUTPUT_RESOURCE_NAME}"
 put_log_file_cmd+=" --file=${log_file_name}"
 put_log_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${log_file_name}"
 put_log_file_cmd+=" --force"
