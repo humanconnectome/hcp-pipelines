@@ -1,0 +1,160 @@
+HCP_RUN_UTILS="{{ HCP_RUN_UTILS }}"
+XNAT_PBS_JOBS="{{ XNAT_PBS_JOBS }}"
+XNAT_PBS_JOBS_ARCHIVE_ROOT="{{ XNAT_PBS_JOBS_ARCHIVE_ROOT }}"
+
+source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
+source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
+log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
+log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
+
+
+g_user="{{ USERNAME }}"
+g_password="{{ USERNAME }}"
+g_server="{{ USERNAME }}"
+g_project="{{ USERNAME }}"
+g_scan="{{ USERNAME }}"
+g_subject="{{ USERNAME }}"
+g_classifier="{{ SUBJECT_CLASSIFIER }}"
+g_fieldmap="{{ FIELDMAP }}"
+g_working_dir="{{ WORKING_DIR }}"
+
+RESOURCE="${g_scan}_preproc"    #functional
+RESOURCE="Diffusion_preproc"
+RESOURCE="MsmAll_proc"
+RESOURCE="MultiRunIcaFix_proc"
+RESOURCE="Structural_preproc"
+RESOURCE="Structural_preproc_handedit"
+
+
+
+
+
+show_job_start
+
+show_platform_info
+
+get_options "$@"
+
+log_Msg "Activating Python 3"
+set_g_python_environment
+source activate ${g_python_environment} 2>&1
+
+log_file_name="${g_subject}.${g_classifier}.${g_script_name}.log"
+success_file_name="${g_subject}.${g_classifier}.${g_script_name}.success"
+
+check_cmd=""
+check_cmd+="${XNAT_PBS_JOBS}/lib/ccf/diffusion_preprocessing/one_subject_completion_xnat_checker.py"
+check_cmd+=" --project=${g_project}"
+check_cmd+=" --subject=${g_subject}"
+check_cmd+=" --classifier=${g_classifier}"
+{% if funcational all %}
+	check_cmd+=" --scan=${g_scan}"
+
+	if [ -z "${g_fieldmap}" ]; then
+		check_cmd+=" --fieldmap=SpinEcho"
+	else
+		check_cmd+=" --fieldmap=${g_fieldmap}"
+	fi
+{% elif diffusion %}
+if [ -z "${g_fieldmap}" ]; then
+    check_cmd+=" --fieldmap=NONE"
+else
+    check_cmd+=" --fieldmap=${g_fieldmap}"
+fi
+{% else %}
+if [ -z "${g_fieldmap}" ]; then
+		check_cmd+=" --fieldmap=SpinEcho"
+else
+    check_cmd+=" --fieldmap=${g_fieldmap}"
+fi
+{% endif %}
+
+check_cmd+=" --verbose"
+check_cmd+=" --output=${log_file_name}"
+check_cmd+=" --check-all"
+
+pushd ${g_working_dir}
+
+rm -f ${log_file_name}
+log_Msg "check_cmd: ${check_cmd}"
+${check_cmd}
+check_cmd_ret_code=$?
+
+log_Msg "check_cmd_ret_code=${check_cmd_ret_code}"
+
+if [ "${check_cmd_ret_code}" -eq 0 ]; then
+    log_Msg "Completion Check was successful"
+    echo "Completion Check was successful" >> ${log_file_name}
+    echo "Completion Check was successful" >  ${success_file_name}
+
+    put_success_file_cmd=""
+    put_success_file_cmd+="${XNAT_PBS_JOBS}/WorkingDirPut/PutFileIntoResource.sh"
+    put_success_file_cmd+=" --user=${g_user}"
+    put_success_file_cmd+=" --password=${g_password}"
+    put_success_file_cmd+=" --protocol=https"
+    put_success_file_cmd+=" --server=${g_server}"
+    put_success_file_cmd+=" --project=${g_project}"
+    put_success_file_cmd+=" --subject=${g_subject}"
+    put_success_file_cmd+=" --session=${g_subject}_${g_classifier}"
+    put_success_file_cmd+=" --resource=$RESOURCE"
+    put_success_file_cmd+=" --file=${success_file_name}"
+    put_success_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
+    put_success_file_cmd+=" --force"
+    put_success_file_cmd+=" --use-http"
+    ${put_success_file_cmd}
+
+else
+    log_Msg "Completion Check was unsuccessful"
+    echo "Completion Check was unsuccessful" >> ${log_file_name}
+    rm -f ${success_file_name}
+
+    success_file_in_archive=""
+    success_file_in_archive+="${XNAT_PBS_JOBS_ARCHIVE_ROOT}/${g_project}"
+    success_file_in_archive+="/arc001/${g_subject}_${g_classifier}/RESOURCES"
+    success_file_in_archive+="/${RESOURCE}/${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
+
+    if [ -e ${success_file_in_archive} ] ; then
+        remove_file_cmd=""
+        remove_file_cmd+="${XNAT_PBS_JOBS}/WorkingDirPut/RemoveFileFromResource.sh"
+        remove_file_cmd+=" --user=${g_user}"
+        remove_file_cmd+=" --password=${g_password}"
+        remove_file_cmd+=" --protocol=https"
+        remove_file_cmd+=" --server=${g_server}"
+        remove_file_cmd+=" --project=${g_project}"
+        remove_file_cmd+=" --subject=${g_subject}"
+        remove_file_cmd+=" --session=${g_subject}_${g_classifier}"
+        remove_file_cmd+=" --resource=${RESOURCE}"
+        remove_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
+
+        ${remove_file_cmd}
+    fi
+
+fi
+
+put_log_file_cmd=""
+put_log_file_cmd+="${XNAT_PBS_JOBS}/WorkingDirPut/PutFileIntoResource.sh"
+put_log_file_cmd+=" --user=${g_user}"
+put_log_file_cmd+=" --password=${g_password}"
+put_log_file_cmd+=" --protocol=https"
+put_log_file_cmd+=" --server=${g_server}"
+put_log_file_cmd+=" --project=${g_project}"
+put_log_file_cmd+=" --subject=${g_subject}"
+put_log_file_cmd+=" --session=${g_subject}_${g_classifier}"
+put_log_file_cmd+=" --resource=${RESOURCE}"
+put_log_file_cmd+=" --file=${log_file_name}"
+put_log_file_cmd+=" --file-path-within-resource=${g_subject}_${g_classifier}/ProcessingInfo/${log_file_name}"
+put_log_file_cmd+=" --force"
+put_log_file_cmd+=" --use-http"
+
+log_Msg "put_log_file_cmd: ${put_log_file_cmd}"
+${put_log_file_cmd}
+shadowserver_code=$?
+
+popd
+
+# clean up
+if [ "${check_cmd_ret_code}" -eq 0 ] && [ "$shadowserver_code" -eq 0 ]; then
+    rm -rf ${g_working_dir}
+    log_Msg "Complete"
+fi
