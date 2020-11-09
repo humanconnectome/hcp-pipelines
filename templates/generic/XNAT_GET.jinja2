@@ -1,0 +1,101 @@
+HCP_RUN_UTILS="{{ HCP_RUN_UTILS }}"
+XNAT_PBS_JOBS="{{ XNAT_PBS_JOBS }}"
+XNAT_PBS_JOBS_ARCHIVE_ROOT="{{ XNAT_PBS_JOBS_ARCHIVE_ROOT }}"
+
+source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
+source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
+log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
+log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
+log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
+
+
+g_scan="{{ USERNAME }}"    #functional
+g_project="{{ USERNAME }}"
+g_subject="{{ USERNAME }}"
+g_classifier="{{ SUBJECT_CLASSIFIER }}"
+g_working_dir="{{ WORKING_DIR }}"
+{% if structural %}
+#   --use-prescan-normalized  : Use the prescan normalized versions of the T1w and T2w scans 
+g_use_prescan_normalized="FALSE"   # "TRUE" if present
+g_delay_seconds=0
+{% endif %}
+
+
+PHASE="diff_preproc_prereqs"
+PHASE="func_preproc_prereqs"
+PHASE="msmall_prereqs"
+PHASE="multirunicafix_prereqs"
+PHASE="struct_preproc_prereqs"
+PHASE="struct_preproc_hand_edit_prereqs"
+
+
+
+show_job_start
+
+show_platform_info
+
+get_options "$@"
+
+# Link CinaB-style data
+log_Msg "Activating Python 3"
+set_g_python_environment
+source activate ${g_python_environment} 2>&1
+
+mkdir -p ${g_working_dir}/tmp
+mkdir -p ${g_working_dir}/${g_subject}_${g_classifier}
+
+log_Msg "Getting CinaB-Style data"
+${XNAT_PBS_JOBS}/lib/ccf/get_cinab_style_data.py \
+    --project=${g_project} \
+    --subject=${g_subject} \
+    --classifier=${g_classifier} \
+{% if functional %}
+    --scan=${g_scan} \
+{% endif %}
+    --study-dir=${g_working_dir}/tmp \
+    --phase=func_preproc_prereqs \
+    --remove-non-subdirs
+
+{% if not structural %}
+find  ${g_working_dir}/tmp/${g_subject}_${g_classifier}/* -maxdepth 0 -type d ! -name "ProcessingInfo" -exec mv {} ${g_working_dir}/${g_subject}_${g_classifier} \;
+rm -r ${g_working_dir}/tmp
+{% else %}
+	log_Msg "Moving files"
+	mv ${g_working_dir}/tmp/* ${g_working_dir}
+
+	log_Msg "Removing tmp dir"
+	rmdir ${g_working_dir}/tmp
+
+	if [ "${g_use_prescan_normalized}" = "TRUE" ]; then
+		log_Msg "Setting up symlinks to enable use of prescan normalized scans"
+
+		pushd ${g_working_dir}/${g_subject}_${g_classifier}/unprocessed
+
+		t1dirs=$(ls -d T1w*)
+		for t1dir in ${t1dirs} ; do
+			pushd ${t1dir}
+			other_files=$(ls OTHER_FILES)
+			for other_file in ${other_files} ; do
+				ln -s OTHER_FILES/${other_file}
+			done
+			popd
+		done
+
+		t2dirs=$(ls -d T2w*)
+		for t2dir in ${t2dirs} ; do
+			pushd ${t2dir}
+			other_files=$(ls OTHER_FILES)
+			for other_file in ${other_files} ; do
+				ln -s OTHER_FILES/${other_file}
+			done
+			popd
+		done
+
+		popd
+	fi
+{% endif %}
+
+log_Msg "Complete"
+
+
+
