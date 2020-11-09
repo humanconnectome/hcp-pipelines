@@ -271,9 +271,8 @@ main()
     fi
 
     if [ ! -z "${delete_it}" ]; then
-        java -Xmx1024m -jar ${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/XnatDataClient-1.7.6-SNAPSHOT-all.jar \
-            -u ${g_user} -p ${g_password} -m DELETE \
-            -r ${resource_uri}
+		log_Msg "Using curl to DELETE the resource: ${resource_uri}"
+		api_delete $resource_uri
     else
         inform "Did not attempt to delete resource: ${resource_url}"
     fi

@@ -319,7 +319,6 @@ main()
 {
     get_options "$@"
 
-    data_client_jar="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/XnatDataClient-1.7.6-SNAPSHOT-all.jar"
     get_session_id_script="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/catalog/ToolsHCP/resources/scripts/sessionid.py"
 
     # Set up to run Python
@@ -408,16 +407,8 @@ main()
             log_Msg "zip_cmd: ${zip_cmd}"
             ${zip_cmd}
 
-            java_cmd=""
-            java_cmd+="java -Xmx${g_java_mem}m -jar ${data_client_jar}"
-            java_cmd+=" -u ${g_user}"
-            java_cmd+=" -p ${g_password}"
-            java_cmd+=" -m PUT"
-            java_cmd+=" -r ${resource_uri}"
-            java_cmd+=" -l ${zipped_file}"
-
-            log_Msg "Using java -Xmx${g_java_mem}m -jar ${data_client_jar} to PUT the file: ${zipped_file} into the resource: ${resource_uri}"
-            ${java_cmd}
+            log_Msg "Using curl to PUT the file: ${zipped_file} into the resource: ${resource_uri}"
+			api_put $resource_uri $zipped_file
 
             rm ${zipped_file}
             popd
@@ -461,16 +452,8 @@ main()
         fi
 
         if [ "${put_it}" = "TRUE" ]; then
-            java_cmd=""
-            java_cmd+="java -Xmx${g_java_mem}m -jar ${data_client_jar}"
-            java_cmd+=" -u ${g_user}"
-            java_cmd+=" -p ${g_password}"
-            java_cmd+=" -m PUT"
-            java_cmd+=" -r ${resource_uri}"
-
-            log_Msg "Using java -Xmx${g_java_mem}m -jar ${data_client_jar} to PUT the resource: ${resource_uri}"
-            ${java_cmd}
-
+            log_Msg "Using curl to PUT the resource: ${resource_uri}"
+			api_put $resource_uri
         else
             log_Msg "Did not attempt to put to resource: ${resource_uri}"
 
