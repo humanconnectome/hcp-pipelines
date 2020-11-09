@@ -1,24 +1,7 @@
 defaults: &defaults
   GET_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_BUILD_DIR
-  GET_DATA_PARAMS: {
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
-    "scan": $SUBJECT_EXTRA,
-  }
   CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  MARK_RUNNING_STATUS_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "resource": "RunningStatus",
-    "done": null,
-  }
   PUT_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   PUT_DATA_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
   PUT_DATA_PARAMS: {
@@ -49,23 +32,8 @@ defaults: &defaults
   PROCESS_PBS_GPU: 0
   PROCESS_NVIDIA: False
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
-  PROCESS_DATA_PARAMS: {
-    parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: $STUDY_FOLDER,
-    subjects: "${SUBJECT_SESSION}",
-    scan: $SUBJECT_EXTRA,
-    overwrite: "yes",
-    hcppipelineprocess: $PIPELINE_NAME,
-  }
 
 scanless: &scanless
-  GET_DATA_PARAMS: {
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
-#   "scan": $SUBJECT_EXTRA,
-}
   PUT_DATA_PARAMS: {
     "user": $USERNAME,
     "password": $PASSWORD,
