@@ -1,3 +1,0 @@
-[submodule "xnat_pbs_jobs"]
-	path = xnat_pbs_jobs
-	url = https://github.com/mobalt/HCPpipelinesXnatPbsJobs
