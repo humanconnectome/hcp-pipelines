@@ -202,7 +202,6 @@ main()
 {
 	get_options "$@"
 
-	data_client_jar="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/lib/XnatDataClient-1.7.6-SNAPSHOT-all.jar"
 	get_session_id_script="${XNAT_PBS_JOBS_PIPELINE_ENGINE}/catalog/ToolsHCP/resources/scripts/sessionid.py"
 
 	# Set up to run Python
@@ -268,15 +267,8 @@ main()
 	resource_uri="${resource_url}"
 	log_Msg "resource_uri: ${resource_uri}"
 
-	java_cmd=""
-	java_cmd+="java -Xmx256m -jar ${data_client_jar}"
-	java_cmd+=" -u ${g_user}"
-	java_cmd+=" -p ${g_password}"
-	java_cmd+=" -m DELETE"
-	java_cmd+=" -r ${resource_uri}"
-
-	log_Msg "Using java -Xmx256m -jar ${data_client_jar} to DELETE the file: ${g_file} into the resource: ${resource_uri}"
-	${java_cmd}
+	log_Msg "Using curl to DELETE the file: ${g_file} into the resource: ${resource_uri}"
+	api_delete $resource_uri
 }
 
 # Invoke the main function to get things started
