@@ -290,30 +290,6 @@ get_options()
     fi
 }
 
-utils_IsYes()
-{
-    answer="$1"
-    # lowercase the answer
-    answer=$(echo $answer | tr '[:upper:]' '[:lower:]')
-    if [ "$answer" = "y" ] || [ "$answer" = "yes" ]
-    then
-        return 0 # The answer is yes: True
-    else
-        return 1 # The answer is yes: False
-    fi
-}
-
-utils_ShouldProceed() {
-    echo -ne "Proceed? [n]: "
-    read proceed
-
-    if utils_IsYes $proceed
-    then
-        return 0 # Should proceed
-    else
-        return 1 # Should not proceed
-    fi
-}
 
 main()
 {
@@ -392,15 +368,6 @@ main()
         resource_uri="${resource_url}${variable_values}"
         log_Msg "resource_uri: ${resource_uri}"
 
-        if [ "${g_force}" = "TRUE" ]; then
-            put_it="TRUE"
-        elif utils_ShouldProceed ; then
-            put_it="TRUE"
-        else
-            put_it="FALSE"
-        fi
-
-        if [ "${put_it}" = "TRUE" ]; then
             zipped_file=$(basename ${g_dir}).zip
             pushd ${g_dir}
             zip_cmd="zip --recurse-paths --test ${zipped_file} ."
@@ -413,10 +380,6 @@ main()
             rm ${zipped_file}
             popd
 
-        else
-            log_Msg "Did not attempt to put to resource: ${resource_uri}"
-
-        fi
 
     else
         # The specified directory is available on the server, so upload it "by reference"
@@ -443,21 +406,9 @@ main()
         resource_uri="${resource_url}${variable_values}"
         log_Msg "resource_uri: ${resource_uri}"
 
-        if [ "${g_force}" = "TRUE" ]; then
-            put_it="TRUE"
-        elif utils_ShouldProceed ; then
-            put_it="TRUE"
-        else
-            put_it="FALSE"
-        fi
 
-        if [ "${put_it}" = "TRUE" ]; then
-            log_Msg "Using curl to PUT the resource: ${resource_uri}"
-			api_put $resource_uri
-        else
-            log_Msg "Did not attempt to put to resource: ${resource_uri}"
-
-        fi
+        log_Msg "Using curl to PUT the resource: ${resource_uri}"
+        api_put $resource_uri
 
     fi
 }
