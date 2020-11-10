@@ -172,30 +172,6 @@ get_options()
     fi
 }
 
-utils_IsYes() {
-    answer="$1"
-    # lowercase the answer
-    answer=$(echo $answer | tr '[:upper:]' '[:lower:]')
-    if [ "$answer" = "y" ] || [ "$answer" = "yes" ]
-    then
-        return 0 # The answer is yes: True
-    else
-        return 1 # The answer is yes: False
-    fi
-}
-
-utils_ShouldProceed() {
-    echo -ne "Proceed? [n]: "
-    read proceed
-
-    if utils_IsYes $proceed
-    then
-        return 0 # Should proceed
-    else
-        return 1 # Should not proceed
-    fi
-}
-
 main()
 {
     get_options "$@"
@@ -262,20 +238,8 @@ main()
 
     inform "resource_uri: ${resource_uri}"
 
-    if [ ! -z "${g_force}" ]; then
-        delete_it="TRUE"
-    elif utils_ShouldProceed ; then
-        delete_it="TRUE"
-    else
-        unset delete_it
-    fi
-
-    if [ ! -z "${delete_it}" ]; then
 		log_Msg "Using curl to DELETE the resource: ${resource_uri}"
 		api_delete $resource_uri
-    else
-        inform "Did not attempt to delete resource: ${resource_url}"
-    fi
 }
 
 # Invoke the main function to get things started
