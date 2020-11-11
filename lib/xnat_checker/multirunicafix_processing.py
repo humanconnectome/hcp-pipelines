@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import ccf.archive as ccf_archive
-import ccf.subject as ccf_subject
 import argparse
 from ccf.one_subject_completion_xnat_checker import MultirunicafixCompletionChecker
 
@@ -56,9 +54,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # check the specified subject for structural preprocessing completion
-    archive = ccf_archive.CcfArchive()
-    subject_info = ccf_subject.SubjectInfo(args.project, args.subject, args.classifier)
-    completion_checker = MultirunicafixCompletionChecker()
+    completion_checker = MultirunicafixCompletionChecker(args.project, args.subject, args.classifier)
 
     if args.output:
         processing_output = open(args.output, "w")
@@ -67,7 +63,6 @@ if __name__ == "__main__":
 
     if args.marked:
         if completion_checker.is_processing_marked_complete(
-            archive=archive, subject_info=subject_info
         ):
             print("Exiting with 0 code - Marked Completion Check Successful")
             exit(0)
@@ -76,9 +71,7 @@ if __name__ == "__main__":
             exit(1)
     else:
         if completion_checker.is_processing_complete(
-            archive=archive,
             fieldmap=args.fieldmap,
-            subject_info=subject_info,
             verbose=args.verbose,
             output=processing_output,
             short_circuit=not args.check_all,

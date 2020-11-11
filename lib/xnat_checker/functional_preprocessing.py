@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import ccf.archive as ccf_archive
-import ccf.subject as ccf_subject
 import argparse
 from ccf.one_subject_completion_xnat_checker import FunctionalCompletionChecker
 
@@ -51,14 +49,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # check the specified subject and scan for functional preprocessing completion
-    archive = ccf_archive.CcfArchive()
-    subject_info = ccf_subject.SubjectInfo(
-        project=args.project,
-        subject_id=args.subject,
-        classifier=args.classifier,
-        extra=args.scan,
-    )
-    completion_checker = FunctionalCompletionChecker()
+    completion_checker = FunctionalCompletionChecker(args.project, args.subject, args.classifier, args.scan)
 
     if args.output:
         processing_output = open(args.output, "w")
@@ -66,9 +57,7 @@ if __name__ == "__main__":
         processing_output = sys.stdout
 
     if completion_checker.is_processing_complete(
-        archive=archive,
         fieldmap=args.fieldmap,
-        subject_info=subject_info,
         verbose=args.verbose,
         output=processing_output,
         short_circuit=not args.check_all,
