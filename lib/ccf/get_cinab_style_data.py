@@ -11,7 +11,6 @@ import os
 import subprocess
 import sys
 import ccf.archive as ccf_archive
-import ccf.subject as ccf_subject
 import utils.debug_utils as debug_utils
 import utils.file_utils as file_utils
 import argparse
@@ -33,8 +32,13 @@ module_logger.addHandler(sh)
 
 
 class DataRetriever(object):
-    def __init__(self, archive):
-        self._archive = archive
+    def __init__(self, archive, project, subject, classifier, scan):
+        self.SUBJECT_PROJECT = project
+        self.SUBJECT_ID = subject
+        self.SUBJECT_CLASSIFIER = classifier
+        self.SUBJECT_EXTRA = scan
+        self.SUBJECT_SESSION = f"{classifier}_{scan}"
+        self._archive = ccf_archive.CcfArchive(project, subject, classifier, scan)
 
         # indication of whether data should be copied
         # False ==> symbolic links will be created
@@ -101,7 +105,7 @@ class DataRetriever(object):
 
     # get unprocessed data
 
-    def _get_unprocessed_data(self, directories, subject_info, output_dir):
+    def _get_unprocessed_data(self, directories, output_dir):
         for directory in directories:
             get_from = directory
             module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
@@ -112,9 +116,9 @@ class DataRetriever(object):
             put_to = (
                 output_dir
                 + "/"
-                + subject_info.subject_id
+                + self.SUBJECT_ID
                 + "_"
-                + subject_info.classifier
+                + self.SUBJECT_CLASSIFIER
                 + "/unprocessed/"
                 + sub_dir
             )
@@ -123,34 +127,31 @@ class DataRetriever(object):
 
             self._from_to(get_from, put_to)
 
-    def get_structural_unproc_data(self, subject_info, output_dir):
+    def get_structural_unproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_structural_unproc_dir_full_paths(subject_info),
-            subject_info,
+            self.archive.available_structural_unproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_functional_unproc_data(self, subject_info, output_dir):
+    def get_functional_unproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_functional_unproc_dir_full_paths(subject_info),
-            subject_info,
+            self.archive.available_functional_unproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_diffusion_unproc_data(self, subject_info, output_dir):
+    def get_diffusion_unproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_diffusion_unproc_dir_full_paths(subject_info),
-            subject_info,
+            self.archive.available_diffusion_unproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_unproc_data(self, subject_info, output_dir):
-        self.get_structural_unproc_data(subject_info, output_dir)
-        self.get_functional_unproc_data(subject_info, output_dir)
-        self.get_diffusion_unproc_data(subject_info, output_dir)
+    def get_unproc_data(self, output_dir):
+        self.get_structural_unproc_data(output_dir)
+        self.get_functional_unproc_data(output_dir)
+        self.get_diffusion_unproc_data(output_dir)
 
     # get preprocessed data
 
@@ -164,66 +165,64 @@ class DataRetriever(object):
 
             self._from_to(get_from, put_to)
 
-    def get_structural_preproc_data(self, subject_info, output_dir):
+    def get_structural_preproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_structural_preproc_dir_full_paths(subject_info),
+            self.archive.available_structural_preproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_icafix_data(self, subject_info, output_dir):
+    def get_icafix_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_processed_data(
-            self.archive.available_multirun_icafix_dir_full_paths(subject_info),
+            self.archive.available_multirun_icafix_dir_full_paths(),
             output_dir,
         )
 
-    def get_supplemental_structural_preproc_data(self, subject_info, output_dir):
+    def get_supplemental_structural_preproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_supplemental_structural_preproc_dir_full_paths(
-                subject_info
-            ),
+            self.archive.available_supplemental_structural_preproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_hand_edit_data(self, subject_info, output_dir):
+    def get_hand_edit_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_hand_edit_full_paths(subject_info), output_dir
+            self.archive.available_hand_edit_full_paths(), output_dir
         )
 
-    def get_functional_preproc_data(self, subject_info, output_dir):
+    def get_functional_preproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_functional_preproc_dir_full_paths(subject_info),
+            self.archive.available_functional_preproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_diffusion_preproc_data(self, subject_info, output_dir):
+    def get_diffusion_preproc_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_diffusion_preproc_dir_full_paths(subject_info),
+            self.archive.available_diffusion_preproc_dir_full_paths(),
             output_dir,
         )
 
-    def get_preproc_data(self, subject_info, output_dir):
+    def get_preproc_data(self, output_dir):
 
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
-            self.get_functional_preproc_data(subject_info, output_dir)
-            self.get_diffusion_preproc_data(subject_info, output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
+            self.get_functional_preproc_data(output_dir)
+            self.get_diffusion_preproc_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_diffusion_preproc_data(subject_info, output_dir)
-            self.get_functional_preproc_data(subject_info, output_dir)
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
+            self.get_diffusion_preproc_data(output_dir)
+            self.get_functional_preproc_data(output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
 
     # get processed data
 
@@ -237,161 +236,159 @@ class DataRetriever(object):
 
             self._from_to(get_from, put_to)
 
-    def get_msmall_registration_data(self, subject_info, output_dir):
+    def get_msmall_registration_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_msmall_registration_dir_full_paths(subject_info),
+            self.archive.available_msmall_registration_dir_full_paths(),
             output_dir,
         )
 
-    def get_fix_processed_data(self, subject_info, output_dir):
+    def get_fix_processed_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_fix_processed_dir_full_paths(subject_info),
+            self.archive.available_fix_processed_dir_full_paths(),
             output_dir,
         )
 
-    def get_dedriftandresample_processed_data(self, subject_info, output_dir):
+    def get_dedriftandresample_processed_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_msmall_dedrift_and_resample_dir_full_paths(
-                subject_info
-            ),
+            self.archive.available_msmall_dedrift_and_resample_dir_full_paths(),
             output_dir,
         )
 
-    def get_resting_state_stats_data(self, subject_info, output_dir):
+    def get_resting_state_stats_data(self, output_dir):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_rss_processed_dir_full_paths(subject_info),
+            self.archive.available_rss_processed_dir_full_paths(),
             output_dir,
         )
 
-    def get_postfix_data(self, subject_info, output_dir):
+    def get_postfix_data(self, output_dir):
         self._get_processed_data(
-            self.archive.available_postfix_processed_dir_full_paths(subject_info),
+            self.archive.available_postfix_processed_dir_full_paths(),
             output_dir,
         )
 
-    def get_taskfmri_data(self, subject_info, output_dir):
+    def get_taskfmri_data(self, output_dir):
         self._get_processed_data(
-            self.archive.available_task_processed_dir_full_paths(subject_info),
+            self.archive.available_task_processed_dir_full_paths(),
             output_dir,
         )
 
-    def get_bedpostx_data(self, subject_info, output_dir):
+    def get_bedpostx_data(self, output_dir):
         self._get_processed_data(
-            self.archive.available_bedpostx_processed_dir_full_paths(subject_info),
+            self.archive.available_bedpostx_processed_dir_full_paths(),
             output_dir,
         )
 
     # prerequisites data for specific pipelines
 
-    def get_struct_preproc_prereqs(self, subject_info, output_dir):
+    def get_struct_preproc_prereqs(self, output_dir):
         """
         Get the data necessary to run the Structural Preprocessing pipeline
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
 
-    def get_struct_preproc_hand_edit_prereqs(self, subject_info, output_dir):
+    def get_struct_preproc_hand_edit_prereqs(self, output_dir):
         """
         Get the data necessary to run the Functional Preprocessing pipelines
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_hand_edit_data(subject_info, output_dir)
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_hand_edit_data(output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
         else:
             # chronological order
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
-            self.get_hand_edit_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
+            self.get_hand_edit_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
-    def get_diffusion_preproc_prereqs(self, subject_info, output_dir):
+    def get_diffusion_preproc_prereqs(self, output_dir):
         """
         Get the data necessary to run the Diffusion Preprocessing pipeline
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
-    def get_functional_preproc_prereqs(self, subject_info, output_dir):
+    def get_functional_preproc_prereqs(self, output_dir):
         """
         Get the data necessary to run the Functional Preprocessing pipelines
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_supplemental_structural_preproc_data(subject_info, output_dir)
-            self.get_structural_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_supplemental_structural_preproc_data(output_dir)
+            self.get_structural_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
-    def get_multirunicafix_prereqs(self, subject_info, output_dir):
+    def get_multirunicafix_prereqs(self, output_dir):
         """
         Get the data necessary to run the MultiRunICAFIX pipeline
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_preproc_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
-    def get_msmall_prereqs(self, subject_info, output_dir):
+    def get_msmall_prereqs(self, output_dir):
         """
         Get the data necessary to run the MsmAll pipeline
         """
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_icafix_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_icafix_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_icafix_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_icafix_data(output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
-    def _copy_some_dedriftandresample_links(self, subject_info, output_dir):
+    def _copy_some_dedriftandresample_links(self, output_dir):
         """
         Some files that already exist prior to running the DeDriftAndResample pipeline
         are opened for writing/modification by the pipeline script. If these files are
@@ -399,29 +396,23 @@ class DataRetriever(object):
         opened for writing. Each of these files needs to be copied instead of linked.
         """
 
-        t1w_native_spec_file = (
-            output_dir + "/" + subject_info.subject_id + "_" + subject_info.classifier
-        )
+        t1w_native_spec_file = output_dir + "/" + self.SUBJECT_SESSION
         t1w_native_spec_file += "/T1w/Native"
-        t1w_native_spec_file += "/" + subject_info.subject_id + ".native.wb.spec"
+        t1w_native_spec_file += "/" + self.SUBJECT_ID + ".native.wb.spec"
         file_utils.make_link_into_copy(t1w_native_spec_file, verbose=True)
 
-        native_spec_file = (
-            output_dir + "/" + subject_info.subject_id + "_" + subject_info.classifier
-        )
+        native_spec_file = output_dir + "/" + self.SUBJECT_SESSION
         native_spec_file += "/MNINonLinear/Native"
-        native_spec_file += "/" + subject_info.subject_id + ".native.wb.spec"
+        native_spec_file += "/" + self.SUBJECT_ID + ".native.wb.spec"
         file_utils.make_link_into_copy(native_spec_file, verbose=True)
 
-    def _remove_some_dedriftandresample_ica_files(self, subject_info, output_dir):
+    def _remove_some_dedriftandresample_ica_files(self, output_dir):
         """
         Some files need to be re-created by the ReApplyFixPipeline.sh script which
         is invoked by the DeDriftAndResample pipeline. For the ReApplyFixPipeline
         to work correctly, those files need to be removed before processing begins.
         """
-        path_expr = (
-            output_dir + "/" + subject_info.subject_id + "_" + subject_info.classifier
-        )
+        path_expr = output_dir + "/" + self.SUBJECT_SESSION
         path_expr += "/MNINonLinear/Results/*"
 
         dir_list = sorted(glob.glob(path_expr))
@@ -448,7 +439,7 @@ class DataRetriever(object):
                 )
                 file_utils.rm_file_if_exists(atlas_preclean_dtseries_file, verbose=True)
 
-    def get_dedriftandresample_prereqs(self, subject_info, output_dir):
+    def get_dedriftandresample_prereqs(self, output_dir):
         """
         Get the subject specific data necessary to run the DeDriftAndResample pipeline
         """
@@ -456,20 +447,20 @@ class DataRetriever(object):
         if self.copy:
             # when copying (via rsync), data should be retreived in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_fix_processed_data(subject_info, output_dir)
-            self.get_msmall_registration_data(subject_info, output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_fix_processed_data(output_dir)
+            self.get_msmall_registration_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_msmall_registration_data(subject_info, output_dir)
-            self.get_fix_processed_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
+            self.get_msmall_registration_data(output_dir)
+            self.get_fix_processed_data(output_dir)
+            self.get_preproc_data(output_dir)
 
-            self._copy_some_dedriftandresample_links(subject_info, output_dir)
+            self._copy_some_dedriftandresample_links(output_dir)
 
-        self._remove_some_dedriftandresample_ica_files(subject_info, output_dir)
+        self._remove_some_dedriftandresample_ica_files(output_dir)
 
     def get_msm_group_average_drift_data(self, project_id, output_dir):
         """
@@ -481,7 +472,7 @@ class DataRetriever(object):
 
         self._from_to(get_from, put_to)
 
-    def _copy_some_reapplyfix_links(self, subject_info, output_dir):
+    def _copy_some_reapplyfix_links(self, output_dir):
         """
         Some files that already exist prio to running the ReApplyFix pipeline are
         opened for writing/modification by the pipeline script. If these files are
@@ -498,16 +489,16 @@ class DataRetriever(object):
                         file_to_copy = os.path.join(root, file)
                         file_utils.make_link_into_copy(file_to_copy, verbose=True)
 
-    def get_reapplyfix_prereqs(self, subject_info, output_dir):
+    def get_reapplyfix_prereqs(self, output_dir):
         """
         Get the subject specific data necessary to run the ReApplyFix pipeline
         """
-        self.get_all_pipeline_data(subject_info, output_dir)
-        self._copy_some_reapplyfix_links(subject_info, output_dir)
+        self.get_all_pipeline_data(output_dir)
+        self._copy_some_reapplyfix_links(output_dir)
 
     # all pipeline data
 
-    def get_all_pipeline_data(self, subject_info, output_dir):
+    def get_all_pipeline_data(self, output_dir):
         """
         Get all the subject specific data recognized.
         Note, this is based on the recognized processing. It does not simply
@@ -523,28 +514,28 @@ class DataRetriever(object):
         if self.copy:
             # when copying (via rsync), data should be retrieved in chronological order
             # (i.e. the order in which the pipelines are run)
-            self.get_unproc_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_fix_processed_data(subject_info, output_dir)
-            self.get_msmall_registration_data(subject_info, output_dir)
-            self.get_dedriftandresample_processed_data(subject_info, output_dir)
-            self.get_resting_state_stats_data(subject_info, output_dir)
-            self.get_postfix_data(subject_info, output_dir)
-            self.get_taskfmri_data(subject_info, output_dir)
-            self.get_bedpostx_data(subject_info, output_dir)
+            self.get_unproc_data(output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_fix_processed_data(output_dir)
+            self.get_msmall_registration_data(output_dir)
+            self.get_dedriftandresample_processed_data(output_dir)
+            self.get_resting_state_stats_data(output_dir)
+            self.get_postfix_data(output_dir)
+            self.get_taskfmri_data(output_dir)
+            self.get_bedpostx_data(output_dir)
 
         else:
             # when creating symbolic links, data should be retrieved in reverse
             # chronological order
-            self.get_bedpostx_data(subject_info, output_dir)
-            self.get_taskfmri_data(subject_info, output_dir)
-            self.get_postfix_data(subject_info, output_dir)
-            self.get_resting_state_stats_data(subject_info, output_dir)
-            self.get_dedriftandresample_processed_data(subject_info, output_dir)
-            self.get_msmall_registration_data(subject_info, output_dir)
-            self.get_fix_processed_data(subject_info, output_dir)
-            self.get_preproc_data(subject_info, output_dir)
-            self.get_unproc_data(subject_info, output_dir)
+            self.get_bedpostx_data(output_dir)
+            self.get_taskfmri_data(output_dir)
+            self.get_postfix_data(output_dir)
+            self.get_resting_state_stats_data(output_dir)
+            self.get_dedriftandresample_processed_data(output_dir)
+            self.get_msmall_registration_data(output_dir)
+            self.get_fix_processed_data(output_dir)
+            self.get_preproc_data(output_dir)
+            self.get_unproc_data(output_dir)
 
     def remove_non_subdirs(self, directory):
         cmd = "find " + directory + " -maxdepth 1 -not -type d -delete"
@@ -643,44 +634,33 @@ def main():
     if args.remove_non_subdirs:
         module_logger.info(" Remove Non-Subdirs: " + str(args.remove_non_subdirs))
 
-    subject_info = ccf_subject.SubjectInfo(
+    data_retriever = DataRetriever(
         args.project, args.subject, args.session_classifier, args.scan
     )
-    archive = ccf_archive.CcfArchive()
-
-    data_retriever = DataRetriever(archive)
     data_retriever.copy = args.copy
     data_retriever.show_log = args.log
 
     # retrieve data based on phase requested
     if args.phase == "STRUCT_PREPROC_PREREQS":
-        data_retriever.get_struct_preproc_prereqs(subject_info, args.output_study_dir)
+        data_retriever.get_struct_preproc_prereqs(args.output_study_dir)
 
     elif args.phase == "STRUCT_PREPROC_HAND_EDIT_PREREQS":
-        data_retriever.get_struct_preproc_hand_edit_prereqs(
-            subject_info, args.output_study_dir
-        )
+        data_retriever.get_struct_preproc_hand_edit_prereqs(args.output_study_dir)
 
     elif args.phase == "DIFF_PREPROC_PREREQS":
-        data_retriever.get_diffusion_preproc_prereqs(
-            subject_info, args.output_study_dir
-        )
+        data_retriever.get_diffusion_preproc_prereqs(args.output_study_dir)
 
     elif args.phase == "FUNC_PREPROC_PREREQS":
-        data_retriever.get_functional_preproc_prereqs(
-            subject_info, args.output_study_dir
-        )
+        data_retriever.get_functional_preproc_prereqs(args.output_study_dir)
 
     elif args.phase == "MULTIRUNICAFIX_PREREQS":
-        data_retriever.get_multirunicafix_prereqs(subject_info, args.output_study_dir)
+        data_retriever.get_multirunicafix_prereqs(args.output_study_dir)
 
     elif args.phase == "MSMALL_PREREQS":
-        data_retriever.get_msmall_prereqs(subject_info, args.output_study_dir)
+        data_retriever.get_msmall_prereqs(args.output_study_dir)
 
     elif args.phase == "DEDRIFTANDRESAMPLE_PREREQS":
-        data_retriever.get_dedriftandresample_prereqs(
-            subject_info, args.output_study_dir
-        )
+        data_retriever.get_dedriftandresample_prereqs(args.output_study_dir)
         # Get the group average drift data
         # As of February 2017, the group average drift data has been moved from HCP_Staging to
         # HCP_1200
@@ -689,7 +669,7 @@ def main():
         )
 
     elif args.phase == "REAPPLYFIX_PREREQS":
-        data_retriever.get_reapplyfix_prereqs(subject_info, args.output_study_dir)
+        data_retriever.get_reapplyfix_prereqs(args.output_study_dir)
 
     if args.remove_non_subdirs:
         # remove any non-subdirectory data at the output study directory level
