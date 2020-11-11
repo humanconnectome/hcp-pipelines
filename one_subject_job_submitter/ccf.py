@@ -10,7 +10,6 @@ import abc
 import contextlib
 import logging
 import os
-import shutil
 import stat
 import subprocess
 import time
@@ -21,9 +20,6 @@ import time
 import ccf.processing_stage as ccf_processing_stage
 import utils.debug_utils as debug_utils
 import utils.delete_resource as delete_resource
-import utils.file_utils as file_utils
-import utils.os_utils as os_utils
-import utils.str_utils as str_utils
 import ccf.subject as ccf_subject
 
 # authorship information
@@ -239,7 +235,7 @@ class OneSubjectJobSubmitter(abc.ABC):
                 get_data_submit_cmd = "qsub " + self.get_data_job_script_name
 
             completed_submit_process = subprocess.run(get_data_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            get_data_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            get_data_job_no = completed_submit_process.stdout.rstrip()
             return get_data_job_no, [get_data_job_no]
 
         else:
@@ -256,7 +252,7 @@ class OneSubjectJobSubmitter(abc.ABC):
                 work_submit_cmd = "qsub " + self.process_data_job_script_name
 
             completed_submit_process = subprocess.run(work_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            work_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            work_job_no = completed_submit_process.stdout.rstrip()
             return work_job_no, [work_job_no]
 
         else:
@@ -273,7 +269,7 @@ class OneSubjectJobSubmitter(abc.ABC):
                 clean_submit_cmd = "qsub " + self.clean_data_script_name
 
             completed_submit_process = subprocess.run(clean_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            clean_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            clean_job_no = completed_submit_process.stdout.rstrip()
             return clean_job_no, [clean_job_no]
 
         else:
@@ -290,7 +286,7 @@ class OneSubjectJobSubmitter(abc.ABC):
                 put_submit_cmd = "qsub " + self.put_data_script_name
 
             completed_submit_process = subprocess.run(put_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            put_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            put_job_no = completed_submit_process.stdout.rstrip()
             return put_job_no, [put_job_no]
 
         else:
@@ -307,7 +303,7 @@ class OneSubjectJobSubmitter(abc.ABC):
                 check_submit_cmd = "qsub " + self.check_data_job_script_name
 
             completed_submit_process = subprocess.run(check_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            check_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            check_job_no = completed_submit_process.stdout.rstrip()
             return check_job_no, [check_job_no]
 
         else:
@@ -322,7 +318,7 @@ class OneSubjectJobSubmitter(abc.ABC):
         else:
             cmd = "qsub " + self.mark_no_longer_running_script_name
 
-        job_no = str_utils.remove_ending_new_lines(subprocess.run(cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True).stdout)
+        job_no = subprocess.run(cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True).stdout.rstrip()
         return job_no, [job_no]
 
     def create_scripts(self, stage):

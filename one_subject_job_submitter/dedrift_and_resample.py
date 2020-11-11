@@ -5,14 +5,12 @@ import contextlib
 import logging
 import os
 import stat
-import time
 
 # import of third-party modules
 
 # import of local modules
 import ccf.one_subject_job_submitter as one_subject_job_submitter
 import utils.debug_utils as debug_utils
-import utils.str_utils as str_utils
 
 # authorship information
 __author__ = "Timothy B. Brown"
