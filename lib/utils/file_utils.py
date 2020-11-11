@@ -2,18 +2,13 @@
 
 """utils/file_utils.py: Some simple and hopefully useful file related utilities."""
 
-# import of built-in modules
 import datetime
 import os
 import shutil
 import subprocess
 import sys
 
-# import of third-party modules
-
-# import of local modules
 import utils.os_utils as os_utils
-import utils.str_utils as str_utils
 
 # authorship information
 __author__ = "Timothy B. Brown"
@@ -24,58 +19,7 @@ __maintainer__ = "Timothy B. Brown"
 def writeln(file, line):
 	file.write(line + os.linesep)
 
-
 wl = writeln
-
-def get_meta_data_json_file_name(source_file_name):
-	meta_data_json_file_name = source_file_name
-
-	if meta_data_json_file_name.endswith('.nii'):
-		meta_data_json_file_name = meta_data_json_file_name[:-4]
-	elif meta_data_json_file_name.endswith('.nii.gz'):
-		meta_data_json_file_name = meta_data_json_file_name[:-7]
-
-	meta_data_json_file_name += '.json'
-
-	return meta_data_json_file_name
-
-
-def get_config_file_name(source_file_name, use_env_variable=True):
-	if use_env_variable:
-		config_file_name = os.path.basename(source_file_name)
-	else:
-		config_file_name = source_file_name
-
-	if config_file_name.endswith('.py'):
-		config_file_name = config_file_name[:-3]
-
-	config_file_name += '.ini'
-
-	if use_env_variable:
-		xnat_pbs_jobs_control = os.getenv('XNAT_PBS_JOBS_CONTROL')
-		if xnat_pbs_jobs_control:
-			config_file_name = xnat_pbs_jobs_control + os.sep + config_file_name
-
-	return config_file_name
-
-
-def get_subjects_file_name(source_file_name, use_env_variable=True):
-	if use_env_variable:
-		subjects_file_name = os.path.basename(source_file_name)
-	else:
-		subjects_file_name = source_file_name
-
-	if subjects_file_name.endswith('.py'):
-		subjects_file_name = subjects_file_name[:-3]
-
-	subjects_file_name += '.subjects'
-
-	if use_env_variable:
-		xnat_pbs_jobs_control = os.getenv('XNAT_PBS_JOBS_CONTROL')
-		if xnat_pbs_jobs_control:
-			subjects_file_name = xnat_pbs_jobs_control + os.sep + subjects_file_name
-
-	return subjects_file_name
 
 
 def get_logging_config_file_name(source_file_name, use_env_variable=True):
@@ -98,31 +42,6 @@ def get_logging_config_file_name(source_file_name, use_env_variable=True):
 	return logging_config_file_name
 
 
-def get_logger_name(source_file_name):
-	logger_name = source_file_name
-
-	xnat_pbs_jobs = os.getenv('XNAT_PBS_JOBS')
-	if not xnat_pbs_jobs:
-		print("Environment variable XNAT_PBS_JOBS must be set!")
-		exit(1)
-
-	if logger_name.startswith(xnat_pbs_jobs + os.sep + 'lib'):
-		logger_name = logger_name[len(xnat_pbs_jobs + os.sep + 'lib'):]
-
-	if logger_name.endswith('.py'):
-		logger_name = logger_name[:-3]
-
-	if logger_name.startswith('.' + os.sep):
-		logger_name = logger_name[2:]
-
-	if logger_name.startswith(os.sep):
-		logger_name = logger_name[1:]
-
-	logger_name = logger_name.replace(os.sep, '.')
-
-	return logger_name
-
-
 def human_readable_byte_size(size, factor=1024.0):
 	num = size
 
@@ -139,14 +58,6 @@ def human_readable_byte_size(size, factor=1024.0):
 		return "%.1f%s" % (num, 'Y')
 
 
-DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
-
-
-def getmtime_str(path, date_format=DEFAULT_DATE_FORMAT):
-	date = datetime.datetime.fromtimestamp(os.path.getmtime(path))
-	return date.strftime(date_format)
-
-
 def make_all_links_into_copies_ext(full_path):
 
 	xnat_pbs_jobs = os_utils.getenv_required('XNAT_PBS_JOBS')
@@ -154,7 +65,7 @@ def make_all_links_into_copies_ext(full_path):
 
 	completed_subprocess = subprocess.run(command_str, shell=True, check=True, stdout=subprocess.PIPE,
 										  universal_newlines=True)
-	output = str_utils.remove_ending_new_lines(completed_subprocess.stdout)
+	output = completed_subprocess.stdout.rstrip()
 
 	print(output)
 
@@ -218,7 +129,7 @@ def rm_dir_if_exists(full_path, verbose=False, output=sys.stdout):
 			print("Removing directory: '" + full_path + "' and all its contents", file=output)
 		shutil.rmtree(full_path)
 
-		
+
 def do_all_files_exist(file_name_list, verbose=False, output=sys.stdout, short_circuit=True):
 
 	all_files_exist = True
@@ -248,21 +159,21 @@ def build_filename_list_from_file(f, root_dir, **substitutions):
 	"""Create a list of file paths based on the contents of a specified file
 
 	Uses the contents of the specified file to build a list of full file paths
-	rooted at the specified root directory. 
+	rooted at the specified root directory.
 
-	Strings in the specified file should _not_ contain any file path 
-	separator characters (e.g. / or \). Instead whitespace should be used in 
+	Strings in the specified file should _not_ contain any file path
+	separator characters (e.g. / or \). Instead whitespace should be used in
 	place of file path separators.
 
 	Strings in the specified file may contain placeholders that are contained
 	in curly brackets. The substitutions parameter is used to specify which
-	placeholders in curly brackets are to be replaced and what they are to 
+	placeholders in curly brackets are to be replaced and what they are to
 	be replaced with.
 
 	Parameters
 	----------
 	f : file
-		The file object containing a list of file paths 
+		The file object containing a list of file paths
 	root_dir : str
 		The path to the root directory to be used for all the file paths in the returned list
 	subsitutions : variable number of dictionary values
@@ -293,24 +204,24 @@ def build_filename_list_from_file(f, root_dir, **substitutions):
 	f = open(...text file contianing template list...)
 	l = build_filename_list_from_file(f, '/mydir', subjectid='HCA6005242', scan='rfMRI_REST2_PA')
 
-	Then, on a system for which the path separator is '/', the following list of strings 
+	Then, on a system for which the path separator is '/', the following list of strings
 	would be returned.
 
 		/mydir/MNINonLinear/fsaverage/HCA6005242.L.sphere.164k_fs_L.surf.gii
 		/mydir/MNINonLinear/fsaverage/HCA6005242.R.sphere.164k_fs_L.surf.gii
 		/mydir/MNINonLinear/Results/rfMRI_REST2_PA/brainmask_fs.2.nii.gz
 		/mydir/MNINonLinear/Results/rfMRI_REST2_PA/rfMRI_REST2_PA_Atlas.dtseries.nii
-	
+
 	Notice that:
 
 	* the root_dir has been prepended
 	* the correct path separator, '/', has been put where internal whitespace was
 	* {subjectid} has been replaced with HCA6005242
 	* {scan} has been replaced with rfMRI_REST2_PA
-	* anything at or after a '#' in the original strings (including the # itself) 
+	* anything at or after a '#' in the original strings (including the # itself)
 	  is treated as a comment and removed
 	"""
-	
+
 	list_from_file = f.readlines()
 
 	list_of_filenames = []
@@ -318,7 +229,7 @@ def build_filename_list_from_file(f, root_dir, **substitutions):
 	for name in list_from_file:
 		# remove any comments (anything at or after a # on a line)
 		filename = name.split('#', 1)[0]
-		
+
 		# remove leading and trailing whitespace
 		filename = filename.strip()
 
@@ -335,7 +246,7 @@ def build_filename_list_from_file(f, root_dir, **substitutions):
 				if replacement_str:
 					filename = filename.replace(str_to_replace, replacement_str)
 
-			# prepend root directory 
+			# prepend root directory
 			filename = os.sep.join([root_dir, filename])
 			list_of_filenames.append(filename)
 

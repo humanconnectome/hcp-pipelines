@@ -2,26 +2,19 @@
 
 # import of built-in modules
 import contextlib
-import glob
 import logging
 import os
 import shutil
 import stat
 import subprocess
-import sys
-import random
 
 # import of third-party modules
 
 # import of local modules
 import ccf.one_subject_job_submitter as one_subject_job_submitter
 import ccf.processing_stage as ccf_processing_stage
-import ccf.subject as ccf_subject
 import utils.debug_utils as debug_utils
 import utils.os_utils as os_utils
-import utils.str_utils as str_utils
-import utils.user_utils as user_utils
-import ccf.archive as ccf_archive
 
 # authorship information
 __author__ = "Timothy B. Brown"
@@ -189,7 +182,7 @@ class OneSubjectJobSubmitter(one_subject_job_submitter.OneSubjectJobSubmitter):
                 fs_submit_cmd = "qsub " + self.freesurfer_assessor_script_name
 
             completed_submit_process = subprocess.run(fs_submit_cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True)
-            fs_job_no = str_utils.remove_ending_new_lines(completed_submit_process.stdout)
+            fs_job_no = completed_submit_process.stdout.rstrip()
             all_process_data_jobs.append(fs_job_no)
             return fs_job_no, all_process_data_jobs
 

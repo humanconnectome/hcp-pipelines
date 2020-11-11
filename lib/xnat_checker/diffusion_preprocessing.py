@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 
-# import of built-in modules
 import sys
-
-# import of third-party modules
-
-# import of local modules
 import ccf.archive as ccf_archive
 import ccf.one_subject_completion_xnat_checker as one_subject_completion_xnat_checker
 import ccf.subject as ccf_subject
-import utils.my_argparse as my_argparse
+import argparse
 
 class OneSubjectCompletionXnatChecker(one_subject_completion_xnat_checker.OneSubjectCompletionXnatChecker):
 
@@ -34,7 +29,7 @@ class OneSubjectCompletionXnatChecker(one_subject_completion_xnat_checker.OneSub
 	
 if __name__ == "__main__":
 
-	parser = my_argparse.MyArgumentParser(
+	parser = argparse.ArgumentParser(
 		description="Program to check for completion of Diffusion Preprocessing.")
 
 	# mandatory arguments
