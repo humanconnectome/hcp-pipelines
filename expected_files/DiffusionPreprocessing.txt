@@ -1,0 +1,167 @@
+Diffusion data avg_data.idxs
+Diffusion data bvals
+Diffusion data bvecs
+Diffusion data bvecs_noRot
+Diffusion data cnr_maps.nii.gz
+Diffusion data data_dilated_vol1.nii.gz
+Diffusion data data.nii.gz
+Diffusion data fov_mask.nii.gz
+Diffusion data fullWarp_jacobian.nii.gz
+Diffusion data grad_dev.nii.gz
+Diffusion data log.txt
+Diffusion data nodif_brain_mask.nii.gz
+Diffusion data nodif_brain.nii.gz
+Diffusion data nodif.nii.gz
+Diffusion data qa.txt
+Diffusion data warped cnr_maps_warped.nii.gz
+Diffusion data warped data_warped.nii.gz
+Diffusion data warped fov_mask_warped.nii.gz
+Diffusion data warped fullWarp_abs.nii.gz
+Diffusion data warped fullWarp.nii.gz
+Diffusion eddy acqparams.txt
+Diffusion eddy eddy_unwarped_images.eddy_cnr_maps.nii.gz
+Diffusion eddy eddy_unwarped_images.eddy_command_txt
+Diffusion eddy eddy_unwarped_images.eddy_mbs_first_order_fields.nii.gz
+Diffusion eddy eddy_unwarped_images.eddy_movement_over_time
+Diffusion eddy eddy_unwarped_images.eddy_movement_rms
+Diffusion eddy eddy_unwarped_images.eddy_outlier_free_data.nii.gz
+Diffusion eddy eddy_unwarped_images.eddy_outlier_map
+Diffusion eddy eddy_unwarped_images.eddy_outlier_n_sqr_stdev_map
+Diffusion eddy eddy_unwarped_images.eddy_outlier_n_stdev_map
+Diffusion eddy eddy_unwarped_images.eddy_outlier_report
+Diffusion eddy eddy_unwarped_images.eddy_parameters
+Diffusion eddy eddy_unwarped_images.eddy_post_eddy_shell_alignment_parameters
+Diffusion eddy eddy_unwarped_images.eddy_post_eddy_shell_PE_translation_parameters
+Diffusion eddy eddy_unwarped_images.eddy_residuals.nii.gz
+Diffusion eddy eddy_unwarped_images.eddy_restricted_movement_rms
+Diffusion eddy eddy_unwarped_images.eddy_results_with_outliers_retained.nii.gz
+Diffusion eddy eddy_unwarped_images.eddy_rotated_bvecs
+Diffusion eddy eddy_unwarped_images.eddy_values_of_all_input_parameters
+Diffusion eddy eddy_unwarped_images.nii.gz
+Diffusion eddy index.txt
+Diffusion eddy Neg.bval
+Diffusion eddy Neg.bvec
+Diffusion eddy Neg_rotated.bvec
+Diffusion eddy Neg_SeriesVolNum.txt
+Diffusion eddy nodif_brain_mask.nii.gz
+Diffusion eddy Pos.bval
+Diffusion eddy Pos.bvec
+Diffusion eddy Pos_Neg.bvals
+Diffusion eddy Pos_Neg.bvecs
+Diffusion eddy Pos_Neg.nii.gz
+Diffusion eddy Pos_rotated.bvec
+Diffusion eddy Pos_SeriesVolNum.txt
+Diffusion QC avg_b0_pe0.png
+Diffusion QC avg_b0_pe1.png
+Diffusion QC avg_b0.png
+Diffusion QC avg_b1495.png
+Diffusion QC avg_b2995.png
+Diffusion QC cnr0000.nii.gz.png
+Diffusion QC cnr0001.nii.gz.png
+Diffusion QC cnr0002.nii.gz.png
+Diffusion QC eddy_msr.txt
+Diffusion QC qc.json
+Diffusion QC qc.pdf
+Diffusion QC ref_list.png
+Diffusion QC ref.txt
+Diffusion QC vdm.png
+Diffusion rawdata all_Neg_b0s.bval
+Diffusion rawdata all_Neg_b0s.bvec
+Diffusion rawdata all_Neg_b0s.nii.gz
+Diffusion rawdata all_Pos_b0s.bval
+Diffusion rawdata all_Pos_b0s.bvec
+Diffusion rawdata all_Pos_b0s.nii.gz
+Diffusion rawdata Neg_1.bval
+Diffusion rawdata Neg_1.bvec
+Diffusion rawdata Neg_1.nii.gz
+Diffusion rawdata Neg_2.bval
+Diffusion rawdata Neg_2.bvec
+Diffusion rawdata Neg_2.nii.gz
+Diffusion rawdata Neg_SeriesCorrespVolNum.txt
+Diffusion rawdata Pos_1.bval
+Diffusion rawdata Pos_1.bvec
+Diffusion rawdata Pos_1.nii.gz
+Diffusion rawdata Pos_2.bval
+Diffusion rawdata Pos_2.bvec
+Diffusion rawdata Pos_2.nii.gz
+Diffusion rawdata Pos_SeriesCorrespVolNum.txt
+Diffusion rawdata select_b0_Neg all_b0s_mcf_avg.nii.gz
+Diffusion rawdata select_b0_Neg all_b0s_mcf.nii.gz
+Diffusion rawdata select_b0_Neg all_b0s_mcf_res.nii.gz
+Diffusion rawdata select_b0_Neg nodif_brain_mask.nii.gz
+Diffusion rawdata select_b0_Neg nodif_brain.nii.gz
+Diffusion rawdata select_b0_Neg scores.txt
+Diffusion rawdata select_b0_Pos all_b0s_mcf_avg.nii.gz
+Diffusion rawdata select_b0_Pos all_b0s_mcf.nii.gz
+Diffusion rawdata select_b0_Pos all_b0s_mcf_res.nii.gz
+Diffusion rawdata select_b0_Pos nodif_brain_mask.nii.gz
+Diffusion rawdata select_b0_Pos nodif_brain.nii.gz
+Diffusion rawdata select_b0_Pos scores.txt
+Diffusion reg diff2str_fs.mat
+Diffusion reg diff2str.mat
+Diffusion reg EPItoT1w.dat
+Diffusion reg EPItoT1w.dat~
+Diffusion reg EPItoT1w.dat.log
+Diffusion reg EPItoT1w.dat.mincost
+Diffusion reg EPItoT1w.dat.param
+Diffusion reg EPItoT1w.dat.sum
+Diffusion reg grad_unwarp_diff2str.nii.gz
+Diffusion reg nodif2T1w_initII_fast_wmedge.nii.gz
+Diffusion reg nodif2T1w_initII_fast_wmseg.nii.gz
+Diffusion reg nodif2T1w_initII_init.mat
+Diffusion reg nodif2T1w_initII.mat
+Diffusion reg nodif2T1w_initII.nii.gz
+Diffusion reg nodif2T1w_init.nii.gz
+Diffusion reg nodif2T1w.nii.gz
+Diffusion reg nodif2T1w_restore_initII.nii.gz
+Diffusion reg nodif2T1w_restore.nii.gz
+Diffusion reg Scout2T1w.nii.gz
+Diffusion reg str2diff.mat
+Diffusion reg T1w_acpc_dc_restore_brain.nii.gz
+Diffusion reg T1wMulEPI_nodif.nii.gz
+Diffusion topup acqparams.txt
+Diffusion topup hifib0.nii.gz
+Diffusion topup index_best_b0s.txt
+Diffusion topup nodif_brain_mask.nii.gz
+Diffusion topup nodif_brain.nii.gz
+Diffusion topup Pos_Neg_b0.nii.gz
+Diffusion topup Pos_Neg_b0.topup_log
+Diffusion topup topup_Pos_Neg_b0_fieldcoef.nii.gz
+Diffusion topup topup_Pos_Neg_b0_field.nii.gz
+Diffusion topup topup_Pos_Neg_b0_movpar.txt
+T1w Diffusion bvals
+T1w Diffusion bvecs
+T1w Diffusion data.nii.gz
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_command_txt
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_movement_over_time
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_movement_rms
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_outlier_map
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_outlier_n_sqr_stdev_map
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_outlier_n_stdev_map
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_outlier_report
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_parameters
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_post_eddy_shell_alignment_parameters
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_post_eddy_shell_PE_translation_parameters
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_restricted_movement_rms
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_rotated_bvecs
+T1w Diffusion eddylogs eddy_unwarped_images.eddy_values_of_all_input_parameters
+T1w Diffusion fov_mask.nii.gz
+T1w Diffusion grad_dev.nii.gz
+T1w Diffusion nodif_brain_mask.nii.gz
+T1w Diffusion nodif_brain_mask.stats.txt
+T1w Diffusion QC avg_b0_pe0.png
+T1w Diffusion QC avg_b0_pe1.png
+T1w Diffusion QC avg_b0.png
+T1w Diffusion QC avg_b1495.png
+T1w Diffusion QC avg_b2995.png
+T1w Diffusion QC cnr0000.nii.gz.png
+T1w Diffusion QC cnr0001.nii.gz.png
+T1w Diffusion QC cnr0002.nii.gz.png
+T1w Diffusion QC cnr_maps.nii.gz
+T1w Diffusion QC eddy_msr.txt
+T1w Diffusion QC qc.json
+T1w Diffusion QC qc.pdf
+T1w Diffusion QC ref_list.png
+T1w Diffusion QC ref.txt
+T1w Diffusion QC vdm.png
+T1w T1w_acpc_dc_restore_1.50.nii.gz
