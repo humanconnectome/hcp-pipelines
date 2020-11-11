@@ -4,23 +4,17 @@ ccf.get_cinab_style_data.py: Get (copy or link) a CinaB style directory tree of 
 for a specified subject within a specified project.
 """
 
-# import of built-in modules
-import abc
 import glob
 import logging
 import logging.config
 import os
 import subprocess
 import sys
-
-# import of third-party modules
-
-# import of local modules
 import ccf.archive as ccf_archive
 import ccf.subject as ccf_subject
 import utils.debug_utils as debug_utils
 import utils.file_utils as file_utils
-import utils.my_argparse as my_argparse
+import argparse
 import utils.os_utils as os_utils
 
 # authorship information
@@ -518,7 +512,7 @@ class DataRetriever(object):
 
 def main():
     # create a parser object for getting the command line arguments
-    parser = my_argparse.MyArgumentParser()
+    parser = argparse.ArgumentParser()
 
     # mandatory arguments
     parser.add_argument('-p', '--project', dest='project', required=True, type=str)

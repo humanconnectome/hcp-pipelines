@@ -4,14 +4,9 @@
 ccf/subject.py: Maintain information about a CCF subject.
 """
 
-# import of built-in modules
 import logging
 import os
 
-# import of third-party modules
-
-# import of local modules
-import utils.str_utils as str_utils
 
 # authorship information
 __author__ = "Timothy B. Brown"
@@ -91,7 +86,7 @@ def read_subject_info_list(file_name, separator=SubjectInfo.DEFAULT_SEPARATOR())
 	input_file = open(file_name, 'r')
 	for line in input_file:
 		# remove new line characters
-		line = str_utils.remove_ending_new_lines(line)
+		line = line.rstrip()
 
 		# remove leading and trailing spaces
 		line = line.strip()
