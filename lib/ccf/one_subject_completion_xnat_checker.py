@@ -8,6 +8,14 @@ import os
 import sys
 from utils import os_utils, file_utils
 
+hcp_run_utils = os_utils.getenv_required("HCP_RUN_UTILS")
+xnat_pbs_jobs = os_utils.getenv_required("XNAT_PBS_JOBS")
+
+
+def expected_output_files_template_filename(fieldmap):
+    """Name of the file containing a list of templates for expected output files"""
+    return f"ExpectedOutputFiles-FieldMap-{fieldmap}.CCF.txt"
+
 
 class OneSubjectCompletionXnatChecker(abc.ABC):
     """
@@ -20,38 +28,32 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         """Name of processing type to check (e.g. StructuralPreprocessing, FunctionalPreprocessing, etc.)"""
         raise NotImplementedError
 
-    def expected_output_files_template_filename(self, fieldmap):
-        """Name of the file containing a list of templates for expected output files"""
-        return "ExpectedOutputFiles-FieldMap-" + fieldmap + ".CCF.txt"
-
     def list_of_expected_files(self, working_dir, fieldmap, subject_info):
 
-        hcp_run_utils = os_utils.getenv_required("HCP_RUN_UTILS")
         if os.path.isfile(
             hcp_run_utils
-            + os.sep
+            + "/"
             + self.processing_name
-            + os.sep
-            + self.expected_output_files_template_filename(fieldmap)
+            + "/"
+            + expected_output_files_template_filename(fieldmap)
         ):
             f = open(
                 hcp_run_utils
-                + os.sep
+                + "/"
                 + self.processing_name
-                + os.sep
-                + self.expected_output_files_template_filename(fieldmap)
+                + "/"
+                + expected_output_files_template_filename(fieldmap)
             )
         else:
-            xnat_pbs_jobs = os_utils.getenv_required("XNAT_PBS_JOBS")
             f = open(
                 xnat_pbs_jobs
-                + os.sep
+                + "/"
                 + self.processing_name
-                + os.sep
-                + self.expected_output_files_template_filename(fieldmap)
+                + "/"
+                + expected_output_files_template_filename(fieldmap)
             )
 
-        root_dir = os.sep.join(
+        root_dir = "/".join(
             [working_dir, subject_info.subject_id + "_" + subject_info.classifier]
         )
         l = file_utils.build_filename_list_from_file(
@@ -104,11 +106,11 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
 
         resource_path = (
             self.my_resource(archive, subject_info)
-            + os.sep
+            + "/"
             + subject_info.subject_id
             + "_"
             + subject_info.classifier
-            + os.sep
+            + "/"
             + "ProcessingInfo"
         )
 
@@ -123,10 +125,10 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         subject_pipeline_name_check += "." + self.processing_name
 
         completion_marker_file_path = (
-            resource_path + os.sep + subject_pipeline_name_check + ".XNAT_CHECK.success"
+            resource_path + "/" + subject_pipeline_name_check + ".XNAT_CHECK.success"
         )
         starttime_marker_file_path = (
-            resource_path + os.sep + subject_pipeline_name + ".starttime"
+            resource_path + "/" + subject_pipeline_name + ".starttime"
         )
 
         # If the completion marker file does not exist, the the processing is certainly not marked
