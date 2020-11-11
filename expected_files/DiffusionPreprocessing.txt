@@ -54,8 +54,6 @@ Diffusion eddy Pos_SeriesVolNum.txt
 Diffusion QC avg_b0_pe0.png
 Diffusion QC avg_b0_pe1.png
 Diffusion QC avg_b0.png
-Diffusion QC avg_b1495.png
-Diffusion QC avg_b2995.png
 Diffusion QC cnr0000.nii.gz.png
 Diffusion QC cnr0001.nii.gz.png
 Diffusion QC cnr0002.nii.gz.png
@@ -152,8 +150,6 @@ T1w Diffusion nodif_brain_mask.stats.txt
 T1w Diffusion QC avg_b0_pe0.png
 T1w Diffusion QC avg_b0_pe1.png
 T1w Diffusion QC avg_b0.png
-T1w Diffusion QC avg_b1495.png
-T1w Diffusion QC avg_b2995.png
 T1w Diffusion QC cnr0000.nii.gz.png
 T1w Diffusion QC cnr0001.nii.gz.png
 T1w Diffusion QC cnr0002.nii.gz.png
