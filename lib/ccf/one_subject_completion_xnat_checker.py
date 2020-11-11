@@ -70,7 +70,10 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         )
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
-        pass
+        raise NotImplementedError
+
+    def my_resource(self, archive, subject_info):
+        raise NotImplementedError
 
     def my_resource_time_stamp(self, archive, subject_info):
         return os.path.getmtime(self.my_resource(archive, subject_info))
@@ -116,8 +119,8 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         if subject_info.extra.lower() != "all" and subject_info.extra != "":
             subject_pipeline_name += "_" + subject_info.extra
             subject_pipeline_name_check += "." + subject_info.extra
-        subject_pipeline_name += "." + self.PIPELINE_NAME
-        subject_pipeline_name_check += "." + self.PIPELINE_NAME
+        subject_pipeline_name += "." + self.processing_name
+        subject_pipeline_name_check += "." + self.processing_name
 
         completion_marker_file_path = (
             resource_path + os.sep + subject_pipeline_name_check + ".XNAT_CHECK.success"
@@ -202,15 +205,8 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
 
 
 class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
-        return "StructuralPreprocessing"
-
-    @property
-    def PIPELINE_NAME(self):
         return "StructuralPreprocessing"
 
     def my_resource(self, archive, subject_info):
@@ -221,23 +217,11 @@ class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
 
 
 class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
         return "StructuralPreprocessingHandEdit"
 
-    @property
-    def structural_preproc_processing_name(self):
-        return "StructuralPreprocessing"
-
-    @property
-    def PIPELINE_NAME(self):
-        return "StructuralPreprocessingHandEdit"
-
     def my_resource(self, archive, subject_info):
-
         return archive.structural_preproc_hand_edit_dir_full_path(subject_info)
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
@@ -245,84 +229,48 @@ class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
 
 
 class FunctionalCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
-        return "FunctionalPreprocessing"
-
-    @property
-    def PIPELINE_NAME(self):
         return "FunctionalPreprocessing"
 
     def my_resource(self, archive, subject_info):
         return archive.functional_preproc_dir_full_path(subject_info)
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
-        dirs = []
-        dirs.append(archive.structural_preproc_dir_full_path(subject_info))
-        return dirs
+        return [archive.structural_preproc_dir_full_path(subject_info)]
 
 
 class MultirunicafixCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
-        return "MultiRunIcaFixProcessing"
-
-    @property
-    def PIPELINE_NAME(self):
         return "MultiRunIcaFixProcessing"
 
     def my_resource(self, archive, subject_info):
         return archive.multirun_icafix_dir_full_path(subject_info)
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
-        dirs = []
-        dirs.append(archive.structural_preproc_dir_full_path(subject_info))
-        return dirs
+        return [archive.structural_preproc_dir_full_path(subject_info)]
 
 
 class MsmAllCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
-        return "MsmAllProcessing"
-
-    @property
-    def PIPELINE_NAME(self):
         return "MsmAllProcessing"
 
     def my_resource(self, archive, subject_info):
         return archive.msm_all_dir_full_path(subject_info)
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
-        dirs = []
-        dirs.append(archive.structural_preproc_dir_full_path(subject_info))
-        return dirs
+        return [archive.structural_preproc_dir_full_path(subject_info)]
 
 
 class DiffusionCompletionChecker(OneSubjectCompletionXnatChecker):
-    def __init__(self):
-        super().__init__()
-
     @property
     def processing_name(self):
-        return "DiffusionPreprocessing"
-
-    @property
-    def PIPELINE_NAME(self):
         return "DiffusionPreprocessing"
 
     def my_resource(self, archive, subject_info):
         return archive.diffusion_preproc_dir_full_path(subject_info)
 
     def my_prerequisite_dir_full_paths(self, archive, subject_info):
-        dirs = []
-        dirs.append(archive.structural_preproc_dir_full_path(subject_info))
-        return dirs
+        return [archive.structural_preproc_dir_full_path(subject_info)]
