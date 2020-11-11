@@ -13,11 +13,6 @@ hcp_run_utils = os_utils.getenv_required("HCP_RUN_UTILS")
 xnat_pbs_jobs = os_utils.getenv_required("XNAT_PBS_JOBS")
 
 
-def expected_output_files_template_filename(fieldmap):
-    """Name of the file containing a list of templates for expected output files"""
-    return f"ExpectedOutputFiles-FieldMap-{fieldmap}.CCF.txt"
-
-
 class OneSubjectCompletionXnatChecker(abc.ABC):
     """
     Abstract base class for classes that are used to check the completion
@@ -38,45 +33,35 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         raise NotImplementedError
 
     def list_of_expected_files(self, working_dir, fieldmap):
+        # define all possible locations
+        common = (
+            f"{self.processing_name}/ExpectedOutputFiles-FieldMap-{fieldmap}.CCF.txt"
+        )
+        alts = [
+            "/pipeline_tools/pipelines/expected_files/DiffusionPreprocessing.txt",
+            f"{hcp_run_utils}/{common}",
+            f"{xnat_pbs_jobs}/{common}",
+        ]
 
-        if os.path.isfile(
-            hcp_run_utils
-            + "/"
-            + self.processing_name
-            + "/"
-            + expected_output_files_template_filename(fieldmap)
-        ):
-            f = open(
-                hcp_run_utils
-                + "/"
-                + self.processing_name
-                + "/"
-                + expected_output_files_template_filename(fieldmap)
-            )
-        else:
-            f = open(
-                xnat_pbs_jobs
-                + "/"
-                + self.processing_name
-                + "/"
-                + expected_output_files_template_filename(fieldmap)
+        # look in all locations and find first file that exists
+        expected_list_file = None
+        for filename in alts:
+            if os.path.isfile(filename):
+                expected_list_file = filename
+        if expected_list_file is None:
+            raise Exception(
+                "Couldn't find an expected file in all the locations:", alts
             )
 
-        root_dir = "/".join([working_dir, self.SUBJECT_SESSION])
-        l = file_utils.build_filename_list_from_file(
-            f,
-            root_dir,
-            subjectid=self.SUBJECT_SESSION,
-            scan=self.SUBJECT_EXTRA,
-        )
-        return l
-
-    def do_all_files_exist(
-        self, file_name_list, verbose=False, output=sys.stdout, short_circuit=True
-    ):
-        return file_utils.do_all_files_exist(
-            file_name_list, verbose, output, short_circuit
-        )
+        with open(expected_list_file) as f:
+            root_dir = "/".join([working_dir, self.SUBJECT_SESSION])
+            l = file_utils.build_filename_list_from_file(
+                f,
+                root_dir,
+                subjectid=self.SUBJECT_SESSION,
+                scan=self.SUBJECT_EXTRA,
+            )
+            return l
 
     def my_prerequisite_dir_full_paths(self):
         raise NotImplementedError
@@ -196,7 +181,7 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         # If processed resource exists and is newer than all the prerequisite resources, then check
         # to see if all the expected files exist
         expected_file_list = self.list_of_expected_files(resource_file_path, fieldmap)
-        return self.do_all_files_exist(
+        return file_utils.do_all_files_exist(
             expected_file_list, verbose, output, short_circuit
         )
 
