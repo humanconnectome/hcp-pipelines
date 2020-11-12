@@ -6,20 +6,18 @@ ccf/archive.py: Provides direct access to a CCF project archive.
 
 # import of built-in modules
 import glob
+from glob import glob
 import os
 
-UNPROC_SUFFIX = "unproc"
-PREPROC_SUFFIX = "preproc"
-FUNCTIONAL_SCAN_MARKER = "fMRI"
-RESTING_STATE_SCAN_MARKER = "rfMRI"
-TASK_SCAN_MARKER = "tfMRI"
-FIX_PROCESSED_SUFFIX = "FIX"
-RSS_PROCESSED_SUFFIX = "RSS"
-POSTFIX_PROCESSED_SUFFIX = "PostFix"
-REAPPLY_FIX_SUFFIX = "ReApplyFix"
 
 ARCHIVE_ROOT = os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT")
 BUILD_DIR = os.getenv("XNAT_PBS_JOBS_BUILD_DIR")
+
+
+def ls(path_expression):
+    items = glob.glob(path_expression)
+    return sorted(items)
+
 
 class CcfArchive(object):
     """
@@ -31,16 +29,20 @@ class CcfArchive(object):
     or a change in conventions could cause this code to no longer be correct.
     """
 
-
     def __init__(self, project, subject, classifier, scan):
         self.SUBJECT_PROJECT = project
         self.SUBJECT_ID = subject
         self.SUBJECT_CLASSIFIER = classifier
         self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = f"{subject}_{classifier}"
-        self.subject_resources = f"{ARCHIVE_ROOT}/{self.SUBJECT_PROJECT}/arc001/{self.SUBJECT_SESSION}/RESOURCES"
-
-
+        self.SUBJECT_SESSION = subject + "_" + classifier + ""
+        self.subject_resources = (
+            ARCHIVE_ROOT
+            + "/"
+            + self.SUBJECT_PROJECT
+            + "/arc001/"
+            + self.SUBJECT_SESSION
+            + "/RESOURCES"
+        )
 
     # scan name property checking methods
 
@@ -50,7 +52,7 @@ class CcfArchive(object):
         The full path to the project-level resources directory
         for the specified project
         """
-        return f"{ARCHIVE_ROOT}/{project_id}/resources"
+        return ARCHIVE_ROOT + "/" + project_id + "/resources"
 
     @staticmethod
     def is_resting_state_scan_name(scan_name):
@@ -58,7 +60,7 @@ class CcfArchive(object):
         Return an indication of whether the specified name is for a
         resting state scan
         """
-        return scan_name.startswith(RESTING_STATE_SCAN_MARKER)
+        return scan_name.startswith("rfMRI")
 
     # Unprocessed data paths and names
 
@@ -68,16 +70,14 @@ class CcfArchive(object):
         Return an indication of whethe the specified name is for a
         task scan
         """
-        return scan_name.startswith(TASK_SCAN_MARKER)
+        return scan_name.startswith("tfMRI")
 
     def available_structural_unproc_dir_full_paths(self):
         """
         List of full paths to any resources containing unprocessed structural scans
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/T[12]w_*{UNPROC_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/T[12]w_*unproc")
 
     def available_structural_unproc_names(self):
         """
@@ -92,9 +92,7 @@ class CcfArchive(object):
         List of full paths to any resources containing unprocessed T1w scans
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/T1w_*{UNPROC_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/T1w_*unproc")
 
     def available_t1w_unproc_names(self):
         """
@@ -109,9 +107,7 @@ class CcfArchive(object):
         List of full paths to any resources containing unprocessed T2w scans
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/T2w_*{UNPROC_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/T2w_*unproc")
 
     def available_t2w_unproc_names(self):
         """
@@ -126,9 +122,7 @@ class CcfArchive(object):
         List of full paths to any resources containing unprocessed functional scans
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/*{FUNCTIONAL_SCAN_MARKER}*{UNPROC_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/*fMRI*unproc")
 
     def available_functional_unproc_names(self):
         """
@@ -150,19 +144,12 @@ class CcfArchive(object):
         name_list = self._get_scan_names_from_full_paths(dir_list)
         return name_list
 
-    def diffusion_unproc_dir_full_path(self):
-        """
-        Full path to the unprocessed diffusion data resource directory
-        """
-        return f"{self.subject_resources}/Diffusion_{UNPROC_SUFFIX}"
-
     def available_diffusion_unproc_dir_full_paths(self):
         """
         List of full paths to any resources containing unprocessing diffusion scans
         for the specified subject
         """
-        dir_list = glob.glob(self.diffusion_unproc_dir_full_path())
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/Diffusion_unproc")
 
     def available_diffusion_unproc_names(self):
         """
@@ -172,126 +159,62 @@ class CcfArchive(object):
         name_list = self._get_scan_names_from_full_paths(dir_list)
         return name_list
 
-    def running_status_dir_full_path(self):
-        """
-        Full path to the running status resource directory
-        """
-        return f"{self.subject_resources}/RunningStatus"
-
     # preprocessed data paths and names
 
     def available_running_status_dir_full_paths(self):
         """
         List of full paths to the running status directories
         """
-        dir_list = glob.glob(self.running_status_dir_full_path())
-        return sorted(dir_list)
-
-    def structural_preproc_dir_full_path(self):
-        """
-        Full path to structural preproc resource directory
-        """
-        return (
-            f"{self.subject_resources}/Structural_preproc"
-        )
+        return ls(self.subject_resources + "/RunningStatus")
 
     def available_hand_edit_full_paths(self):
         """
         List of full paths to any resource containing preprocessed functional data
         for the specified subject
         """
-        path_expr = self.hand_edit_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return self.available_hand_edit_dir_full_paths()
 
     def available_structural_preproc_hand_edit_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed structural data
         for the specified subject
         """
-        path_expr = self.structural_preproc_hand_edit_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/Structural_preproc_handedit")
 
     def available_structural_preproc_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed structural data
         for the specified subject
         """
-        path_expr = self.structural_preproc_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def supplemental_structural_preproc_dir_full_path(self):
-        """
-        Full path to supplemental structural preproc resource directory
-        """
-        return f"{self.subject_resources}/Structural_preproc/supplemental"
+        return ls(self.subject_resources + "/Structural_preproc")
 
     def available_supplemental_structural_preproc_dir_full_paths(self):
         """
         List of full paths to any resource containing supplemental preprocessed structural
         data for the specified subject
         """
-        path_expr = self.supplemental_structural_preproc_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def hand_edit_dir_full_path(self):
-        """
-        Full path to structural preproc resource directory
-        """
-        return f"{self.subject_resources}/Structural_Hand_Edit"
-
-    def structural_preproc_hand_edit_dir_full_path(self):
-        """
-        Full path to structural preproc resource directory
-        """
-        return f"{self.subject_resources}/Structural_preproc_handedit"
+        return ls(self.subject_resources + "/Structural_preproc/supplemental")
 
     def available_hand_edit_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed structural data
         for the specified subject
         """
-        path_expr = self.hand_edit_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def available_structural_preproc_hand_edit_dir_full_paths(self):
-        """
-        List of full paths to any resource containing preprocessed structural data
-        for the specified subject
-        """
-        path_expr = self.structural_preproc_hand_edit_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def diffusion_preproc_dir_full_path(self):
-        """
-        Full path to diffusion preproc resource directory
-        """
-        return (
-            f"{self.subject_resources}/Diffusion_preproc"
-        )
+        return ls(self.subject_resources + "/Structural_Hand_Edit")
 
     def available_diffusion_preproc_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed diffusion data
         for the specified subject
         """
-        path_expr = self.diffusion_preproc_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/Diffusion_preproc")
 
     def available_functional_preproc_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed functional data
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/*{FUNCTIONAL_SCAN_MARKER}*preproc"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/*fMRI*preproc")
 
     def available_functional_preproc_names(self):
         """
@@ -301,99 +224,49 @@ class CcfArchive(object):
         name_list = self._get_scan_names_from_full_paths(dir_list)
         return name_list
 
-    def functional_preproc_dir_full_path(self):
-        """
-        Full path to functional preprocessed resource for the specified subject
-        (including the specified scan in the self.SUBJECT_EXTRA field)
-        """
-        return ( self.subject_resources + "/" + self.SUBJECT_EXTRA + "_" + "preproc" )
-
     # processed data paths and names
-
-    def msmall_registration_dir_full_path(self):
-        """
-        Full path to MSM All registration resource directory
-        """
-        return f"{self.subject_resources}/MSMAllReg"
 
     def available_msmall_registration_dir_full_paths(self):
         """
         List of full paths to any resource containing msmall registration results
         data for the specified subject
         """
-        path_expr = self.msmall_registration_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def msm_all_dir_full_path(self):
-        """
-        Full path to diffusion preproc resource directory
-        """
-        return f"{self.subject_resources}/MsmAll_proc"
-
-    def multirun_icafix_dir_full_path(self):
-        """
-        Full path to diffusion preproc resource directory
-        """
-        return f"{self.subject_resources}/MultiRunIcaFix_proc"
-
+        return ls(self.subject_resources + "/MSMAllReg")
 
     def available_multirun_icafix_dir_full_paths(self):
         """
         List of full paths to any resource containing preprocessed diffusion data
         for the specified subject
         """
-        # path_expr = self.multirun_icafix_dir_full_path()
-        # dir_list = glob.glob(path_expr)
-        # return sorted(dir_list)
-        path_expr = self.multirun_icafix_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/MultiRunIcaFix_proc")
 
     def available_fix_processed_dir_full_paths(self):
         """
         List of full paths to any resource containing FIX processed results data
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/*{FIX_PROCESSED_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def dedrift_and_resample_dir_full_path(self):
-        """
-        Full path to MSM All DeDrift and Resample resource directory
-        """
-        path_expr = f"{self.subject_resources}/MSMAllDeDrift"
-        return path_expr
+        return ls(self.subject_resources + "/*FIX")
 
     def available_msmall_dedrift_and_resample_dir_full_paths(self):
         """
         List of full paths to any resource containing msmall dedrift and resample results
         data for the specified subject
         """
-        path_expr = self.dedrift_and_resample_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/MSMAllDeDrift")
 
     def available_rss_processed_dir_full_paths(self):
         """
         List of full paths to any resource containing RestingStateStats processed results data
         for the specified subject
         """
-        path_expr = f"{self.subject_resources}/*{RSS_PROCESSED_SUFFIX}"
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/*RSS")
 
     def available_postfix_processed_dir_full_paths(self):
         """
         List of full paths to any resource containing PostFix processed results data
         for the specified subject
         """
-        path_expr = (
-            f"{self.subject_resources}/*{POSTFIX_PROCESSED_SUFFIX}"
-        )
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(self.subject_resources + "/*PostFix")
 
     def available_task_processed_dir_full_paths(self):
         """
@@ -402,8 +275,7 @@ class CcfArchive(object):
         """
         dir_list = []
 
-        path_expr = f"{self.subject_resources}/{TASK_SCAN_MARKER}*"
-        first_dir_list = glob.glob(path_expr)
+        first_dir_list = ls(self.subject_resources + "/tfMRI*")
 
         for directory in first_dir_list:
             lastsepindex = directory.rfind("/")
@@ -415,42 +287,19 @@ class CcfArchive(object):
 
         return sorted(dir_list)
 
-    def bedpostx_dir_full_path(self):
-        """
-        Full path to bedpostx processed resource directory
-        """
-        path_expr = f"{self.subject_resources}/Diffusion_bedpostx"
-        return path_expr
-
     def available_bedpostx_processed_dir_full_paths(self):
         """
         List of full paths to any resource containing bedpostx processed results data
         for the specified subject
         """
-        path_expr = self.bedpostx_dir_full_path()
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
-
-    def reapplyfix_dir_full_path(self, scan_name, reg_name=None):
-        path_expr = (
-            self.subject_resources
-            + "/"
-            + scan_name
-            + "_"
-            + REAPPLY_FIX_SUFFIX
-        )
-        if reg_name:
-            path_expr += reg_name
-
-        return path_expr
+        return ls(self.subject_resources + "/Diffusion_bedpostx")
 
     def available_reapplyfix_dir_full_paths(self, reg_name=None):
-        path_expr = f"{self.subject_resources}/*{REAPPLY_FIX_SUFFIX}"
+        path_expr = self.subject_resources + "/*ReApplyFix"
         if reg_name:
             path_expr += reg_name
 
-        dir_list = glob.glob(path_expr)
-        return sorted(dir_list)
+        return ls(path_expr)
 
     def available_reapplyfix_names(self, reg_name=None):
         dir_list = self.available_reapplyfix_dir_full_paths(reg_name)
