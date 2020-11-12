@@ -30,13 +30,39 @@ sh.setFormatter(logging.Formatter("%(name)s: %(message)s"))
 module_logger.addHandler(sh)
 
 
+def copy_with_rsync(get_from, put_to, show_log=True):
+    if show_log:
+        rsync_cmd = "rsync -auLv "
+    else:
+        rsync_cmd = "rsync -auL "
+    rsync_cmd += get_from + "/* " + put_to
+    module_logger.debug(debug_utils.get_name() + " rsync_cmd: " + rsync_cmd)
+    completed_rsync_process = subprocess.run(
+        rsync_cmd,
+        shell=True,
+        check=True,
+        stdout=subprocess.PIPE,
+        universal_newlines=True,
+    )
+    module_logger.debug(
+        debug_utils.get_name() + " stdout: " + completed_rsync_process.stdout
+    )
+
+
+def link_directory(get_from, put_to, show_log=True):
+    module_logger.debug(
+        debug_utils.get_name() + " linking " + put_to + " to " + get_from
+    )
+    os_utils.lndir(get_from, put_to, show_log, ignore_existing_dst_files=True)
+
+
 class DataRetriever(object):
     def __init__(self, project, subject, classifier, scan, output_dir):
         self.SUBJECT_PROJECT = project
         self.SUBJECT_ID = subject
         self.SUBJECT_CLASSIFIER = classifier
         self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = f"{classifier}_{scan}"
+        self.SUBJECT_SESSION = f"{subject}_{classifier}"
         self.archive = ccf_archive.CcfArchive(project, subject, classifier, scan)
         self.output_dir = output_dir
 
@@ -49,35 +75,12 @@ class DataRetriever(object):
         # or linked should be shown
         self.show_log = False
 
-    def _from_to(self, get_from, put_to):
-        os.makedirs(put_to, exist_ok=True)
+    def _from_to(self, source, destination):
+        os.makedirs(destination, exist_ok=True)
         if self.copy:
-            if self.show_log:
-                rsync_cmd = "rsync -auLv "
-            else:
-                rsync_cmd = "rsync -auL "
-
-            rsync_cmd += get_from + "/* " + put_to
-            module_logger.debug(debug_utils.get_name() + " rsync_cmd: " + rsync_cmd)
-
-            completed_rsync_process = subprocess.run(
-                rsync_cmd,
-                shell=True,
-                check=True,
-                stdout=subprocess.PIPE,
-                universal_newlines=True,
-            )
-            module_logger.debug(
-                debug_utils.get_name() + " stdout: " + completed_rsync_process.stdout
-            )
-
+            copy_with_rsync(source, destination, self.show_log)
         else:
-            module_logger.debug(
-                debug_utils.get_name() + " linking " + put_to + " to " + get_from
-            )
-            os_utils.lndir(
-                get_from, put_to, self.show_log, ignore_existing_dst_files=True
-            )
+            link_directory(source, destination, self.show_log)
 
     # get unprocessed data
 
@@ -90,13 +93,7 @@ class DataRetriever(object):
             unproc_loc = get_from.rfind("_unproc")
             sub_dir = get_from[last_sep_loc + 1 : unproc_loc]
             put_to = (
-                self.output_dir
-                + "/"
-                + self.SUBJECT_ID
-                + "_"
-                + self.SUBJECT_CLASSIFIER
-                + "/unprocessed/"
-                + sub_dir
+                self.output_dir + "/" + self.SUBJECT_SESSION + "/unprocessed/" + sub_dir
             )
 
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
@@ -260,14 +257,17 @@ class DataRetriever(object):
         opened for writing. Each of these files needs to be copied instead of linked.
         """
 
-        t1w_native_spec_file = self.output_dir + "/" + self.SUBJECT_SESSION
-        t1w_native_spec_file += "/T1w/Native"
-        t1w_native_spec_file += "/" + self.SUBJECT_ID + ".native.wb.spec"
+        output_dir = self.output_dir
+        session = self.SUBJECT_SESSION
+        subject_id = self.SUBJECT_ID
+        t1w_native_spec_file = (
+            f"{output_dir}/{session}/T1w/Native/{subject_id}.native.wb.spec"
+        )
         file_utils.make_link_into_copy(t1w_native_spec_file, verbose=True)
 
-        native_spec_file = self.output_dir + "/" + self.SUBJECT_SESSION
-        native_spec_file += "/MNINonLinear/Native"
-        native_spec_file += "/" + self.SUBJECT_ID + ".native.wb.spec"
+        native_spec_file = (
+            f"{output_dir}/{session}/MNINonLinear/Native/{subject_id}.native.wb.spec"
+        )
         file_utils.make_link_into_copy(native_spec_file, verbose=True)
 
     def _remove_some_dedriftandresample_ica_files(self):
