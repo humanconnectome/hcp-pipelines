@@ -21,6 +21,9 @@ def split_subject_components(SUBJECT):
 
     proj, subject_id, classifier, extra = components
 
+    if extra == "all":
+        extra = ""
+
     return {
         "SUBJECT_PROJECT": proj,
         "SUBJECT_ID": subject_id,
