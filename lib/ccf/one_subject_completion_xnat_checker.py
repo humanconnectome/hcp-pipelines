@@ -24,7 +24,7 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         self.SUBJECT_ID = subject
         self.SUBJECT_CLASSIFIER = classifier
         self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = f"{classifier}_{scan}"
+        self.SUBJECT_SESSION = f"{subject}_{classifier}"
         self.archive = ccf_archive.CcfArchive(project, subject, classifier, scan)
 
     @property
