@@ -75,6 +75,26 @@ class DataRetriever(object):
         # or linked should be shown
         self.show_log = False
 
+    def run(self, *funcs):
+        funcs = list(funcs)
+        if self.copy:
+            # when copying (via rsync), data should be retrieved in chronological order
+            # (i.e. the order in which the pipelines are run)
+            pass
+        else:
+            # when creating symbolic links, data should be
+            # retrieved in reverse chronological order
+            funcs.reverse()
+        for fn in funcs:
+            fn()
+
+    def remove_non_subdirs(self):
+        cmd = "find " + self.output_dir + " -maxdepth 1 -not -type d -delete"
+        completed_process = subprocess.run(
+            cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True
+        )
+        return
+
     def _from_to(self, source, destination):
         os.makedirs(destination, exist_ok=True)
         if self.copy:
@@ -82,24 +102,40 @@ class DataRetriever(object):
         else:
             link_directory(source, destination, self.show_log)
 
-    # get unprocessed data
-
     def _get_unprocessed_data(self, directories):
-        for directory in directories:
-            get_from = directory
+        for get_from in directories:
             module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
 
-            last_sep_loc = get_from.rfind("/")
-            unproc_loc = get_from.rfind("_unproc")
-            sub_dir = get_from[last_sep_loc + 1 : unproc_loc]
+            base = os.path.basename(get_from)
+            sub_dir = base[: base.rfind("_unproc")]
             put_to = (
                 self.output_dir + "/" + self.SUBJECT_SESSION + "/unprocessed/" + sub_dir
             )
-
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
 
             self._from_to(get_from, put_to)
 
+    def _get_preprocessed_data(self, directories):
+        for directory in directories:
+            get_from = directory
+            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
+
+            put_to = self.output_dir
+            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
+
+            self._from_to(get_from, put_to)
+
+    def _get_processed_data(self, directories):
+        for directory in directories:
+            get_from = directory
+            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
+
+            put_to = self.output_dir
+            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
+
+            self._from_to(get_from, put_to)
+
+    # get unprocessed data
     def get_structural_unproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
@@ -126,16 +162,6 @@ class DataRetriever(object):
         )
 
     # get preprocessed data
-
-    def _get_preprocessed_data(self, directories):
-        for directory in directories:
-            get_from = directory
-            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
-
-            put_to = self.output_dir
-            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
-
-            self._from_to(get_from, put_to)
 
     def get_structural_preproc_data(self):
         module_logger.debug(debug_utils.get_name())
@@ -181,16 +207,6 @@ class DataRetriever(object):
 
     # get processed data
 
-    def _get_processed_data(self, directories):
-        for directory in directories:
-            get_from = directory
-            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
-
-            put_to = self.output_dir
-            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
-
-            self._from_to(get_from, put_to)
-
     def get_msmall_registration_data(self):
         module_logger.debug(debug_utils.get_name())
 
@@ -235,19 +251,6 @@ class DataRetriever(object):
         )
 
     # prerequisites data for specific pipelines
-
-    def run(self, *funcs):
-        funcs = list(funcs)
-        if self.copy:
-            # when copying (via rsync), data should be retrieved in chronological order
-            # (i.e. the order in which the pipelines are run)
-            pass
-        else:
-            # when creating symbolic links, data should be
-            # retrieved in reverse chronological order
-            funcs.reverse()
-        for fn in funcs:
-            fn()
 
     def _copy_some_dedriftandresample_links(self):
         """
@@ -329,13 +332,6 @@ class DataRetriever(object):
                     for file in files:
                         file_to_copy = os.path.join(root, file)
                         file_utils.make_link_into_copy(file_to_copy, verbose=True)
-
-    def remove_non_subdirs(self):
-        cmd = "find " + self.output_dir + " -maxdepth 1 -not -type d -delete"
-        completed_process = subprocess.run(
-            cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True
-        )
-        return
 
 
 class PipelinePrereqDownloader:
