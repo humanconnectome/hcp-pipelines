@@ -139,19 +139,19 @@ class DataRetriever(object):
     def get_structural_unproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_structural_unproc_dir_full_paths(),
+            self.archive.structural_unproc(),
         )
 
     def get_functional_unproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_functional_unproc_dir_full_paths(),
+            self.archive.functional_unproc(),
         )
 
     def get_diffusion_unproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.available_diffusion_unproc_dir_full_paths(),
+            self.archive.diffusion_unproc(),
         )
 
     def get_unproc_data(self):
@@ -166,35 +166,35 @@ class DataRetriever(object):
     def get_structural_preproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_structural_preproc_dir_full_paths(),
+            self.archive.structural_preproc(),
         )
 
     def get_icafix_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_processed_data(
-            self.archive.available_multirun_icafix_dir_full_paths(),
+            self.archive.multirun_icafix(),
         )
 
     def get_supplemental_structural_preproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_supplemental_structural_preproc_dir_full_paths(),
+            self.archive.supplemental_structural_preproc(),
         )
 
     def get_hand_edit_data(self):
         module_logger.debug(debug_utils.get_name())
-        self._get_preprocessed_data(self.archive.available_hand_edit_full_paths())
+        self._get_preprocessed_data(self.archive.hand_edit())
 
     def get_functional_preproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_functional_preproc_dir_full_paths(),
+            self.archive.functional_preproc(),
         )
 
     def get_diffusion_preproc_data(self):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.available_diffusion_preproc_dir_full_paths(),
+            self.archive.diffusion_preproc(),
         )
 
     def get_preproc_data(self):
@@ -211,43 +211,43 @@ class DataRetriever(object):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_msmall_registration_dir_full_paths(),
+            self.archive.msmall_registration(),
         )
 
     def get_fix_processed_data(self):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_fix_processed_dir_full_paths(),
+            self.archive.fix_processed(),
         )
 
     def get_dedriftandresample_processed_data(self):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_msmall_dedrift_and_resample_dir_full_paths(),
+            self.archive.msmall_dedrift_and_resample(),
         )
 
     def get_resting_state_stats_data(self):
         module_logger.debug(debug_utils.get_name())
 
         self._get_processed_data(
-            self.archive.available_rss_processed_dir_full_paths(),
+            self.archive.rss_processed(),
         )
 
     def get_postfix_data(self):
         self._get_processed_data(
-            self.archive.available_postfix_processed_dir_full_paths(),
+            self.archive.postfix_processed(),
         )
 
     def get_taskfmri_data(self):
         self._get_processed_data(
-            self.archive.available_task_processed_dir_full_paths(),
+            self.archive.task_processed(),
         )
 
     def get_bedpostx_data(self):
         self._get_processed_data(
-            self.archive.available_bedpostx_processed_dir_full_paths(),
+            self.archive.bedpostx_processed(),
         )
 
     # prerequisites data for specific pipelines
@@ -310,7 +310,7 @@ class DataRetriever(object):
         """
         Get the group average drift data stored in the specified project
         """
-        get_from = self.archive.project_resources_dir_full_path(project_id)
+        get_from = ccf_archive.project_resources_dir_full_path(project_id)
         get_from += "/MSMAllDeDrift"
         put_to = self.output_dir
 
