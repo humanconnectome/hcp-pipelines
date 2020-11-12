@@ -99,8 +99,7 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
             + self.SUBJECT_ID
             + "_"
             + self.SUBJECT_CLASSIFIER
-            + "/"
-            + "ProcessingInfo"
+            + "/ProcessingInfo"
         )
 
         subject_pipeline_name = self.SUBJECT_SESSION
@@ -192,7 +191,8 @@ class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
         return "StructuralPreprocessing"
 
     def my_resource(self):
-        return self.archive.structural_preproc_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/Structural_preproc"
 
     def my_prerequisite_dir_full_paths(self):
         return self.archive.available_structural_unproc_dir_full_paths()
@@ -204,7 +204,8 @@ class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
         return "StructuralPreprocessingHandEdit"
 
     def my_resource(self):
-        return self.archive.structural_preproc_hand_edit_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/Structural_preproc_handedit"
 
     def my_prerequisite_dir_full_paths(self):
         return self.archive.available_structural_preproc_dir_full_paths()
@@ -216,10 +217,12 @@ class FunctionalCompletionChecker(OneSubjectCompletionXnatChecker):
         return "FunctionalPreprocessing"
 
     def my_resource(self):
-        return self.archive.functional_preproc_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/" + archive.SUBJECT_EXTRA + "_preproc"
 
     def my_prerequisite_dir_full_paths(self):
-        return [self.archive.structural_preproc_dir_full_path()]
+        archive = self.archive
+        return [(archive.subject_resources + "/Structural_preproc")]
 
 
 class MultirunicafixCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -228,10 +231,12 @@ class MultirunicafixCompletionChecker(OneSubjectCompletionXnatChecker):
         return "MultiRunIcaFixProcessing"
 
     def my_resource(self):
-        return self.archive.multirun_icafix_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/MultiRunIcaFix_proc"
 
     def my_prerequisite_dir_full_paths(self):
-        return [self.archive.structural_preproc_dir_full_path()]
+        archive = self.archive
+        return [(archive.subject_resources + "/Structural_preproc")]
 
 
 class MsmAllCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -240,10 +245,12 @@ class MsmAllCompletionChecker(OneSubjectCompletionXnatChecker):
         return "MsmAllProcessing"
 
     def my_resource(self):
-        return self.archive.msm_all_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/MsmAll_proc"
 
     def my_prerequisite_dir_full_paths(self):
-        return [self.archive.structural_preproc_dir_full_path()]
+        archive = self.archive
+        return [(archive.subject_resources + "/Structural_preproc")]
 
 
 class DiffusionCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -252,7 +259,9 @@ class DiffusionCompletionChecker(OneSubjectCompletionXnatChecker):
         return "DiffusionPreprocessing"
 
     def my_resource(self):
-        return self.archive.diffusion_preproc_dir_full_path()
+        archive = self.archive
+        return archive.subject_resources + "/Diffusion_preproc"
 
     def my_prerequisite_dir_full_paths(self):
-        return [self.archive.structural_preproc_dir_full_path()]
+        archive = self.archive
+        return [(archive.subject_resources + "/Structural_preproc")]
