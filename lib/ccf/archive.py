@@ -14,11 +14,6 @@ ARCHIVE_ROOT = os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT")
 BUILD_DIR = os.getenv("XNAT_PBS_JOBS_BUILD_DIR")
 
 
-def ls(path_expression):
-    items = glob.glob(path_expression)
-    return sorted(items)
-
-
 class CcfArchive(object):
     """
     This class provides access to a CCF project data archive.
@@ -54,23 +49,7 @@ class CcfArchive(object):
         """
         return ARCHIVE_ROOT + "/" + project_id + "/resources"
 
-    @staticmethod
-    def is_resting_state_scan_name(scan_name):
-        """
-        Return an indication of whether the specified name is for a
-        resting state scan
-        """
-        return scan_name.startswith("rfMRI")
-
     # Unprocessed data paths and names
-
-    @staticmethod
-    def is_task_scan_name(scan_name):
-        """
-        Return an indication of whethe the specified name is for a
-        task scan
-        """
-        return scan_name.startswith("tfMRI")
 
     def available_structural_unproc_dir_full_paths(self):
         """
@@ -84,7 +63,7 @@ class CcfArchive(object):
         List of names (not full paths) of structural unprocessed scans
         """
         dir_list = self.available_structural_unproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     def available_t1w_unproc_dir_full_paths(self):
@@ -99,7 +78,7 @@ class CcfArchive(object):
         List of names (not full paths) of T1w unprocessed scans
         """
         dir_list = self.available_t1w_unproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     def available_t2w_unproc_dir_full_paths(self):
@@ -114,7 +93,7 @@ class CcfArchive(object):
         List of names (not full paths) of T2w unprocessed scans
         """
         dir_list = self.available_t2w_unproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     def available_functional_unproc_dir_full_paths(self):
@@ -141,7 +120,7 @@ class CcfArchive(object):
         tfMRI_RETCCW_AP
         """
         dir_list = self.available_functional_unproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     def available_diffusion_unproc_dir_full_paths(self):
@@ -156,7 +135,7 @@ class CcfArchive(object):
         List of names (not full paths) of diffusion scan resources
         """
         dir_list = self.available_diffusion_unproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     # preprocessed data paths and names
@@ -221,7 +200,7 @@ class CcfArchive(object):
         List of names (not full paths) of functional scans that have been preprocessed
         """
         dir_list = self.available_functional_preproc_dir_full_paths()
-        name_list = self._get_scan_names_from_full_paths(dir_list)
+        name_list = scan_names_from_paths(dir_list)
         return name_list
 
     # processed data paths and names
@@ -273,19 +252,8 @@ class CcfArchive(object):
         List of full paths to any resource containing Task Analysis processed results data
         for the specified subject
         """
-        dir_list = []
-
-        first_dir_list = ls(self.subject_resources + "/tfMRI*")
-
-        for directory in first_dir_list:
-            lastsepindex = directory.rfind("/")
-            basename = directory[lastsepindex + 1 :]
-            index = basename.find("_")
-            rindex = basename.rfind("_")
-            if index == rindex:
-                dir_list.append(directory)
-
-        return sorted(dir_list)
+        dir_list = ls(self.subject_resources + "/tfMRI*")
+        return sorted([d for d in dir_list if os.path.basename(d).count("_") <= 1])
 
     def available_bedpostx_processed_dir_full_paths(self):
         """
@@ -294,30 +262,40 @@ class CcfArchive(object):
         """
         return ls(self.subject_resources + "/Diffusion_bedpostx")
 
-    def available_reapplyfix_dir_full_paths(self, reg_name=None):
-        path_expr = self.subject_resources + "/*ReApplyFix"
-        if reg_name:
-            path_expr += reg_name
-
-        return ls(path_expr)
-
     def available_reapplyfix_names(self, reg_name=None):
-        dir_list = self.available_reapplyfix_dir_full_paths(reg_name)
-        name_list = []
-        for directory in dir_list:
-            name_list.append(self._get_scan_name_from_path(directory))
-        return name_list
+        if not reg_name:
+            reg_name = ""
+        dir_list = ls(self.subject_resources + "/*ReApplyFix" + reg_name)
+        return scan_names_from_paths(dir_list)
 
-    # Internal utility methods
 
-    def _get_scan_names_from_full_paths(self, dir_list):
-        name_list = []
-        for directory in dir_list:
-            name_list.append(self._get_scan_name_from_path(directory))
-        return name_list
+def ls(path_expression):
+    items = glob.glob(path_expression)
+    return sorted(items)
 
-    def _get_scan_name_from_path(self, path):
-        short_path = os.path.basename(path)
-        last_char = short_path.rfind("_")
-        name = short_path[:last_char]
-        return name
+
+def _get_scan_name_from_path(path):
+    basename = os.path.basename(path)
+    last_position = basename.rfind("_")
+    scan_name = basename[:last_position]
+    return scan_name
+
+
+def scan_names_from_paths(dir_list):
+    return [_get_scan_name_from_path(d) for d in dir_list]
+
+
+def is_resting_state_scan_name(scan_name):
+    """
+    Return an indication of whether the specified name is for a
+    resting state scan
+    """
+    return scan_name.startswith("rfMRI")
+
+
+def is_task_scan_name(scan_name):
+    """
+    Return an indication of whethe the specified name is for a
+    task scan
+    """
+    return scan_name.startswith("tfMRI")
