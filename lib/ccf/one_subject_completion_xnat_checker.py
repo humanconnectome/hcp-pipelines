@@ -195,7 +195,7 @@ class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
         return archive.subject_resources + "/Structural_preproc"
 
     def my_prerequisite_dir_full_paths(self):
-        return self.archive.available_structural_unproc_dir_full_paths()
+        return self.archive.structural_unproc()
 
 
 class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -208,7 +208,7 @@ class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
         return archive.subject_resources + "/Structural_preproc_handedit"
 
     def my_prerequisite_dir_full_paths(self):
-        return self.archive.available_structural_preproc_dir_full_paths()
+        return self.archive.structural_preproc()
 
 
 class FunctionalCompletionChecker(OneSubjectCompletionXnatChecker):
