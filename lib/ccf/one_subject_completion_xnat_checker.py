@@ -33,6 +33,12 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         """Name of processing type to check (e.g. StructuralPreprocessing, FunctionalPreprocessing, etc.)"""
         raise NotImplementedError
 
+    def prereq_dirs(self):
+        raise NotImplementedError
+
+    def my_resource(self):
+        raise NotImplementedError
+
     def list_of_expected_files(self, working_dir, fieldmap):
         # define all possible locations
         common = (
@@ -54,68 +60,51 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
                 "Couldn't find an expected file in all the locations:", alts
             )
 
-        with open(expected_list_file) as f:
-            root_dir = "/".join([working_dir, self.SUBJECT_SESSION])
+        with open(expected_list_file) as fd:
+            root_dir = os.path.join(working_dir, self.SUBJECT_SESSION)
             l = file_utils.build_filename_list_from_file(
-                f,
+                fd,
                 root_dir,
                 subjectid=self.SUBJECT_SESSION,
                 scan=self.SUBJECT_EXTRA,
             )
             return l
 
-    def my_prerequisite_dir_full_paths(self):
-        raise NotImplementedError
-
-    def my_resource(self):
-        raise NotImplementedError
-
-    def my_resource_time_stamp(self):
-        return os.path.getmtime(self.my_resource())
-
-    def does_processed_resource_exist(self):
-        fullpath = self.my_resource()
-        return os.path.isdir(fullpath)
-
-    def latest_prereq_resource_time_stamp(self):
-        latest_time_stamp = 0
-        prerequisite_dir_paths = self.my_prerequisite_dir_full_paths()
-
-        for full_path in prerequisite_dir_paths:
-            this_time_stamp = os.path.getmtime(full_path)
-            if this_time_stamp > latest_time_stamp:
-                latest_time_stamp = this_time_stamp
-
-        return latest_time_stamp
-
     def is_processing_complete(self, fieldmap, output=sys.stdout):
-        # If the processed resource does not exist, then the processing is certainly not complete.
-        if not self.does_processed_resource_exist():
+        resource = self.my_resource()
+
+        # Check if it exists
+        if not os.path.isdir(resource):
+            print(f"resource: {resource} DOES NOT EXIST", file=output)
+            return False
+
+        prereq_timestamps = map(os.path.getmtime, self.prereq_dirs())
+        max_prereq_timestamp = max(prereq_timestamps, default=0)
+        resource_timestamp = os.path.getmtime(resource)
+
+        # Make sure the resource is newer (larger timestamp) than the newest prereq file
+        if resource_timestamp > max_prereq_timestamp:
+            # resource is newer than all the prerequisite resources
+            # check to see if all the expected files exist
+            expected_file_list = self.list_of_expected_files(resource, fieldmap)
+            return do_all_files_exist(expected_file_list, output)
+        else:
             print(
-                "resource: " + self.my_resource() + " DOES NOT EXIST",
-                file=output,
+                f"resource: {resource} IS NOT NEWER THAN ALL PREREQUISITES", file=output
             )
             return False
 
-        # If processed resource is not newer than prerequisite resources, then the processing
-        # is not complete.
-        resource_time_stamp = self.my_resource_time_stamp()
-        latest_prereq_time_stamp = self.latest_prereq_resource_time_stamp()
 
-        if resource_time_stamp <= latest_prereq_time_stamp:
-            print(
-                "resource: "
-                + self.my_resource()
-                + " IS NOT NEWER THAN ALL PREREQUISITES",
-                file=output,
-            )
-            return False
+def do_all_files_exist(file_name_list, output=sys.stdout):
+    all_files_exist = True
 
-        resource_file_path = self.my_resource()
-        # If processed resource exists and is newer than all the prerequisite resources, then check
-        # to see if all the expected files exist
-        expected_file_list = self.list_of_expected_files(resource_file_path, fieldmap)
-        return file_utils.do_all_files_exist(expected_file_list, True, output, False)
+    for file_name in file_name_list:
+        print("Checking for existence of: " + file_name, file=output)
+        if not os.path.exists(file_name):
+            print("FILE DOES NOT EXIST: " + file_name, file=output)
+            all_files_exist = False
+
+    return all_files_exist
 
 
 class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -127,7 +116,7 @@ class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/Structural_preproc"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         return self.archive.structural_unproc()
 
 
@@ -140,7 +129,7 @@ class StructuralHandEditCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/Structural_preproc_handedit"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         return self.archive.structural_preproc()
 
 
@@ -153,7 +142,7 @@ class FunctionalCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/" + archive.SUBJECT_EXTRA + "_preproc"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         archive = self.archive
         return [(archive.subject_resources + "/Structural_preproc")]
 
@@ -167,7 +156,7 @@ class MultirunicafixCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/MultiRunIcaFix_proc"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         archive = self.archive
         return [(archive.subject_resources + "/Structural_preproc")]
 
@@ -181,7 +170,7 @@ class MsmAllCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/MsmAll_proc"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         archive = self.archive
         return [(archive.subject_resources + "/Structural_preproc")]
 
@@ -195,7 +184,7 @@ class DiffusionCompletionChecker(OneSubjectCompletionXnatChecker):
         archive = self.archive
         return archive.subject_resources + "/Diffusion_preproc"
 
-    def my_prerequisite_dir_full_paths(self):
+    def prereq_dirs(self):
         archive = self.archive
         return [(archive.subject_resources + "/Structural_preproc")]
 
