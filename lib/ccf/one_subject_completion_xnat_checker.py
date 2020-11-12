@@ -4,6 +4,7 @@
 Abstract Base Class for One Subject Completion Checker Classes
 """
 import abc
+import argparse
 import os
 import sys
 from utils import os_utils, file_utils
@@ -87,78 +88,13 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
 
         return latest_time_stamp
 
-    def is_processing_marked_complete(self):
-        # If the processed resource does not exist, then the process is certainly not marked
-        # as complete. The file that marks completeness would be in that resource.
-        if not self.does_processed_resource_exist():
-            return False
-
-        resource_path = (
-            self.my_resource()
-            + "/"
-            + self.SUBJECT_ID
-            + "_"
-            + self.SUBJECT_CLASSIFIER
-            + "/ProcessingInfo"
-        )
-
-        subject_pipeline_name = self.SUBJECT_SESSION
-        subject_pipeline_name_check = self.SUBJECT_ID + "." + self.SUBJECT_CLASSIFIER
-        if self.SUBJECT_EXTRA.lower() != "all" and self.SUBJECT_EXTRA != "":
-            subject_pipeline_name += "_" + self.SUBJECT_EXTRA
-            subject_pipeline_name_check += "." + self.SUBJECT_EXTRA
-        subject_pipeline_name += "." + self.processing_name
-        subject_pipeline_name_check += "." + self.processing_name
-
-        completion_marker_file_path = (
-            resource_path + "/" + subject_pipeline_name_check + ".XNAT_CHECK.success"
-        )
-        starttime_marker_file_path = (
-            resource_path + "/" + subject_pipeline_name + ".starttime"
-        )
-
-        # If the completion marker file does not exist, the the processing is certainly not marked
-        # as complete.
-        marker_file_exists = os.path.exists(completion_marker_file_path)
-        if not marker_file_exists:
-            return False
-
-        # If the completion marker file is older than the starttime marker file, then any mark
-        # of completeness is invalid.
-        if not os.path.exists(starttime_marker_file_path):
-            return False
-
-        if os.path.getmtime(completion_marker_file_path) < os.path.getmtime(
-            starttime_marker_file_path
-        ):
-            return False
-
-        # If the completion marker file does exist, then look at the contents for further
-        # confirmation.
-
-        f = open(completion_marker_file_path, "r")
-        lines = f.readlines()
-
-        if lines[-1].strip() != "Completion Check was successful":
-            return False
-
-        return True
-
-    def is_processing_complete(
-        self,
-        fieldmap,
-        verbose=False,
-        output=sys.stdout,
-        short_circuit=True,
-    ):
-
+    def is_processing_complete(self, fieldmap, output=sys.stdout):
         # If the processed resource does not exist, then the processing is certainly not complete.
         if not self.does_processed_resource_exist():
-            if verbose:
-                print(
-                    "resource: " + self.my_resource() + " DOES NOT EXIST",
-                    file=output,
-                )
+            print(
+                "resource: " + self.my_resource() + " DOES NOT EXIST",
+                file=output,
+            )
             return False
 
         # If processed resource is not newer than prerequisite resources, then the processing
@@ -167,22 +103,19 @@ class OneSubjectCompletionXnatChecker(abc.ABC):
         latest_prereq_time_stamp = self.latest_prereq_resource_time_stamp()
 
         if resource_time_stamp <= latest_prereq_time_stamp:
-            if verbose:
-                print(
-                    "resource: "
-                    + self.my_resource()
-                    + " IS NOT NEWER THAN ALL PREREQUISITES",
-                    file=output,
-                )
+            print(
+                "resource: "
+                + self.my_resource()
+                + " IS NOT NEWER THAN ALL PREREQUISITES",
+                file=output,
+            )
             return False
 
         resource_file_path = self.my_resource()
         # If processed resource exists and is newer than all the prerequisite resources, then check
         # to see if all the expected files exist
         expected_file_list = self.list_of_expected_files(resource_file_path, fieldmap)
-        return file_utils.do_all_files_exist(
-            expected_file_list, verbose, output, short_circuit
-        )
+        return file_utils.do_all_files_exist(expected_file_list, True, output, False)
 
 
 class StructuralCompletionChecker(OneSubjectCompletionXnatChecker):
@@ -265,3 +198,74 @@ class DiffusionCompletionChecker(OneSubjectCompletionXnatChecker):
     def my_prerequisite_dir_full_paths(self):
         archive = self.archive
         return [(archive.subject_resources + "/Structural_preproc")]
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description="Program to check for completion of Functional Preprocessing."
+    )
+
+    # mandatory arguments
+    parser.add_argument(
+        "--project",
+        required=True,
+        type=str,
+    )
+    parser.add_argument(
+        "--subject",
+        required=True,
+        type=str,
+    )
+    parser.add_argument(
+        "--classifier",
+        required=True,
+        type=str,
+    )
+    parser.add_argument(
+        "--scan",
+        required=True,
+        type=str,
+    )
+    parser.add_argument(
+        "--output",
+        required=True,
+        type=str,
+    )
+
+    # parse the command line arguments
+    args = parser.parse_args()
+
+    # check the specified subject and scan for functional preprocessing completion
+    project = args.project
+    subject = args.subject
+    classifier = args.classifier
+    scan = args.scan
+    # if PIPELINE_NAME == "DiffusionPreprocessing":
+    if False:
+        fieldmap = "NONE"
+    else:
+        fieldmap = "SpinEcho"
+    completion_checker = FunctionalCompletionChecker(
+        project,
+        subject,
+        classifier,
+        scan,
+    )
+
+    if args.output:
+        processing_output = open(
+            args.output,
+            "w",
+        )
+    else:
+        processing_output = sys.stdout
+
+    if completion_checker.is_processing_complete(
+        fieldmap=fieldmap, verbose=True, output=processing_output, short_circuit=False
+    ):
+        print("Exiting with 0 code - Completion Check Successful")
+        exit(0)
+    else:
+        print("Existing wih 1 code - Completion Check Unsuccessful")
+        exit(1)
