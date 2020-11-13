@@ -2,7 +2,7 @@
 
 import os
 from ccf.get_cinab_style_data import PipelinePrereqDownloader
-from .shared_values import (
+from shared_values import (
     project,
     subject,
     classifier,

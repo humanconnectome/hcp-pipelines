@@ -2,7 +2,7 @@
 import argparse
 import os
 import subprocess
-from .shared_values import client, g_scan
+from shared_values import client, g_scan
 
 
 g_resource = "RunningStatus"

@@ -6,7 +6,6 @@ ccf/archive.py: Provides direct access to a CCF project archive.
 
 # import of built-in modules
 import glob
-from glob import glob
 import os
 
 
