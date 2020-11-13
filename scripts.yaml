@@ -3,62 +3,21 @@ defaults: &defaults
   CHECK_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   MARK_RUNNING_STATUS_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
   PUT_DATA_BINDPATH: $XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH
-  PUT_DATA_RUNPATH: "${XNAT_PBS_JOBS}/WorkingDirPut/XNAT_working_dir_put.sh"
-  PUT_DATA_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "session": $SUBJECT_SESSION,
-    "reason": $PIPELINE_NAME,
-    "working-dir": $WORKING_DIR,
-    "leave-subject-id-level": null,
-    "scan": $SUBJECT_EXTRA,
-    "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
-  }
-  FREESURFER_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "session": $SUBJECT_SESSION,
-    "session-classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR_SCRATCH,
-  }
   PROCESS_PBS_HASWELL: True
   PROCESS_PBS_K20X: False
   PROCESS_PBS_GPU: 0
   PROCESS_NVIDIA: False
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
 
-scanless: &scanless
-  PUT_DATA_PARAMS: {
-    "user": $USERNAME,
-    "password": $PASSWORD,
-    "server": $PUT_SERVER,
-    "project": $SUBJECT_PROJECT,
-    "subject": $SUBJECT_ID,
-    "session": $SUBJECT_SESSION,
-    "reason": $PIPELINE_NAME,
-    "working-dir": $WORKING_DIR,
-    "leave-subject-id-level": null,
-#   "scan": $SUBJECT_EXTRA,
-    "resource-suffix": $OUTPUT_RESOURCE_SUFFIX
-  }
-
 structural_process: &structural_process
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
 
 structural:
   <<: *defaults
-  <<: *scanless
   <<: *structural_process
 
 struct_handedit:
   <<: *defaults
-  <<: *scanless
   <<: *structural_process
   PROCESS_DATA_PARAMS: {
     parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
@@ -77,7 +36,6 @@ functional:
 
 diffusion:
   <<: *defaults
-  <<: *scanless
   PROCESS_PBS_HASWELL: False
   PROCESS_PBS_K20X: True
   PROCESS_PBS_GPU: 1
@@ -85,12 +43,10 @@ diffusion:
 
 msmall: &ms_mall
   <<: *defaults
-  <<: *scanless
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control,$SCRATCH_TMP_DIR:/tmp"
 
 multirunicafix:
   <<: *defaults
-  <<: *scanless
   PROCESS_PBS_HASWELL: False
 
