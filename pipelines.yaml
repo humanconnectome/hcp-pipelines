@@ -172,7 +172,7 @@ FunctionalPreprocessing:
 
 
 
-MultiRunIcaFix:
+MultiRunIcaFixProcessing:
   - set_from_env:
       SUBJECT: $_1
       USER: $USER
@@ -240,7 +240,7 @@ MultiRunIcaFix:
 
 
 
-MsmAll:
+MsmAllProcessing:
   - set_from_env:
       SUBJECT: $_1
       USER: $USER
