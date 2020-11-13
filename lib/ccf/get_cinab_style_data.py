@@ -58,7 +58,15 @@ def link_directory(get_from, put_to, show_log=True):
 
 class DataRetriever(object):
     def __init__(
-        self, project, subject, classifier, scan, output_dir, XNAT_PBS_JOBS_ARCHIVE_ROOT
+        self,
+        project,
+        subject,
+        classifier,
+        scan,
+        copy,
+        log,
+        output_dir,
+        XNAT_PBS_JOBS_ARCHIVE_ROOT,
     ):
         self.SUBJECT_ID = subject
         session = f"{subject}_{classifier}"
@@ -67,15 +75,8 @@ class DataRetriever(object):
             project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT
         )
         self.output_dir = output_dir
-
-        # indication of whether data should be copied
-        # False ==> symbolic links will be created
-        # True  ==> files will be copied
-        self.copy = False
-
-        # indication of whether logging of files copied
-        # or linked should be shown
-        self.show_log = False
+        self.copy = copy
+        self.show_log = log
 
     def run(self, *funcs):
         funcs = list(funcs)
@@ -353,10 +354,15 @@ class PipelinePrereqDownloader:
         XNAT_PBS_JOBS_ARCHIVE_ROOT,
     ):
         self.data_retriever = DataRetriever(
-            project, subject, classifier, scan, output_dir, XNAT_PBS_JOBS_ARCHIVE_ROOT
+            project,
+            subject,
+            classifier,
+            scan,
+            copy,
+            log,
+            output_dir,
+            XNAT_PBS_JOBS_ARCHIVE_ROOT,
         )
-        self.data_retriever.copy = copy
-        self.data_retriever.show_log = log
 
     def struct(self):
         r = self.data_retriever
@@ -437,6 +443,30 @@ class PipelinePrereqDownloader:
             r.get_bedpostx_data,
         )
 
+    def get_data_for_pipeline(self, pipeline, remove_non_subdirs=False):
+        pipeline = pipeline.lower().replace("_", "").replace(" ", "")
+
+        if "handedit" in pipeline:
+            self.struct_hand_edit()
+        elif "struct" in pipeline:
+            self.struct()
+        elif "diff" in pipeline:
+            self.diffusion()
+        elif "func" in pipeline:
+            self.functional()
+        elif "icafix" in pipeline:
+            self.multirunicafix()
+        elif "msmall" in pipeline:
+            self.msmall()
+        elif "dedrift" in pipeline:
+            self.dedriftandresample()
+        elif "reapplyfix" in pipeline:
+            self.reapplyfix()
+
+        if remove_non_subdirs:
+            # remove any non-subdirectory data at the output study directory level
+            self.data_retriever.remove_non_subdirs()
+
 
 def main():
     # create a parser object for getting the command line arguments
@@ -468,35 +498,7 @@ def main():
         default=False,
     )
 
-    phase_choices = [
-        "STRUCT_PREPROC_PREREQS",
-        "struct_preproc_prereqs",
-        "STRUCT_PREPROC_HAND_EDIT_PREREQS",
-        "struct_preproc_hand_edit_prereqs",
-        "DIFF_PREPROC_PREREQS",
-        "diff_preproc_prereqs",
-        "FUNC_PREPROC_PREREQS",
-        "func_preproc_prereqs",
-        "MULTIRUNICAFIX_PREREQS",
-        "multirunicafix_prereqs",
-        "MSMALL_PREREQS",
-        "msmall_prereqs",
-        "DEDRIFTANDRESAMPLE_PREREQS",
-        "dedriftandresample_prereqs",
-        "REAPPLYFIX_PREREQS",
-        "reapplyfix_prereqs",
-    ]
-
-    default_phase_choice = phase_choices[0]
-
-    parser.add_argument(
-        "-ph",
-        "--phase",
-        dest="phase",
-        required=False,
-        choices=phase_choices,
-        default=default_phase_choice,
-    )
+    parser.add_argument("-ph", "--phase", dest="phase", required=True, type=str)
 
     parser.add_argument(
         "-cl",
@@ -538,34 +540,7 @@ def main():
         os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT"),
     )
 
-    # retrieve data based on phase requested
-    if args.phase == "STRUCT_PREPROC_PREREQS":
-        prereq.struct()
-
-    elif args.phase == "STRUCT_PREPROC_HAND_EDIT_PREREQS":
-        prereq.struct_hand_edit()
-
-    elif args.phase == "DIFF_PREPROC_PREREQS":
-        prereq.diffusion()
-
-    elif args.phase == "FUNC_PREPROC_PREREQS":
-        prereq.functional()
-
-    elif args.phase == "MULTIRUNICAFIX_PREREQS":
-        prereq.multirunicafix()
-
-    elif args.phase == "MSMALL_PREREQS":
-        prereq.msmall()
-
-    elif args.phase == "DEDRIFTANDRESAMPLE_PREREQS":
-        prereq.dedriftandresample()
-
-    elif args.phase == "REAPPLYFIX_PREREQS":
-        prereq.reapplyfix()
-
-    if args.remove_non_subdirs:
-        # remove any non-subdirectory data at the output study directory level
-        prereq.data_retriever.remove_non_subdirs()
+    prereq.get_data_for_pipeline(args.phase, args.remove_non_subdirs)
 
 
 if __name__ == "__main__":
