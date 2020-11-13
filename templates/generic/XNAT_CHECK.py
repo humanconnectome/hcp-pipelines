@@ -15,6 +15,7 @@ from .shared_values import (
     XNAT_PBS_JOBS,
     CHECK_DATA_DIR,
     session,
+    EXPECTED_FILES_LIST,
 )
 
 completion_checker = OneSubjectCompletionXnatChecker(
@@ -26,6 +27,7 @@ completion_checker = OneSubjectCompletionXnatChecker(
     HCP_RUN_UTILS,
     XNAT_PBS_JOBS,
     XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    EXPECTED_FILES_LIST,
 )
 
 g_working_dir = CHECK_DATA_DIR

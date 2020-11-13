@@ -20,7 +20,9 @@ class OneSubjectCompletionXnatChecker:
         HCP_RUN_UTILS,
         XNAT_PBS_JOBS,
         XNAT_PBS_JOBS_ARCHIVE_ROOT,
+        EXPECTED_FILES_LIST,
     ):
+        self.EXPECTED_FILES_LIST = EXPECTED_FILES_LIST
         self.HCP_RUN_UTILS = HCP_RUN_UTILS
         self.XNAT_PBS_JOBS = XNAT_PBS_JOBS
         self.SUBJECT_EXTRA = scan
@@ -42,30 +44,13 @@ class OneSubjectCompletionXnatChecker:
         return archive.subject_resources + "/" + self.OUTPUT_RESOURCE_NAME
 
     def list_of_expected_files(self, working_dir):
-        if self.PIPELINE_NAME == "DiffusionPreprocessing":
-            fieldmap = "NONE"
-        else:
-            fieldmap = "SpinEcho"
-
-        # define all possible locations
-        common = f"{self.PIPELINE_NAME}/ExpectedOutputFiles-FieldMap-{fieldmap}.CCF.txt"
-        alts = [
-            "/pipeline_tools/pipelines/expected_files/DiffusionPreprocessing.txt",
-            f"{self.HCP_RUN_UTILS}/{common}",
-            f"{self.XNAT_PBS_JOBS}/{common}",
-        ]
-
-        # look in all locations and find first file that exists
-        expected_list_file = None
-        for filename in alts:
-            if os.path.isfile(filename):
-                expected_list_file = filename
-        if expected_list_file is None:
+        if not os.path.isfile(self.EXPECTED_FILES_LIST):
             raise Exception(
-                "Couldn't find an expected file in all the locations:", alts
+                "The list of expected files was not found in the specified location:",
+                self.EXPECTED_FILES_LIST,
             )
 
-        with open(expected_list_file) as fd:
+        with open(self.EXPECTED_FILES_LIST) as fd:
             root_dir = os.path.join(working_dir, self.SUBJECT_SESSION)
             l = file_utils.build_filename_list_from_file(
                 fd,

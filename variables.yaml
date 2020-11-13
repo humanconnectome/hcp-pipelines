@@ -1,5 +1,6 @@
 DEFAULT: &default
   XNAT_CREDENTIALS_FILE: $PRUNNER_CONFIG_DIR/.secret
+  EXPECTED_FILES_LIST: $PRUNNER_CONFIG_DIR/expected_files/$PIPELINE_NAME.txt
   XNAT_PBS_JOBS_CONTROL: $HOME/processing/ls_struc_preproc/xnat_pbs_jobs_control_CCF_HCA
   REQUESTED_XNAT_SERVER: intradb
   SINGULARITY_CONTAINER_VERSION: singularity-3.5.2
