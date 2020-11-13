@@ -3,11 +3,9 @@
 """
 Abstract Base Class for One Subject Completion Checker Classes
 """
-import abc
-import argparse
 import os
 import sys
-from utils import os_utils, file_utils
+from utils import file_utils
 import ccf.archive as ccf_archive
 
 
@@ -15,21 +13,23 @@ class OneSubjectCompletionXnatChecker:
     def __init__(
         self,
         project,
-        subject,
-        classifier,
         scan,
+        session,
         OUTPUT_RESOURCE_NAME,
         PIPELINE_NAME,
         HCP_RUN_UTILS,
         XNAT_PBS_JOBS,
+        XNAT_PBS_JOBS_ARCHIVE_ROOT,
     ):
         self.HCP_RUN_UTILS = HCP_RUN_UTILS
         self.XNAT_PBS_JOBS = XNAT_PBS_JOBS
         self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = f"{subject}_{classifier}"
+        self.SUBJECT_SESSION = session
         self.OUTPUT_RESOURCE_NAME = OUTPUT_RESOURCE_NAME
         self.PIPELINE_NAME = PIPELINE_NAME
-        self.archive = ccf_archive.CcfArchive(project, subject, classifier, scan)
+        self.archive = ccf_archive.CcfArchive(
+            project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT
+        )
 
     def prereq_dirs(self):
         if self.PIPELINE_NAME == "StructuralPreprocessing":
@@ -86,6 +86,7 @@ class OneSubjectCompletionXnatChecker:
         # Check if it exists
         if not os.path.isdir(resource):
             print(f"resource: {resource} DOES NOT EXIST", file=output)
+            print("Completion Check was unsuccessful", file=output)
             return False
 
         prereq_timestamps = map(os.path.getmtime, self.prereq_dirs())
@@ -97,11 +98,17 @@ class OneSubjectCompletionXnatChecker:
             # resource is newer than all the prerequisite resources
             # check to see if all the expected files exist
             expected_file_list = self.list_of_expected_files(resource)
-            return do_all_files_exist(expected_file_list, output)
+            success = do_all_files_exist(expected_file_list, output)
+            if success:
+                print("Completion Check was successful", file=output)
+            else:
+                print("Completion Check was unsuccessful", file=output)
+            return success
         else:
             print(
                 f"resource: {resource} IS NOT NEWER THAN ALL PREREQUISITES", file=output
             )
+            print("Completion Check was unsuccessful", file=output)
             return False
 
 
@@ -115,59 +122,3 @@ def do_all_files_exist(file_name_list, output=sys.stdout):
             all_files_exist = False
 
     return all_files_exist
-
-
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(
-        description="Program to check for completion of Functional Preprocessing."
-    )
-
-    # mandatory arguments
-    parser.add_argument(
-        "--project",
-        required=True,
-        type=str,
-    )
-    parser.add_argument(
-        "--subject",
-        required=True,
-        type=str,
-    )
-    parser.add_argument(
-        "--classifier",
-        required=True,
-        type=str,
-    )
-    parser.add_argument(
-        "--scan",
-        required=True,
-        type=str,
-    )
-    parser.add_argument(
-        "--output",
-        required=True,
-        type=str,
-    )
-
-    # parse the command line arguments
-    args = parser.parse_args()
-
-    # check the specified subject and scan for functional preprocessing completion
-    project = args.project
-    subject = args.subject
-    classifier = args.classifier
-    scan = args.scan
-    completion_checker = OneSubjectCompletionXnatChecker(
-        project,
-        subject,
-        classifier,
-        scan,
-    )
-
-    if completion_checker.is_processing_complete(args.output):
-        print("Exiting with 0 code - Completion Check Successful")
-        exit(0)
-    else:
-        print("Existing wih 1 code - Completion Check Unsuccessful")
-        exit(1)
