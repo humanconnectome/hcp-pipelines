@@ -1,8 +1,11 @@
 appdirs==1.4.4
 attrs==20.3.0
 black==20.8b1
+certifi==2020.11.8
+chardet==3.0.4
 click==7.1.2
 coverage==5.3
+idna==2.10
 iniconfig==1.1.1
 Jinja2==2.11.2
 MarkupSafe==1.1.1
@@ -21,8 +24,11 @@ pytest-picked==0.4.4
 pytest-sugar==0.9.4
 PyYAML==5.3.1
 regex==2020.11.13
+requests==2.25.0
+requests-toolbelt==0.9.1
 six==1.15.0
 termcolor==1.1.0
 toml==0.10.2
 typed-ast==1.4.1
 typing-extensions==3.7.4.3
+urllib3==1.26.2
