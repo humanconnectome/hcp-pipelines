@@ -3,16 +3,16 @@
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
-    mkdir -p "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/unprocessed/"
-    mv ${StudyFolder}/T*w "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
-    mv ${StudyFolder}/MNINonLinear "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
-    mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/unprocessed/"
+    mkdir -p "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/unprocessed/"
+    mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+    mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+    mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/unprocessed/"
     #json_location=fd -a -e json dMRI ~/XNAT_BUILD_DIR/HCPpipeline/diffusion_Q3_2020_runs/ | rg -v SBRef | head -1
     json_file=`find "${StudyFolder}" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
     echo "json_file=${json_file}"
     ${QUNEXCOMMAND} hcp_Diffusion \
     --sessions="${StudyFolder}/processing/batch.txt" \
-    --subjectsfolder="${StudyFolder}/subjects" \
+    --subjectsfolder="${StudyFolder}/sessions" \
     --overwrite="${Overwrite}" \
     --hcp_matlab_mode="compiled" \
     --parsessions="${parsessions}" \

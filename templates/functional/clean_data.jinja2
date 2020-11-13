@@ -2,13 +2,13 @@
 {% block content %}
 SCAN="{{ SUBJECT_EXTRA }}"
 
-find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
-mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
+find $COMMON/sessions/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
+mv $COMMON/sessions/$SUBJ/hcp/$SUBJ/* $COMMON
 mv $COMMON/processing $COMMON/ProcessingInfo
-mv $COMMON/subjects/specs $COMMON/ProcessingInfo
+mv $COMMON/sessions/specs $COMMON/ProcessingInfo
 mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-mv $COMMON/subjects/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
-mv $COMMON/subjects/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
+mv $COMMON/sessions/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
+mv $COMMON/sessions/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
 find $COMMON -maxdepth 1 -mindepth 1 \
     \( -type d -not -path "$COMMON/t1w" \
     -a -not -path "$COMMON/ProcessingInfo" \

@@ -1,12 +1,12 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-find $COMMON/subjects/$SUBJ/hcp/$SUBJ \! -newer {{ STARTTIME_FILE_NAME }} -delete
-mv $COMMON/subjects/$SUBJ/hcp/$SUBJ/* $COMMON
-mv $COMMON/subjects/specs $COMMON/ProcessingInfo
+find $COMMON/sessions/$SUBJ/hcp/$SUBJ \! -newer {{ STARTTIME_FILE_NAME }} -delete
+mv $COMMON/sessions/$SUBJ/hcp/$SUBJ/* $COMMON
+mv $COMMON/sessions/specs $COMMON/ProcessingInfo
 mv $COMMON/processing $COMMON/ProcessingInfo
 mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-cp $COMMON/subjects/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
-cp $COMMON/subjects/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
+cp $COMMON/sessions/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
+cp $COMMON/sessions/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
 find $COMMON \
     -not -path "$COMMON/T1w/*" \
     -not -path "$COMMON/ProcessingInfo/*" \

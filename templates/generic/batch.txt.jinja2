@@ -30,7 +30,7 @@ _hcp_resample_extractvolume	: TRUE
 ---
 id: {{ SUBJECT_SESSION }}
 subject: {{ SUBJECT_ID }}
-hcp: {{ STUDY_FOLDER }}/subjects/{{ SUBJECT_SESSION }}/hcp
+hcp: {{ STUDY_FOLDER }}/sessions/{{ SUBJECT_SESSION }}/hcp
 
 hcpready: true
 {% for XX, YY in QUNEX_SCANLIST %}

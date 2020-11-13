@@ -52,7 +52,7 @@ defaults: &defaults
     "subject": $SUBJECT_ID,
     "session": $SUBJECT_SESSION,
     "session-classifier": $SUBJECT_CLASSIFIER,
-    "working-dir": $WORKING_DIR,
+    "working-dir": $WORKING_DIR_SCRATCH,
   }
   PROCESS_PBS_HASWELL: True
   PROCESS_PBS_K20X: False
@@ -61,7 +61,7 @@ defaults: &defaults
   PROCESS_DATA_BINDPATH: "${GRADIENT_COEFFICIENT_PATH}:/export/HCP/gradient_coefficient_files,$XNAT_PBS_JOBS_ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$XNAT_PBS_JOBS_CONTROL:/opt/xnat_pbs_jobs_control"
   PROCESS_DATA_PARAMS: {
     parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: $STUDY_FOLDER,
+    studyfolder: $STUDY_FOLDER_SCRATCH,
     subjects: "${SUBJECT_SESSION}",
     scan: $SUBJECT_EXTRA,
     overwrite: "yes",
@@ -114,7 +114,7 @@ struct_handedit:
   <<: *structural_process
   PROCESS_DATA_PARAMS: {
     parameterfolder: $SINGULARITY_QUNEXPARAMETER_PATH,
-    studyfolder: "${WORKING_DIR}/${SUBJECT_SESSION}", #TODO: figure this out lines 106-110
+    studyfolder: "${WORKING_DIR_SCRATCH}/${SUBJECT_SESSION}", #TODO: figure this out lines 106-110
     subjects: "${SUBJECT_SESSION}",
     scan: $SUBJECT_EXTRA,
     overwrite: "yes",
