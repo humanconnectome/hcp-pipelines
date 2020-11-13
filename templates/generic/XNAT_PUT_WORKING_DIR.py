@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import subprocess
-from .shared_values import client, OUTPUT_RESOURCE_NAME, PIPELINE_NAME, WORKING_DIR
+from shared_values import client, OUTPUT_RESOURCE_NAME, PIPELINE_NAME, WORKING_DIR
 
 reason = PIPELINE_NAME
 resource = OUTPUT_RESOURCE_NAME

@@ -2,7 +2,7 @@
 
 import os
 from ccf.one_subject_completion_xnat_checker import OneSubjectCompletionXnatChecker
-from .shared_values import (
+from shared_values import (
     client,
     project,
     subject,
