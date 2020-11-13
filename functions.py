@@ -199,7 +199,7 @@ def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
 
 def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
-    return {"QUNEX_SCALIST": qunex_scanlist}
+    return {"QUNEX_SCANLIST": qunex_scanlist}
 
 def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
     if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG','CCF_HCA_TST','CCF_HCD_TST'] :
