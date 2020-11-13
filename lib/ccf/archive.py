@@ -10,10 +10,6 @@ from glob import glob
 import os
 
 
-ARCHIVE_ROOT = os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT")
-BUILD_DIR = os.getenv("XNAT_PBS_JOBS_BUILD_DIR")
-
-
 class _ArchiveScanNames:
     def __init__(self, archive):
         self.archive = archive
@@ -50,9 +46,11 @@ class CcfArchive(object):
     or a change in conventions could cause this code to no longer be correct.
     """
 
-    def __init__(self, project, subject, classifier, scan):
-        session = f"{subject}_{classifier}"
-        self.subject_resources = f"{ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
+    def __init__(self, project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT):
+        self.ARCHIVE_ROOT = XNAT_PBS_JOBS_ARCHIVE_ROOT
+        self.subject_resources = (
+            f"{XNAT_PBS_JOBS_ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
+        )
         self.scans = _ArchiveScanNames(self)
 
     # Unprocessed data paths and names
@@ -204,13 +202,12 @@ class CcfArchive(object):
         """
         return ls(self.subject_resources + "/Diffusion_bedpostx")
 
-
-def project_resources_dir_full_path(project_id):
-    """
-    The full path to the project-level resources directory
-    for the specified project
-    """
-    return ARCHIVE_ROOT + "/" + project_id + "/resources"
+    def project_resources_dir_full_path(self, project_id):
+        """
+        The full path to the project-level resources directory
+        for the specified project
+        """
+        return self.ARCHIVE_ROOT + "/" + project_id + "/resources"
 
 
 def ls(path_expression):

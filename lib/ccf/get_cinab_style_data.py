@@ -57,13 +57,15 @@ def link_directory(get_from, put_to, show_log=True):
 
 
 class DataRetriever(object):
-    def __init__(self, project, subject, classifier, scan, output_dir):
-        self.SUBJECT_PROJECT = project
+    def __init__(
+        self, project, subject, classifier, scan, output_dir, XNAT_PBS_JOBS_ARCHIVE_ROOT
+    ):
         self.SUBJECT_ID = subject
-        self.SUBJECT_CLASSIFIER = classifier
-        self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = f"{subject}_{classifier}"
-        self.archive = ccf_archive.CcfArchive(project, subject, classifier, scan)
+        session = f"{subject}_{classifier}"
+        self.SUBJECT_SESSION = session
+        self.archive = ccf_archive.CcfArchive(
+            project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT
+        )
         self.output_dir = output_dir
 
         # indication of whether data should be copied
@@ -310,7 +312,7 @@ class DataRetriever(object):
         """
         Get the group average drift data stored in the specified project
         """
-        get_from = ccf_archive.project_resources_dir_full_path(project_id)
+        get_from = self.archive.project_resources_dir_full_path(project_id)
         get_from += "/MSMAllDeDrift"
         put_to = self.output_dir
 
@@ -339,9 +341,19 @@ class PipelinePrereqDownloader:
     Get the data necessary to run the specific pipelines
     """
 
-    def __init__(self, project, subject, classifier, scan, copy, log, output_dir):
+    def __init__(
+        self,
+        project,
+        subject,
+        classifier,
+        scan,
+        copy,
+        log,
+        output_dir,
+        XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    ):
         self.data_retriever = DataRetriever(
-            project, subject, classifier, scan, output_dir
+            project, subject, classifier, scan, output_dir, XNAT_PBS_JOBS_ARCHIVE_ROOT
         )
         self.data_retriever.copy = copy
         self.data_retriever.show_log = log
@@ -523,6 +535,7 @@ def main():
         args.copy,
         args.log,
         args.output_study_dir,
+        os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT"),
     )
 
     # retrieve data based on phase requested
