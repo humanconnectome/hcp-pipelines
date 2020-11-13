@@ -92,11 +92,17 @@ class DataRetriever(object):
             fn()
 
     def remove_non_subdirs(self):
-        cmd = "find " + self.output_dir + " -maxdepth 1 -not -type d -delete"
-        completed_process = subprocess.run(
-            cmd, shell=True, check=True, stdout=subprocess.PIPE, universal_newlines=True
-        )
-        return
+        cmd = [
+            "find",
+            self.output_dir,
+            "-maxdepth",
+            "1",
+            "-not",
+            "-type",
+            "d",
+            "-delete",
+        ]
+        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, universal_newlines=True)
 
     def _from_to(self, source, destination):
         os.makedirs(destination, exist_ok=True)
