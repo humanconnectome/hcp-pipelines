@@ -365,10 +365,12 @@ class PipelinePrereqDownloader:
         )
 
     def struct(self):
+        print("Getting prereq data for the Structural pipeline.")
         r = self.data_retriever
         r.run(r.get_unproc_data)
 
     def struct_hand_edit(self):
+        print("Getting prereq data for the Structural HandEditting pipeline.")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
@@ -378,6 +380,7 @@ class PipelinePrereqDownloader:
         )
 
     def diffusion(self):
+        print("Getting prereq data for the Diffusion pipeline.")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
@@ -386,6 +389,7 @@ class PipelinePrereqDownloader:
         )
 
     def functional(self):
+        print("Getting prereq data for the Functional pipeline.")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
@@ -394,6 +398,7 @@ class PipelinePrereqDownloader:
         )
 
     def multirunicafix(self):
+        print("Getting prereq data for the Multi-run ICA Fix pipeline.")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
@@ -401,6 +406,7 @@ class PipelinePrereqDownloader:
         )
 
     def msmall(self):
+        print("Getting prereq data for the Msm-All pipeline.")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
@@ -409,6 +415,7 @@ class PipelinePrereqDownloader:
         )
 
     def dedriftandresample(self):
+        print("Getting prereq data for the Dedrift & Resample pipeline.")
         r = self.data_retriever
         r.run(
             r.get_preproc_data,
@@ -426,10 +433,12 @@ class PipelinePrereqDownloader:
         r.get_msm_group_average_drift_data("HCP_1200")
 
     def reapplyfix(self):
+        print("Getting prereq data for the ReapplyFix pipeline.")
         self.all_pipeline_data()
         self.data_retriever._copy_some_reapplyfix_links()
 
     def all_pipeline_data(self):
+        print("Getting all pipeline data...")
         r = self.data_retriever
         r.run(
             r.get_unproc_data,
