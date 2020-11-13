@@ -17,22 +17,10 @@ if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
     {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --user="{{USERNAME}}" \
-      --password="{{PASSWORD}}" \
-      --server="{{PUT_SERVER}}" \
-      --project="{{SUBJECT_PROJECT}}" \
-      --subject="{{SUBJECT_ID}}" \
-      --session="{{SUBJECT_SESSION}}" \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
 else 
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --user="{{USERNAME}}" \
-      --password="{{PASSWORD}}" \
-      --server="{{PUT_SERVER}}" \
-      --project="{{SUBJECT_PROJECT}}" \
-      --subject="{{SUBJECT_ID}}" \
-      --session="{{SUBJECT_SESSION}}" \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
 fi
@@ -44,28 +32,10 @@ if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
     {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
     $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --user={{USERNAME}} \
-      --password={{PASSWORD}} \
-      --server={{PUT_SERVER}} \
-      --project={{SUBJECT_PROJECT}} \
-      --subject={{SUBJECT_ID}} \
-      --classifier={{SUBJECT_CLASSIFIER}} \
-{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
-      --scan={{SUBJECT_EXTRA}} \
-{%- endif %}
       --resource=RunningStatus \
       --queued
 else
     $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --user={{USERNAME}} \
-      --password={{PASSWORD}} \
-      --server={{PUT_SERVER}} \
-      --project={{SUBJECT_PROJECT}} \
-      --subject={{SUBJECT_ID}} \
-      --classifier={{SUBJECT_CLASSIFIER}} \
-{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
-      --scan={{SUBJECT_EXTRA}} \
-{%- endif %}
       --resource=RunningStatus \
       --queued
 fi
