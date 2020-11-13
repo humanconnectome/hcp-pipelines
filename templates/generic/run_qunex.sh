@@ -16,7 +16,7 @@ scriptPath=$(dirname ${0})
 #
 # -- key variables to set
 ParameterFolder='{{ SINGULARITY_QUNEXPARAMETER_PATH }}'
-StudyFolder='{{ STUDY_FOLDER }}'
+StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
 Subject='{{ SUBJECT_SESSION }}'
 SubjectPart='{{ SUBJECT_ID }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
@@ -38,7 +38,7 @@ parsessions=1      # the number of subjects to process in parallel
 threads=1    # the number of bold files to process in parallel
 
 # -- Derivative variables
-SubjectsFolder="${StudyFolder}/subjects"
+SubjectsFolder="${StudyFolder}/sessions"
 BatchFile="${StudyFolder}/processing/batch.txt"
 
 # -- Report options
@@ -113,11 +113,11 @@ cd ${SubjectsFolder}
 
 	## Copy in ParameterFiles and SpecFiles (NOTE:  Not necessary for MR-FIX)
 	if [ ! -z "$ParameterFolder" ]; then
-		cp ${ParameterFolder}/* "${StudyFolder}/subjects/specs"
+		cp ${ParameterFolder}/* "${StudyFolder}/sessions/specs"
 	fi
 
 	${QUNEXCOMMAND} importHCP \
-		--sessionsfolder="${StudyFolder}/subjects"  \
+		--sessionsfolder="${StudyFolder}/sessions"  \
 		--inbox="${StudyFolder}/unprocessed" \
 		--action="link" \
 		--overwrite="${Overwrite}" \
@@ -125,14 +125,15 @@ cd ${SubjectsFolder}
 
 	#########################	setupHCP
 	${QUNEXCOMMAND} setupHCP \
-	    --sessionsfolder="${StudyFolder}/subjects" \
+	    --sessionsfolder="${StudyFolder}/sessions" \
 	    --sessions="${Subject}" \
-		--filename="original"
+		--hcp_filename="original"
 
 	#########################	createBatch
 	${QUNEXCOMMAND} createBatch \
-	 --sessionsfolder="${StudyFolder}/subjects" \
-	 --overwrite="append"
+	 --sessionsfolder="${StudyFolder}/sessions" \
+	 --overwrite="append" \
+	 --paramfile="${StudyFolder}/sessions/specs/batch_parameters.txt"
 
 #{% endblock qunex_setup %}
 
@@ -160,7 +161,7 @@ log_Msg "PBS execution node: $(hostname)" >> ${filename}
 #{% endblock pipeline_specific %}
 
 ${QUNEXCOMMAND} exportHCP \
-    --sessionsfolder="${StudyFolder}/subjects" \
+    --sessionsfolder="${StudyFolder}/sessions" \
     --sessions="${StudyFolder}/processing/batch.txt" \
     --mapaction="link" \
     --mapto="${StudyFolder}" \

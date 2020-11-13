@@ -4,10 +4,10 @@
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
-	mkdir -p "${StudyFolder}/subjects/${Subject}/hcp/${Subject}"
-	mv ${StudyFolder}/T*w "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
-	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
-	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/subjects/${Subject}/hcp/${Subject}/"
+	mkdir -p "${StudyFolder}/sessions/${Subject}/hcp/${Subject}"
+	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
 
 	#IcaFixBolds=`opts_GetOpt "--icafixbolds" $@`
 	#ReapplyFixBolds=`opts_GetOpt "--reapplyfixbolds" $@`
@@ -15,7 +15,7 @@
 	######################### hcp_ICAFix
 	${QUNEXCOMMAND} hcp_ICAFix \
 		--sessions="${StudyFolder}/processing/batch.txt" \
-		--sessionsfolder="${StudyFolder}/subjects" \
+		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
 		--hcp_matlab_mode="compiled" \
 		--parsessions="${parsessions}"
@@ -26,7 +26,7 @@
 	########################## hcp_ReApplyFix
 	#${QUNEXCOMMAND} hcp_ReApplyFix \
 	#	--sessions="${StudyFolder}/processing/batch.txt" \
-	#	--sessionsfolder="${StudyFolder}/subjects" \
+	#	--sessionsfolder="${StudyFolder}/sessions" \
 	#	--overwrite="${Overwrite}" \
 	#	--hcp_icafix_bolds="${ReapplyFixBolds}" \
 	#	--hcp_matlab_mode="compiled" \
