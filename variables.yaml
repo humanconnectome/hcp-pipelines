@@ -6,8 +6,7 @@ DEFAULT: &default
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp
   SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/parameter_files/SpecFiles_v4
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
-  #SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3_FSL603.sif
-  SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3a.sif
+  SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3_FSL603.sif
   SINGULARITY_CONTAINER_XNAT_PATH: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   SINGULARITY_CONTAINER_PIPELINES_PATH: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
@@ -36,7 +35,7 @@ DEFAULT: &default
 
   USE_SCRATCH_FOR_PROCESSING: False
   AUTOLAUNCH_AT_END: False
-  PROCESSING_STAGE: PROCESS_DATA
+  PROCESSING_STAGE: CHECK_DATA
 
 functional: &functional
   <<: *default
@@ -117,7 +116,7 @@ multirunicafix: &multirunicafix
   SINGULARITY_QUNEXRUN_PATH: /export/HCP/qunex-hcp/run_scripts/run_qunex.sh
   XNAT_PBS_JOBS_SHADOWS_ROOT: /data/intradb/build_ssd
   PROCESSING_STAGE: CHECK_DATA
-  AUTOLAUNCH_AT_END: False
+  AUTOLAUNCH_AT_END: True
 
 multirunicafix_process_CCF_HCA:
   <<: *multirunicafix
