@@ -12,10 +12,11 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
   {%- if USE_SCRATCH_FOR_PROCESSING %}
 ####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
-  BASE="{{ WORKING_DIR_BASENAME }}"
-  SCRATCH="{{ SCRATCH_SPACE }}"
-  ORIGINAL="{{ BUILD_SPACE }}"
+  BASE="{{ SUBJECT_SESSION }}"
+  SCRATCH="{{ SCRATCH_SPACE }}/{{ WORKING_DIR_BASENAME }}"
+  ORIGINAL="{{ BUILD_SPACE }}/{{ WORKING_DIR_BASENAME }}"
 
+  mkdir -p $SCRATCH
   mv $ORIGINAL/$BASE $SCRATCH
 
 {% endif %}
@@ -36,5 +37,6 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 {% block content %}
 {% if USE_SCRATCH_FOR_PROCESSING %}
 mv $SCRATCH/$BASE $ORIGINAL
+rm -rf $SCRATCH
 {% endif %}
 {% endblock %}
