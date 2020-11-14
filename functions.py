@@ -19,16 +19,18 @@ def split_subject_components(SUBJECT):
             SUBJECT,
         )
 
-    proj, subject_id, classifier, extra = components
+    proj, subject_id, classifier, scan = components
 
-    if extra == "all":
-        extra = ""
+    if scan == "all":
+        scan = ""
+    _scan = "_" + scan if scan else ""
 
     return {
         "SUBJECT_PROJECT": proj,
         "SUBJECT_ID": subject_id,
         "SUBJECT_CLASSIFIER": classifier,
-        "SUBJECT_EXTRA": extra,
+        "SUBJECT_EXTRA": scan,
+        "_SUBJECT_EXTRA": _scan,
         "SUBJECT_SESSION": f"{subject_id}_{classifier}",
     }
 
