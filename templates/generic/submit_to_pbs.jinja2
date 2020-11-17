@@ -4,7 +4,7 @@
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
 if [ -z "$SINGULARITY_CONTAINER" ]; then
-	module load {{ SINGULARITY_VERSION }}
+	module load singularity-3.5.2
 else 
 	echo "Sourcing Python Setup."
 	source /pipeline_tools/HCPpipelinesRunUtils/ToolSetupScripts/epd-python_setup.sh

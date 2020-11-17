@@ -4,7 +4,7 @@
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
 {{ singularity(
-        container=SINGULARITY_CONTAINER_XNAT_PATH,
+        container=SINGULARITY_CONTAINER_PIPELINES_PATH,
         runpath=MARK_RUNNING_STATUS_RUNPATH,
         bindpath=MARK_RUNNING_STATUS_BINDPATH,
         params=MARK_RUNNING_STATUS_PARAMS
