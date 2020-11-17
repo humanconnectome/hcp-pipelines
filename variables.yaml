@@ -5,7 +5,7 @@ DEFAULT: &default
   REQUESTED_XNAT_SERVER: intradb
   SINGULARITY_CONTAINER_VERSION: singularity-3.5.2
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build,/export/HCP/qunex-hcp
-  QUNEX_PARAMETERS_ROOT: $PRUNNER_CONFIG_DIR/parameter_files
+  QUNEX_PARAMETERS_ROOT: $HOME/hcp-pipelines/parameter_files
   SINGULARITY_QUNEXPARAMETER_PATH: $QUNEX_PARAMETERS_ROOT/SpecFiles_v4
   #SINGULARITY_QUNEXPARAMETER_PATH: /export/HCP/qunex-hcp/production_containers/parameter_files/SpecFiles_v4
   SINGULARITY_QUNEXRUN_PATH: /opt/xnat_pbs_jobs_control/run_qunex.sh
