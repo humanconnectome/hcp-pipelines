@@ -13,5 +13,5 @@ singularity run \
         --bind /usr/local/torque-6.1.2 \
         --bind /export/HCP/qunex-hcp \
         --bind /scratch/$USER \
-        /export/HCP/qunex-hcp/production_containers/pipelines.sif \
+        /scratch/Mobalt/pipelines.sif \
         --verbose  $@  &> "log.$1.$2.txt"
