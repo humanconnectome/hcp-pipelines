@@ -8,14 +8,12 @@ StructuralPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#structural
   - generate_file:
       template: generic/shared_values.py
       filepath: "${WORKING_DIR}/shared_values.py"
@@ -86,7 +84,6 @@ StructuralPreprocessingHandEdit:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: hand_edit_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
@@ -94,7 +91,6 @@ StructuralPreprocessingHandEdit:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#structural_handedit
   - generate_file:
       template: structural/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
@@ -144,7 +140,6 @@ FunctionalPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
@@ -152,7 +147,6 @@ FunctionalPreprocessing:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#functional
   - generate_file:
       template: functional/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
@@ -199,7 +193,6 @@ MultiRunIcaFixProcessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: multirunicafix_process_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
@@ -207,7 +200,6 @@ MultiRunIcaFixProcessing:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#multirunicafix
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -267,7 +259,6 @@ MsmAllProcessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: msmall_process_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
@@ -275,7 +266,6 @@ MsmAllProcessing:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#msmall
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -334,7 +324,6 @@ DiffusionPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: diffusion_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
   - function: set_credentials_from_file
   - function: choose_put_server
   - function: set_study_folder
@@ -342,7 +331,6 @@ DiffusionPreprocessing:
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#diffusion
 
   # Only for msmall, multirunicafix, and diffusion
   - function: set_qunex_scanlist_dwi
