@@ -5,7 +5,7 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 {% block pre %}{% endblock %}
 
 {{ singularity(
-        container=SINGULARITY_CONTAINER_XNAT_PATH,
+        container=SINGULARITY_CONTAINER_PIPELINES_PATH,
         runpath=CHECK_DATA_RUNPATH,
         bindpath=CHECK_DATA_BINDPATH
 ) }}

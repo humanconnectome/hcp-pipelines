@@ -127,6 +127,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 generated/
+original/
 .secret
 
 # Singularity containers
