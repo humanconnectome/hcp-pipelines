@@ -8,23 +8,15 @@ DEFAULT: &default
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3_FSL603.sif
   SINGULARITY_CONTAINER_PIPELINES_PATH: /scratch/Mobalt/pipelines.sif
   GRADIENT_COEFFICIENT_PATH: $RUNTIME_FILES_DIR/gradient_coefficient_files
-  SEVEN_MM_TEMPLATE_PROJECTS: ('HCP_500', 'HCP_900', 'HCP_1200')
-  CONNECTOME_SKYRA_SCANNER_PROJECTS: ('HCP_500', 'HCP_900', 'HCP_1200')
-  PRISMA_3T_PROJECTS: ('CCF_BWH_STG', 'CCF_MDD_STG', 'CCF_HCA_STG', 'CCF_HCD_STG')
-
   LOG_DIR: $HOME/XNAT_LOGS
   ARCHIVE_ROOT: /NRG-data/NRG/intradb/archive
   XNAT_SERVER: hcpi-shadow10.nrg.wustl.edu
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu
-
   HCP_LIB_DIR: /pipeline_tools/hcp-pipelines/lib
-
   FREESURFER_LICENSE_PATH: $HOME/freesurfer/license
   CLEAN_OUTPUT_FIRST: false
   WALLTIME_LIMIT_HOURS: 52
   MEM_LIMIT_GBS: 8
-  BRAIN_SIZE: 150
-
   USE_SCRATCH_FOR_PROCESSING: False
   AUTOLAUNCH_AT_END: False
   PROCESSING_STAGE: CHECK_DATA
