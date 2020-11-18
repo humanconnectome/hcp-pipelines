@@ -10,7 +10,7 @@ from shared_values import (
     extra,
     OUTPUT_RESOURCE_NAME,
     PIPELINE_NAME,
-    XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    ARCHIVE_ROOT,
     HCP_RUN_UTILS,
     XNAT_PBS_JOBS,
     CHECK_DATA_DIR,
@@ -26,7 +26,7 @@ completion_checker = OneSubjectCompletionXnatChecker(
     PIPELINE_NAME,
     HCP_RUN_UTILS,
     XNAT_PBS_JOBS,
-    XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    ARCHIVE_ROOT,
     EXPECTED_FILES_LIST,
 )
 

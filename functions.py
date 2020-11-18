@@ -61,12 +61,12 @@ def set_credentials_from_file(XNAT_CREDENTIALS_FILE):
     return {"USERNAME": username, "PASSWORD": pwd}
 
 
-def choose_put_server(XNAT_PBS_JOBS_PUT_SERVER_LIST, PUT_SERVER=None):
+def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
     if PUT_SERVER is not None:
         print("PUT_SERVER has already been set. Skipping regeneration.")
         return
 
-    server_list = XNAT_PBS_JOBS_PUT_SERVER_LIST.split(" ")
+    server_list = PUT_SERVER_LIST.split(" ")
     chosen = random.choice(server_list)
 
     return {
@@ -137,13 +137,13 @@ def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
         shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
-def available_bold_dirs(XNAT_PBS_JOBS_ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
+def available_bold_dirs(ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
     """
     List of full paths to any resource containing preprocessed functional data
     for the specified subject
     """
 
-    archive_root = f"{XNAT_PBS_JOBS_ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
+    archive_root = f"{ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
     functional_preproc_dir = f"{archive_root}/{SUBJECT_SESSION}/RESOURCES/*fMRI*preproc"
     dir_list = sorted(glob.glob(functional_preproc_dir))
     available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
