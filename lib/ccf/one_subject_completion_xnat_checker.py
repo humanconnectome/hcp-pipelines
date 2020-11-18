@@ -17,21 +17,15 @@ class OneSubjectCompletionXnatChecker:
         session,
         OUTPUT_RESOURCE_NAME,
         PIPELINE_NAME,
-        HCP_RUN_UTILS,
-        XNAT_PBS_JOBS,
         ARCHIVE_ROOT,
         EXPECTED_FILES_LIST,
     ):
         self.EXPECTED_FILES_LIST = EXPECTED_FILES_LIST
-        self.HCP_RUN_UTILS = HCP_RUN_UTILS
-        self.XNAT_PBS_JOBS = XNAT_PBS_JOBS
         self.SUBJECT_EXTRA = scan
         self.SUBJECT_SESSION = session
         self.OUTPUT_RESOURCE_NAME = OUTPUT_RESOURCE_NAME
         self.PIPELINE_NAME = PIPELINE_NAME
-        self.archive = ccf_archive.CcfArchive(
-            project, session, ARCHIVE_ROOT
-        )
+        self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
 
     def prereq_dirs(self):
         if self.PIPELINE_NAME == "StructuralPreprocessing":

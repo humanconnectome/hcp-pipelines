@@ -47,9 +47,7 @@ class CcfArchive(object):
 
     def __init__(self, project, session, ARCHIVE_ROOT):
         self.ARCHIVE_ROOT = ARCHIVE_ROOT
-        self.subject_resources = (
-            f"{ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
-        )
+        self.subject_resources = f"{ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
         self.scans = _ArchiveScanNames(self)
 
     # Unprocessed data paths and names

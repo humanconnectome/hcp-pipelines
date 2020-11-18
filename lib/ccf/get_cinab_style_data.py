@@ -71,9 +71,7 @@ class DataRetriever(object):
         self.SUBJECT_ID = subject
         session = f"{subject}_{classifier}"
         self.SUBJECT_SESSION = session
-        self.archive = ccf_archive.CcfArchive(
-            project, session, ARCHIVE_ROOT
-        )
+        self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
         self.output_dir = output_dir
         self.copy = copy
         self.show_log = log

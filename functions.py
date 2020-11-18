@@ -111,16 +111,16 @@ def make_directories(
         os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
-def copy_free_surfer_assessor_script(
-    DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
-):
-    source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    if not DRYRUN:
-        shutil.copy(source, dest)
-        os.chmod(dest, 0o770)
-
-    return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
+# def copy_free_surfer_assessor_script(
+#     DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
+# ):
+#     source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+#     dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+#     if not DRYRUN:
+#         shutil.copy(source, dest)
+#         os.chmod(dest, 0o770)
+#
+#     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
 def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
@@ -206,15 +206,17 @@ def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
+
 def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
-    if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG','CCF_HCA_TST','CCF_HCD_TST'] :
+    if SUBJECT_PROJECT in ["CCF_HCA_STG", "CCF_HCD_STG", "CCF_HCA_TST", "CCF_HCD_TST"]:
         qunex_scanlist = [
-            ['01: DWI:dir98_AP','dMRI_dir98_AP'],
-            ['02: DWI:dir98_AP','dMRI_dir98_PA'],
-            ['03: DWI:dir99_AP','dMRI_dir99_AP'],
-            ['04: DWI:dir99_AP','dMRI_dir99_PA']
+            ["01: DWI:dir98_AP", "dMRI_dir98_AP"],
+            ["02: DWI:dir98_AP", "dMRI_dir98_PA"],
+            ["03: DWI:dir99_AP", "dMRI_dir99_AP"],
+            ["04: DWI:dir99_AP", "dMRI_dir99_PA"],
         ]
     return {"QUNEX_SCANLIST": qunex_scanlist}
+
 
 def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
     SINGULARITY_PARAMS["delay-seconds"] = 120
