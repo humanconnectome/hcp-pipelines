@@ -11,8 +11,6 @@ from shared_values import (
     OUTPUT_RESOURCE_NAME,
     PIPELINE_NAME,
     ARCHIVE_ROOT,
-    HCP_RUN_UTILS,
-    XNAT_PBS_JOBS,
     CHECK_DATA_DIR,
     session,
     EXPECTED_FILES_LIST,
@@ -26,8 +24,6 @@ completion_checker = OneSubjectCompletionXnatChecker(
     session,
     OUTPUT_RESOURCE_NAME,
     PIPELINE_NAME,
-    HCP_RUN_UTILS,
-    XNAT_PBS_JOBS,
     ARCHIVE_ROOT,
     EXPECTED_FILES_LIST,
 )
