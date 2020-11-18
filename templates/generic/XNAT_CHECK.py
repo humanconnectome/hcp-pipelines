@@ -16,7 +16,9 @@ from shared_values import (
     CHECK_DATA_DIR,
     session,
     EXPECTED_FILES_LIST,
+    print_system_info,
 )
+
 
 completion_checker = OneSubjectCompletionXnatChecker(
     project,
@@ -36,6 +38,7 @@ log_filename = f"{subject}.{classifier}.{script_name}.log"
 success_filename = f"{subject}.{classifier}.{script_name}.success"
 dest_dir = f"{session}/ProcessingInfo/"
 
+print_system_info()
 check_cmd_ret_code = completion_checker.is_processing_complete(log_filename)
 print("Everything OK? ", check_cmd_ret_code)
 

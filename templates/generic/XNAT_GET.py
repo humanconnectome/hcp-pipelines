@@ -11,8 +11,10 @@ from shared_values import (
     ARCHIVE_ROOT,
     session,
     WORKING_DIR,
+    print_system_info,
 )
 
+print_system_info()
 tmp_dir = f"{WORKING_DIR}/tmp"
 os.makedirs(tmp_dir, exist_ok=True)
 os.makedirs(f"{WORKING_DIR}/{session}", exist_ok=True)

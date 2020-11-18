@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 
 import subprocess
-from shared_values import client, OUTPUT_RESOURCE_NAME, PIPELINE_NAME, WORKING_DIR
+from shared_values import (
+    client,
+    OUTPUT_RESOURCE_NAME,
+    PIPELINE_NAME,
+    WORKING_DIR,
+    print_system_info,
+)
 
 reason = PIPELINE_NAME
 resource = OUTPUT_RESOURCE_NAME
 
+
+print_system_info()
 
 print("Delete previous resource")
 client.delete_resource(resource)
