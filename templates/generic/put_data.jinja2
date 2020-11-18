@@ -5,7 +5,7 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 mv {{ WORKING_DIR }}/*{{ PIPELINE_NAME }}* {{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/ProcessingInfo
 
 {{ singularity(
-        container=SINGULARITY_CONTAINER_PIPELINES_PATH,
+        container=PIPELINES_CONTAINER,
         runpath=PUT_DATA_RUNPATH,
         bindpath=PUT_DATA_BINDPATH,
         params=PUT_DATA_PARAMS
