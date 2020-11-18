@@ -6,8 +6,7 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 {{ singularity(
         container=PIPELINES_CONTAINER,
         runpath=MARK_RUNNING_STATUS_RUNPATH,
-        bindpath=MARK_RUNNING_STATUS_BINDPATH,
-        params=MARK_RUNNING_STATUS_PARAMS
+        bindpath=MARK_RUNNING_STATUS_BINDPATH
 ) }}
 
 {% block content %}
