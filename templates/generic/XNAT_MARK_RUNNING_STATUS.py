@@ -15,16 +15,18 @@ path = f"{directory}/{file}"
 
 parser = argparse.ArgumentParser("Set up a running status file")
 parser.add_argument("--status", choices=["queued", "done"], default="done")
-args = parser.parse_args()
-reason = args.status
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    reason = args.status
 
 
-if reason == "queued":
-    os.makedirs(directory, exist_ok=True)
-    with open(path, "w") as fd:
-        fd.write(f"Reason: {reason}")
-    client.upload_resource_filepath(g_resource, directory, reason)
-    subprocess.call(["rm", "-rf", directory])
-else:
-    if os.path.exists(existing_file):
-        client.remove_resource_filepath(g_resource, file)
+    if reason == "queued":
+        os.makedirs(directory, exist_ok=True)
+        with open(path, "w") as fd:
+            fd.write(f"Reason: {reason}")
+        client.upload_resource_filepath(g_resource, directory, reason)
+        subprocess.call(["rm", "-rf", directory])
+    else:
+        if os.path.exists(existing_file):
+            client.remove_resource_filepath(g_resource, file)
