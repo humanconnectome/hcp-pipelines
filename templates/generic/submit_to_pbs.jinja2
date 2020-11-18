@@ -11,7 +11,9 @@ else
 fi
 
 delete_resource(){
-  #todo: determine if this needs to run in singularity container (probably)
+echo "TODO: This needs to be reimplemented using xnat_file_client.py - Moises (11/18/2020)"
+exit 1
+
   echo "Deleting the resource from the XNAT server"
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
@@ -31,13 +33,11 @@ mark_running_status(){
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
     {{ PIPELINES_CONTAINER }} \
-    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --resource=RunningStatus \
-      --queued
+    {{ MARK_RUNNING_STATUS_RUNPATH }} \
+        --status=queued
 else
-    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --resource=RunningStatus \
-      --queued
+    {{ MARK_RUNNING_STATUS_RUNPATH }} \
+        --status=queued
 fi
 }
 {% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}
