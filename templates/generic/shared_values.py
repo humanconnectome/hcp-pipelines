@@ -26,8 +26,5 @@ resources_root = archive.subject_resources
 
 
 def print_system_info():
-    hostname = subprocess.check_output(["hostname"])
-    date = subprocess.check_output(["date"])
     platform = subprocess.check_output(["uname", "-a"])
-    print(f"Job started on {hostname} at {date}")
     print(f" Platform:   {platform}")
