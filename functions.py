@@ -3,7 +3,35 @@ import os
 import random
 import shutil
 import time
-from .util import escape_path, keep_resting_state_scans, shell_run, qsub
+from .util import escape_path, keep_resting_state_scans, shell_run, qsub, is_unreadable
+
+
+def check_required_files_are_available(
+    QUNEX_CONTAINER,
+    PIPELINES_CONTAINER,
+    XNAT_CREDENTIALS_FILE,
+    EXPECTED_FILES_LIST,
+    QUNEX_PARAMETER_FILES,
+    GRADIENT_COEFFICIENT_PATH,
+    HCP_LIB_DIR,
+    FREESURFER_LICENSE_PATH,
+):
+    if is_unreadable(QUNEX_CONTAINER):
+        raise Exception("QUNEX_CONTAINER is not accessible. Value = ", QUNEX_CONTAINER)
+    if is_unreadable(PIPELINES_CONTAINER):
+        raise Exception("PIPELINES_CONTAINER is not accessible. Value = ", PIPELINES_CONTAINER)
+    if is_unreadable(XNAT_CREDENTIALS_FILE):
+        raise Exception("XNAT_CREDENTIALS_FILE is not accessible. Value = ", XNAT_CREDENTIALS_FILE)
+    if is_unreadable(EXPECTED_FILES_LIST):
+        raise Exception("EXPECTED_FILES_LIST is not accessible. Value = ", EXPECTED_FILES_LIST)
+    if is_unreadable(QUNEX_PARAMETER_FILES):
+        raise Exception("QUNEX_PARAMETER_FILES is not accessible. Value = ", QUNEX_PARAMETER_FILES)
+    if is_unreadable(GRADIENT_COEFFICIENT_PATH):
+        raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
+    if is_unreadable(HCP_LIB_DIR):
+        raise Exception("HCP_LIB_DIR is not accessible. Value = ", HCP_LIB_DIR)
+    if is_unreadable(FREESURFER_LICENSE_PATH):
+        raise Exception("FREESURFER_LICENSE_PATH is not accessible. Value = ", FREESURFER_LICENSE_PATH)
 
 
 def generate_timestamp(TIMESTAMP=None):
