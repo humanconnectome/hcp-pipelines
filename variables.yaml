@@ -12,8 +12,8 @@ DEFAULT: &default
   ARCHIVE_ROOT: /NRG-data/NRG/intradb/archive
   XNAT_SERVER: hcpi-shadow10.nrg.wustl.edu
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu
-  HCP_LIB_DIR: /pipeline_tools/hcp-pipelines/lib
-  FREESURFER_LICENSE_PATH: $HOME/freesurfer/license
+  HCP_LIB_DIR: /pipeline_tools/pipelines/lib
+  FREESURFER_LICENSE_PATH: $HOME/freesurfer/license.txt
   CLEAN_OUTPUT_FIRST: false
   WALLTIME_LIMIT_HOURS: 52
   MEM_LIMIT_GBS: 8
