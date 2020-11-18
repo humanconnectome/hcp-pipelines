@@ -1,0 +1,273 @@
+MNINonLinear fsaverage_LR32k {subjectid}.ArealDistortion_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.ArealDistortion_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.atlas_MyelinMap_BC.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.atlas_RSNs_d40.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.atlas_Topographic_ROIs.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.atlas_Topography.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.BiasField_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.BiasField_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.BiasField_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.BiasField_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.corrThickness_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.curvature_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.EdgeDistortion_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.EdgeDistortion_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_RSNs_d40_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_RSNs_d40_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_RSNs_d40_weights.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_Topography_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_Topography_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.individual_Topography_weights.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.L.atlas_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.atlasroi_inv.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.atlas_RSNs_d40.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.atlas_Topography.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.BiasField_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.BiasField_MSMSulc.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.individual_RSNs_d40_MSMSulc.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.individual_RSNs_d40_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.individual_Topography_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.individual_Topography_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.inflated_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.midthickness_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.Modalities_1.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.Modalities_1_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.Modalities_2.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.Modalities_2_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.norm_atlas_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.norm_atlas_RSNs_d40.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.norm_atlas_Topography.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.norm_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.pial_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.sphere.MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.sphere.MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.sphere.MSMSulc.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.very_inflated_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.white_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.MSMAll.32k_fs_LR.wb.spec
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_BC_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_BC_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.R.atlas_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.atlasroi_inv.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.atlas_RSNs_d40.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.atlas_Topography.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.BiasField_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.BiasField_MSMSulc.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.individual_RSNs_d40_MSMSulc.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.individual_RSNs_d40_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.individual_Topography_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.individual_Topography_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.inflated_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.midthickness_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.Modalities_1.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.Modalities_1_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.Modalities_2.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.Modalities_2_weights.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.norm_atlas_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.norm_atlas_RSNs_d40.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.norm_atlas_Topography.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.norm_MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.pial_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.sphere.MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.sphere.MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.sphere.MSMSulc.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.very_inflated_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.white_MSMAll.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.SmoothedMyelinMap_BC_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.SphericalDistortion_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.SphericalDistortion_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainJ_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainJ_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainR_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainR_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.sulc_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.sulc_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.thickness_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN conf.L
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN conf.R
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.CPgrid-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.logdir MSM.log
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.SOURCE-1.func.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.SOURCE-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.sphere.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.TARGET.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN L.transformed_and_reprojected.func.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.CPgrid-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.logdir MSM.log
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.SOURCE-1.func.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.SOURCE-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.sphere.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.TARGET.surf.gii
+MNINonLinear Native MSMAll_InitialReg_1_d40_WRN R.transformed_and_reprojected.func.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN conf.L
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN conf.R
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.CPgrid-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.logdir MSM.log
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.SOURCE-1.func.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.SOURCE-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.sphere.regLR.Res2.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.sphere.regLR.Res3.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.sphere.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.TARGET.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN L.transformed_and_reprojected.func.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.CPgrid-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.logdir MSM.log
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.SOURCE-1.func.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.SOURCE-1.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.sphere.regLR.Res2.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.sphere.regLR.Res3.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.sphere.reg.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.TARGET.surf.gii
+MNINonLinear Native MSMAll_InitialReg_2_d40_WRN R.transformed_and_reprojected.func.gii
+MNINonLinear Native {subjectid}.ArealDistortion_MSMAll_InitialReg_1_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.ArealDistortion_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.BiasField_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.BiasField_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.EdgeDistortion_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.EdgeDistortion_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.L.ArealDistortion_MSMAll_InitialReg_1_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.L.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.L.ArealDistortion_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.L.atlas_RSNs_d40.native.func.gii
+MNINonLinear Native {subjectid}.L.atlas_Topography.native.func.gii
+MNINonLinear Native {subjectid}.L.BiasField_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.BiasField_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.L.EdgeDistortion_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.L.EdgeDistortion_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.L.individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.individual_RSNs_d40_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.L.individual_RSNs_d40_weights.native.func.gii
+MNINonLinear Native {subjectid}.L.individual_Topography_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.individual_Topography_weights.native.func.gii
+MNINonLinear Native {subjectid}.L.Modalities_1_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.L.Modalities_1_weights.native.func.gii
+MNINonLinear Native {subjectid}.L.Modalities_2_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.Modalities_2_weights.native.func.gii
+MNINonLinear Native {subjectid}.L.MSMAll_InitialReg_1_d40_WRN_roi_inv.native.shape.gii
+MNINonLinear Native {subjectid}.L.MSMAll_InitialReg_1_d40_WRN_roi.native.shape.gii
+MNINonLinear Native {subjectid}.L.MSMSulc_roi_inv.native.shape.gii
+MNINonLinear Native {subjectid}.L.MSMSulc_roi.native.shape.gii
+MNINonLinear Native {subjectid}.L.norm_individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.norm_individual_RSNs_d40_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.L.norm_individual_Topography_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.norm_MyelinMap_BC_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.L.norm_MyelinMap_BC_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.L.sphere.MSMAll_InitialReg_1_d40_WRN.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.MSMAll_InitialReg_2_d40_WRN.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.MSMAll.native.surf.gii
+MNINonLinear Native {subjectid}.L.SphericalDistortion.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainJ_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainJ_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainR_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainR_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.MyelinMap_BC_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.MyelinMap_BC_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.R.ArealDistortion_MSMAll_InitialReg_1_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.R.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.R.ArealDistortion_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.R.atlas_RSNs_d40.native.func.gii
+MNINonLinear Native {subjectid}.R.atlas_Topography.native.func.gii
+MNINonLinear Native {subjectid}.R.BiasField_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.BiasField_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.R.EdgeDistortion_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.R.EdgeDistortion_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.R.individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.individual_RSNs_d40_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.R.individual_RSNs_d40_weights.native.func.gii
+MNINonLinear Native {subjectid}.R.individual_Topography_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.individual_Topography_weights.native.func.gii
+MNINonLinear Native {subjectid}.R.Modalities_1_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.R.Modalities_1_weights.native.func.gii
+MNINonLinear Native {subjectid}.R.Modalities_2_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.Modalities_2_weights.native.func.gii
+MNINonLinear Native {subjectid}.R.MSMAll_InitialReg_1_d40_WRN_roi_inv.native.shape.gii
+MNINonLinear Native {subjectid}.R.MSMAll_InitialReg_1_d40_WRN_roi.native.shape.gii
+MNINonLinear Native {subjectid}.R.MSMSulc_roi_inv.native.shape.gii
+MNINonLinear Native {subjectid}.R.MSMSulc_roi.native.shape.gii
+MNINonLinear Native {subjectid}.R.norm_individual_RSNs_d40_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.norm_individual_RSNs_d40_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.R.norm_individual_Topography_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.norm_MyelinMap_BC_MSMAll_InitialReg_1_d40_WRN.native.func.gii
+MNINonLinear Native {subjectid}.R.norm_MyelinMap_BC_MSMSulc.native.func.gii
+MNINonLinear Native {subjectid}.R.sphere.MSMAll_InitialReg_1_d40_WRN.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.MSMAll_InitialReg_2_d40_WRN.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.MSMAll.native.surf.gii
+MNINonLinear Native {subjectid}.R.SphericalDistortion.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainJ_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainJ_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainR_MSMAll_InitialReg_2_d40_WRN.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainR_MSMAll.native.shape.gii
+MNINonLinear Native {subjectid}.SmoothedMyelinMap_BC_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.SphericalDistortion.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainJ_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainJ_MSMAll.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainR_MSMAll_InitialReg_2_d40_WRN.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainR_MSMAll.native.dscalar.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll.dtseries.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_clean.dtseries.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_clean_vn.dscalar.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0.dtseries.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_vn.dscalar.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_mean.dscalar.nii
+MNINonLinear Results rfMRI_REST rfMRI_REST_Atlas_hp0_clean_vn.dtseries.nii
+MNINonLinear {subjectid}.ArealDistortion_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.corrThickness_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.curvature_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.EdgeDistortion_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.EdgeDistortion_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.L.inflated_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.midthickness_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.pial_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.very_inflated_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.white_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.MSMAll.164k_fs_LR.wb.spec
+MNINonLinear {subjectid}.MyelinMap_BC_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.MyelinMap_BC_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.R.inflated_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.midthickness_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.pial_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.very_inflated_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.white_MSMAll.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.SmoothedMyelinMap_BC_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.SphericalDistortion_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.SphericalDistortion_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainJ_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainJ_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainR_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainR_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.sulc_MSMAll.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.sulc_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.thickness_MSMAll.164k_fs_LR.dscalar.nii
+T1w fsaverage_LR32k {subjectid}.L.inflated_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness_MSMAll_va.32k_fs_LR.shape.gii
+T1w fsaverage_LR32k {subjectid}.L.pial_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.very_inflated_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.white_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.midthickness_MSMAll_va.32k_fs_LR.dscalar.nii
+T1w fsaverage_LR32k {subjectid}.midthickness_MSMAll_va_norm.32k_fs_LR.dscalar.nii
+T1w fsaverage_LR32k {subjectid}.MSMAll.32k_fs_LR.wb.spec
+T1w fsaverage_LR32k {subjectid}.R.inflated_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness_MSMAll_InitialReg_1_d40_WRN.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness_MSMAll_InitialReg_2_d40_WRN.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness_MSMAll_va.32k_fs_LR.shape.gii
+T1w fsaverage_LR32k {subjectid}.R.pial_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.very_inflated_MSMAll.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.white_MSMAll.32k_fs_LR.surf.gii
