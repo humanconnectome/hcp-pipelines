@@ -19,7 +19,6 @@ DEFAULT: &default
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu
 
   HCP_LIB_DIR: /pipeline_tools/hcp-pipelines/lib
-  SHADOWS_ROOT: /data/intradb/build
 
   FREESURFER_LICENSE_PATH: $HOME/freesurfer/license
   HCP_RUN_UTILS: /pipeline_tools/HCPpipelinesRunUtils
@@ -67,7 +66,6 @@ functional: &functional
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
-  SHADOWS_ROOT: /data/intradb/build_ssd
   PROCESSING_STAGE: CHECK_DATA
   AUTOLAUNCH_AT_END: True
 
@@ -89,7 +87,6 @@ hand_edit: &hand_edit
   <<: *structural_process
   MEM_LIMIT_GBS: 64
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
-  SHADOWS_SUBDIR:
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   HAND_EDIT_PROCESSING_DIR: /scratch/$USER/hand_edit_buildspace
 
@@ -103,7 +100,6 @@ hand_edit_CCF_HCD:
   <<: *hand_edit
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd,/scratch/$USER/hand_edit_buildspace
-  SHADOWS_ROOT: /data/intradb/build_ssd
 
 msmall: &msmall
   <<: *default
@@ -112,10 +108,8 @@ msmall: &msmall
   WALLTIME_LIMIT_HOURS: 20
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/msmall_Q2_2020_runs
-  SHADOWS_SUBDIR: msmall_Q2_2020_runs
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
-  SHADOWS_ROOT: /data/intradb/build_ssd
   PROCESSING_STAGE: CHECK_DATA
   AUTOLAUNCH_AT_END: True
 
@@ -132,10 +126,8 @@ multirunicafix: &multirunicafix
   MEM_LIMIT_GBS: 48
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/icafix_Q2_2020_runs
-  SHADOWS_SUBDIR: icafix_Q2_2020_runs
   PUT_SERVER_LIST: hcpi-shadow11.nrg.wustl.edu hcpi-shadow12.nrg.wustl.edu hcpi-shadow13.nrg.wustl.edu hcpi-shadow14.nrg.wustl.edu hcpi-shadow15.nrg.wustl.edu hcpi-shadow16.nrg.wustl.edu hcpi-shadow17.nrg.wustl.edu hcpi-shadow18.nrg.wustl.edu hcpi-shadow19.nrg.wustl.edu
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
-  SHADOWS_ROOT: /data/intradb/build_ssd
   PROCESSING_STAGE: CHECK_DATA
   AUTOLAUNCH_AT_END: True
 
@@ -154,7 +146,6 @@ structural_preprocess: &structural_preprocess
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
   SINGULARITY_QUNEXPARAMETER_PATH: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v3
   BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER/ls_struc_preproc
-  SHADOWS_SUBDIR: ls_struc_preproc
   USE_SCRATCH_FOR_PROCESSING: True
   PROCESSING_STAGE: CHECK_DATA
   AUTOLAUNCH_AT_END: True
@@ -163,8 +154,6 @@ structural_preprocess_CCF_BWH:
   <<: *structural_preprocess
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/bwh_struc_preproc
-  SHADOWS_ROOT: /data/intradb/build_ssd
-  SHADOWS_SUBDIR: bwh_struc_preproc
 
 structural_preprocess_CCF_HCA:
   <<: *structural_preprocess
@@ -176,8 +165,6 @@ structural_preprocess_CCF_MDD:
   <<: *structural_preprocess
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/mdd_struc_preproc
-  SHADOWS_ROOT: /data/intradb/build_ssd
-  SHADOWS_SUBDIR: mdd_struc_preproc
 
 diffusion_preprocess: &diffusion_preprocess
   <<: *default
@@ -190,8 +177,6 @@ diffusion_preprocess: &diffusion_preprocess
   SINGULARITY_QUNEXPARAMETER_PATH: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v3
   SINGULARITY_CONTAINER_PATH: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3a.sif
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/diffusion_preproc
-  SHADOWS_ROOT: /data/intradb/build_ssd
-  SHADOWS_SUBDIR: diffusion_preproc
   USE_SCRATCH_FOR_PROCESSING: False
   WALLTIME_LIMIT_HOURS: 72
   MEM_LIMIT_GBS: 32
