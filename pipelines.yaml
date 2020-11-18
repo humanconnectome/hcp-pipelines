@@ -8,6 +8,7 @@ StructuralPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories

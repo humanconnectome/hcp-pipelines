@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 
@@ -27,3 +28,7 @@ def qsub(cmd, prior_job=None, afterok=True):
         full_cmd = f"qsub -W depend={afterok}:{prior_job} {cmd} "
     jobnumb = shell_run(full_cmd)
     return jobnumb
+
+
+def is_unreadable(filename):
+    return not os.access(filename, os.R_OK)
