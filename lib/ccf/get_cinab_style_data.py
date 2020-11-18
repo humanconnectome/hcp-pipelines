@@ -66,13 +66,13 @@ class DataRetriever(object):
         copy,
         log,
         output_dir,
-        XNAT_PBS_JOBS_ARCHIVE_ROOT,
+        ARCHIVE_ROOT,
     ):
         self.SUBJECT_ID = subject
         session = f"{subject}_{classifier}"
         self.SUBJECT_SESSION = session
         self.archive = ccf_archive.CcfArchive(
-            project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT
+            project, session, ARCHIVE_ROOT
         )
         self.output_dir = output_dir
         self.copy = copy
@@ -357,7 +357,7 @@ class PipelinePrereqDownloader:
         copy,
         log,
         output_dir,
-        XNAT_PBS_JOBS_ARCHIVE_ROOT,
+        ARCHIVE_ROOT,
     ):
         self.data_retriever = DataRetriever(
             project,
@@ -367,7 +367,7 @@ class PipelinePrereqDownloader:
             copy,
             log,
             output_dir,
-            XNAT_PBS_JOBS_ARCHIVE_ROOT,
+            ARCHIVE_ROOT,
         )
 
     def struct(self):
@@ -552,7 +552,7 @@ def main():
         args.copy,
         args.log,
         args.output_study_dir,
-        os.getenv("XNAT_PBS_JOBS_ARCHIVE_ROOT"),
+        os.getenv("ARCHIVE_ROOT"),
     )
 
     prereq.get_data_for_pipeline(args.phase, args.remove_non_subdirs)

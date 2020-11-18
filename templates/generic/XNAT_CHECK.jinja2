@@ -1,12 +1,12 @@
 HCP_RUN_UTILS="{{ HCP_RUN_UTILS }}"
 XNAT_PBS_JOBS="{{ XNAT_PBS_JOBS }}"
-XNAT_PBS_JOBS_ARCHIVE_ROOT="{{ XNAT_PBS_JOBS_ARCHIVE_ROOT }}"
+ARCHIVE_ROOT="{{ ARCHIVE_ROOT }}"
 
 source ${HCP_RUN_UTILS}/shlib/log.shlib  # Logging related functions
 source ${HCP_RUN_UTILS}/shlib/utils.shlib  # Utility functions
 log_Msg "XNAT_PBS_JOBS: ${XNAT_PBS_JOBS}"
 log_Msg "HCP_RUN_UTILS: ${HCP_RUN_UTILS}"
-log_Msg "XNAT_PBS_JOBS_ARCHIVE_ROOT: ${XNAT_PBS_JOBS_ARCHIVE_ROOT}"
+log_Msg "ARCHIVE_ROOT: ${ARCHIVE_ROOT}"
 
 
 g_user="{{ USERNAME }}"
@@ -91,7 +91,7 @@ else
     rm -f ${success_file_name}
 
     success_file_in_archive=""
-    success_file_in_archive+="${XNAT_PBS_JOBS_ARCHIVE_ROOT}/${g_project}"
+    success_file_in_archive+="${ARCHIVE_ROOT}/${g_project}"
     success_file_in_archive+="/arc001/${g_subject}_${g_classifier}/RESOURCES"
     success_file_in_archive+="/${OUTPUT_RESOURCE_NAME}/${g_subject}_${g_classifier}/ProcessingInfo/${success_file_name}"
 

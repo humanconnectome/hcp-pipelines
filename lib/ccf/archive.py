@@ -45,10 +45,10 @@ class CcfArchive(object):
     or a change in conventions could cause this code to no longer be correct.
     """
 
-    def __init__(self, project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT):
-        self.ARCHIVE_ROOT = XNAT_PBS_JOBS_ARCHIVE_ROOT
+    def __init__(self, project, session, ARCHIVE_ROOT):
+        self.ARCHIVE_ROOT = ARCHIVE_ROOT
         self.subject_resources = (
-            f"{XNAT_PBS_JOBS_ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
+            f"{ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
         )
         self.scans = _ArchiveScanNames(self)
 

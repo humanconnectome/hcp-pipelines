@@ -19,7 +19,7 @@ class OneSubjectCompletionXnatChecker:
         PIPELINE_NAME,
         HCP_RUN_UTILS,
         XNAT_PBS_JOBS,
-        XNAT_PBS_JOBS_ARCHIVE_ROOT,
+        ARCHIVE_ROOT,
         EXPECTED_FILES_LIST,
     ):
         self.EXPECTED_FILES_LIST = EXPECTED_FILES_LIST
@@ -30,7 +30,7 @@ class OneSubjectCompletionXnatChecker:
         self.OUTPUT_RESOURCE_NAME = OUTPUT_RESOURCE_NAME
         self.PIPELINE_NAME = PIPELINE_NAME
         self.archive = ccf_archive.CcfArchive(
-            project, session, XNAT_PBS_JOBS_ARCHIVE_ROOT
+            project, session, ARCHIVE_ROOT
         )
 
     def prereq_dirs(self):

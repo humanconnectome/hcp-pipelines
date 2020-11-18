@@ -8,7 +8,7 @@ from shared_values import (
     classifier,
     extra,
     PIPELINE_NAME,
-    XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    ARCHIVE_ROOT,
     session,
     WORKING_DIR,
 )
@@ -25,7 +25,7 @@ prereq = PipelinePrereqDownloader(
     copy=False,
     log=False,
     output_dir=tmp_dir,
-    XNAT_PBS_JOBS_ARCHIVE_ROOT=XNAT_PBS_JOBS_ARCHIVE_ROOT,
+    ARCHIVE_ROOT=ARCHIVE_ROOT,
 )
 prereq.get_data_for_pipeline(PIPELINE_NAME, remove_non_subdirs=True)
 
