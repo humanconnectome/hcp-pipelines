@@ -15,7 +15,7 @@ scriptPath=$(dirname ${0})
 # =-=-=-=-=-= GENERAL OPTIONS =-=-=-=-=-=
 #
 # -- key variables to set
-ParameterFolder='{{ SINGULARITY_QUNEXPARAMETER_PATH }}'
+ParameterFolder='{{ QUNEX_PARAMETER_FILES }}'
 StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
 Subject='{{ SUBJECT_SESSION }}'
 SubjectPart='{{ SUBJECT_ID }}'

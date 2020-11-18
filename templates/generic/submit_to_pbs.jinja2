@@ -15,7 +15,7 @@ delete_resource(){
   echo "Deleting the resource from the XNAT server"
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
-    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
+    {{ PIPELINES_CONTAINER }} \
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
@@ -30,7 +30,7 @@ mark_running_status(){
   echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
-    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
+    {{ PIPELINES_CONTAINER }} \
     $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
       --resource=RunningStatus \
       --queued
