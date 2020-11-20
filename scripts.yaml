@@ -107,6 +107,16 @@ structural:
   <<: *defaults
   <<: *scanless
   <<: *structural_process
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+    "fieldmap": NONE,
+  }
 
 struct_handedit:
   <<: *defaults
@@ -121,6 +131,16 @@ struct_handedit:
     hcppipelineprocess: $PIPELINE_NAME,
     #TODO: Figure out what that FS_EXTRA_RECONALL param does and if it is even necessary
     #"fs-extra-reconall": $FS_EXTRA_RECONALL
+  }
+  CHECK_DATA_PARAMS: {
+    "user": $USERNAME,
+    "password": $PASSWORD,
+    "server": $PUT_SERVER,
+    "project": $SUBJECT_PROJECT,
+    "subject": $SUBJECT_ID,
+    "classifier": $SUBJECT_CLASSIFIER,
+    "working-dir": $CHECK_DATA_DIR,
+    "fieldmap": NONE,
   }
 
 functional:
