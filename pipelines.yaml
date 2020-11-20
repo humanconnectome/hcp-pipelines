@@ -51,7 +51,7 @@ StructuralPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
-      template: structural/check_data.jinja2
+      template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
