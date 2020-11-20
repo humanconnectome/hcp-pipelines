@@ -2,14 +2,14 @@
 import argparse
 import os
 import subprocess
-from shared_values import client, g_scan
+from shared_values import client
 
 
 g_resource = "RunningStatus"
 
 
-directory = f"{{BUILD_DIR}}/{{SUBJECT_PROJECT}}/{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{g_scan}_RUNNING_STATUS"
-file = f"{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{g_scan}.RUNNING"
+directory = f"{{BUILD_DIR}}/{{SUBJECT_PROJECT}}/{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{{_SUBJECT_EXTRA}}_RUNNING_STATUS"
+file = f"{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{{_SUBJECT_EXTRA}}.RUNNING"
 existing_file = f"{{ARCHIVE_ROOT}}/{{ SUBJECT_PROJECT }}/arc001/{{SUBJECT_SESSION}}/RESOURCES/RunningStatus/{file}"
 path = f"{directory}/{file}"
 

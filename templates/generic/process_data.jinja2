@@ -1,8 +1,6 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=WORKING_DIR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
-source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
-
 {% block pre -%}
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	# Make sure to `--bind` this to "/tmp" in the singularity invocation
