@@ -1,8 +1,6 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=WORKING_DIR) }}
 
-source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
-
 {{ singularity(
         container=PIPELINES_CONTAINER,
         runpath=GET_DATA_RUNPATH,
