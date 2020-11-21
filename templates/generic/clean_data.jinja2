@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=WORKING_DIR) }}
+{{ pbs_head(log_dir=CHECK_DATA_DIR) }}
 
 WORK_DIR="{{ WORKING_DIR }}"
 SUBJ="{{ SUBJECT_ID }}_{{ SUBJECT_CLASSIFIER }}"
