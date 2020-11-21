@@ -26,5 +26,5 @@ resources_root = archive.subject_resources
 
 
 def print_system_info():
-    platform = subprocess.check_output(["uname", "-a"])
+    platform = subprocess.check_output(["uname", "-a"]).decode()
     print(f" Platform:   {platform}")

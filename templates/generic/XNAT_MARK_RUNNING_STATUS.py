@@ -20,7 +20,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     reason = args.status
 
-
     if reason == "queued":
         os.makedirs(directory, exist_ok=True)
         with open(path, "w") as fd:
