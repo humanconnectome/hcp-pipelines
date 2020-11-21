@@ -1,5 +1,5 @@
 {% extends "generic/XNAT_GET.py" %}
-{% block content %}
+{% block post %}
 print("Moving files")
 os.system(f'mv {tmp_dir}/* {WORKING_DIR} \;')
 
@@ -7,4 +7,4 @@ print("Removing tmp dir")
 os.system(f"rm -r {tmp_dir}")
 
 # TODO: add the block if USE_PRESCAN_NORMALIZED is turned on
-{% endblock content %}
+{% endblock post %}
