@@ -13,5 +13,5 @@ singularity run \
         --bind /NRG-data/NRG/intradb/build_ssd \
         --bind /usr/local/torque-6.1.2 \
         --bind /scratch/$USER \
-        /scratch/Mobalt/pipelines.sif \
+        /export/HCP/qunex-hcp/production_containers/pipelines.sif \
         --verbose  $@  &> "log.$1.$2.txt"
