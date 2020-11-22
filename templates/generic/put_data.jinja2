@@ -1,14 +1,12 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=XNAT_PBS_JOBS_LOG_DIR, mem=12) }}
+{{ pbs_head(log_dir=LOG_DIR, mem=12) }}
 
-source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
-mv {{ WORKING_DIR }}/*{{ PIPELINE_NAME }}* {{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/ProcessingInfo
+cp {{ CHECK_DATA_DIR }}/* {{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/ProcessingInfo
 
 {{ singularity(
-        container=SINGULARITY_CONTAINER_XNAT_PATH,
+        container=PIPELINES_CONTAINER,
         runpath=PUT_DATA_RUNPATH,
-        bindpath=PUT_DATA_BINDPATH,
-        params=PUT_DATA_PARAMS
+        bindpath=PUT_DATA_BINDPATH
 ) }}
 
 {% block content %}{% endblock %}

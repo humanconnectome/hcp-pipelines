@@ -4,35 +4,25 @@
 source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
 if [ -z "$SINGULARITY_CONTAINER" ]; then
-	module load {{ SINGULARITY_VERSION }}
+	module load singularity-3.5.2
 else 
 	echo "Sourcing Python Setup."
 	source /pipeline_tools/HCPpipelinesRunUtils/ToolSetupScripts/epd-python_setup.sh
 fi
 
 delete_resource(){
-  #todo: determine if this needs to run in singularity container (probably)
+echo "TODO: This needs to be reimplemented using xnat_file_client.py - Moises (11/18/2020)"
+exit 1
+
   echo "Deleting the resource from the XNAT server"
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
-    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
+    {{ PIPELINES_CONTAINER }} \
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --user="{{USERNAME}}" \
-      --password="{{PASSWORD}}" \
-      --server="{{PUT_SERVER}}" \
-      --project="{{SUBJECT_PROJECT}}" \
-      --subject="{{SUBJECT_ID}}" \
-      --session="{{SUBJECT_SESSION}}" \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
 else 
     python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --user="{{USERNAME}}" \
-      --password="{{PASSWORD}}" \
-      --server="{{PUT_SERVER}}" \
-      --project="{{SUBJECT_PROJECT}}" \
-      --subject="{{SUBJECT_ID}}" \
-      --session="{{SUBJECT_SESSION}}" \
       --resource="{{OUTPUT_RESOURCE_NAME}}"
       --force
 fi
@@ -42,32 +32,12 @@ mark_running_status(){
   echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
 if [ -z "$SINGULARITY_CONTAINER" ]; then
   singularity exec \
-    {{ SINGULARITY_CONTAINER_PIPELINES_PATH }} \
-    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --user={{USERNAME}} \
-      --password={{PASSWORD}} \
-      --server={{PUT_SERVER}} \
-      --project={{SUBJECT_PROJECT}} \
-      --subject={{SUBJECT_ID}} \
-      --classifier={{SUBJECT_CLASSIFIER}} \
-{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
-      --scan={{SUBJECT_EXTRA}} \
-{%- endif %}
-      --resource=RunningStatus \
-      --queued
+    {{ PIPELINES_CONTAINER }} \
+    {{ MARK_RUNNING_STATUS_RUNPATH }} \
+        --status=queued
 else
-    $XNAT_PBS_JOBS/{{ PIPELINE_NAME }}/{{ PIPELINE_NAME }}.XNAT_MARK_RUNNING_STATUS \
-      --user={{USERNAME}} \
-      --password={{PASSWORD}} \
-      --server={{PUT_SERVER}} \
-      --project={{SUBJECT_PROJECT}} \
-      --subject={{SUBJECT_ID}} \
-      --classifier={{SUBJECT_CLASSIFIER}} \
-{%- if PIPELINE_NAME == "FunctionalPreprocessing" %}
-      --scan={{SUBJECT_EXTRA}} \
-{%- endif %}
-      --resource=RunningStatus \
-      --queued
+    {{ MARK_RUNNING_STATUS_RUNPATH }} \
+        --status=queued
 fi
 }
 {% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}

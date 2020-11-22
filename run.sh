@@ -7,11 +7,11 @@ module load singularity-3.5.2
 singularity run \
         --bind ./:/pipeline_tools/pipelines/ \
         --bind /NRG-data/NRG/intradb/archive \
+        --bind /export/HCP/qunex-hcp/production_containers \
         --bind /act/ \
         --bind /NRG-data/NRG/intradb/build \
         --bind /NRG-data/NRG/intradb/build_ssd \
         --bind /usr/local/torque-6.1.2 \
-        --bind /export/HCP/qunex-hcp \
         --bind /scratch/$USER \
-        /export/HCP/qunex-hcp/production_containers/pipelines.sif \
+        /scratch/Mobalt/pipelines.sif \
         --verbose  $@  &> "log.$1.$2.txt"

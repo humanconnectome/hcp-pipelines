@@ -1,0 +1,1213 @@
+MNINonLinear
+MNINonLinear aparc.a2009s+aseg.nii.gz
+MNINonLinear aparc+aseg.nii.gz
+MNINonLinear BiasField.nii.gz
+MNINonLinear brainmask_fs.nii.gz
+MNINonLinear fsaverage
+MNINonLinear fsaverage {subjectid}.L.def_sphere.164k_fs_L.surf.gii
+MNINonLinear fsaverage {subjectid}.L.sphere.164k_fs_L.surf.gii
+MNINonLinear fsaverage {subjectid}.R.def_sphere.164k_fs_R.surf.gii
+MNINonLinear fsaverage {subjectid}.R.sphere.164k_fs_R.surf.gii
+MNINonLinear fsaverage_LR32k
+MNINonLinear fsaverage_LR32k {subjectid}.32k_fs_LR.wb.spec
+MNINonLinear fsaverage_LR32k {subjectid}.aparc.32k_fs_LR.dlabel.nii
+MNINonLinear fsaverage_LR32k {subjectid}.aparc.a2009s.32k_fs_LR.dlabel.nii
+MNINonLinear fsaverage_LR32k {subjectid}.ArealDistortion_FS.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.ArealDistortion_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.corrThickness.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.curvature.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.EdgeDistortion_FS.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.EdgeDistortion_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.L.aparc.32k_fs_LR.label.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.aparc.a2009s.32k_fs_LR.label.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.ArealDistortion_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.ArealDistortion_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.atlasroi.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.corrThickness.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.curvature.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.EdgeDistortion_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.EdgeDistortion_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.flat.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.inflated.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.midthickness.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.MyelinMap.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.pial.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.SmoothedMyelinMap.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.SmoothedMyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.sphere.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.StrainJ_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.StrainJ_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.StrainR_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.StrainR_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.sulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.thickness.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.very_inflated.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.white.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_BC.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.R.aparc.32k_fs_LR.label.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.aparc.a2009s.32k_fs_LR.label.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.ArealDistortion_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.ArealDistortion_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.atlasroi.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.corrThickness.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.curvature.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.EdgeDistortion_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.EdgeDistortion_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.flat.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.inflated.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.midthickness.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.MyelinMap.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.MyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.pial.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.SmoothedMyelinMap.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.SmoothedMyelinMap_BC.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.sphere.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.StrainJ_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.StrainJ_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.StrainR_FS.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.StrainR_MSMSulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.sulc.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.thickness.32k_fs_LR.shape.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.very_inflated.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.white.32k_fs_LR.surf.gii
+MNINonLinear fsaverage_LR32k {subjectid}.SmoothedMyelinMap.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.SmoothedMyelinMap_BC.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainJ_FS.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainJ_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainR_FS.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.StrainR_MSMSulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.sulc.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.thickness.32k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.164k_fs_LR.wb.spec
+MNINonLinear {subjectid}.aparc.164k_fs_LR.dlabel.nii
+MNINonLinear {subjectid}.aparc.a2009s.164k_fs_LR.dlabel.nii
+MNINonLinear {subjectid}.ArealDistortion_FS.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.ArealDistortion_MSMSulc.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.corrThickness.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.curvature.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.EdgeDistortion_FS.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.EdgeDistortion_MSMSulc.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.L.aparc.164k_fs_LR.label.gii
+MNINonLinear {subjectid}.L.aparc.a2009s.164k_fs_LR.label.gii
+MNINonLinear {subjectid}.L.ArealDistortion_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.ArealDistortion_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.atlasroi.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.corrThickness.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.curvature.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.EdgeDistortion_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.EdgeDistortion_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.flat.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.inflated.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.midthickness.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.MyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.L.MyelinMap_BC.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.L.pial.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.RefMyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.L.refsulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.SmoothedMyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.L.SmoothedMyelinMap_BC.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.L.sphere.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.StrainJ_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.StrainJ_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.StrainR_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.StrainR_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.sulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.thickness.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.L.very_inflated.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.L.white.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.MyelinMap.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.MyelinMap_BC.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.R.aparc.164k_fs_LR.label.gii
+MNINonLinear {subjectid}.R.aparc.a2009s.164k_fs_LR.label.gii
+MNINonLinear {subjectid}.R.ArealDistortion_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.ArealDistortion_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.atlasroi.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.corrThickness.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.curvature.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.EdgeDistortion_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.EdgeDistortion_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.flat.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.inflated.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.midthickness.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.MyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.R.MyelinMap_BC.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.R.pial.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.RefMyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.R.refsulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.SmoothedMyelinMap.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.R.SmoothedMyelinMap_BC.164k_fs_LR.func.gii
+MNINonLinear {subjectid}.R.sphere.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.StrainJ_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.StrainJ_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.StrainR_FS.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.StrainR_MSMSulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.sulc.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.thickness.164k_fs_LR.shape.gii
+MNINonLinear {subjectid}.R.very_inflated.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.R.white.164k_fs_LR.surf.gii
+MNINonLinear {subjectid}.SmoothedMyelinMap.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.SmoothedMyelinMap_BC.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainJ_FS.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainJ_MSMSulc.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainR_FS.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.StrainR_MSMSulc.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.sulc.164k_fs_LR.dscalar.nii
+MNINonLinear {subjectid}.thickness.164k_fs_LR.dscalar.nii
+MNINonLinear Native
+MNINonLinear Native {subjectid}.aparc.a2009s.native.dlabel.nii
+MNINonLinear Native {subjectid}.aparc.native.dlabel.nii
+MNINonLinear Native {subjectid}.ArealDistortion_FS.native.dscalar.nii
+MNINonLinear Native {subjectid}.ArealDistortion_MSMSulc.native.dscalar.nii
+MNINonLinear Native {subjectid}.corrThickness.native.dscalar.nii
+MNINonLinear Native {subjectid}.curvature.native.dscalar.nii
+MNINonLinear Native {subjectid}.EdgeDistortion_FS.native.dscalar.nii
+MNINonLinear Native {subjectid}.EdgeDistortion_MSMSulc.native.dscalar.nii
+MNINonLinear Native {subjectid}.L.aparc.a2009s.native.label.gii
+MNINonLinear Native {subjectid}.L.aparc.native.label.gii
+MNINonLinear Native {subjectid}.L.ArealDistortion_FS.native.shape.gii
+MNINonLinear Native {subjectid}.L.ArealDistortion_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.L.atlasroi.native.shape.gii
+MNINonLinear Native {subjectid}.L.BiasField.native.func.gii
+MNINonLinear Native {subjectid}.L.corrThickness.native.shape.gii
+MNINonLinear Native {subjectid}.L.curvature.native.shape.gii
+MNINonLinear Native {subjectid}.L.EdgeDistortion_FS.native.shape.gii
+MNINonLinear Native {subjectid}.L.EdgeDistortion_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.L.inflated.native.surf.gii
+MNINonLinear Native {subjectid}.L.midthickness.native.surf.gii
+MNINonLinear Native {subjectid}.L.MyelinMap_BC.native.func.gii
+MNINonLinear Native {subjectid}.L.MyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.L.pial.native.surf.gii
+MNINonLinear Native {subjectid}.L.RefMyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.L.roi.native.shape.gii
+MNINonLinear Native {subjectid}.L.SmoothedMyelinMap_BC.native.func.gii
+MNINonLinear Native {subjectid}.L.SmoothedMyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.L.sphere.MSMSulc.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.reg.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.reg.reg_LR.native.surf.gii
+MNINonLinear Native {subjectid}.L.sphere.rot.native.surf.gii
+MNINonLinear Native {subjectid}.L.StrainJ_FS.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainJ_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainR_FS.native.shape.gii
+MNINonLinear Native {subjectid}.L.StrainR_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.L.sulc.native.shape.gii
+MNINonLinear Native {subjectid}.L.thickness.native.shape.gii
+MNINonLinear Native {subjectid}.L.very_inflated.native.surf.gii
+MNINonLinear Native {subjectid}.L.white.native.surf.gii
+MNINonLinear Native {subjectid}.MyelinMap_BC.native.dscalar.nii
+MNINonLinear Native {subjectid}.MyelinMap.native.dscalar.nii
+MNINonLinear Native {subjectid}.native.wb.spec
+MNINonLinear Native {subjectid}.R.aparc.a2009s.native.label.gii
+MNINonLinear Native {subjectid}.R.aparc.native.label.gii
+MNINonLinear Native {subjectid}.R.ArealDistortion_FS.native.shape.gii
+MNINonLinear Native {subjectid}.R.ArealDistortion_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.R.atlasroi.native.shape.gii
+MNINonLinear Native {subjectid}.R.BiasField.native.func.gii
+MNINonLinear Native {subjectid}.R.corrThickness.native.shape.gii
+MNINonLinear Native {subjectid}.R.curvature.native.shape.gii
+MNINonLinear Native {subjectid}.R.EdgeDistortion_FS.native.shape.gii
+MNINonLinear Native {subjectid}.R.EdgeDistortion_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.R.inflated.native.surf.gii
+MNINonLinear Native {subjectid}.R.midthickness.native.surf.gii
+MNINonLinear Native {subjectid}.R.MyelinMap_BC.native.func.gii
+MNINonLinear Native {subjectid}.R.MyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.R.pial.native.surf.gii
+MNINonLinear Native {subjectid}.R.RefMyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.R.roi.native.shape.gii
+MNINonLinear Native {subjectid}.R.SmoothedMyelinMap_BC.native.func.gii
+MNINonLinear Native {subjectid}.R.SmoothedMyelinMap.native.func.gii
+MNINonLinear Native {subjectid}.R.sphere.MSMSulc.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.reg.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.reg.reg_LR.native.surf.gii
+MNINonLinear Native {subjectid}.R.sphere.rot.native.surf.gii
+MNINonLinear Native {subjectid}.R.StrainJ_FS.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainJ_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainR_FS.native.shape.gii
+MNINonLinear Native {subjectid}.R.StrainR_MSMSulc.native.shape.gii
+MNINonLinear Native {subjectid}.R.sulc.native.shape.gii
+MNINonLinear Native {subjectid}.R.thickness.native.shape.gii
+MNINonLinear Native {subjectid}.R.very_inflated.native.surf.gii
+MNINonLinear Native {subjectid}.R.white.native.surf.gii
+MNINonLinear Native {subjectid}.SmoothedMyelinMap_BC.native.dscalar.nii
+MNINonLinear Native {subjectid}.SmoothedMyelinMap.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainJ_FS.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainJ_MSMSulc.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainR_FS.native.dscalar.nii
+MNINonLinear Native {subjectid}.StrainR_MSMSulc.native.dscalar.nii
+MNINonLinear Native {subjectid}.sulc.native.dscalar.nii
+MNINonLinear Native {subjectid}.thickness.native.dscalar.nii
+MNINonLinear Native MSMSulc
+MNINonLinear Native MSMSulc L.logdir
+MNINonLinear Native MSMSulc L.logdir conf
+MNINonLinear Native MSMSulc L.logdir MSM.log
+MNINonLinear Native MSMSulc L.mat
+MNINonLinear Native MSMSulc L.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMSulc L.sphere.reg.surf.gii
+MNINonLinear Native MSMSulc L.sphere_rot.surf.gii
+MNINonLinear Native MSMSulc L.transformed_and_reprojected.func.gii
+MNINonLinear Native MSMSulc R.logdir
+MNINonLinear Native MSMSulc R.logdir conf
+MNINonLinear Native MSMSulc R.logdir MSM.log
+MNINonLinear Native MSMSulc R.mat
+MNINonLinear Native MSMSulc R.sphere.LR.reg.surf.gii
+MNINonLinear Native MSMSulc R.sphere.reg.surf.gii
+MNINonLinear Native MSMSulc R.sphere_rot.surf.gii
+MNINonLinear Native MSMSulc R.transformed_and_reprojected.func.gii
+MNINonLinear Results
+MNINonLinear ribbon.nii.gz
+MNINonLinear ROIs
+MNINonLinear ROIs Atlas_ROIs.2.nii.gz
+MNINonLinear ROIs Atlas_wmparc.2.nii.gz
+MNINonLinear ROIs ROIs.2.nii.gz
+MNINonLinear ROIs wmparc.2.nii.gz
+MNINonLinear T1w.nii.gz
+MNINonLinear T1w_restore.2.nii.gz
+MNINonLinear T1w_restore_brain.nii.gz
+MNINonLinear T1w_restore.nii.gz
+MNINonLinear T2w.nii.gz
+MNINonLinear T2w_restore.2.nii.gz
+MNINonLinear T2w_restore_brain.nii.gz
+MNINonLinear T2w_restore.nii.gz
+MNINonLinear wmparc.nii.gz
+MNINonLinear xfms
+MNINonLinear xfms 2mmReg.nii.gz
+MNINonLinear xfms acpc2MNILinear.mat
+MNINonLinear xfms acpc_dc2standard.nii.gz
+MNINonLinear xfms IntensityModulatedT1.nii.gz
+MNINonLinear xfms log.txt
+MNINonLinear xfms NonlinearIntensities.nii.gz
+MNINonLinear xfms NonlinearIntensities.nii.gz.txt
+MNINonLinear xfms NonlinearRegJacobians.nii.gz
+MNINonLinear xfms NonlinearReg.nii.gz
+MNINonLinear xfms NonlinearReg.txt
+MNINonLinear xfms qa.txt
+MNINonLinear xfms standard2acpc_dc.nii.gz
+MNINonLinear xfms T1w_acpc_dc_restore_brain_to_MNILinear.nii.gz
+T1w
+T1w ACPCAlignment
+T1w ACPCAlignment acpc_final.nii.gz
+T1w ACPCAlignment full2roi.mat
+T1w ACPCAlignment full2std.mat
+T1w ACPCAlignment log.txt
+T1w ACPCAlignment qa.txt
+T1w ACPCAlignment robustroi.nii.gz
+T1w ACPCAlignment roi2full.mat
+T1w ACPCAlignment roi2std.mat
+T1w aparc.a2009s+aseg_1mm.nii.gz
+T1w aparc.a2009s+aseg.nii.gz
+T1w aparc+aseg_1mm.nii.gz
+T1w aparc+aseg.nii.gz
+T1w BiasField_acpc_dc.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w
+T1w BiasFieldCorrection_sqrtT1wXT1w bias_raw.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w log.txt
+T1w BiasFieldCorrection_sqrtT1wXT1w qa.txt
+T1w BiasFieldCorrection_sqrtT1wXT1w SmoothNorm_s5.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w_brain.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w_brain_norm_modulate_mask.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w_brain_norm_modulate.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w_brain_norm.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w_brain_norm_s5.nii.gz
+T1w BiasFieldCorrection_sqrtT1wXT1w T1wmulT2w.nii.gz
+T1w BrainExtraction_FNIRTbased
+T1w BrainExtraction_FNIRTbased IntensityModulatedT1.nii.gz
+T1w BrainExtraction_FNIRTbased log.txt
+T1w BrainExtraction_FNIRTbased NonlinearIntensities.nii.gz
+T1w BrainExtraction_FNIRTbased NonlinearIntensities.nii.gz.txt
+T1w BrainExtraction_FNIRTbased NonlinearRegJacobians.nii.gz
+T1w BrainExtraction_FNIRTbased NonlinearReg.nii.gz
+T1w BrainExtraction_FNIRTbased NonlinearReg.txt
+T1w BrainExtraction_FNIRTbased qa.txt
+T1w BrainExtraction_FNIRTbased roughlin.mat
+T1w BrainExtraction_FNIRTbased standard2str.nii.gz
+T1w BrainExtraction_FNIRTbased str2standard.nii.gz
+T1w BrainExtraction_FNIRTbased T1w_acpc_to_MNI_nonlin.nii.gz
+T1w BrainExtraction_FNIRTbased T1w_acpc_to_MNI_roughlin.nii.gz
+T1w brainmask_fs_1mm.nii.gz
+T1w brainmask_fs.nii.gz
+T1w fsaverage
+T1w fsaverage label
+T1w fsaverage label lh.aparc.a2005s.annot
+T1w fsaverage label lh.aparc.a2009s.annot
+T1w fsaverage label lh.aparc.annot
+T1w fsaverage label lh.aparc.label
+T1w fsaverage label lh.BA1_exvivo.label
+T1w fsaverage label lh.BA1_exvivo.thresh.label
+T1w fsaverage label lh.BA2_exvivo.label
+T1w fsaverage label lh.BA2_exvivo.thresh.label
+T1w fsaverage label lh.BA3a_exvivo.label
+T1w fsaverage label lh.BA3a_exvivo.thresh.label
+T1w fsaverage label lh.BA3b_exvivo.label
+T1w fsaverage label lh.BA3b_exvivo.thresh.label
+T1w fsaverage label lh.BA44_exvivo.label
+T1w fsaverage label lh.BA44_exvivo.thresh.label
+T1w fsaverage label lh.BA45_exvivo.label
+T1w fsaverage label lh.BA45_exvivo.thresh.label
+T1w fsaverage label lh.BA4a_exvivo.label
+T1w fsaverage label lh.BA4a_exvivo.thresh.label
+T1w fsaverage label lh.BA4p_exvivo.label
+T1w fsaverage label lh.BA4p_exvivo.thresh.label
+T1w fsaverage label lh.BA6_exvivo.label
+T1w fsaverage label lh.BA6_exvivo.thresh.label
+T1w fsaverage label lh.cortex.label
+T1w fsaverage label lh.entorhinal_exvivo.label
+T1w fsaverage label lh.entorhinal_exvivo.thresh.label
+T1w fsaverage label lh.Medial_wall.label
+T1w fsaverage label lh.MT_exvivo.label
+T1w fsaverage label lh.MT_exvivo.thresh.label
+T1w fsaverage label lh.oasis.chubs.annot
+T1w fsaverage label lh.oasis.chubs.ifc.label
+T1w fsaverage label lh.oasis.chubs.ipc.label
+T1w fsaverage label lh.oasis.chubs.ips.label
+T1w fsaverage label lh.oasis.chubs.lateraltemporal.label
+T1w fsaverage label lh.oasis.chubs.medialpfc.label
+T1w fsaverage label lh.oasis.chubs.mtl.label
+T1w fsaverage label lh.oasis.chubs.retrosplenial.label
+T1w fsaverage label lh.oasis.chubs.tp.label
+T1w fsaverage label lh.PALS_B12_Brodmann.annot
+T1w fsaverage label lh.PALS_B12.labels.gii
+T1w fsaverage label lh.PALS_B12_Lobes.annot
+T1w fsaverage label lh.PALS_B12_OrbitoFrontal.annot
+T1w fsaverage label lh.PALS_B12_Visuotopic.annot
+T1w fsaverage label lh.perirhinal_exvivo.label
+T1w fsaverage label lh.perirhinal_exvivo.thresh.label
+T1w fsaverage label lh.V1_exvivo.label
+T1w fsaverage label lh.V1_exvivo.thresh.label
+T1w fsaverage label lh.V2_exvivo.label
+T1w fsaverage label lh.V2_exvivo.thresh.label
+T1w fsaverage label lh.Yeo2011_17NetworksConfidence_N1000.mgz
+T1w fsaverage label lh.Yeo2011_17Networks_N1000.annot
+T1w fsaverage label lh.Yeo2011_7NetworksConfidence_N1000.mgz
+T1w fsaverage label lh.Yeo2011_7Networks_N1000.annot
+T1w fsaverage label lh.Yeo_Brainmap_10Comp_PrActGivenComp.mgz
+T1w fsaverage label lh.Yeo_Brainmap_10to14Comp_Flexibility.mgz
+T1w fsaverage label lh.Yeo_Brainmap_10to14Comp_Specialization.mgz
+T1w fsaverage label lh.Yeo_Brainmap_10to14Comp_SpecializationROI.mgz
+T1w fsaverage label lh.Yeo_Brainmap_10to14Comp_TopSpecializationComp.csv
+T1w fsaverage label lh.Yeo_Brainmap_11Comp_PrActGivenComp.mgz
+T1w fsaverage label lh.Yeo_Brainmap_12Comp_PrActGivenComp.mgz
+T1w fsaverage label lh.Yeo_Brainmap_13Comp_PrActGivenComp.mgz
+T1w fsaverage label lh.Yeo_Brainmap_14Comp_PrActGivenComp.mgz
+T1w fsaverage label rh.aparc.a2005s.annot
+T1w fsaverage label rh.aparc.a2009s.annot
+T1w fsaverage label rh.aparc.annot
+T1w fsaverage label rh.aparc.label
+T1w fsaverage label rh.BA1_exvivo.label
+T1w fsaverage label rh.BA1_exvivo.thresh.label
+T1w fsaverage label rh.BA2_exvivo.label
+T1w fsaverage label rh.BA2_exvivo.thresh.label
+T1w fsaverage label rh.BA3a_exvivo.label
+T1w fsaverage label rh.BA3a_exvivo.thresh.label
+T1w fsaverage label rh.BA3b_exvivo.label
+T1w fsaverage label rh.BA3b_exvivo.thresh.label
+T1w fsaverage label rh.BA44_exvivo.label
+T1w fsaverage label rh.BA44_exvivo.thresh.label
+T1w fsaverage label rh.BA45_exvivo.label
+T1w fsaverage label rh.BA45_exvivo.thresh.label
+T1w fsaverage label rh.BA4a_exvivo.label
+T1w fsaverage label rh.BA4a_exvivo.thresh.label
+T1w fsaverage label rh.BA4p_exvivo.label
+T1w fsaverage label rh.BA4p_exvivo.thresh.label
+T1w fsaverage label rh.BA6_exvivo.label
+T1w fsaverage label rh.BA6_exvivo.thresh.label
+T1w fsaverage label rh.cortex.label
+T1w fsaverage label rh.entorhinal_exvivo.label
+T1w fsaverage label rh.entorhinal_exvivo.thresh.label
+T1w fsaverage label rh.Medial_wall.label
+T1w fsaverage label rh.MT_exvivo.label
+T1w fsaverage label rh.MT_exvivo.thresh.label
+T1w fsaverage label rh.oasis.chubs.annot
+T1w fsaverage label rh.oasis.chubs.ifc.label
+T1w fsaverage label rh.oasis.chubs.ipc.label
+T1w fsaverage label rh.oasis.chubs.ips.label
+T1w fsaverage label rh.oasis.chubs.lateraltemporal.label
+T1w fsaverage label rh.oasis.chubs.medialpfc.label
+T1w fsaverage label rh.oasis.chubs.mtl.label
+T1w fsaverage label rh.oasis.chubs.retrosplenial.label
+T1w fsaverage label rh.oasis.chubs.tp.label
+T1w fsaverage label rh.PALS_B12_Brodmann.annot
+T1w fsaverage label rh.PALS_B12.labels.gii
+T1w fsaverage label rh.PALS_B12_Lobes.annot
+T1w fsaverage label rh.PALS_B12_OrbitoFrontal.annot
+T1w fsaverage label rh.PALS_B12_Visuotopic.annot
+T1w fsaverage label rh.perirhinal_exvivo.label
+T1w fsaverage label rh.perirhinal_exvivo.thresh.label
+T1w fsaverage label rh.V1_exvivo.label
+T1w fsaverage label rh.V1_exvivo.thresh.label
+T1w fsaverage label rh.V2_exvivo.label
+T1w fsaverage label rh.V2_exvivo.thresh.label
+T1w fsaverage label rh.Yeo2011_17NetworksConfidence_N1000.mgz
+T1w fsaverage label rh.Yeo2011_17Networks_N1000.annot
+T1w fsaverage label rh.Yeo2011_7NetworksConfidence_N1000.mgz
+T1w fsaverage label rh.Yeo2011_7Networks_N1000.annot
+T1w fsaverage label rh.Yeo_Brainmap_10Comp_PrActGivenComp.mgz
+T1w fsaverage label rh.Yeo_Brainmap_10to14Comp_Flexibility.mgz
+T1w fsaverage label rh.Yeo_Brainmap_10to14Comp_Specialization.mgz
+T1w fsaverage label rh.Yeo_Brainmap_10to14Comp_SpecializationROI.mgz
+T1w fsaverage label rh.Yeo_Brainmap_10to14Comp_TopSpecializationComp.csv
+T1w fsaverage label rh.Yeo_Brainmap_11Comp_PrActGivenComp.mgz
+T1w fsaverage label rh.Yeo_Brainmap_12Comp_PrActGivenComp.mgz
+T1w fsaverage label rh.Yeo_Brainmap_13Comp_PrActGivenComp.mgz
+T1w fsaverage label rh.Yeo_Brainmap_14Comp_PrActGivenComp.mgz
+T1w fsaverage label Yeo_Brainmap_fsaverage_README
+T1w fsaverage_LR32k
+T1w fsaverage_LR32k {subjectid}.32k_fs_LR.wb.spec
+T1w fsaverage_LR32k {subjectid}.L.inflated.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.midthickness_va.32k_fs_LR.shape.gii
+T1w fsaverage_LR32k {subjectid}.L.pial.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.very_inflated.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.L.white.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.midthickness_va.32k_fs_LR.dscalar.nii
+T1w fsaverage_LR32k {subjectid}.midthickness_va_norm.32k_fs_LR.dscalar.nii
+T1w fsaverage_LR32k {subjectid}.R.inflated.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.midthickness_va.32k_fs_LR.shape.gii
+T1w fsaverage_LR32k {subjectid}.R.pial.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.very_inflated.32k_fs_LR.surf.gii
+T1w fsaverage_LR32k {subjectid}.R.white.32k_fs_LR.surf.gii
+T1w fsaverage mri
+T1w fsaverage mri.2mm
+T1w fsaverage mri.2mm aseg.mgz
+T1w fsaverage mri.2mm brainmask.mgz
+T1w fsaverage mri.2mm brain.mgz
+T1w fsaverage mri.2mm mni305.cor.mgz
+T1w fsaverage mri.2mm orig.mgz
+T1w fsaverage mri.2mm README
+T1w fsaverage mri.2mm reg.2mm.dat
+T1w fsaverage mri.2mm reg.2mm.mni152.dat
+T1w fsaverage mri.2mm subcort.mask.mgz
+T1w fsaverage mri.2mm subcort.prob.mgz
+T1w fsaverage mri.2mm T1.mgz
+T1w fsaverage mri aparc.a2005s+aseg.mgz
+T1w fsaverage mri aparc.a2009s+aseg.mgz
+T1w fsaverage mri aparc+aseg.mgz
+T1w fsaverage mri aseg.mgz
+T1w fsaverage mri brainmask.mgz
+T1w fsaverage mri brain.mgz
+T1w fsaverage mri lh.ribbon.mgz
+T1w fsaverage mri mni305.cor.mgz
+T1w fsaverage mri orig
+T1w fsaverage mri orig.mgz
+T1w fsaverage mri p.aseg.mgz
+T1w fsaverage mri rh.ribbon.mgz
+T1w fsaverage mri ribbon.mgz
+T1w fsaverage mri subcort.mask.1mm.mgz
+T1w fsaverage mri subcort.mask.1mm.README
+T1w fsaverage mri subcort.prob.log
+T1w fsaverage mri subcort.prob.mgz
+T1w fsaverage mri T1.mgz
+T1w fsaverage mri transforms
+T1w fsaverage mri transforms bak
+T1w fsaverage mri transforms reg.mni152.2mm.dat
+T1w fsaverage mri transforms talairach.xfm
+T1w fsaverage scripts
+T1w fsaverage scripts build-stamp.txt
+T1w fsaverage scripts cvs_log_pre_31May2011.txt
+T1w fsaverage scripts make_average_surface.log
+T1w fsaverage scripts make_average_volume.log
+T1w fsaverage scripts mris_inflate_lh.log
+T1w fsaverage scripts mris_inflate.log
+T1w fsaverage scripts mris_inflate_rh.log
+T1w fsaverage scripts recon-all.cmd
+T1w fsaverage scripts recon-all.done
+T1w fsaverage scripts recon-all.env
+T1w fsaverage scripts recon-all.env.bak
+T1w fsaverage scripts recon-all.local-copy
+T1w fsaverage scripts recon-all.log
+T1w fsaverage scripts recon-all-status.log
+T1w fsaverage scripts surfreg.fsaverage_sym.lh.log
+T1w fsaverage scripts surfreg.fsaverage_sym.rh.log
+T1w fsaverage surf
+T1w fsaverage surf lh.area
+T1w fsaverage surf lh.avg_curv
+T1w fsaverage surf lh.avg_sulc
+T1w fsaverage surf lh.avg_thickness
+T1w fsaverage surf lh.cortex.patch.3d
+T1w fsaverage surf lh.cortex.patch.flat
+T1w fsaverage surf lh.curv
+T1w fsaverage surf lh.fsaverage_sym.sphere.reg
+T1w fsaverage surf lh.inflated
+T1w fsaverage surf lh.inflated_avg
+T1w fsaverage surf lh.inflated.H
+T1w fsaverage surf lh.inflated.K
+T1w fsaverage surf lh.inflated_pre
+T1w fsaverage surf lh.orig
+T1w fsaverage surf lh.orig_avg
+T1w fsaverage surf lh.orig.avg.area.mgh
+T1w fsaverage surf lh.pial
+T1w fsaverage surf lh.pial_avg
+T1w fsaverage surf lh.pial.avg.area.mgh
+T1w fsaverage surf lh.pial_semi_inflated
+T1w fsaverage surf lh.smoothwm
+T1w fsaverage surf lh.sphere
+T1w fsaverage surf lh.sphere.left_right
+T1w fsaverage surf lh.sphere.reg
+T1w fsaverage surf lh.sphere.reg.avg
+T1w fsaverage surf lh.sulc
+T1w fsaverage surf lh.thickness
+T1w fsaverage surf lh.white
+T1w fsaverage surf lh.white_avg
+T1w fsaverage surf lh.white.avg.area.mgh
+T1w fsaverage surf lh.white_avg.H
+T1w fsaverage surf lh.white_avg.K
+T1w fsaverage surf mris_preproc.surface.lh.log
+T1w fsaverage surf mris_preproc.surface.rh.log
+T1w fsaverage surf rh.area
+T1w fsaverage surf rh.avg_curv
+T1w fsaverage surf rh.avg_sulc
+T1w fsaverage surf rh.avg_thickness
+T1w fsaverage surf rh.cortex.patch.3d
+T1w fsaverage surf rh.cortex.patch.flat
+T1w fsaverage surf rh.curv
+T1w fsaverage surf rh.fsaverage_sym.sphere.reg
+T1w fsaverage surf rh.inflated
+T1w fsaverage surf rh.inflated_avg
+T1w fsaverage surf rh.inflated.H
+T1w fsaverage surf rh.inflated.K
+T1w fsaverage surf rh.inflated_pre
+T1w fsaverage surf rh.orig
+T1w fsaverage surf rh.orig_avg
+T1w fsaverage surf rh.orig.avg.area.mgh
+T1w fsaverage surf rh.pial
+T1w fsaverage surf rh.pial_avg
+T1w fsaverage surf rh.pial.avg.area.mgh
+T1w fsaverage surf rh.pial_semi_inflated
+T1w fsaverage surf rh.smoothwm
+T1w fsaverage surf rh.sphere
+T1w fsaverage surf rh.sphere.left_right
+T1w fsaverage surf rh.sphere.reg
+T1w fsaverage surf rh.sphere.reg.avg
+T1w fsaverage surf rh.sulc
+T1w fsaverage surf rh.thickness
+T1w fsaverage surf rh.white
+T1w fsaverage surf rh.white_avg
+T1w fsaverage surf rh.white.avg.area.mgh
+T1w fsaverage surf rh.white_avg.H
+T1w fsaverage surf rh.white_avg.K
+T1w fsaverage xhemi
+T1w fsaverage xhemi bem
+T1w fsaverage xhemi label
+T1w fsaverage xhemi label lh.aparc.a2009s.annot
+T1w fsaverage xhemi label lh.aparc.annot
+T1w fsaverage xhemi label lh.cortex.label
+T1w fsaverage xhemi label rh.aparc.a2009s.annot
+T1w fsaverage xhemi label rh.aparc.annot
+T1w fsaverage xhemi label rh.cortex.label
+T1w fsaverage xhemi lrrev.pure.register.dat
+T1w fsaverage xhemi lrrev.register.dat
+T1w fsaverage xhemi mri
+T1w fsaverage xhemi mri aparc+aseg.mgz
+T1w fsaverage xhemi mri aseg.mgz
+T1w fsaverage xhemi mri brainmask.mgz
+T1w fsaverage xhemi mri brain.mgz
+T1w fsaverage xhemi mri mri_nu_correct.mni.log
+T1w fsaverage xhemi mri orig
+T1w fsaverage xhemi mri orig.mgz
+T1w fsaverage xhemi mri orig_nu.mgz
+T1w fsaverage xhemi mri T1.mgz
+T1w fsaverage xhemi mri transforms
+T1w fsaverage xhemi mri transforms bak
+T1w fsaverage xhemi mri transforms talairach.auto.xfm
+T1w fsaverage xhemi mri transforms talairach_avi.log
+T1w fsaverage xhemi mri transforms talairach.xfm
+T1w fsaverage xhemi mri transforms talsrcimg_to_711-2C_as_mni_average_305_t4_vox2vox.txt
+T1w fsaverage xhemi scripts
+T1w fsaverage xhemi scripts build-stamp.txt
+T1w fsaverage xhemi scripts lastcall.build-stamp.txt
+T1w fsaverage xhemi scripts patchdir.txt
+T1w fsaverage xhemi scripts recon-all.cmd
+T1w fsaverage xhemi scripts recon-all.done
+T1w fsaverage xhemi scripts recon-all.env
+T1w fsaverage xhemi scripts recon-all.local-copy
+T1w fsaverage xhemi scripts recon-all.log
+T1w fsaverage xhemi scripts recon-all-status.log
+T1w fsaverage xhemi scripts surfreg.fsaverage_sym.lh.log
+T1w fsaverage xhemi scripts surfreg.fsaverage_sym.rh.log
+T1w fsaverage xhemi src
+T1w fsaverage xhemi stats
+T1w fsaverage xhemi surf
+T1w fsaverage xhemi surf lh.area
+T1w fsaverage xhemi surf lh.curv
+T1w fsaverage xhemi surf lh.fsaverage_sym.sphere.reg
+T1w fsaverage xhemi surf lh.inflated
+T1w fsaverage xhemi surf lh.inflated.H
+T1w fsaverage xhemi surf lh.inflated.K
+T1w fsaverage xhemi surf lh.orig
+T1w fsaverage xhemi surf lh.pial
+T1w fsaverage xhemi surf lh.smoothwm
+T1w fsaverage xhemi surf lh.sphere
+T1w fsaverage xhemi surf lh.sulc
+T1w fsaverage xhemi surf lh.thickness
+T1w fsaverage xhemi surf lh.white
+T1w fsaverage xhemi surf rh.area
+T1w fsaverage xhemi surf rh.curv
+T1w fsaverage xhemi surf rh.fsaverage_sym.sphere.reg
+T1w fsaverage xhemi surf rh.inflated
+T1w fsaverage xhemi surf rh.inflated.H
+T1w fsaverage xhemi surf rh.inflated.K
+T1w fsaverage xhemi surf rh.orig
+T1w fsaverage xhemi surf rh.pial
+T1w fsaverage xhemi surf rh.smoothwm
+T1w fsaverage xhemi surf rh.sphere
+T1w fsaverage xhemi surf rh.sulc
+T1w fsaverage xhemi surf rh.thickness
+T1w fsaverage xhemi surf rh.white
+T1w fsaverage xhemi tmp
+T1w fsaverage xhemi touch
+T1w fsaverage xhemi touch talairach.touch
+T1w fsaverage xhemi trash
+T1w fsaverage xhemi xhemireg.lh.log
+T1w fsaverage xhemi xhemireg.rh.log
+T1w {subjectid}
+T1w {subjectid} label
+T1w {subjectid} label aparc.annot.a2009s.ctab
+T1w {subjectid} label aparc.annot.ctab
+T1w {subjectid} label aparc.annot.DKTatlas.ctab
+T1w {subjectid} label BA_exvivo.ctab
+T1w {subjectid} label BA_exvivo.thresh.ctab
+T1w {subjectid} label lh.aparc.a2009s.annot
+T1w {subjectid} label lh.aparc.annot
+T1w {subjectid} label lh.aparc.DKTatlas.annot
+T1w {subjectid} label lh.BA1_exvivo.label
+T1w {subjectid} label lh.BA1_exvivo.thresh.label
+T1w {subjectid} label lh.BA2_exvivo.label
+T1w {subjectid} label lh.BA2_exvivo.thresh.label
+T1w {subjectid} label lh.BA3a_exvivo.label
+T1w {subjectid} label lh.BA3a_exvivo.thresh.label
+T1w {subjectid} label lh.BA3b_exvivo.label
+T1w {subjectid} label lh.BA3b_exvivo.thresh.label
+T1w {subjectid} label lh.BA44_exvivo.label
+T1w {subjectid} label lh.BA44_exvivo.thresh.label
+T1w {subjectid} label lh.BA45_exvivo.label
+T1w {subjectid} label lh.BA45_exvivo.thresh.label
+T1w {subjectid} label lh.BA4a_exvivo.label
+T1w {subjectid} label lh.BA4a_exvivo.thresh.label
+T1w {subjectid} label lh.BA4p_exvivo.label
+T1w {subjectid} label lh.BA4p_exvivo.thresh.label
+T1w {subjectid} label lh.BA6_exvivo.label
+T1w {subjectid} label lh.BA6_exvivo.thresh.label
+T1w {subjectid} label lh.BA_exvivo.annot
+T1w {subjectid} label lh.BA_exvivo.thresh.annot
+T1w {subjectid} label lh.cortex.label
+T1w {subjectid} label lh.entorhinal_exvivo.label
+T1w {subjectid} label lh.entorhinal_exvivo.thresh.label
+T1w {subjectid} label lh.MT_exvivo.label
+T1w {subjectid} label lh.MT_exvivo.thresh.label
+T1w {subjectid} label lh.perirhinal_exvivo.label
+T1w {subjectid} label lh.perirhinal_exvivo.thresh.label
+T1w {subjectid} label lh.V1_exvivo.label
+T1w {subjectid} label lh.V1_exvivo.thresh.label
+T1w {subjectid} label lh.V2_exvivo.label
+T1w {subjectid} label lh.V2_exvivo.thresh.label
+T1w {subjectid} label rh.aparc.a2009s.annot
+T1w {subjectid} label rh.aparc.annot
+T1w {subjectid} label rh.aparc.DKTatlas.annot
+T1w {subjectid} label rh.BA1_exvivo.label
+T1w {subjectid} label rh.BA1_exvivo.thresh.label
+T1w {subjectid} label rh.BA2_exvivo.label
+T1w {subjectid} label rh.BA2_exvivo.thresh.label
+T1w {subjectid} label rh.BA3a_exvivo.label
+T1w {subjectid} label rh.BA3a_exvivo.thresh.label
+T1w {subjectid} label rh.BA3b_exvivo.label
+T1w {subjectid} label rh.BA3b_exvivo.thresh.label
+T1w {subjectid} label rh.BA44_exvivo.label
+T1w {subjectid} label rh.BA44_exvivo.thresh.label
+T1w {subjectid} label rh.BA45_exvivo.label
+T1w {subjectid} label rh.BA45_exvivo.thresh.label
+T1w {subjectid} label rh.BA4a_exvivo.label
+T1w {subjectid} label rh.BA4a_exvivo.thresh.label
+T1w {subjectid} label rh.BA4p_exvivo.label
+T1w {subjectid} label rh.BA4p_exvivo.thresh.label
+T1w {subjectid} label rh.BA6_exvivo.label
+T1w {subjectid} label rh.BA6_exvivo.thresh.label
+T1w {subjectid} label rh.BA_exvivo.annot
+T1w {subjectid} label rh.BA_exvivo.thresh.annot
+T1w {subjectid} label rh.cortex.label
+T1w {subjectid} label rh.entorhinal_exvivo.label
+T1w {subjectid} label rh.entorhinal_exvivo.thresh.label
+T1w {subjectid} label rh.MT_exvivo.label
+T1w {subjectid} label rh.MT_exvivo.thresh.label
+T1w {subjectid} label rh.perirhinal_exvivo.label
+T1w {subjectid} label rh.perirhinal_exvivo.thresh.label
+T1w {subjectid} label rh.V1_exvivo.label
+T1w {subjectid} label rh.V1_exvivo.thresh.label
+T1w {subjectid} label rh.V2_exvivo.label
+T1w {subjectid} label rh.V2_exvivo.thresh.label
+T1w {subjectid} mri
+T1w {subjectid} mri aparc.a2009s+aseg.mgz
+T1w {subjectid} mri aparc+aseg.mgz
+T1w {subjectid} mri aparc.DKTatlas+aseg.mgz
+T1w {subjectid} mri aseg.auto.mgz
+T1w {subjectid} mri aseg.auto_noCCseg.label_intensities.txt
+T1w {subjectid} mri aseg.auto_noCCseg.mgz
+T1w {subjectid} mri aseg.mgz
+T1w {subjectid} mri aseg.presurf.hypos.mgz
+T1w {subjectid} mri aseg.presurf.mgz
+T1w {subjectid} mri brain.finalsurfs.mgz
+T1w {subjectid} mri brainmask.auto.mgz
+T1w {subjectid} mri brainmask.mgz
+T1w {subjectid} mri brain.mgz
+T1w {subjectid} mri conf.T2.mgz
+T1w {subjectid} mri c_ras.mat
+T1w {subjectid} mri ctrl_pts.mgz
+T1w {subjectid} mri extern.emreg.mask.mgz
+T1w {subjectid} mri filled.mgz
+T1w {subjectid} mri lh.ribbon.mgz
+T1w {subjectid} mri mri_nu_correct.mni.log
+T1w {subjectid} mri mri_nu_correct.mni.log.bak
+T1w {subjectid} mri norm.mgz
+T1w {subjectid} mri nu.mgz
+T1w {subjectid} mri orig
+T1w {subjectid} mri orig 001.mgz
+T1w {subjectid} mri orig.mgz
+T1w {subjectid} mri orig_nu.mgz
+T1w {subjectid} mri orig T2raw.mgz
+T1w {subjectid} mri Q.lta~
+T1w {subjectid} mri rawavg.aseg.presurf.mgz
+T1w {subjectid} mri rawavg.brain.finalsurfs.conf.mgz
+T1w {subjectid} mri rawavg.brain.finalsurfs.mgz
+T1w {subjectid} mri rawavg.brain.fs.mgz
+T1w {subjectid} mri rawavg.cmdc0.mgz
+T1w {subjectid} mri rawavg.cmdc.mgz
+T1w {subjectid} mri rawavg.filled.mgz
+T1w {subjectid} mri rawavg.mgz
+T1w {subjectid} mri rawavg.norm.mgz
+T1w {subjectid} mri rawavg.T2.mgz
+T1w {subjectid} mri rawavg.T2.norm.mgz
+T1w {subjectid} mri rawavg.T2.prenorm.mgz
+T1w {subjectid} mri rawavg.wm.mgz
+T1w {subjectid} mri rh.ribbon.mgz
+T1w {subjectid} mri ribbon.mgz
+T1w {subjectid} mri segment.dat
+T1w {subjectid} mri T1.mgz
+T1w {subjectid} mri T1w_hires.nii.gz
+T1w {subjectid} mri T1wMulT2w_hires.nii.gz
+T1w {subjectid} mri T2.mgz
+T1w {subjectid} mri T2w_hires.nii.gz
+T1w {subjectid} mri talairach.label_intensities.txt
+T1w {subjectid} mri talairach.log
+T1w {subjectid} mri talairach_with_externmask.log
+T1w {subjectid} mri transforms
+T1w {subjectid} mri transforms bak
+T1w {subjectid} mri transforms cc_up.lta
+T1w {subjectid} mri transforms conf2rawavg.dat
+T1w {subjectid} mri transforms conf2rawavg.lta
+T1w {subjectid} mri transforms eye.dat
+T1w {subjectid} mri transforms orig2rawavg.dat
+T1w {subjectid} mri transforms orig-to-rawavg.lta
+T1w {subjectid} mri transforms rawavg2conf.dat
+T1w {subjectid} mri transforms rawavg2conf.lta
+T1w {subjectid} mri transforms T2raw.auto.dat
+T1w {subjectid} mri transforms T2raw.auto.dat~
+T1w {subjectid} mri transforms T2raw.auto.dat.log
+T1w {subjectid} mri transforms T2raw.auto.dat.mincost
+T1w {subjectid} mri transforms T2raw.auto.dat.param
+T1w {subjectid} mri transforms T2raw.auto.dat.sum
+T1w {subjectid} mri transforms T2raw.auto.lta
+T1w {subjectid} mri transforms T2raw.lta
+T1w {subjectid} mri transforms T2raw.rawavg.lta
+T1w {subjectid} mri transforms T2wtoT1w.mat
+T1w {subjectid} mri transforms talairach.auto.xfm
+T1w {subjectid} mri transforms talairach.auto.xfm.lta
+T1w {subjectid} mri transforms talairach_avi.log
+T1w {subjectid} mri transforms talairach_avi_QA.log
+T1w {subjectid} mri transforms talairach.lta
+T1w {subjectid} mri transforms talairach.m3z
+T1w {subjectid} mri transforms talairach_with_externmask.lta
+T1w {subjectid} mri transforms talairach.xfm
+T1w {subjectid} mri transforms talsrcimg_to_711-2C_as_mni_average_305_t4_vox2vox.txt
+T1w {subjectid} mri wm.asegedit.mgz
+T1w {subjectid} mri wm.mgz
+T1w {subjectid} mri wmparc.mgz
+T1w {subjectid} mri wm.seg.mgz
+T1w {subjectid} scripts
+T1w {subjectid} scripts build-stamp.txt
+T1w {subjectid} scripts conf2hires.log
+T1w {subjectid} scripts DoConf2Hires
+T1w {subjectid} scripts lastcall.build-stamp.txt
+T1w {subjectid} scripts patchdir.txt
+T1w {subjectid} scripts pctsurfcon.log
+T1w {subjectid} scripts pctsurfcon.log.old
+T1w {subjectid} scripts ponscc.cut.log
+T1w {subjectid} scripts recon-all.cmd
+T1w {subjectid} scripts recon-all.done
+T1w {subjectid} scripts recon-all.env
+T1w {subjectid} scripts recon-all.local-copy
+T1w {subjectid} scripts recon-all.log
+T1w {subjectid} scripts recon-all-status.log
+T1w {subjectid} stats
+T1w {subjectid} stats aseg.stats
+T1w {subjectid} stats lh.aparc.a2009s.stats
+T1w {subjectid} stats lh.aparc.DKTatlas.stats
+T1w {subjectid} stats lh.aparc.pial.stats
+T1w {subjectid} stats lh.aparc.stats
+T1w {subjectid} stats lh.BA_exvivo.stats
+T1w {subjectid} stats lh.BA_exvivo.thresh.stats
+T1w {subjectid} stats lh.curv.stats
+T1w {subjectid} stats lh.w-g.pct.stats
+T1w {subjectid} stats rh.aparc.a2009s.stats
+T1w {subjectid} stats rh.aparc.DKTatlas.stats
+T1w {subjectid} stats rh.aparc.pial.stats
+T1w {subjectid} stats rh.aparc.stats
+T1w {subjectid} stats rh.BA_exvivo.stats
+T1w {subjectid} stats rh.BA_exvivo.thresh.stats
+T1w {subjectid} stats rh.curv.stats
+T1w {subjectid} stats rh.w-g.pct.stats
+T1w {subjectid} stats wmparc.stats
+T1w {subjectid} surf
+T1w {subjectid} surf lh.area
+T1w {subjectid} surf lh.area.mid
+T1w {subjectid} surf lh.area.pial
+T1w {subjectid} surf lh.avg_curv
+T1w {subjectid} surf lh.bak.thickness
+T1w {subjectid} surf lh.curv
+T1w {subjectid} surf lh.curv.pial
+T1w {subjectid} surf lh.defect_borders
+T1w {subjectid} surf lh.defect_chull
+T1w {subjectid} surf lh.defect_labels
+T1w {subjectid} surf lh.inflated
+T1w {subjectid} surf lh.inflated.H
+T1w {subjectid} surf lh.inflated.K
+T1w {subjectid} surf lh.inflated.nofix
+T1w {subjectid} surf lh.jacobian_white
+T1w {subjectid} surf lh.orig
+T1w {subjectid} surf lh.orig.nofix
+T1w {subjectid} surf lh.pial
+T1w {subjectid} surf lh.pial.rawavg
+T1w {subjectid} surf lh.pial.rawavg.conf
+T1w {subjectid} surf lh.qsphere.nofix
+T1w {subjectid} surf lh.smoothwm
+T1w {subjectid} surf lh.smoothwm.BE.crv
+T1w {subjectid} surf lh.smoothwm.C.crv
+T1w {subjectid} surf lh.smoothwm.FI.crv
+T1w {subjectid} surf lh.smoothwm.H.crv
+T1w {subjectid} surf lh.smoothwm.K1.crv
+T1w {subjectid} surf lh.smoothwm.K2.crv
+T1w {subjectid} surf lh.smoothwm.K.crv
+T1w {subjectid} surf lh.smoothwm.nofix
+T1w {subjectid} surf lh.smoothwm.S.crv
+T1w {subjectid} surf lh.sphere
+T1w {subjectid} surf lh.sphere.reg
+T1w {subjectid} surf lh.sulc
+T1w {subjectid} surf lh.thickness
+T1w {subjectid} surf lh.volume
+T1w {subjectid} surf lh.w-g.pct.mgh
+T1w {subjectid} surf lh.white
+T1w {subjectid} surf lh.white.deformed
+T1w {subjectid} surf lh.white.H
+T1w {subjectid} surf lh.white.K
+T1w {subjectid} surf lh.white.preaparc
+T1w {subjectid} surf lh.white.preaparc.H
+T1w {subjectid} surf lh.white.preaparc.K
+T1w {subjectid} surf lh.white.preaparc.rawavg
+T1w {subjectid} surf lh.white.rawavg
+T1w {subjectid} surf lh.white.rawavg.conf
+T1w {subjectid} surf lh.woT2.pial
+T1w {subjectid} surf lh.woT2.pial.rawavg
+T1w {subjectid} surf lh.woT2.pial.rawavg.conf
+T1w {subjectid} surf rh.area
+T1w {subjectid} surf rh.area.mid
+T1w {subjectid} surf rh.area.pial
+T1w {subjectid} surf rh.avg_curv
+T1w {subjectid} surf rh.bak.thickness
+T1w {subjectid} surf rh.curv
+T1w {subjectid} surf rh.curv.pial
+T1w {subjectid} surf rh.defect_borders
+T1w {subjectid} surf rh.defect_chull
+T1w {subjectid} surf rh.defect_labels
+T1w {subjectid} surf rh.inflated
+T1w {subjectid} surf rh.inflated.H
+T1w {subjectid} surf rh.inflated.K
+T1w {subjectid} surf rh.inflated.nofix
+T1w {subjectid} surf rh.jacobian_white
+T1w {subjectid} surf rh.orig
+T1w {subjectid} surf rh.orig.nofix
+T1w {subjectid} surf rh.pial
+T1w {subjectid} surf rh.pial.rawavg
+T1w {subjectid} surf rh.pial.rawavg.conf
+T1w {subjectid} surf rh.qsphere.nofix
+T1w {subjectid} surf rh.smoothwm
+T1w {subjectid} surf rh.smoothwm.BE.crv
+T1w {subjectid} surf rh.smoothwm.C.crv
+T1w {subjectid} surf rh.smoothwm.FI.crv
+T1w {subjectid} surf rh.smoothwm.H.crv
+T1w {subjectid} surf rh.smoothwm.K1.crv
+T1w {subjectid} surf rh.smoothwm.K2.crv
+T1w {subjectid} surf rh.smoothwm.K.crv
+T1w {subjectid} surf rh.smoothwm.nofix
+T1w {subjectid} surf rh.smoothwm.S.crv
+T1w {subjectid} surf rh.sphere
+T1w {subjectid} surf rh.sphere.reg
+T1w {subjectid} surf rh.sulc
+T1w {subjectid} surf rh.thickness
+T1w {subjectid} surf rh.volume
+T1w {subjectid} surf rh.w-g.pct.mgh
+T1w {subjectid} surf rh.white
+T1w {subjectid} surf rh.white.deformed
+T1w {subjectid} surf rh.white.H
+T1w {subjectid} surf rh.white.K
+T1w {subjectid} surf rh.white.preaparc
+T1w {subjectid} surf rh.white.preaparc.H
+T1w {subjectid} surf rh.white.preaparc.K
+T1w {subjectid} surf rh.white.preaparc.rawavg
+T1w {subjectid} surf rh.white.rawavg
+T1w {subjectid} surf rh.white.rawavg.conf
+T1w {subjectid} surf rh.woT2.pial
+T1w {subjectid} surf rh.woT2.pial.rawavg
+T1w {subjectid} surf rh.woT2.pial.rawavg.conf
+T1w {subjectid} tmp
+T1w {subjectid} touch
+T1w {subjectid} touch aparc.a2009s2aseg.touch
+T1w {subjectid} touch aparc.DKTatlas2aseg.touch
+T1w {subjectid} touch apas2aseg.touch
+T1w {subjectid} touch asegmerge.touch
+T1w {subjectid} touch ca_label.touch
+T1w {subjectid} touch ca_normalize.touch
+T1w {subjectid} touch ca_register.touch
+T1w {subjectid} touch conf2hires
+T1w {subjectid} touch conform.touch
+T1w {subjectid} touch cortical_ribbon.touch
+T1w {subjectid} touch em_register.touch
+T1w {subjectid} touch fill.touch
+T1w {subjectid} touch inorm1.touch
+T1w {subjectid} touch inorm2.touch
+T1w {subjectid} touch lh.aparc2.touch
+T1w {subjectid} touch lh.aparcstats2.touch
+T1w {subjectid} touch lh.aparcstats3.touch
+T1w {subjectid} touch lh.aparcstats.touch
+T1w {subjectid} touch lh.aparc.touch
+T1w {subjectid} touch lh.avgcurv.touch
+T1w {subjectid} touch lh.curvstats.touch
+T1w {subjectid} touch lh.final_surfaces.touch
+T1w {subjectid} touch lh.inflate1.touch
+T1w {subjectid} touch lh.inflate2.touch
+T1w {subjectid} touch lh.inflate.H.K.touch
+T1w {subjectid} touch lh.jacobian_white.touch
+T1w {subjectid} touch lh.pctsurfcon.touch
+T1w {subjectid} touch lh.qsphere.touch
+T1w {subjectid} touch lh.smoothwm1.touch
+T1w {subjectid} touch lh.smoothwm2.touch
+T1w {subjectid} touch lh.sphmorph.touch
+T1w {subjectid} touch lh.sphreg.touch
+T1w {subjectid} touch lh.surfvolume.touch
+T1w {subjectid} touch lh.tessellate.touch
+T1w {subjectid} touch lh.topofix.touch
+T1w {subjectid} touch lh.white.H.K.touch
+T1w {subjectid} touch lh.white_surface.touch
+T1w {subjectid} touch nu.touch
+T1w {subjectid} touch relabelhypos.touch
+T1w {subjectid} touch rh.aparc2.touch
+T1w {subjectid} touch rh.aparcstats2.touch
+T1w {subjectid} touch rh.aparcstats3.touch
+T1w {subjectid} touch rh.aparcstats.touch
+T1w {subjectid} touch rh.aparc.touch
+T1w {subjectid} touch rh.avgcurv.touch
+T1w {subjectid} touch rh.curvstats.touch
+T1w {subjectid} touch rh.final_surfaces.touch
+T1w {subjectid} touch rh.inflate1.touch
+T1w {subjectid} touch rh.inflate2.touch
+T1w {subjectid} touch rh.inflate.H.K.touch
+T1w {subjectid} touch rh.jacobian_white.touch
+T1w {subjectid} touch rh.pctsurfcon.touch
+T1w {subjectid} touch rh.qsphere.touch
+T1w {subjectid} touch rh.smoothwm1.touch
+T1w {subjectid} touch rh.smoothwm2.touch
+T1w {subjectid} touch rh.sphmorph.touch
+T1w {subjectid} touch rh.sphreg.touch
+T1w {subjectid} touch rh.surfvolume.touch
+T1w {subjectid} touch rh.tessellate.touch
+T1w {subjectid} touch rh.topofix.touch
+T1w {subjectid} touch rh.white.H.K.touch
+T1w {subjectid} touch rh.white_surface.touch
+T1w {subjectid} touch rusage.mri_ca_register.dat
+T1w {subjectid} touch rusage.mris_fix_topology.lh.dat
+T1w {subjectid} touch rusage.mris_fix_topology.rh.dat
+T1w {subjectid} touch rusage.mris_inflate.lh.dat
+T1w {subjectid} touch rusage.mris_inflate.rh.dat
+T1w {subjectid} touch rusage.mris_register.lh.dat
+T1w {subjectid} touch rusage.mris_register.rh.dat
+T1w {subjectid} touch rusage.mris_sphere.lh.dat
+T1w {subjectid} touch rusage.mris_sphere.rh.dat
+T1w {subjectid} touch segstats.touch
+T1w {subjectid} touch skull.lta.touch
+T1w {subjectid} touch skull_strip.touch
+T1w {subjectid} touch talairach.touch
+T1w {subjectid} touch wmaparc.stats.touch
+T1w {subjectid} touch wmaparc.touch
+T1w {subjectid} touch wmsegment.touch
+T1w {subjectid} trash
+T1w Native
+T1w Native {subjectid}.L.inflated.native.surf.gii
+T1w Native {subjectid}.L.midthickness.native.surf.gii
+T1w Native {subjectid}.L.pial.native.surf.gii
+T1w Native {subjectid}.L.very_inflated.native.surf.gii
+T1w Native {subjectid}.L.white.native.surf.gii
+T1w Native {subjectid}.native.wb.spec
+T1w Native {subjectid}.R.inflated.native.surf.gii
+T1w Native {subjectid}.R.midthickness.native.surf.gii
+T1w Native {subjectid}.R.pial.native.surf.gii
+T1w Native {subjectid}.R.very_inflated.native.surf.gii
+T1w Native {subjectid}.R.white.native.surf.gii
+T1w ribbon.nii.gz
+T1w T1w1_gdc.nii.gz
+T1w T1w1_GradientDistortionUnwarp
+T1w T1w1_GradientDistortionUnwarp fullWarp_abs.nii.gz
+T1w T1w1_GradientDistortionUnwarp log.txt
+T1w T1w1_GradientDistortionUnwarp qa.txt
+T1w T1w1_GradientDistortionUnwarp T1w1.nii.gz
+T1w T1w1_GradientDistortionUnwarp T1w1_vol1.nii.gz
+T1w T1w1_GradientDistortionUnwarp trilinear.nii.gz
+T1w T1w_acpc_brain_mask.nii.gz
+T1w T1w_acpc_brain.nii.gz
+T1w T1w_acpc_dc_brain.nii.gz
+T1w T1w_acpc_dc.nii.gz
+T1w T1w_acpc_dc_restore_brain.nii.gz
+T1w T1w_acpc_dc_restore.nii.gz
+T1w T1w_acpc.nii.gz
+T1w T1wDividedByT2w.nii.gz
+T1w T1wDividedByT2w_ribbon.nii.gz
+T1w T1w.nii.gz
+T1w T2w_acpc_dc.nii.gz
+T1w T2w_acpc_dc_restore_brain.nii.gz
+T1w T2w_acpc_dc_restore.nii.gz
+T1w wmparc_1mm.nii.gz
+T1w wmparc.nii.gz
+T1w xfms
+T1w xfms acpc.mat
+T1w xfms OrigT1w2standard.nii.gz
+T1w xfms OrigT1w2T1w.nii.gz
+T1w xfms OrigT1w2T1w_PreFS.nii.gz
+T1w xfms OrigT2w2standard.nii.gz
+T1w xfms OrigT2w2T1w.nii.gz
+T1w xfms OrigT2w2T1w_PreFS.nii.gz
+T1w xfms T1w1_gdc_warp_jacobian.nii.gz
+T1w xfms T1w1_gdc_warp.nii.gz
+T1w xfms T1w_dc.nii.gz
+T1w xfms T2w_reg_dc.nii.gz
+T2w
+T2w ACPCAlignment
+T2w ACPCAlignment acpc_final.nii.gz
+T2w ACPCAlignment full2roi.mat
+T2w ACPCAlignment full2std.mat
+T2w ACPCAlignment log.txt
+T2w ACPCAlignment qa.txt
+T2w ACPCAlignment robustroi.nii.gz
+T2w ACPCAlignment roi2full.mat
+T2w ACPCAlignment roi2std.mat
+T2w BrainExtraction_FNIRTbased
+T2w BrainExtraction_FNIRTbased IntensityModulatedT1.nii.gz
+T2w BrainExtraction_FNIRTbased log.txt
+T2w BrainExtraction_FNIRTbased NonlinearIntensities.nii.gz
+T2w BrainExtraction_FNIRTbased NonlinearIntensities.nii.gz.txt
+T2w BrainExtraction_FNIRTbased NonlinearRegJacobians.nii.gz
+T2w BrainExtraction_FNIRTbased NonlinearReg.nii.gz
+T2w BrainExtraction_FNIRTbased NonlinearReg.txt
+T2w BrainExtraction_FNIRTbased qa.txt
+T2w BrainExtraction_FNIRTbased roughlin.mat
+T2w BrainExtraction_FNIRTbased standard2str.nii.gz
+T2w BrainExtraction_FNIRTbased str2standard.nii.gz
+T2w BrainExtraction_FNIRTbased T2w_acpc_to_MNI_nonlin.nii.gz
+T2w BrainExtraction_FNIRTbased T2w_acpc_to_MNI_roughlin.nii.gz
+T2w T2w1_gdc.nii.gz
+T2w T2w1_GradientDistortionUnwarp
+T2w T2w1_GradientDistortionUnwarp fullWarp_abs.nii.gz
+T2w T2w1_GradientDistortionUnwarp log.txt
+T2w T2w1_GradientDistortionUnwarp qa.txt
+T2w T2w1_GradientDistortionUnwarp T2w1.nii.gz
+T2w T2w1_GradientDistortionUnwarp T2w1_vol1.nii.gz
+T2w T2w1_GradientDistortionUnwarp trilinear.nii.gz
+T2w T2w_acpc_brain_mask.nii.gz
+T2w T2w_acpc_brain.nii.gz
+T2w T2w_acpc.nii.gz
+T2w T2w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg
+T2w T2wToT1wDistortionCorrectAndReg FieldMap
+T2w T2wToT1wDistortionCorrectAndReg Fieldmap2T1w_acpc.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T1w_acpc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T1w_acpc_ShiftMap.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T1w_acpc_Warp.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Fieldmap2T2w_acpc.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T2w_acpc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T2w_acpc_ShiftMap.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap2T2w_acpc_Warp.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap acqparams.txt
+T2w T2wToT1wDistortionCorrectAndReg FieldMap BothPhases.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap BothPhases.topup_log
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Coefficents_fieldcoef.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Coefficents_movpar.txt
+T2w T2wToT1wDistortionCorrectAndReg FieldMap fullWarp_abs.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Jacobian_01.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Jacobian_02.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Jacobian.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap log.txt
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Magnitude_brain_mask.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Magnitude_brain.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Magnitude.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Magnitudes.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap Mask.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap MotionMatrix_01.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap MotionMatrix_02.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_gdc_dc_jac.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_gdc_dc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_gdc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_gdc_warp_jacobian.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_gdc_warp.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_mask_gdc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_mask.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseOne_vol1.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_gdc_dc_jac.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_gdc_dc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_gdc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_gdc_warp_jacobian.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_gdc_warp.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_mask_gdc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_mask.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap PhaseTwo_vol1.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap qa.txt
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef2PhaseTwo_gdc.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef2PhaseTwo_gdc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef2WarpField.mat
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef_dc_jac.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef_dc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap SBRef.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap_ShiftMapT1w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap_ShiftMapT2w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap TopupField.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap trilinear.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap WarpField_01.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap WarpField_02.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap WarpField.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap_WarpT1w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg FieldMap_WarpT2w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Jacobian.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg log.txt
+T2w T2wToT1wDistortionCorrectAndReg Magnitude_brain.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Magnitude_brain_warppedT1w2T1w_acpc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Magnitude_brain_warppedT1w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Magnitude_brain_warppedT2w2T2w_acpc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Magnitude_brain_warppedT2w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg Magnitude.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg qa.txt
+T2w T2wToT1wDistortionCorrectAndReg T1w_acpc_brain.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T1w_acpc.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w sqrtT1wbyT2w.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_dc_reg.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_reg_fast_wmedge.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_reg_fast_wmseg.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_reg_init.mat
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_reg.mat
+T2w T2wToT1wDistortionCorrectAndReg T2w2T1w T2w_reg.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w_acpc_brain.nii.gz
+T2w T2wToT1wDistortionCorrectAndReg T2w_acpc.nii.gz
+T2w xfms
+T2w xfms acpc.mat
+T2w xfms T2w1_gdc_warp_jacobian.nii.gz
+T2w xfms T2w1_gdc_warp.nii.gz

@@ -8,39 +8,56 @@ StructuralPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#structural
+  - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
       template: structural/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: structural/XNAT_GET.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: structural/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
-      template: structural/check_data.jinja2
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
+  - generate_file:
+      template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -48,7 +65,7 @@ StructuralPreprocessing:
 #  - function: copy_free_surfer_assessor_script
 #  - generate_file:
 #      template: generic/freesurfer.jinja2
-#      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
+#      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
 #      variable: FREESURFER_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -68,39 +85,56 @@ StructuralPreprocessingHandEdit:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: hand_edit_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#structural_handedit
+  - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
       template: structural/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: generic/XNAT_GET.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -108,7 +142,7 @@ StructuralPreprocessingHandEdit:
 # - function: copy_free_surfer_assessor_script
 # - generate_file:
 #     template: generic/freesurfer.jinja2
-#     filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
+#     filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CREATE_FREESURFER_ASSESSOR_job.sh"
 #     variable: FREESURFER_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -126,39 +160,56 @@ FunctionalPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#functional
+  - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
       template: functional/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: generic/XNAT_GET.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: functional/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: functional/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -181,15 +232,13 @@ MultiRunIcaFixProcessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: multirunicafix_process_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#multirunicafix
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -203,29 +252,48 @@ MultiRunIcaFixProcessing:
       variable: BATCH_FILE
 
   - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
+  - generate_file:
       template: multirunicafix/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: generic/XNAT_GET.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: multirunicafix/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -249,15 +317,13 @@ MsmAllProcessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: msmall_process_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#msmall
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -271,29 +337,48 @@ MsmAllProcessing:
       variable: BATCH_FILE
 
   - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
+  - generate_file:
       template: msmall/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: generic/XNAT_GET.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: msmall/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: msmall/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
@@ -316,15 +401,13 @@ DiffusionPreprocessing:
   - function: split_subject_components
   - function: get_project_acronym
   - load_variables: diffusion_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
-  - load_variables: common_vars
-  - function: set_credentials_from_file
+  - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - dump_variables:
       filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
       variable: XNAT_PBS_SETUP_SCRIPT_PATH
-  - load_variables: scripts.yaml#diffusion
 
   # Only for msmall, multirunicafix, and diffusion
   - function: set_qunex_scanlist_dwi
@@ -334,29 +417,48 @@ DiffusionPreprocessing:
       variable: BATCH_FILE
 
   - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
+  - generate_file:
       template: diffusion/run_qunex.jinja2
-      filepath: "${WORKING_DIR}/run_qunex.sh"
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
+      template: generic/XNAT_GET.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
       template: diffusion/get_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: diffusion/process_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: diffusion/clean_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
+      template: generic/XNAT_PUT_WORKING_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${WORKING_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
       variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
       filepath: "${MARK_COMPLETION_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"

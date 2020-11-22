@@ -1,7 +1,5 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=WORKING_DIR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
-
-source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
+{{ pbs_head(log_dir=CHECK_DATA_DIR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
 {% block pre -%}
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
@@ -12,10 +10,11 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
   {%- if USE_SCRATCH_FOR_PROCESSING %}
 ####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
-  BASE="{{ WORKING_DIR_BASENAME }}"
-  SCRATCH="{{ SCRATCH_SPACE }}"
-  ORIGINAL="{{ BUILD_SPACE }}"
+  BASE="{{ SUBJECT_SESSION }}"
+  SCRATCH="{{ SCRATCH_SPACE }}/{{ WORKING_DIR_BASENAME }}"
+  ORIGINAL="{{ BUILD_SPACE }}/{{ WORKING_DIR_BASENAME }}"
 
+  mkdir -p $SCRATCH
   mv $ORIGINAL/$BASE $SCRATCH
 
 {% endif %}
@@ -23,19 +22,15 @@ source {{ XNAT_PBS_SETUP_SCRIPT_PATH }}
 
 
 {{ singularity(
-        container=SINGULARITY_CONTAINER_PATH,
+        container=QUNEX_CONTAINER,
         runpath=RUN_QUNEX_SCRIPT,
         bindpath=PROCESS_DATA_BINDPATH,
-        params=PROCESS_DATA_PARAMS,
 		nvidia=PROCESS_NVIDIA
 ) }}
-
-# prior version qunex runpath was: {{ SINGULARITY_QUNEXRUN_PATH }}
-#   instead of: {{ RUN_QUNEX_SCRIPT }}
-# TODO: should all instances of SINGULARITY_QUNEXRUN_PATH be replaced by RUN_QUNEX_SCRIPT
 
 {% block content %}
 {% if USE_SCRATCH_FOR_PROCESSING %}
 mv $SCRATCH/$BASE $ORIGINAL
+rm -rf $SCRATCH
 {% endif %}
 {% endblock %}

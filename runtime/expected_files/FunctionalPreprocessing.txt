@@ -1,0 +1,200 @@
+MNINonLinear
+MNINonLinear Results
+MNINonLinear Results {scan}
+MNINonLinear Results {scan} brainmask_fs.2.nii.gz
+MNINonLinear Results {scan} Movement_AbsoluteRMS_mean.txt
+MNINonLinear Results {scan} Movement_AbsoluteRMS.txt
+MNINonLinear Results {scan} Movement_Regressors_dt.txt
+MNINonLinear Results {scan} Movement_Regressors.txt
+MNINonLinear Results {scan} Movement_RelativeRMS_mean.txt
+MNINonLinear Results {scan} Movement_RelativeRMS.txt
+MNINonLinear Results {scan} {scan}_Atlas.dtseries.nii
+MNINonLinear Results {scan} {scan}_Atlas_nonzero.stats.txt
+MNINonLinear Results {scan} {scan}_finalmask.nii.gz
+MNINonLinear Results {scan} {scan}_finalmask.stats.txt
+MNINonLinear Results {scan} {scan}_fovmask.nii.gz
+MNINonLinear Results {scan} {scan}_Jacobian.nii.gz
+MNINonLinear Results {scan} {scan}.L.native.func.gii
+MNINonLinear Results {scan} {scan}.nii.gz
+MNINonLinear Results {scan} {scan}_PhaseOne_gdc_dc.nii.gz
+MNINonLinear Results {scan} {scan}_PhaseTwo_gdc_dc.nii.gz
+MNINonLinear Results {scan} {scan}.R.native.func.gii
+MNINonLinear Results {scan} {scan}_SBRef.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_norm_modulate.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_norm_modulate_ribbon.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon_norm.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping cov_ribbon_norm_s5.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping goodvoxels.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.cov.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.goodvoxels.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.goodvoxels.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping L.mean.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping mask.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping mean.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.cov.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.goodvoxels.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.goodvoxels.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping ribbon_only.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean_all.32k_fs_LR.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean_all.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping R.mean.native.func.gii
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping SmoothNorm.nii.gz
+MNINonLinear Results {scan} RibbonVolumeToSurfaceMapping std.nii.gz
+MNINonLinear xfms
+MNINonLinear xfms {scan}2standard.nii.gz
+MNINonLinear xfms standard2{scan}.nii.gz
+{scan}
+{scan} BiasField.2.nii.gz
+{scan} brainmask_fs.2.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat~
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat.log
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat.mincost
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat.param
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased EPItoT1w.dat.sum
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap acqparams.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap BothPhases.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap BothPhases.topup_log
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Coefficents_fieldcoef.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Coefficents_movpar.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap fullWarp_abs.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Jacobian_01.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Jacobian_02.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Jacobian.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap log.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Magnitude_brain_mask.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Magnitude_brain.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Magnitude.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Magnitudes.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap Mask.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap MotionMatrix_01.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap MotionMatrix_02.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc_dc_jac.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc.nii.gz
+# Generates PhaseTwo_gdc_one.nii.gz or PhaseOne_gdc_one.nii.gz
+# {scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc_one.nii.gz
+# Generates SBRef2PhaseOne_gdc.mat or SBRef2PhaseTwo_gdc.mat
+# {scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef2PhaseOne_gdc.mat
+# Generates SBRef2PhaseOne_gdc.nii.gz or SBRef2PhaseTwo_gdc.nii.gz
+# {scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef2PhaseOne_gdc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc_warp_jacobian.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_gdc_warp.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_mask_gdc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_mask.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseOne_vol1.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_gdc_dc_jac.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_gdc_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_gdc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_gdc_warp_jacobian.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_gdc_warp.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_mask_gdc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_mask.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap PhaseTwo_vol1.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap qa.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef2WarpField.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef_dc_jac.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap SBRef.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap TopupField.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap trilinear.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap WarpField_01.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap WarpField_02.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased FieldMap WarpField.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased fMRI2str.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased fMRI2str.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased fMRI2str_refinement.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Jacobian2T1w.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Jacobian.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased log.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased PhaseOne_gdc_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased PhaseOne_gdc_dc_unbias.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased PhaseTwo_gdc_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased PhaseTwo_gdc_dc_unbias.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased qa.txt
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased SBRef_dc.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init_fast_wmedge.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init_fast_wmseg.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init_init.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init.mat
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w_init_warp.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted2T1w.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased Scout_gdc_undistorted.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased T1w_acpc_dc_restore_brain.nii.gz
+{scan} DistortionCorrectionAndEPIToT1wReg_FLIRTBBRAndFreeSurferBBRbased WarpField.nii.gz
+{scan} GradientDistortionUnwarp
+{scan} GradientDistortionUnwarp fullWarp_abs.nii.gz
+{scan} GradientDistortionUnwarp log.txt
+{scan} GradientDistortionUnwarp qa.txt
+{scan} GradientDistortionUnwarp {scan}_orig_vol1.nii.gz
+{scan} GradientDistortionUnwarp trilinear.nii.gz
+{scan} Jacobian_MNI.2.nii.gz
+{scan} Jacobian.nii.gz
+{scan} MotionCorrection
+{scan} MotionCorrection {scan}_mc.ecclog
+{scan} MotionCorrection {scan}_mc.par
+{scan} MotionMatrices
+{scan} Movement_AbsoluteRMS_mean.txt
+{scan} Movement_AbsoluteRMS.txt
+{scan} Movement_Regressors_dt.txt
+{scan} Movement_Regressors.txt
+{scan} Movement_RelativeRMS_mean.txt
+{scan} Movement_RelativeRMS.txt
+{scan} OneStepResampling
+{scan} OneStepResampling BiasField.2.nii.gz
+{scan} OneStepResampling brainmask_fs.2.nii.gz
+{scan} OneStepResampling gdc_dc_jacobian.nii.gz
+{scan} OneStepResampling gdc_dc_warp.nii.gz
+{scan} OneStepResampling log.txt
+{scan} OneStepResampling qa.txt
+{scan} OneStepResampling Scout_gdc_MNI_warp.nii.gz
+{scan} OneStepResampling T1w_restore.2.nii.gz
+{scan} {scan}_gdc.nii.gz
+{scan} {scan}_gdc_warp_jacobian.nii.gz
+{scan} {scan}_gdc_warp.nii.gz
+{scan} {scan}_mc.nii.gz
+{scan} {scan}_nonlin_finalmask.nii.gz
+{scan} {scan}_nonlin_finalmask.stats.txt
+{scan} {scan}_nonlin_mask.nii.gz
+{scan} {scan}_nonlin_norm.wdir
+{scan} {scan}_nonlin_norm.wdir log.txt
+{scan} {scan}_nonlin_norm.wdir qa.txt
+{scan} {scan}_nonlin_T1FOVmask.nii.gz
+{scan} {scan}_orig.nii.gz
+{scan} {scan}_SBRef_nonlin.nii.gz
+{scan} {scan}_SBRef_nonlin_norm.nii.gz
+{scan} Scout2T1w.nii.gz
+{scan} Scout_gdc_mask.nii.gz
+{scan} Scout_gdc.nii.gz
+{scan} Scout_gdc_warp_jacobian.nii.gz
+{scan} Scout_gdc_warp.nii.gz
+{scan} Scout_GradientDistortionUnwarp
+{scan} Scout_GradientDistortionUnwarp fullWarp_abs.nii.gz
+{scan} Scout_GradientDistortionUnwarp log.txt
+{scan} Scout_GradientDistortionUnwarp qa.txt
+{scan} Scout_GradientDistortionUnwarp Scout_orig_vol1.nii.gz
+{scan} Scout_GradientDistortionUnwarp trilinear.nii.gz
+{scan} Scout_orig.nii.gz
+{scan} T1wMulEPI.nii.gz
+{scan} T1w_restore.2.nii.gz
+T1w
+T1w xfms
+T1w xfms {scan}2str.nii.gz

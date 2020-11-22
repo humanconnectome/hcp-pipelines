@@ -3,7 +3,35 @@ import os
 import random
 import shutil
 import time
-from .util import escape_path, keep_resting_state_scans, shell_run, qsub
+from .util import escape_path, keep_resting_state_scans, shell_run, qsub, is_unreadable
+
+
+def check_required_files_are_available(
+    QUNEX_CONTAINER,
+    PIPELINES_CONTAINER,
+    XNAT_CREDENTIALS_FILE,
+    EXPECTED_FILES_LIST,
+    QUNEX_PARAMETER_FILES,
+    GRADIENT_COEFFICIENT_PATH,
+    HCP_LIB_DIR,
+    FREESURFER_LICENSE_PATH,
+):
+    if is_unreadable(QUNEX_CONTAINER):
+        raise Exception("QUNEX_CONTAINER is not accessible. Value = ", QUNEX_CONTAINER)
+    if is_unreadable(PIPELINES_CONTAINER):
+        raise Exception("PIPELINES_CONTAINER is not accessible. Value = ", PIPELINES_CONTAINER)
+    if is_unreadable(XNAT_CREDENTIALS_FILE):
+        raise Exception("XNAT_CREDENTIALS_FILE is not accessible. Value = ", XNAT_CREDENTIALS_FILE)
+    if is_unreadable(EXPECTED_FILES_LIST):
+        raise Exception("EXPECTED_FILES_LIST is not accessible. Value = ", EXPECTED_FILES_LIST)
+    if is_unreadable(QUNEX_PARAMETER_FILES):
+        raise Exception("QUNEX_PARAMETER_FILES is not accessible. Value = ", QUNEX_PARAMETER_FILES)
+    if is_unreadable(GRADIENT_COEFFICIENT_PATH):
+        raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
+    if is_unreadable(HCP_LIB_DIR):
+        raise Exception("HCP_LIB_DIR is not accessible. Value = ", HCP_LIB_DIR)
+    if is_unreadable(FREESURFER_LICENSE_PATH):
+        raise Exception("FREESURFER_LICENSE_PATH is not accessible. Value = ", FREESURFER_LICENSE_PATH)
 
 
 def generate_timestamp(TIMESTAMP=None):
@@ -19,13 +47,18 @@ def split_subject_components(SUBJECT):
             SUBJECT,
         )
 
-    proj, subject_id, classifier, extra = components
+    proj, subject_id, classifier, scan = components
+
+    if scan == "all":
+        scan = ""
+    _scan = "_" + scan if scan else ""
 
     return {
         "SUBJECT_PROJECT": proj,
         "SUBJECT_ID": subject_id,
         "SUBJECT_CLASSIFIER": classifier,
-        "SUBJECT_EXTRA": extra,
+        "SUBJECT_EXTRA": scan,
+        "_SUBJECT_EXTRA": _scan,
         "SUBJECT_SESSION": f"{subject_id}_{classifier}",
     }
 
@@ -56,12 +89,12 @@ def set_credentials_from_file(XNAT_CREDENTIALS_FILE):
     return {"USERNAME": username, "PASSWORD": pwd}
 
 
-def choose_put_server(XNAT_PBS_JOBS_PUT_SERVER_LIST, PUT_SERVER=None):
+def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
     if PUT_SERVER is not None:
         print("PUT_SERVER has already been set. Skipping regeneration.")
         return
 
-    server_list = XNAT_PBS_JOBS_PUT_SERVER_LIST.split(" ")
+    server_list = PUT_SERVER_LIST.split(" ")
     chosen = random.choice(server_list)
 
     return {
@@ -106,16 +139,16 @@ def make_directories(
         os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
-def copy_free_surfer_assessor_script(
-    DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
-):
-    source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-    if not DRYRUN:
-        shutil.copy(source, dest)
-        os.chmod(dest, 0o770)
-
-    return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
+# def copy_free_surfer_assessor_script(
+#     DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
+# ):
+#     source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+#     dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
+#     if not DRYRUN:
+#         shutil.copy(source, dest)
+#         os.chmod(dest, 0o770)
+#
+#     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
 
 
 def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
@@ -132,13 +165,13 @@ def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
         shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
-def available_bold_dirs(XNAT_PBS_JOBS_ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
+def available_bold_dirs(ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
     """
     List of full paths to any resource containing preprocessed functional data
     for the specified subject
     """
 
-    archive_root = f"{XNAT_PBS_JOBS_ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
+    archive_root = f"{ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
     functional_preproc_dir = f"{archive_root}/{SUBJECT_SESSION}/RESOURCES/*fMRI*preproc"
     dir_list = sorted(glob.glob(functional_preproc_dir))
     available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
@@ -201,8 +234,9 @@ def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
+
 def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
-    if SUBJECT_PROJECT in ['CCF_HCA_STG','CCF_HCD_STG','CCF_HCA_TST','CCF_HCD_TST'] :
+    if SUBJECT_PROJECT in ["CCF_HCA_STG", "CCF_HCD_STG", "CCF_HCA_TST", "CCF_HCD_TST"]:
         qunex_scanlist = [
             ['01: DWI:dir98_AP','dMRI_dir98_AP'],
             ['02: DWI:dir98_PA','dMRI_dir98_PA'],
@@ -210,6 +244,7 @@ def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
             ['04: DWI:dir99_PA','dMRI_dir99_PA']
         ]
     return {"QUNEX_SCANLIST": qunex_scanlist}
+
 
 def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
     SINGULARITY_PARAMS["delay-seconds"] = 120
