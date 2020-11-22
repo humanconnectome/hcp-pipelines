@@ -1,11 +1,6 @@
 {% extends "generic/XNAT_GET.py" %}
 {% block post %}
-print("Moving files")
-os.system(f'mv {tmp_dir}/* {WORKING_DIR} \;')
-
-print("Removing tmp dir")
-os.system(f"rm -r {tmp_dir}")
-
+{{ super() }}
 {% if USE_PRESCAN_NORMALIZED is defined and USE_PRESCAN_NORMALIZED %}
 # TODO: test this to make sure it does the equivalent of the bash snippet in file templates/generic/XNAT_GET.jinja2
 import glob
