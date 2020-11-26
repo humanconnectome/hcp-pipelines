@@ -14,4 +14,4 @@ singularity run \
         --bind /usr/local/torque-6.1.2 \
         --bind /scratch/$USER \
         /export/HCP/qunex-hcp/production_containers/pipelines.sif \
-        --verbose  $@  &> "log.$1.$2.txt"
+        --verbose  $@  2>&1 | tee "log.$1.$2.txt"
