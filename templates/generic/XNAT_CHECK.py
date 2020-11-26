@@ -31,20 +31,24 @@ completion_checker = OneSubjectCompletionXnatChecker(
 g_working_dir = CHECK_DATA_DIR
 script_name = f"{PIPELINE_NAME}.XNAT_CHECK"
 log_filename = f"{subject}.{classifier}.{script_name}.log"
+log_filepath = f"{g_working_dir}/{log_filename}"
 success_filename = f"{subject}.{classifier}.{script_name}.success"
-dest_dir = f"{session}/ProcessingInfo/"
+success_filepath = f"{g_working_dir}/{success_filename}"
+dest_dir = f"{session}/ProcessingInfo"
 
 print_system_info()
-check_cmd_ret_code = completion_checker.is_processing_complete(log_filename)
+check_cmd_ret_code = completion_checker.is_processing_complete(log_filepath)
 print("Everything OK? ", check_cmd_ret_code)
 
 if check_cmd_ret_code:
     print("Completion Check was successful")
-    print("Completion Check was successful", file=success_filename)
+    success_filepath = open(success_filepath, "w")
+    print("Completion Check was successful", file=success_filepath)
+    success_filepath.close()
     client.upload_resource_filepath(
         OUTPUT_RESOURCE_NAME,
-        success_filename,
-        resource_filepath=f"{dest_dir}/{success_filename}",
+        success_filepath.name,
+        resource_filepath=f"{dest_dir}/{success_filename}"
     )
 else:
     print("Completion Check was unsuccessful")
@@ -56,5 +60,5 @@ else:
     )
 
 client.upload_resource_filepath(
-    OUTPUT_RESOURCE_NAME, log_filename, resource_filepath=f"{dest_dir}/{log_filename}"
+    OUTPUT_RESOURCE_NAME, log_filepath, resource_filepath=f"{dest_dir}/{log_filename}"
 )
