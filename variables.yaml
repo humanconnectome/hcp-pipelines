@@ -7,7 +7,7 @@ DEFAULT: &default
   #QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.61.17_FSL603.sif
   QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3_FSL603.sif
   PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/pipelines.sif
-  #GRADIENT_COEFFICIENT_PATH: $RUNTIME_FILES_DIR/gradient_coefficient_files
+  GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   LOG_DIR: $HOME/XNAT_LOGS
   ARCHIVE_ROOT: /NRG-data/NRG/intradb/archive
   XNAT_SERVER: hcpi-shadow10.nrg.wustl.edu
@@ -32,7 +32,7 @@ DEFAULT: &default
   PROCESS_PBS_K20X: False
   PROCESS_PBS_GPU: 0
   PROCESS_NVIDIA: False
-  PROCESS_DATA_BINDPATH: "/export/HCP/gradient_coefficient_files,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
+  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
 
 #common_vars:
   SCRATCH_SPACE: /scratch/$USER/buildspace/structural/$SUBJECT_PROJECT
@@ -48,7 +48,7 @@ DEFAULT: &default
 
 functional: &functional
   <<: *default
-  PROCESS_DATA_BINDPATH: "/export/HCP/gradient_coefficient_files,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
+  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH"
   OUTPUT_RESOURCE_NAME: ${SUBJECT_EXTRA}_preproc
   WALLTIME_LIMIT_HOURS: 24
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER
@@ -66,7 +66,7 @@ functional_preprocess_CCF_HCD:
   WALLTIME_LIMIT_HOURS: 48
 
 structural_process: &structural_process
-  PROCESS_DATA_BINDPATH: "/export/HCP/gradient_coefficient_files,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
+  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
 
 hand_edit: &hand_edit
   <<: *default
@@ -90,7 +90,7 @@ hand_edit_CCF_HCD:
 msmall: &msmall
   <<: *default
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/$SUBJECT_SESSION
-  PROCESS_DATA_BINDPATH: "/export/HCP/gradient_coefficient_files,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$SCRATCH_TMP_DIR:/tmp"
+  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$SCRATCH_TMP_DIR:/tmp"
   WALLTIME_LIMIT_HOURS: 20
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/msmall_Q2_2020_runs

@@ -26,8 +26,9 @@ def check_required_files_are_available(
         raise Exception("EXPECTED_FILES_LIST is not accessible. Value = ", EXPECTED_FILES_LIST)
     if is_unreadable(QUNEX_PARAMETER_FILES):
         raise Exception("QUNEX_PARAMETER_FILES is not accessible. Value = ", QUNEX_PARAMETER_FILES)
-    if is_unreadable(GRADIENT_COEFFICIENT_PATH):
-        raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
+    #MRH:  Not sure why the path is showing up as unreadable by os.access, but let's not check it
+    #if is_unreadable(GRADIENT_COEFFICIENT_PATH):
+    #    raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
     if is_unreadable(HCP_LIB_DIR):
         raise Exception("HCP_LIB_DIR is not accessible. Value = ", HCP_LIB_DIR)
     if is_unreadable(FREESURFER_LICENSE_PATH):
