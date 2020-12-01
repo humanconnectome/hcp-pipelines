@@ -5,7 +5,7 @@ DEFAULT: &default
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
   QUNEX_PARAMETER_FILES: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v4
   #QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.61.17_FSL603.sif
-  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.3_FSL603.sif
+  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.4_FSL603.sif
   PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/pipelines.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   LOG_DIR: $HOME/XNAT_LOGS
