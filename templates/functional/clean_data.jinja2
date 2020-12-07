@@ -10,7 +10,7 @@ mv $COMMON/info/hcpls $COMMON/ProcessingInfo
 mv $COMMON/sessions/$SUBJ/subject_hcp.txt $COMMON/ProcessingInfo/processing
 mv $COMMON/sessions/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
 find $COMMON -maxdepth 1 -mindepth 1 \
-    \( -type d -not -path "$COMMON/t1w" \
+    \( -type d -not -path "$COMMON/T1w" \
     -a -not -path "$COMMON/ProcessingInfo" \
     -a -not -path "$COMMON/MNINonLinear" \
     -a -not -path "$COMMON/$SCAN" \

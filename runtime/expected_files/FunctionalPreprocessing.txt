@@ -167,10 +167,8 @@ MNINonLinear xfms standard2{scan}.nii.gz
 {scan} OneStepResampling qa.txt
 {scan} OneStepResampling Scout_gdc_MNI_warp.nii.gz
 {scan} OneStepResampling T1w_restore.2.nii.gz
-{scan} {scan}_gdc.nii.gz
 {scan} {scan}_gdc_warp_jacobian.nii.gz
 {scan} {scan}_gdc_warp.nii.gz
-{scan} {scan}_mc.nii.gz
 {scan} {scan}_nonlin_finalmask.nii.gz
 {scan} {scan}_nonlin_finalmask.stats.txt
 {scan} {scan}_nonlin_mask.nii.gz
