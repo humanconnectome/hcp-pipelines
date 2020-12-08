@@ -83,13 +83,6 @@ def get_project_acronym(SUBJECT_PROJECT):
     }
 
 
-def set_credentials_from_file(XNAT_CREDENTIALS_FILE):
-    with open(XNAT_CREDENTIALS_FILE, "r") as fd:
-        cred = fd.read().strip()
-    username, pwd = cred.split("\n")
-    return {"USERNAME": username, "PASSWORD": pwd}
-
-
 def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
     if PUT_SERVER is not None:
         print("PUT_SERVER has already been set. Skipping regeneration.")

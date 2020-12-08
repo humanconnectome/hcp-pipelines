@@ -78,30 +78,6 @@ log_Msg()
 
 	echo ${dateTime} "-" ${toolname} "-" "${msg}"
 }
-old_setup_code_for_msmall_multirunicafix_diffusion() {
-# this is now replaced by template located in "generic/batch.txt.jinja2"
-#if [ "${HCPpipelineProcess}" == "MultiRunIcaFixProcessing" ] || [ "${HCPpipelineProcess}" == "MsmAllProcessing" ] ; then
-
-	## For these pipelines, we use a template-based approach to generate batch.txt rather than 'createBatch'.
-	## hcp_icafix_bolds: Not specified directly in batch.txt -- instead both hcp_ICAFix and hcp_MSMAll will
-	##   internally construct this parameter from the runs (and their order) listed in the resulting batch.txt.
-	##   It is important that this parameter is identical in both pipelines for the processing to work correctly,
-	##   which is why both pipelines are handled in an integrated fashion within this same conditional.
-	## hcp_msmall_bolds: Controls which runs contribute to the MSMAll registration, which should be just the
-	##   resting-state scans. Irrelevant to hcp_ICAFix, but harmless to include in its batch.txt file.
-
-	BoldList=`opts_GetOpt "--boldlist" $@`
- 	MsmAllBolds=`echo "${BoldList}" | sed -e "s/|/,/g" -e "s/,tf[^,]*//g"`  # exclude runs starting with 'tf'
-	StudyFolderRepl=`printf ${StudyFolder} | sed -e 's/[\/&]/\\\\&/g'`
-
-	## The template file needs modifications before it's appropriate.
-	cat /opt/xnat_pbs_jobs_control/batch.txt.tmpl | \
-		sed -e "s/@@@Subject@@@/${Subject}/g" -e "s/@@@SubjectPart@@@/${SubjectPart}/g" -e "s/@@@StudyFolder@@@/${StudyFolderRepl}/g" -e "s/@@@MsmAllBolds@@@/${MsmAllBolds}/g" |\
-        grep -v "^[0-9][0-9]*:" > $BatchFile
-	## Add the lines in the template that are in BoldList into the batch file.
- 	## Note that the order of runs in BoldList does NOT alter their order in batch.txt.
-        cat /opt/xnat_pbs_jobs_control/batch.txt.tmpl | grep "^[0-9][0-9]*:" | egrep "filename\((${BoldList})\)" >> $BatchFile
-}
 
 main() {
 
