@@ -371,13 +371,13 @@ class PipelinePrereqDownloader:
     def struct(self):
         print("Getting prereq data for the Structural pipeline.")
         r = self.data_retriever
-        r.run(r.get_unproc_data)
+        r.run(r.get_structural_unproc_data)
 
     def struct_hand_edit(self):
         print("Getting prereq data for the Structural HandEditting pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_unproc_data,
+            # r.get_structural_unproc_data,
             r.get_structural_preproc_data,
             r.get_hand_edit_data,
             r.get_supplemental_structural_preproc_data,
@@ -387,7 +387,7 @@ class PipelinePrereqDownloader:
         print("Getting prereq data for the Diffusion pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_unproc_data,
+            r.get_diffusion_unproc_data,
             r.get_structural_preproc_data,
             r.get_supplemental_structural_preproc_data,
         )
@@ -396,7 +396,7 @@ class PipelinePrereqDownloader:
         print("Getting prereq data for the Functional pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_unproc_data,
+            r.get_functional_unproc_data,
             r.get_structural_preproc_data,
             r.get_supplemental_structural_preproc_data,
         )
@@ -405,7 +405,6 @@ class PipelinePrereqDownloader:
         print("Getting prereq data for the Multi-run ICA Fix pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_unproc_data,
             r.get_preproc_data,
         )
 
@@ -413,7 +412,6 @@ class PipelinePrereqDownloader:
         print("Getting prereq data for the Msm-All pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_unproc_data,
             r.get_preproc_data,
             r.get_icafix_data,
         )
