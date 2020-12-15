@@ -12,9 +12,6 @@ StructuralPreprocessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
   - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
@@ -89,9 +86,6 @@ StructuralPreprocessingHandEdit:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
   - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
@@ -164,9 +158,6 @@ FunctionalPreprocessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
   - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
@@ -236,9 +227,6 @@ MultiRunIcaFixProcessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -321,9 +309,6 @@ MsmAllProcessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -405,9 +390,6 @@ DiffusionPreprocessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
-  - dump_variables:
-      filename: "${CHECK_DATA_DIR}/xnat_pbs_setup.sh"
-      variable: XNAT_PBS_SETUP_SCRIPT_PATH
 
   # Only for msmall, multirunicafix, and diffusion
   - function: set_qunex_scanlist_dwi
