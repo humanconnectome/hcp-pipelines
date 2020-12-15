@@ -18,8 +18,13 @@ def make_zip_from_dir(dirpath):
 
 def ping(server):
     _server = server if server.startswith("http") else f"https://{server}"
-    r = requests.get(_server)
-    return r.status_code == 200
+    try:
+        r = requests.get(_server)
+        return r.status_code == 200
+    except requests.exceptions.ConnectionError:
+        # if shadow server is down, HAProxy abruptly terminates connection
+        # causing error rather than just bad status_code
+        return False
 
 
 def get_server(serverlist):
@@ -31,7 +36,8 @@ def get_server(serverlist):
             if ping(shadow_server):
                 print(f"switching to a New shadow Server: {shadow_server}")
                 return shadow_server
-
+            else:
+                print(f"Server ({shadow_server}) is down, trying next server")
         print("Sleeping for 1 minute to Check shadow servers again")
         time.sleep(60)
 
