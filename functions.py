@@ -129,8 +129,8 @@ def make_directories(
         os.makedirs(f"{STUDY_FOLDER}/processing", exist_ok=True)
         print("Making ", CHECK_DATA_DIR)
         os.makedirs(CHECK_DATA_DIR, exist_ok=True)
-        print("Making ", MARK_COMPLETION_DIR)
-        os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
+        #print("Making ", MARK_COMPLETION_DIR)
+        #os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
 # def copy_free_surfer_assessor_script(
