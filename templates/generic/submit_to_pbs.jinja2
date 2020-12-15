@@ -5,21 +5,14 @@ if [ -z "$SINGULARITY_CONTAINER" ]; then
 fi
 
 delete_resource(){
-echo "TODO: This needs to be reimplemented using xnat_file_client.py - Moises (11/18/2020)"
-exit 1
-
   echo "Deleting the resource from the XNAT server"
-if [ -z "$SINGULARITY_CONTAINER" ]; then
-  singularity exec \
-    {{ PIPELINES_CONTAINER }} \
-    python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --resource="{{OUTPUT_RESOURCE_NAME}}"
-      --force
-else 
-    python3 $XNAT_PBS_JOBS/lib/utils/delete_resource.py \
-      --resource="{{OUTPUT_RESOURCE_NAME}}"
-      --force
-fi
+  if [ -z "$SINGULARITY_CONTAINER" ]; then
+      singularity exec \
+      {{ PIPELINES_CONTAINER }} \
+      python3 -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
+  else
+      python3 -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
+  fi
 }
 
 mark_running_status(){
@@ -34,7 +27,7 @@ mark_running_status(){
           --status=queued
   fi
 }
-{% if CLEAN_OUTPUT_RESOURCE is defined and CLEAN_OUTPUT_RESOURCE %}
+{% if CLEAN_OUTPUT_FIRST %}
   # Delete the resource first
   delete_resource
 {% else %}
