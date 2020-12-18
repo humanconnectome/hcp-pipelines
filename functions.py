@@ -40,12 +40,12 @@ def generate_timestamp(TIMESTAMP=None):
         return {"TIMESTAMP": str(int(time.time()))}
 
 
-def split_subject_components(SUBJECT):
-    components = SUBJECT.split(":")
+def split_subject_components(SUBJECT_ARG):
+    components = SUBJECT_ARG.split(":")
     if len(components) != 4:
         raise ValueError(
-            "Expecting a colon-delimited SUBJECT in the format AA:BB:CC:DD, instead got: ",
-            SUBJECT,
+            "Expecting a colon-delimited SUBJECT_ARG in the format AA:BB:CC:DD, instead got: ",
+            SUBJECT_ARG,
         )
 
     proj, subject_id, classifier, scan = components
@@ -55,17 +55,17 @@ def split_subject_components(SUBJECT):
     _scan = "_" + scan if scan else ""
 
     return {
-        "SUBJECT_PROJECT": proj,
-        "SUBJECT_ID": subject_id,
-        "SUBJECT_CLASSIFIER": classifier,
-        "SUBJECT_EXTRA": scan,
-        "_SUBJECT_EXTRA": _scan,
-        "SUBJECT_SESSION": f"{subject_id}_{classifier}",
+        "PROJECT": proj,
+        "SUBJECT": subject_id,
+        "CLASSIFIER": classifier,
+        "SCAN": scan,
+        "_SCAN": _scan,
+        "SESSION": f"{subject_id}_{classifier}",
     }
 
 
-def get_project_acronym(SUBJECT_PROJECT):
-    proj = SUBJECT_PROJECT
+def get_project_acronym(PROJECT):
+    proj = PROJECT
     if "HCA" in proj:
         proj_acronym = "HCA"
     elif "HCD" in proj:
@@ -79,7 +79,7 @@ def get_project_acronym(SUBJECT_PROJECT):
             "Unexpected project value. Expecting HCA, HCD, MDD, or BWH. Got: ", proj
         )
     return {
-        "SUBJECT_PROJECT_ACRONYM": proj_acronym,
+        "PROJECT_ACRONYM": proj_acronym,
     }
 
 
@@ -98,7 +98,7 @@ def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
 
 def set_study_folder(
     WORKING_DIR,
-    SUBJECT_SESSION,
+    SESSION,
     SCRATCH_SPACE,
     WORKING_DIR_BASENAME,
     USE_SCRATCH_FOR_PROCESSING,
@@ -107,8 +107,8 @@ def set_study_folder(
         WORKING_DIR_SCRATCH = f"{SCRATCH_SPACE}/{WORKING_DIR_BASENAME}"
     else:
         WORKING_DIR_SCRATCH = WORKING_DIR
-    STUDY_FOLDER_SCRATCH = os.path.join(WORKING_DIR_SCRATCH, SUBJECT_SESSION)
-    STUDY_FOLDER = os.path.join(WORKING_DIR, SUBJECT_SESSION)
+    STUDY_FOLDER_SCRATCH = os.path.join(WORKING_DIR_SCRATCH, SESSION)
+    STUDY_FOLDER = os.path.join(WORKING_DIR, SESSION)
     STUDY_FOLDER_REPL = escape_path(STUDY_FOLDER)
 
     return {
@@ -159,14 +159,14 @@ def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
         shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
-def available_bold_dirs(ARCHIVE_ROOT, SUBJECT_SESSION, SUBJECT_PROJECT):
+def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
     """
     List of full paths to any resource containing preprocessed functional data
     for the specified subject
     """
 
-    archive_root = f"{ARCHIVE_ROOT}/{SUBJECT_PROJECT}/arc001"
-    functional_preproc_dir = f"{archive_root}/{SUBJECT_SESSION}/RESOURCES/*fMRI*preproc"
+    archive_root = f"{ARCHIVE_ROOT}/{PROJECT}/arc001"
+    functional_preproc_dir = f"{archive_root}/{SESSION}/RESOURCES/*fMRI*preproc"
     dir_list = sorted(glob.glob(functional_preproc_dir))
     available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
 
@@ -205,18 +205,18 @@ def set_msm_all_bolds(BOLD_LIST):
     return {"MSM_ALL_BOLDS": MSM_ALL_BOLDS}
 
 
-def set_bold_list_order(SUBJECT_PROJECT, SUBJECT_EXTRA):
+def set_bold_list_order(PROJECT, SCAN):
     # possible values for BOLD_LIST_ORDER
     BLO_HCA = "hca"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
-    if SUBJECT_PROJECT == "CCF_HCA_STG" or "CCF_HCA_TST":
+    if PROJECT == "CCF_HCA_STG" or "CCF_HCA_TST":
         bold_list_order = BLO_HCA
     else:
-        if SUBJECT_EXTRA == "YOUNGER":
+        if SCAN == "YOUNGER":
             bold_list_order = BLO_HCD_YOUNG
-        elif SUBJECT_EXTRA == "OLDER":
+        elif SCAN == "OLDER":
             bold_list_order = BLO_HCD_OLDER
         else:
             raise ValueError("The subject subgroup should be YOUNGER or OLDER.")
@@ -229,8 +229,8 @@ def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
 
-def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
-    if SUBJECT_PROJECT in ["CCF_HCA_STG", "CCF_HCD_STG", "CCF_HCA_TST", "CCF_HCD_TST"]:
+def set_qunex_scanlist_dwi(PROJECT, SCAN):
+    if PROJECT in ["CCF_HCA_STG", "CCF_HCD_STG", "CCF_HCA_TST", "CCF_HCD_TST"]:
         qunex_scanlist = [
             ['01: DWI:dir98_AP','dMRI_dir98_AP'],
             ['02: DWI:dir98_PA','dMRI_dir98_PA'],

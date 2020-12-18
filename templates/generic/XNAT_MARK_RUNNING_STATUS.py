@@ -8,9 +8,9 @@ from shared_values import client
 g_resource = "RunningStatus"
 
 
-directory = f"{{BUILD_DIR}}/{{SUBJECT_PROJECT}}/{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{{_SUBJECT_EXTRA}}_RUNNING_STATUS"
-file = f"{{ PIPELINE_NAME }}.{{SUBJECT_ID}}_{{SUBJECT_CLASSIFIER}}{{_SUBJECT_EXTRA}}.RUNNING"
-existing_file = f"{{ARCHIVE_ROOT}}/{{ SUBJECT_PROJECT }}/arc001/{{SUBJECT_SESSION}}/RESOURCES/RunningStatus/{file}"
+directory = f"{{BUILD_DIR}}/{{PROJECT}}/{{ PIPELINE_NAME }}.{{SUBJECT}}_{{CLASSIFIER}}{{_SCAN}}_RUNNING_STATUS"
+file = f"{{ PIPELINE_NAME }}.{{SUBJECT}}_{{CLASSIFIER}}{{_SCAN}}.RUNNING"
+existing_file = f"{{ARCHIVE_ROOT}}/{{ PROJECT }}/arc001/{{SESSION}}/RESOURCES/RunningStatus/{file}"
 path = f"{directory}/{file}"
 
 parser = argparse.ArgumentParser("Set up a running status file")

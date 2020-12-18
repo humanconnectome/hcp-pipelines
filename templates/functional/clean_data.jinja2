@@ -1,6 +1,6 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-SCAN="{{ SUBJECT_EXTRA }}"
+SCAN="{{ SCAN }}"
 
 find $COMMON/sessions/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
 mv $COMMON/sessions/$SUBJ/hcp/$SUBJ/* $COMMON

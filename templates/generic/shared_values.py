@@ -12,13 +12,13 @@ EXPECTED_FILES_LIST = "{{ EXPECTED_FILES_LIST }}"
 
 serverlist = "{{ PUT_SERVER_LIST }}"
 server = "{{ PUT_SERVER }}"
-project = "{{ SUBJECT_PROJECT }}"
-subject = "{{ SUBJECT_ID }}"
-classifier = "{{ SUBJECT_CLASSIFIER }}"
-extra = "{{ SUBJECT_EXTRA }}"
-session = "{{ SUBJECT_SESSION }}"
+project = "{{ PROJECT }}"
+subject = "{{ SUBJECT }}"
+classifier = "{{ CLASSIFIER }}"
+extra = "{{ SCAN }}"
+session = "{{ SESSION }}"
 credentials_file = "{{ XNAT_CREDENTIALS_FILE }}"
-g_scan = "{{ _SUBJECT_EXTRA }}"
+g_scan = "{{ _SCAN }}"
 
 client = XnatFileClient(project, subject, session, serverlist, credentials_file)
 archive = CcfArchive(project, session, ARCHIVE_ROOT)

@@ -21,8 +21,8 @@ class OneSubjectCompletionXnatChecker:
         EXPECTED_FILES_LIST,
     ):
         self.EXPECTED_FILES_LIST = EXPECTED_FILES_LIST
-        self.SUBJECT_EXTRA = scan
-        self.SUBJECT_SESSION = session
+        self.SCAN = scan
+        self.SESSION = session
         self.OUTPUT_RESOURCE_NAME = OUTPUT_RESOURCE_NAME
         self.PIPELINE_NAME = PIPELINE_NAME
         self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
@@ -45,12 +45,12 @@ class OneSubjectCompletionXnatChecker:
             )
 
         with open(self.EXPECTED_FILES_LIST) as fd:
-            root_dir = os.path.join(working_dir, self.SUBJECT_SESSION)
+            root_dir = os.path.join(working_dir, self.SESSION)
             l = file_utils.build_filename_list_from_file(
                 fd,
                 root_dir,
-                subjectid=self.SUBJECT_SESSION,
-                scan=self.SUBJECT_EXTRA,
+                subjectid=self.SESSION,
+                scan=self.SCAN,
             )
             return l
 

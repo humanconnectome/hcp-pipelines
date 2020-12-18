@@ -1,7 +1,7 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=LOG_DIR, mem=12) }}
 
-cp {{ CHECK_DATA_DIR }}/* {{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/ProcessingInfo
+cp {{ CHECK_DATA_DIR }}/* {{ WORKING_DIR }}/{{ SESSION }}/ProcessingInfo
 
 {{ singularity(
         container=PIPELINES_CONTAINER,

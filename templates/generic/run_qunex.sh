@@ -17,11 +17,11 @@ scriptPath=$(dirname ${0})
 # -- key variables to set
 ParameterFolder='{{ QUNEX_PARAMETER_FILES }}'
 StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
-Session='{{ SUBJECT_SESSION }}'
-SubjectPart='{{ SUBJECT_ID }}'
+Session='{{ SESSION }}'
+SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
-SessionName="{{ SUBJECT_SESSION }}{{ _SUBJECT_EXTRA }}"
+SessionName="{{ SESSION }}{{ _SCAN }}"
 
 export StudyFolder Session SubjectPart
 

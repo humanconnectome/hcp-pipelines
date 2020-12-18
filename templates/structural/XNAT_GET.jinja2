@@ -7,7 +7,7 @@ import glob
 import os
 from pathlib import Path
 
-pathbase = "{{ WORKING_DIR }}/{{ SUBJECT_SESSION }}/unprocessed"
+pathbase = "{{ WORKING_DIR }}/{{ SESSION }}/unprocessed"
 otherfiles = glob.glob(f"{pathbase}/T[12]w*/OTHER_FILES/*")
 
 for f in otherfiles:

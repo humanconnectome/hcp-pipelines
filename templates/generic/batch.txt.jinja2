@@ -19,9 +19,9 @@ _hcp_cifti_tail         : _Atlas
 {%- endblock additional_params %}
 
 ---
-id: {{ SUBJECT_SESSION }}
-subject: {{ SUBJECT_ID }}
-hcp: {{ STUDY_FOLDER }}/sessions/{{ SUBJECT_SESSION }}/hcp
+id: {{ SESSION }}
+subject: {{ SUBJECT }}
+hcp: {{ STUDY_FOLDER }}/sessions/{{ SESSION }}/hcp
 
 hcpready: true
 {% for XX, YY in QUNEX_SCANLIST %}

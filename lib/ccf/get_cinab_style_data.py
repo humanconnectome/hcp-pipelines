@@ -68,9 +68,9 @@ class DataRetriever(object):
         output_dir,
         ARCHIVE_ROOT,
     ):
-        self.SUBJECT_ID = subject
+        self.SUBJECT = subject
         session = f"{subject}_{classifier}"
-        self.SUBJECT_SESSION = session
+        self.SESSION = session
         self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
         self.output_dir = output_dir
         self.copy = copy
@@ -116,7 +116,7 @@ class DataRetriever(object):
             base = os.path.basename(get_from)
             sub_dir = base[: base.rfind("_unproc")]
             put_to = (
-                self.output_dir + "/" + self.SUBJECT_SESSION + "/unprocessed/" + sub_dir
+                self.output_dir + "/" + self.SESSION + "/unprocessed/" + sub_dir
             )
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
 
@@ -268,8 +268,8 @@ class DataRetriever(object):
         """
 
         output_dir = self.output_dir
-        session = self.SUBJECT_SESSION
-        subject_id = self.SUBJECT_ID
+        session = self.SESSION
+        subject_id = self.SUBJECT
         t1w_native_spec_file = (
             f"{output_dir}/{session}/T1w/Native/{subject_id}.native.wb.spec"
         )
@@ -286,7 +286,7 @@ class DataRetriever(object):
         is invoked by the DeDriftAndResample pipeline. For the ReApplyFixPipeline
         to work correctly, those files need to be removed before processing begins.
         """
-        path_expr = self.output_dir + "/" + self.SUBJECT_SESSION
+        path_expr = self.output_dir + "/" + self.SESSION
         path_expr += "/MNINonLinear/Results/*"
 
         dir_list = sorted(glob.glob(path_expr))

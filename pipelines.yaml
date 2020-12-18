@@ -1,13 +1,13 @@
 StructuralPreprocessing:
   - set_from_env:
       # the first positional argument is the subject string
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: structural_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: structural_preprocess_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -75,13 +75,13 @@ StructuralPreprocessing:
 StructuralPreprocessingHandEdit:
   - set_from_env:
       # the first positional argument is the subject string
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: hand_edit_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: hand_edit_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -147,13 +147,13 @@ StructuralPreprocessingHandEdit:
 
 FunctionalPreprocessing:
   - set_from_env:
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: functional_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: functional_preprocess_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -216,13 +216,13 @@ FunctionalPreprocessing:
 
 MultiRunIcaFixProcessing:
   - set_from_env:
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: multirunicafix_process_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: multirunicafix_process_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -298,13 +298,13 @@ MultiRunIcaFixProcessing:
 
 MsmAllProcessing:
   - set_from_env:
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: msmall_process_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: msmall_process_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -379,13 +379,13 @@ MsmAllProcessing:
 
 DiffusionPreprocessing:
   - set_from_env:
-      SUBJECT: $_1
+      SUBJECT_ARG: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - function: get_project_acronym
-  - load_variables: diffusion_preprocess_CCF_${SUBJECT_PROJECT_ACRONYM}
+  - load_variables: diffusion_preprocess_CCF_${PROJECT_ACRONYM}
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder

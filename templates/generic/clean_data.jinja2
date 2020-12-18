@@ -2,7 +2,7 @@
 {{ pbs_head(log_dir=CHECK_DATA_DIR) }}
 
 WORK_DIR="{{ WORKING_DIR }}"
-SUBJ="{{ SUBJECT_ID }}_{{ SUBJECT_CLASSIFIER }}"
+SUBJ="{{ SUBJECT }}_{{ CLASSIFIER }}"
 COMMON="$WORK_DIR/$SUBJ"
 
 {% block content %}
