@@ -38,7 +38,7 @@ parsessions=1      # the number of subjects to process in parallel
 threads=1    # the number of bold files to process in parallel
 
 # -- Derivative variables
-SubjectsFolder="${StudyFolder}/sessions"
+SessionsFolder="${StudyFolder}/sessions"
 BatchFile="${StudyFolder}/processing/batch.txt"
 
 # -- Report options
@@ -49,7 +49,7 @@ echo "   QUNEX Study          : $StudyFolder"                                   
 #echo "   Input data location  : $InputDataLocation"                               2>&1 | tee -a ${LogFile}
 echo "   Cores to use         : $parsessions"                                           2>&1 | tee -a ${LogFile}
 echo "   Threads to use       : $threads"                                         2>&1 | tee -a ${LogFile}
-echo "   QUNEX subjects folder: $SubjectsFolder"                                  2>&1 | tee -a ${LogFile}
+echo "   QUNEX subjects folder: $SessionsFolder"                                  2>&1 | tee -a ${LogFile}
 echo "   QUNEX batch file     : $BatchFile"                                       2>&1 | tee -a ${LogFile}
 echo "   Overwrite HCP step   : $Overwrite"                                       2>&1 | tee -a ${LogFile}
 echo "   Subjects to run      : $Subject"                                         2>&1 | tee -a ${LogFile}
@@ -83,7 +83,7 @@ main() {
 
 #########################	createStudy
 ${QUNEXCOMMAND} createStudy --studyfolder="${StudyFolder}"
-cd ${SubjectsFolder}
+cd ${SessionsFolder}
 ### qunex_setup ###
 #{% block qunex_setup %}
 
