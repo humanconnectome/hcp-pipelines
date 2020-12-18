@@ -8,8 +8,8 @@ from shared_values import client
 g_resource = "RunningStatus"
 
 
-directory = f"{{BUILD_DIR}}/{{PROJECT}}/{{ PIPELINE_NAME }}.{{SUBJECT}}_{{CLASSIFIER}}{{_SCAN}}_RUNNING_STATUS"
-file = f"{{ PIPELINE_NAME }}.{{SUBJECT}}_{{CLASSIFIER}}{{_SCAN}}.RUNNING"
+directory = f"{{BUILD_DIR}}/{{PROJECT}}/{{ PIPELINE_NAME }}.{{SESSION}}{{_SCAN}}_RUNNING_STATUS"
+file = f"{{ PIPELINE_NAME }}.{{SESSION}}{{_SCAN}}.RUNNING"
 existing_file = f"{{ARCHIVE_ROOT}}/{{ PROJECT }}/arc001/{{SESSION}}/RESOURCES/RunningStatus/{file}"
 path = f"{directory}/{file}"
 

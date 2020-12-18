@@ -1,18 +1,18 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-find $COMMON/sessions/$SUBJ/hcp/$SUBJ \! -newer $START_FILE -delete
-mv $COMMON/sessions/$SUBJ/hcp/$SUBJ/* $COMMON
-mv $COMMON/processing $COMMON/ProcessingInfo
-mv $COMMON/sessions/specs $COMMON/ProcessingInfo
-mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-find $COMMON -maxdepth 1 -mindepth 1 \
-    \( -type d -not -path "$COMMON/ProcessingInfo" \
-    -a -not -path "$COMMON/MNINonLinear" \
-    -a -not -path "$COMMON/T1w" \
+find $StudyFolder/sessions/${Session}/hcp/${Session} \! -newer $START_FILE -delete
+mv $StudyFolder/sessions/${Session}/hcp/${Session}/* $StudyFolder
+mv $StudyFolder/processing $StudyFolder/ProcessingInfo
+mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
+mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
+find $StudyFolder -maxdepth 1 -mindepth 1 \
+    \( -type d -not -path "$StudyFolder/ProcessingInfo" \
+    -a -not -path "$StudyFolder/MNINonLinear" \
+    -a -not -path "$StudyFolder/T1w" \
     \) -exec rm -rf '{}' \;
-find $COMMON -type d -empty -delete
+find $StudyFolder -type d -empty -delete
 echo "Removing any XNAT catalog files still around."
-find $WORK_DIR -name "*_catalog.xml" -delete
+find $WorkingDir -name "*_catalog.xml" -delete
 echo "Remaining files:"
-find $COMMON
+find $StudyFolder
 {% endblock content %}

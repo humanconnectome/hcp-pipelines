@@ -3,11 +3,11 @@
 {{ super() }}
 
 echo "Removing subdirectories for other subjects and groups"
-find $WORK_DIR \
+find $WorkingDir \
     -maxdepth 1 \
     -type d \
     -not -newer $START_FILE \
     -exec rm -rf {} \;
 echo "Remaining files:"
-find $COMMON
+find $StudyFolder
 {% endblock content %}

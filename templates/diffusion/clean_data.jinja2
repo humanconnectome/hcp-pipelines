@@ -1,19 +1,19 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-find $COMMON/sessions/$SUBJ/hcp/$SUBJ \! -newer {{ STARTTIME_FILE_NAME }} -delete
-mv $COMMON/sessions/$SUBJ/hcp/$SUBJ/* $COMMON
-mv $COMMON/sessions/specs $COMMON/ProcessingInfo
-mv $COMMON/processing $COMMON/ProcessingInfo
-mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-cp $COMMON/sessions/$SUBJ/session_hcp.txt $COMMON/ProcessingInfo/processing
-cp $COMMON/sessions/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
-find $COMMON \
-    -not -path "$COMMON/T1w/*" \
-    -not -path "$COMMON/ProcessingInfo/*" \
-    -not -path "$COMMON/Diffusion/*" \
+find $StudyFolder/sessions/${Session}/hcp/${Session} \! -newer {{ STARTTIME_FILE_NAME }} -delete
+mv $StudyFolder/sessions/${Session}/hcp/${Session}/* $StudyFolder
+mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
+mv $StudyFolder/processing $StudyFolder/ProcessingInfo
+mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
+cp $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
+cp $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+find $StudyFolder \
+    -not -path "$StudyFolder/T1w/*" \
+    -not -path "$StudyFolder/ProcessingInfo/*" \
+    -not -path "$StudyFolder/Diffusion/*" \
     -delete
 echo "Removing any XNAT catalog files still around."
-find $WORK_DIR -name "*_catalog.xml" -delete
+find $WorkingDir -name "*_catalog.xml" -delete
 echo "Remaining files:"
-find $COMMON
+find $StudyFolder
 {% endblock %}

@@ -2,11 +2,11 @@
 {% block content %}
 SCAN="{{ SCAN }}"
 
-find $COMMON/unprocessed/ -maxdepth 1 -mindepth 1 \
-    \( -type d -not -path "$COMMON/unprocessed/$SCAN" \
-    -path "$COMMON/unprocessed/[rt]fMRI_*_[AP][PA]" \
-    -o -path "$COMMON/unprocessed/T1w_*" \
-    -o -path "$COMMON/unprocessed/T2w_*" \
-    -o -path "$COMMON/unprocessed/Diffusion" \
+find $StudyFolder/unprocessed/ -maxdepth 1 -mindepth 1 \
+    \( -type d -not -path "$StudyFolder/unprocessed/$SCAN" \
+    -path "$StudyFolder/unprocessed/[rt]fMRI_*_[AP][PA]" \
+    -o -path "$StudyFolder/unprocessed/T1w_*" \
+    -o -path "$StudyFolder/unprocessed/T2w_*" \
+    -o -path "$StudyFolder/unprocessed/Diffusion" \
     \) -exec rm -rf '{}' \;
 {% endblock content %}

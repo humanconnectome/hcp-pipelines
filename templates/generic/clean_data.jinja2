@@ -1,25 +1,25 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=CHECK_DATA_DIR) }}
 
-WORK_DIR="{{ WORKING_DIR }}"
-SUBJ="{{ SUBJECT }}_{{ CLASSIFIER }}"
-COMMON="$WORK_DIR/$SUBJ"
+WorkingDir="{{ WORKING_DIR }}"
+Session="{{SESSION}}"
+StudyFolder="$WorkingDir/${Session}"
 
 {% block content %}
-mv $COMMON/$SUBJ/MNINonLinear $COMMON
-mv $COMMON/$SUBJ/T*w $COMMON
-mv $COMMON/sessions/specs $COMMON/ProcessingInfo
-mv $COMMON/processing $COMMON/ProcessingInfo
-mv $COMMON/info/hcpls $COMMON/ProcessingInfo
-mv $COMMON/sessions/$SUBJ/session_hcp.txt $COMMON/ProcessingInfo/processing
-mv $COMMON/sessions/$SUBJ/hcpls/hcpls2nii.log $COMMON/ProcessingInfo/processing
-find $COMMON \
-    -not -path "$COMMON/T*w/*" \
-    -not -path "$COMMON/ProcessingInfo/*" \
-    -not -path "$COMMON/MNINonLinear/*" \
+mv $StudyFolder/${Session}/MNINonLinear $StudyFolder
+mv $StudyFolder/${Session}/T*w $StudyFolder
+mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
+mv $StudyFolder/processing $StudyFolder/ProcessingInfo
+mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
+mv $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
+mv $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+find $StudyFolder \
+    -not -path "$StudyFolder/T*w/*" \
+    -not -path "$StudyFolder/ProcessingInfo/*" \
+    -not -path "$StudyFolder/MNINonLinear/*" \
     -delete
 echo "Removing any XNAT catalog files still around."
-find $WORK_DIR -name "*_catalog.xml" -delete
+find $WorkingDir -name "*_catalog.xml" -delete
 echo "Remaining files:"
-find $COMMON
+find $StudyFolder
 {% endblock %}
