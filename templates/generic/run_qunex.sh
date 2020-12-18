@@ -21,7 +21,7 @@ Session='{{ SUBJECT_SESSION }}'
 SubjectPart='{{ SUBJECT_ID }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
-Scan='{{ SUBJECT_EXTRA }}'
+SessionName="{{ SUBJECT_SESSION }}{{ _SUBJECT_EXTRA }}"
 
 export StudyFolder Session SubjectPart
 
@@ -117,15 +117,9 @@ cd ${SessionsFolder}
 sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
 
-if [ ! -z "${Scan}" ]; then
-	subject_name="${Session}_${Scan}"
-else
-	subject_name="${Session}"
-fi
-
-start_time_file="${StudyFolder}/ProcessingInfo/${subject_name}.${HCPpipelineProcess}.starttime"
+start_time_file="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.starttime"
 g_script_name=$(basename "${0}" .sh)
-filename="${StudyFolder}/ProcessingInfo/${subject_name}.${HCPpipelineProcess}.${g_script_name}.execinfo"
+filename="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${g_script_name}.execinfo"
 echo $(date) > ${start_time_file}
 log_Msg "PBS_JOBID: ${PBS_JOBID}" > ${filename}
 log_Msg "PBS execution node: $(hostname)" >> ${filename}
