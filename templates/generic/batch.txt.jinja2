@@ -13,19 +13,10 @@ _log                    : study|hcp
 
 # -------------------------> Map to MNAP
 
-_hcp_cifti_tail         : _Atlas 
+_hcp_cifti_tail         : _Atlas
 
-{% block additional_params %}
-{% if MSM_ALL_BOLDS is defined %}
-# -------------------------> MSMAll parameters
-
-_hcp_msmall_bolds	: {{ MSM_ALL_BOLDS }}
-_hcp_resample_extractnames	: rfMRI_REST:{{ MSM_ALL_BOLDS }}
-_hcp_resample_extractextraregnames	: MSMSulc
-_hcp_resample_extractvolume	: TRUE
-
-{% endif %}
-{% endblock additional_params %}
+{% block additional_params -%}
+{%- endblock additional_params %}
 
 ---
 id: {{ SUBJECT_SESSION }}
