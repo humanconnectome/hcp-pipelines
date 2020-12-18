@@ -3,10 +3,10 @@
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
-    mkdir -p "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/unprocessed/"
-    mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
-    mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
-    mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/unprocessed/"
+    mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
+    mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
+    mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
+    mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
     #json_location=fd -a -e json dMRI ~/XNAT_BUILD_DIR/HCPpipeline/diffusion_Q3_2020_runs/ | rg -v SBRef | head -1
     json_file=`find "${StudyFolder}" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
     echo "json_file=${json_file}"

@@ -4,10 +4,10 @@
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
-	mkdir -p "${StudyFolder}/sessions/${Subject}/hcp/${Subject}"
-	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
-	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
-	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+	mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}"
+	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
+	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
+	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
 
 	######################### hcp_MSMAll
 	#--hcp_msmall_bolds="rfMRI_CONCAT:${MsmAllBolds}" \

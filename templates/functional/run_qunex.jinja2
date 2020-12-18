@@ -1,8 +1,8 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
-	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
-	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Subject}/hcp/${Subject}/"
+	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
+	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
 
 	######################### hcp4
 	${QUNEXCOMMAND} hcp4 \

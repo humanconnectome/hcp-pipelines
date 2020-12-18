@@ -17,13 +17,13 @@ scriptPath=$(dirname ${0})
 # -- key variables to set
 ParameterFolder='{{ QUNEX_PARAMETER_FILES }}'
 StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
-Subject='{{ SUBJECT_SESSION }}'
+Session='{{ SUBJECT_SESSION }}'
 SubjectPart='{{ SUBJECT_ID }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
 Scan='{{ SUBJECT_EXTRA }}'
 
-export StudyFolder Subject SubjectPart
+export StudyFolder Session SubjectPart
 
 TimeStamp=`date +%Y-%m-%d-%H-%M-%S`
 mkdir -p $StudyFolder/processing/logs &> /dev/null
@@ -52,7 +52,7 @@ echo "   Threads to use       : $threads"                                       
 echo "   QUNEX subjects folder: $SessionsFolder"                                  2>&1 | tee -a ${LogFile}
 echo "   QUNEX batch file     : $BatchFile"                                       2>&1 | tee -a ${LogFile}
 echo "   Overwrite HCP step   : $Overwrite"                                       2>&1 | tee -a ${LogFile}
-echo "   Subjects to run      : $Subject"                                         2>&1 | tee -a ${LogFile}
+echo "   Subjects to run      : $Session"                                         2>&1 | tee -a ${LogFile}
 echo "   HCP pipelne process  : $HCPpipelineProcess"                              2>&1 | tee -a ${LogFile}
 echo "   Log file output      : $LogFile"                                         2>&1 | tee -a ${LogFile}
 echo ""                                                                           2>&1 | tee -a ${LogFile}
@@ -102,8 +102,8 @@ cd ${SessionsFolder}
 	#########################	setupHCP
 	${QUNEXCOMMAND} setupHCP \
 	    --sessionsfolder="${StudyFolder}/sessions" \
-	    --sessions="${Subject}"
-
+	    --sessions="${Session}"
+	 
 	#########################	createBatch
 	${QUNEXCOMMAND} createBatch \
 	 --sessionsfolder="${StudyFolder}/sessions" \
@@ -118,9 +118,9 @@ sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
 
 if [ ! -z "${Scan}" ]; then
-	subject_name="${Subject}_${Scan}"
+	subject_name="${Session}_${Scan}"
 else
-	subject_name="${Subject}"
+	subject_name="${Session}"
 fi
 
 start_time_file="${StudyFolder}/ProcessingInfo/${subject_name}.${HCPpipelineProcess}.starttime"
