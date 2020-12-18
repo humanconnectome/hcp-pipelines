@@ -238,17 +238,3 @@ def set_qunex_scanlist_dwi(SUBJECT_PROJECT, SUBJECT_EXTRA):
             ['04: DWI:dir99_PA','dMRI_dir99_PA']
         ]
     return {"QUNEX_SCANLIST": qunex_scanlist}
-
-
-def structural_get_data_job_script(USE_PRESCAN_NORMALIZED, SINGULARITY_PARAMS):
-    SINGULARITY_PARAMS["delay-seconds"] = 120
-    del SINGULARITY_PARAMS["scan"]
-    if USE_PRESCAN_NORMALIZED:
-        SINGULARITY_PARAMS["use-prescan-normalized"] = None
-
-    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
-
-
-def structural_create_check_data_job_script(SINGULARITY_PARAMS):
-    SINGULARITY_PARAMS["fieldmap"] = "NONE"
-    return {"SINGULARITY_PARAMS": SINGULARITY_PARAMS}
