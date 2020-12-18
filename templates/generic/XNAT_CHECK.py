@@ -30,9 +30,9 @@ completion_checker = OneSubjectCompletionXnatChecker(
 
 g_working_dir = CHECK_DATA_DIR
 script_name = f"{PIPELINE_NAME}.XNAT_CHECK"
-log_filename = f"{subject}.{classifier}.{script_name}.log"
+log_filename = f"{subject}_{classifier}_{script_name}.log"
 log_filepath = f"{g_working_dir}/{log_filename}"
-success_filename = f"{subject}.{classifier}.{script_name}.success"
+success_filename = f"{subject}_{classifier}_{script_name}.success"
 success_filepath = f"{g_working_dir}/{success_filename}"
 dest_dir = f"{session}/ProcessingInfo"
 
