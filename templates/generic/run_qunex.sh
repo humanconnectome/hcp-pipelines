@@ -49,10 +49,10 @@ echo "   QUNEX Study          : $StudyFolder"                                   
 #echo "   Input data location  : $InputDataLocation"                               2>&1 | tee -a ${LogFile}
 echo "   Cores to use         : $parsessions"                                           2>&1 | tee -a ${LogFile}
 echo "   Threads to use       : $threads"                                         2>&1 | tee -a ${LogFile}
-echo "   QUNEX subjects folder: $SessionsFolder"                                  2>&1 | tee -a ${LogFile}
+echo "   QUNEX sessions folder: $SessionsFolder"                                  2>&1 | tee -a ${LogFile}
 echo "   QUNEX batch file     : $BatchFile"                                       2>&1 | tee -a ${LogFile}
 echo "   Overwrite HCP step   : $Overwrite"                                       2>&1 | tee -a ${LogFile}
-echo "   Subjects to run      : $Session"                                         2>&1 | tee -a ${LogFile}
+echo "   Sessions to run      : $Session"                                         2>&1 | tee -a ${LogFile}
 echo "   HCP pipelne process  : $HCPpipelineProcess"                              2>&1 | tee -a ${LogFile}
 echo "   Log file output      : $LogFile"                                         2>&1 | tee -a ${LogFile}
 echo ""                                                                           2>&1 | tee -a ${LogFile}
