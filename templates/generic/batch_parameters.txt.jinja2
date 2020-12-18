@@ -1,0 +1,96 @@
+#  Batch parameters file
+#  =====================
+#
+
+# Note: We choose NOT to set default values for the dwelltime/echospacing params
+# because if the value isn't found in the sidecar JSON, we want processing to abort/abend,
+# rather than proceeding silently with a default value
+
+# -------------------------> General HCP settings
+
+_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_folderstructure    : hcpls
+_hcp_filename           : original
+_hcp_processing_mode    : HCPStyleData
+_log                    : study|hcp
+_hcp_regname            : MSMSulc
+
+
+# -------------------------> PreFS
+
+# These two particular params describing the SEFMs are currently only relevant when using
+# TOPUP-based readout distortion correction (RDC) within PreFreeSurfer.
+# Note that the 'dwelltime' param has been renamed to 'seechospacing' within PreFS itself
+_hcp_seechospacing      : # 0.0005800090  # ==> Default "EffectiveEchoSpacing" value if missing from JSON
+_hcp_seunwarpdir        : y  # Assumes that the SEFM NIFTIs are LAS or RAS oriented!
+
+_hcp_brainsize          : 150
+_hcp_t1samplespacing    : 
+_hcp_t2samplespacing    : 
+_hcp_unwarpdir          : # Readout direction of the *structurals*; Usually z
+_hcp_gdcoeffs           : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_avgrdcmethod       : NONE
+_hcp_topupconfig        : b02b0.cnf
+_hcp_prefs_template_res : 0.8
+
+# NOTE: These now apply only to structural processing
+
+_hcp_sephaseneg         : # AP
+_hcp_sephasepos         : # PA
+
+
+# -------------------------> FS
+
+_hcp_freesurfer_home    : ${FREESURFER_HOME}
+
+
+# -------------------------> Post FS
+ 
+_hcp_grayordinatesres   : 2
+_hcp_hiresmesh          : 164
+_hcp_lowresmesh         : 32
+
+
+# -------------------------> fMRIVolume
+
+_hcp_bold_sbref             : use  # Specifies whether SBRef image should be used as the "Scout"
+_hcp_bold_echospacing     : # 0.0005800090  # ==> Default "EffectiveEchoSpacing" value if missing from JSON
+						    # Note: Currently, the BOLD and SEFMs are assumed to have the same echo-spacing
+							# within fMRIVolume
+_hcp_bold_dcmethod        : TOPUP
+_hcp_bold_sephaseneg      : AP
+_hcp_bold_sephasepos      : PA
+_hcp_bold_unwarpdir       : PA=y|AP=y-
+_hcp_bold_topupconfig     : b02b0.cnf
+_hcp_bold_biascorrection  : SEBASED
+_hcp_bold_res             : 2
+_hcp_bold_gdcoeffs        : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_bold_doslicetime     : 
+_hcp_bold_refreg          :
+
+
+# -------------------------> fMRI Surface
+
+_hcp_bold_smoothFWHM    : 2
+
+
+# -------------------------> dMRI settings
+
+_hcp_dwi_echospacing    : # 0.6899980000
+_hcp_dwi_PEdir          : 2
+_hcp_dwi_gdcoeffs       : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+
+
+# -------------------------> Check settings
+
+_hcp_prefs_check        : last
+_hcp_fs_check           : last
+_hcp_postfs_check       : last
+_hcp_bold_vol_check     : last
+_hcp_bold_surf_check    : last
+_hcp_dwi_check          : last
+
+
+# -------------------------> Map to MNAP
+
+_hcp_cifti_tail         : _Atlas

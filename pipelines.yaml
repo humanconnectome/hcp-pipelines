@@ -13,6 +13,10 @@ StructuralPreprocessing:
   - function: set_study_folder
   - function: make_directories
   - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
+  - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
@@ -87,6 +91,10 @@ StructuralPreprocessingHandEdit:
   - function: set_study_folder
   - function: make_directories
   - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
+  - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
@@ -159,6 +167,10 @@ FunctionalPreprocessing:
   - function: set_study_folder
   - function: make_directories
   - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
+  - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
@@ -227,6 +239,10 @@ MultiRunIcaFixProcessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
+  - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -309,6 +325,10 @@ MsmAllProcessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
+  - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
   - function: available_bold_dirs
@@ -390,6 +410,10 @@ DiffusionPreprocessing:
   - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
+  - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${STUDY_FOLDER_SCRATCH}/sessions/specs/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
   - function: set_qunex_scanlist_dwi
