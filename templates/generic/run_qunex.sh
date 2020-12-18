@@ -15,7 +15,7 @@ scriptPath=$(dirname ${0})
 # =-=-=-=-=-= GENERAL OPTIONS =-=-=-=-=-=
 #
 # -- key variables to set
-ParameterFolder='{{ QUNEX_PARAMETER_FILES }}'
+ParametersFile='{{ BATCH_PARAMETERS_FILE }}'
 StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
 Session='{{ SESSION }}'
 SubjectPart='{{ SUBJECT }}'
@@ -86,11 +86,6 @@ cd ${StudyFolder}/sessions
 ### qunex_setup ###
 #{% block qunex_setup %}
 
-	## Copy in ParameterFiles and SpecFiles (NOTE:  Not necessary for MR-FIX)
-	if [ ! -z "$ParameterFolder" ]; then
-		cp ${ParameterFolder}/* "${StudyFolder}/sessions/specs"
-	fi
-
 	${QUNEXCOMMAND} importHCP \
 		--sessionsfolder="${StudyFolder}/sessions"  \
 		--inbox="${StudyFolder}/unprocessed" \
@@ -107,7 +102,7 @@ cd ${StudyFolder}/sessions
 	${QUNEXCOMMAND} createBatch \
 	 --sessionsfolder="${StudyFolder}/sessions" \
 	 --overwrite="append" \
-	 --paramfile="${StudyFolder}/sessions/specs/batch_parameters.txt"
+	 --paramfile="$ParametersFile"
 
 #{% endblock qunex_setup %}
 

@@ -3,7 +3,6 @@ DEFAULT: &default
   RUNTIME_FILES_DIR: $HOME/hcp-pipelines/runtime
   EXPECTED_FILES_LIST: $RUNTIME_FILES_DIR/expected_files/$PIPELINE_NAME.txt
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
-  QUNEX_PARAMETER_FILES: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v4
   #QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.61.17_FSL603.sif
   QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.6_FSL603.sif
   PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/pipelines.sif
@@ -126,7 +125,6 @@ structural_preprocess: &structural_preprocess
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
-  QUNEX_PARAMETER_FILES: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v3
   BUILD_DIR: $HOME/XNAT_OLDBUILD_DIR/$USER/ls_struc_preproc
   USE_SCRATCH_FOR_PROCESSING: True
 
@@ -154,7 +152,6 @@ diffusion_preprocess: &diffusion_preprocess
   PROCESS_NVIDIA: True
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
-  QUNEX_PARAMETER_FILES: $RUNTIME_FILES_DIR/parameter_files/SpecFiles_v3
   QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.4.sif
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/diffusion_preproc
   USE_SCRATCH_FOR_PROCESSING: False
