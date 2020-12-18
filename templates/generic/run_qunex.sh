@@ -102,8 +102,7 @@ cd ${SubjectsFolder}
 	#########################	setupHCP
 	${QUNEXCOMMAND} setupHCP \
 	    --sessionsfolder="${StudyFolder}/sessions" \
-	    --sessions="${Subject}" \
-		--hcp_filename="original"
+	    --sessions="${Subject}"
 
 	#########################	createBatch
 	${QUNEXCOMMAND} createBatch \
