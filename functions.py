@@ -221,7 +221,7 @@ def set_bold_list_order(PROJECT, SCAN):
     return {"BOLD_LIST_ORDER": bold_list_order}
 
 
-def set_qunex_scanlist(BOLD_LIST_ORDER, BOLD_LIST):
+def set_qunex_scanlist_bold(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
