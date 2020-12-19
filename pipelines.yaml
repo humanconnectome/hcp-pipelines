@@ -75,7 +75,6 @@ StructuralPreprocessing:
   - function: launch_main_script
 
 
-
 StructuralPreprocessingHandEdit:
   - set_from_env:
       # the first positional argument is the subject string
@@ -221,9 +220,7 @@ FunctionalPreprocessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
 
 
 MultiRunIcaFixProcessing:
@@ -306,10 +303,7 @@ MultiRunIcaFixProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
-
 
 
 MsmAllProcessing:
@@ -392,9 +386,7 @@ MsmAllProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
 
 
 DiffusionPreprocessing:
@@ -474,4 +466,3 @@ DiffusionPreprocessing:
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
-
