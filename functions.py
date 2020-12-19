@@ -37,12 +37,12 @@ def generate_timestamp(TIMESTAMP=None):
         return {"TIMESTAMP": str(int(time.time()))}
 
 
-def split_subject_components(SUBJECT_ARG):
-    components = SUBJECT_ARG.split(":")
+def split_subject_components(RUNNER_ARGS):
+    components = RUNNER_ARGS.split(":")
     if len(components) != 4:
         raise ValueError(
-            "Expecting a colon-delimited SUBJECT_ARG in the format AA:BB:CC:DD, instead got: ",
-            SUBJECT_ARG,
+            "Expecting a colon-delimited RUNNER_ARGS in the format AA:BB:CC:DD, instead got: ",
+            RUNNER_ARGS,
         )
 
     proj, subject_id, classifier, scan = components
