@@ -74,7 +74,6 @@ StructuralPreprocessing:
   - function: launch_main_script
 
 
-
 StructuralPreprocessingHandEdit:
   - set_from_env:
       RUNNER_ARGS: $_1
@@ -219,9 +218,7 @@ FunctionalPreprocessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
 
 
 MultiRunIcaFixProcessing:
@@ -247,7 +244,7 @@ MultiRunIcaFixProcessing:
   - function: set_msm_all_bolds
   - function: set_bold_list_order
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_scanlist
+  - function: set_qunex_scanlist_bold
   - generate_file:
       template: multirunicafix/batch.txt.jinja2
       filepath: $STUDY_FOLDER/processing/batch.txt
@@ -304,10 +301,7 @@ MultiRunIcaFixProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
-
 
 
 MsmAllProcessing:
@@ -333,7 +327,7 @@ MsmAllProcessing:
   - function: set_msm_all_bolds
   - function: set_bold_list_order
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
-  - function: set_qunex_scanlist
+  - function: set_qunex_scanlist_bold
   - generate_file:
       template: msmall/batch.txt.jinja2
       filepath: $STUDY_FOLDER/processing/batch.txt
@@ -390,9 +384,7 @@ MsmAllProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
-
   - function: launch_main_script
-
 
 
 DiffusionPreprocessing:
@@ -472,4 +464,3 @@ DiffusionPreprocessing:
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
-

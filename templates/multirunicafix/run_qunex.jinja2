@@ -1,37 +1,20 @@
 {% extends "generic/run_qunex.sh" %}
 {% block qunex_setup %}
-## This pipeline uses a template-based approach to generate batch.txt rather than 'createBatch', et al.
+## This pipeline uses a template-based approach to generate the id/scan portion of batch.txt, rather than 'createBatch'
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
 	mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}"
 	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
 	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
-	#mv ${StudyFolder}/*fMRI_* "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
-
-	#IcaFixBolds=`opts_GetOpt "--icafixbolds" $@`
-	#ReapplyFixBolds=`opts_GetOpt "--reapplyfixbolds" $@`
 
 	######################### hcp_ICAFix
+	## No hcp_ReApplyFix (run automatically as part of hcp_ICAFix)
+	## NOTE:  As part of setting up batch.txt, we've included only scans that exist, and they're in the preferred order
 	${QUNEXCOMMAND} hcp_ICAFix \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
-		--hcp_matlab_mode="compiled" \
 		--parsessions="${parsessions}"
-		## NOTE:  We've included only scans that exist int the batch.txt file, and they're in the preferred order
-		#--hcp_icafix_bolds="${IcaFixBolds}" \
-
-	## No ReapplyFix (run automatically as part of hcp_ICAFix)
-	########################## hcp_ReApplyFix
-	#${QUNEXCOMMAND} hcp_ReApplyFix \
-	#	--sessions="${StudyFolder}/processing/batch.txt" \
-	#	--sessionsfolder="${StudyFolder}/sessions" \
-	#	--overwrite="${Overwrite}" \
-	#	--hcp_icafix_bolds="${ReapplyFixBolds}" \
-	#	--hcp_matlab_mode="compiled" \
-	#	--parsessions="${parsessions}" \
-	#	--nprocess="0"
-
 
 {% endblock pipeline_specific %}

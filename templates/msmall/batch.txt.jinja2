@@ -3,7 +3,10 @@
 {% if MSM_ALL_BOLDS is defined %}
 # -------------------------> MSMAll parameters
 
-_hcp_msmall_bolds	: {{ MSM_ALL_BOLDS }}
+_hcp_msmall_bolds                   : {{ MSM_ALL_BOLDS }}
+_hcp_resample_extractnames          : "rfMRI_REST:{{ MSM_ALL_BOLDS }}"
+_hcp_resample_extractextraregnames  : MSMSulc
+_hcp_resample_extractvolume         : TRUE
 
 {% endif %}
 {% endblock additional_params %}
