@@ -8,8 +8,25 @@
     mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
     mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
     mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
+    
+    # Find json for one of the dMRI scans; needed to provide slice ordering/timing to eddy
     json_file=`find "${StudyFolder}" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
     echo "json_file=${json_file}"
+
+    # Extract EchoSpacing using inline python from same json
+    spacing=`python << END
+    import json
+    json_file = "$json_file"
+    with open(json_file) as f:
+        data = json.load(f)
+        spacing = data["EffectiveEchoSpacing"]
+        # convert from seconds to milliseconds
+        spacing *= 1000
+        print(spacing)
+    END`
+
+    echo "# Value for the following was extracted from 'EffectiveEchoSpacing' in $(basename $json_file)." >> ${StudyFolder}/processing/batch.txt
+    echo "_hcp_dwi_echospacing : $spacing" >> ${StudyFolder}/processing/batch.txt
 
     ######################### hcp_Diffusion
     ${QUNEXCOMMAND} hcp_Diffusion \

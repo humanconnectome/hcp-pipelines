@@ -1,7 +1,6 @@
 StructuralPreprocessing:
   - set_from_env:
-      # the first positional argument is the subject string
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
@@ -77,8 +76,7 @@ StructuralPreprocessing:
 
 StructuralPreprocessingHandEdit:
   - set_from_env:
-      # the first positional argument is the subject string
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
@@ -154,7 +152,7 @@ StructuralPreprocessingHandEdit:
 
 FunctionalPreprocessing:
   - set_from_env:
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
@@ -225,7 +223,7 @@ FunctionalPreprocessing:
 
 MultiRunIcaFixProcessing:
   - set_from_env:
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
@@ -308,7 +306,7 @@ MultiRunIcaFixProcessing:
 
 MsmAllProcessing:
   - set_from_env:
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
@@ -391,7 +389,7 @@ MsmAllProcessing:
 
 DiffusionPreprocessing:
   - set_from_env:
-      SUBJECT_ARG: $_1
+      RUNNER_ARGS: $_1
       USER: $USER
       HOME: /home/$USER
   - function: generate_timestamp
