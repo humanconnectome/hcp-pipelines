@@ -10,6 +10,23 @@
     #json_location=fd -a -e json dMRI ~/XNAT_BUILD_DIR/HCPpipeline/diffusion_Q3_2020_runs/ | rg -v SBRef | head -1
     json_file=`find "${StudyFolder}" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
     echo "json_file=${json_file}"
+
+
+    spacing=`python << END
+    import json
+    json_file = "$json_file"
+    with open(json_file) as f:
+        data = json.load(f)
+        spacing = data["EffectiveEchoSpacing"]
+        # convert from seconds to milliseconds
+        spacing *= 1000
+        print(spacing)
+    END`
+
+    echo "# Value for the following was extracted from 'EffectiveEchoSpacing' in $(basename $json_file)." >> ${StudyFolder}/processing/batch.txt
+    echo "_hcp_dwi_echospacing : $spacing" >> ${StudyFolder}/processing/batch.txt
+
+
     ${QUNEXCOMMAND} hcp_Diffusion \
     --sessions="${StudyFolder}/processing/batch.txt" \
     --subjectsfolder="${StudyFolder}/sessions" \
