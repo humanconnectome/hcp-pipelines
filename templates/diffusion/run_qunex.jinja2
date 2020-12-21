@@ -23,7 +23,7 @@
         print(spacing)
     END`
 
-    echo "# The was extracted from `EffectiveEchoSpacing` in $json_file." >> ${StudyFolder}/processing/batch.txt
+    echo "# Value for the following was extracted from 'EffectiveEchoSpacing' in $(basename $json_file)." >> ${StudyFolder}/processing/batch.txt
     echo "_hcp_dwi_echospacing : $spacing" >> ${StudyFolder}/processing/batch.txt
 
 
