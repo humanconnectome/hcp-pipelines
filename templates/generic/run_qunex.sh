@@ -14,8 +14,8 @@ scriptPath=$(dirname ${0})
 # =-=-=-=-=-= GENERAL OPTIONS =-=-=-=-=-=
 #
 # -- key variables to set
-ParametersFile='{{ BATCH_PARAMETERS_FILE }}'
 StudyFolder='{{ STUDY_FOLDER_SCRATCH }}'
+ParametersFile="$StudyFolder/sessions/specs/batch_parameters.txt"
 Session='{{ SESSION }}'
 SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
