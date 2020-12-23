@@ -20,6 +20,7 @@ DEFAULT: &default
   AUTOLAUNCH_AT_END: True
   #PROCESSING_STAGE: PREPARE_SCRIPTS
   PROCESSING_STAGE: CHECK_DATA
+  #PROCESSING_STAGE: GET_DATA
   #PROCESSING_STAGE: PROCESS_DATA
 
 #defaults from scripts.yaml:
@@ -155,7 +156,7 @@ diffusion_preprocess: &diffusion_preprocess
   QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.4.sif
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/diffusion_preproc
   USE_SCRATCH_FOR_PROCESSING: False
-  WALLTIME_LIMIT_HOURS: 72
+  WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 32
 
 diffusion_preprocess_CCF_HCA:
