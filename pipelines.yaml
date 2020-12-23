@@ -13,7 +13,7 @@ StructuralPreprocessing:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
   - generate_file:
       template: generic/shared_values.py
@@ -89,7 +89,7 @@ StructuralPreprocessingHandEdit:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
   - generate_file:
       template: generic/shared_values.py
@@ -165,7 +165,7 @@ FunctionalPreprocessing:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
   - generate_file:
       template: generic/shared_values.py
@@ -236,7 +236,7 @@ MultiRunIcaFixProcessing:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
@@ -247,7 +247,7 @@ MultiRunIcaFixProcessing:
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: multirunicafix/batch.txt.jinja2
-      filepath: $STUDY_FOLDER/processing/batch.txt
+      filepath: ${CHECK_DATA_DIR}/batch.txt
       variable: BATCH_FILE
 
   - generate_file:
@@ -319,7 +319,7 @@ MsmAllProcessing:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
@@ -330,7 +330,7 @@ MsmAllProcessing:
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: msmall/batch.txt.jinja2
-      filepath: $STUDY_FOLDER/processing/batch.txt
+      filepath: ${CHECK_DATA_DIR}/batch.txt
       variable: BATCH_FILE
 
   - generate_file:
@@ -402,14 +402,14 @@ DiffusionPreprocessing:
   - function: make_directories
   - generate_file:
       template: generic/batch_parameters.txt.jinja2
-      filepath: "${STUDY_FOLDER}/sessions/specs/batch_parameters.txt"
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
 
   # Only for msmall, multirunicafix, and diffusion
   - function: set_qunex_scanlist_dwi
   - generate_file:
       template: diffusion/batch.txt.jinja2
-      filepath: $STUDY_FOLDER/processing/batch.txt
+      filepath: ${CHECK_DATA_DIR}/batch.txt
       variable: BATCH_FILE
 
   - generate_file:
