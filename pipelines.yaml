@@ -239,7 +239,7 @@ MultiRunIcaFixProcessing:
       filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
 
-  # Only for msmall, multirunicafix, and diffusion
+  # Only for msmall and multirunicafix
   - function: available_bold_dirs
   - function: set_msm_all_bolds
   - function: set_bold_list_order
@@ -322,7 +322,7 @@ MsmAllProcessing:
       filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
 
-  # Only for msmall, multirunicafix, and diffusion
+  # Only for msmall and multirunicafix
   - function: available_bold_dirs
   - function: set_msm_all_bolds
   - function: set_bold_list_order
@@ -404,14 +404,6 @@ DiffusionPreprocessing:
       template: generic/batch_parameters.txt.jinja2
       filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
-
-  # Only for msmall, multirunicafix, and diffusion
-  - function: set_qunex_scanlist_dwi
-  - generate_file:
-      template: diffusion/batch.txt.jinja2
-      filepath: ${CHECK_DATA_DIR}/batch.txt
-      variable: BATCH_FILE
-
   - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
