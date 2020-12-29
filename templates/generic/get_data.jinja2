@@ -17,7 +17,7 @@ if [ -f {{CHECK_DATA_DIR}}/batch_parameters.txt ]; then
 fi
 if [ -f {{CHECK_DATA_DIR}}/batch.txt ]; then
 	mkdir -p $WorkingDir/${Session}/processing
-	cp -p  {{CHECK_DATA_DIR}}/batch_parameters.txt $WorkingDir/${Session}/processing
+	cp -p  {{CHECK_DATA_DIR}}/batch.txt $WorkingDir/${Session}/processing
 fi
 
 {% block content %}{% endblock %}

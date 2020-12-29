@@ -1,13 +1,15 @@
 {% extends "generic/batch_parameters.txt.jinja2" %}
-{% block additional_params -%}
-{%- endblock additional_params %}
-
+{% block additional_params %}{% endblock additional_params %}
+{% block subject_params %}
 ---
 id: {{ SESSION }}
 subject: {{ SUBJECT }}
 hcp: {{ STUDY_FOLDER }}/sessions/{{ SESSION }}/hcp
-
+{% endblock subject_params %}
+{% block scan_list %}
 hcpready: true
 {% for XX, YY in QUNEX_SCANLIST %}
 {{ '{:24}'.format(XX) }} : {{ '{:30}'.format(YY) }} : filename({{ YY }})
 {%- endfor %}
+
+{% endblock scan_list %}
