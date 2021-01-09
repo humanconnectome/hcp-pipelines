@@ -81,7 +81,8 @@ main() {
 #########################	createStudy
 ${QUNEXCOMMAND} createStudy --studyfolder="${StudyFolder}"
 cd ${StudyFolder}/sessions
-### qunex_setup ###
+
+### BEGIN qunex_setup ###
 #{% block qunex_setup %}
 
   #########################	importHCP
@@ -105,7 +106,7 @@ cd ${StudyFolder}/sessions
 	 --paramfile="$ParametersFile"
 
 #{% endblock qunex_setup %}
-
+### END qunex_setup ###
 
 sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
@@ -118,10 +119,12 @@ log_Msg "PBS_JOBID: ${PBS_JOBID}" > ${filename}
 log_Msg "PBS execution node: $(hostname)" >> ${filename}
 
 
-### pipeline_specific ###
+### BEGIN pipeline_specific ###
 #{% block pipeline_specific %}
 #{% endblock pipeline_specific %}
+### END pipeline_specific ###
 
+#########################	exportHCP
 ${QUNEXCOMMAND} exportHCP \
     --sessionsfolder="${StudyFolder}/sessions" \
     --sessions="${StudyFolder}/processing/batch.txt" \
