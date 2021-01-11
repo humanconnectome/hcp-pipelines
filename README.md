@@ -19,7 +19,7 @@ project:subject_id:classifier:extra
 
 ### Using singularity container on WashU HPC
 If using the container specified in [hcp-pipelines-singularity](https://github.com/mobalt/hcp-pipelines-singularity),
-placed in location `/export/HCP/qunex-hcp/production_containers/pipelines.sif`.
+placed in location `/export/HCP/qunex-hcp/production_containers/hcp-pipelines-runner.sif`.
 Then just clone the repo on your HPC home directory and run the
 [run.sh](https://github.com/mobalt/hcp-pipelines/blob/master/run.sh) script as is, for example:
 ```

@@ -4,7 +4,7 @@ DEFAULT: &default
   EXPECTED_FILES_LIST: $RUNTIME_FILES_DIR/expected_files/$PIPELINE_NAME.txt
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
   QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.7_FSL603.sif
-  PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/pipelines.sif
+  PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/hcp-pipelines-runner.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   LOG_DIR: $HOME/XNAT_LOGS
   ARCHIVE_ROOT: /NRG-data/NRG/intradb/archive
