@@ -223,6 +223,12 @@ MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0.dtseries.n
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_vn.dscalar.nii
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_MSMAll_mean.dscalar.nii
 MNINonLinear Results rfMRI_REST rfMRI_REST_Atlas_hp0_clean_vn.dtseries.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Atlas_hp0_clean.dtseries.nii
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0_clean.nii.gz
+MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_Runs.csv
+MNINonLinear Results rfMRI_REST rfMRI_REST_Atlas_MSMAll_hp0_clean.dtseries.nii
+MNINonLinear Results rfMRI_REST rfMRI_REST_Atlas_hp0_clean.dtseries.nii
+MNINonLinear Results rfMRI_REST rfMRI_REST_hp0_clean.nii.gz
 MNINonLinear {subjectid}.ArealDistortion_MSMAll.164k_fs_LR.dscalar.nii
 MNINonLinear {subjectid}.ArealDistortion_MSMAll_InitialReg_2_d40_WRN.164k_fs_LR.dscalar.nii
 MNINonLinear {subjectid}.corrThickness_MSMAll.164k_fs_LR.dscalar.nii
