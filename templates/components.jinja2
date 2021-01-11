@@ -1,22 +1,23 @@
-{% macro pbs_head(log_dir, nodes=1, ppn=1, haswell=False, gpu=0, k20x=False, walltime=4, mem=4) -%}
-#PBS -S /bin/bash
-#PBS -l nodes={{ nodes|int }}:ppn={{ ppn|int }}
+{% macro pbs_head(job_name, log_dir, nodes=1, ppn=1, haswell=False, gpu=0, k20x=False, walltime=4, mem=4) -%}
+#!/bin/bash
+#SBATCH --job-name="{{ job_name }}"
+#SBATCH --nodes={{ nodes|int }} --ntasks-per-node={{ ppn|int }}
 
-{%- if haswell -%}
-:haswell
+{%- if haswell %}
+#SBATCH --constraint=haswell
 {%- endif -%}
 
-{%- if gpu -%}
-:gpus={{ gpu|int }}
-{%- endif -%}
+{%- if gpu %}
+#SBATCH --gres=gpu
+    {%- if k20x -%}
+        :K20x
+    {%- endif -%}
+:{{ gpu|int }}
+{% endif -%}
 
-{%- if k20x -%}
-    :K20x
-{%- endif -%}
-
-,walltime={{ walltime|int }}:00:00,mem={{ mem|int }}gb
-#PBS -o {{ log_dir }}
-#PBS -e {{ log_dir }}
+#SBATCH --time={{ walltime|int }}:00:00 --mem={{ mem|int }}000
+#SBATCH --output="{{ log_dir }}/{{ job_name }}.%j.stdout"
+#SBATCH --error="{{ log_dir }}/{{ job_name }}.%j.stderr"
 {%- endmacro %}
 
 
