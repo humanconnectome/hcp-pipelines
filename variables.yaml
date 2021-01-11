@@ -106,7 +106,6 @@ msmall_process_CCF_HCD:
 
 multirunicafix: &multirunicafix
   <<: *default
-  PROCESS_PBS_HASWELL: False
   WALLTIME_LIMIT_HOURS: 48
   MEM_LIMIT_GBS: 48
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
@@ -144,7 +143,6 @@ structural_preprocess_CCF_MDD:
 
 diffusion_preprocess: &diffusion_preprocess
   <<: *default
-  PROCESS_PBS_HASWELL: False
   PROCESS_PBS_K20X: True
   PROCESS_PBS_GPU: 1
   PROCESS_NVIDIA: True
