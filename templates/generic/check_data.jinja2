@@ -2,6 +2,10 @@
 {{ pbs_head(log_dir=LOG_DIR, haswell=False) }}
 
 {% block pre %}{% endblock %}
+if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }} -name 'error*.log' | grep "\/comlogs\/" | wc -l` -gt "0" ] ; then
+	echo "ERROR: One or more QuNex comlogs are error logs"
+	exit 1
+fi
 
 {{ singularity(
         container=PIPELINES_CONTAINER,
