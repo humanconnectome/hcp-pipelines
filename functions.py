@@ -1,9 +1,8 @@
 import glob
 import os
 import random
-import shutil
 import time
-from .util import escape_path, keep_resting_state_scans, shell_run, qsub, is_unreadable
+from .util import escape_path, keep_resting_state_scans, shell_run, is_unreadable
 
 
 def check_required_files_are_available(

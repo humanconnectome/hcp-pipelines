@@ -17,18 +17,5 @@ def shell_run(cmd):
     # return None;
 
 
-def qsub(cmd, prior_job=None, afterok=True):
-    if cmd is None:
-        return prior_job
-
-    if prior_job is None:
-        full_cmd = f"qsub {cmd}"
-    else:
-        afterok = "afterok" if afterok else "afterany"
-        full_cmd = f"qsub -W depend={afterok}:{prior_job} {cmd} "
-    jobnumb = shell_run(full_cmd)
-    return jobnumb
-
-
 def is_unreadable(filename):
     return not os.access(filename, os.R_OK)
