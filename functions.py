@@ -225,13 +225,3 @@ def set_qunex_scanlist_bold(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
-
-def set_qunex_scanlist_dwi(PROJECT):
-    if PROJECT in ["CCF_HCA_STG", "CCF_HCD_STG", "CCF_HCA_TST", "CCF_HCD_TST"]:
-        qunex_scanlist = [
-            ['01: DWI:dir98_AP','dMRI_dir98_AP'],
-            ['02: DWI:dir98_PA','dMRI_dir98_PA'],
-            ['03: DWI:dir99_AP','dMRI_dir99_AP'],
-            ['04: DWI:dir99_PA','dMRI_dir99_PA']
-        ]
-    return {"QUNEX_SCANLIST": qunex_scanlist}
