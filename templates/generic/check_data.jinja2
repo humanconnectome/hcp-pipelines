@@ -1,5 +1,5 @@
-{% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=LOG_DIR, haswell=True) }}
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name="check_data", log_dir=LOG_DIR) }}
 
 {% block pre %}{% endblock %}
 
