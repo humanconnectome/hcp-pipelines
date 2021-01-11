@@ -1,5 +1,5 @@
-{% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=CHECK_DATA_DIR, pbs_email_addr=PBS_EMAIL_ADDR) }}
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name="get_data", log_dir=CHECK_DATA_DIR) }}
 
 {{ PYTHON }} \
     {{ GET_DATA_RUNPATH }}

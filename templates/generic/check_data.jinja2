@@ -1,5 +1,5 @@
-{% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=LOG_DIR, haswell=False) }}
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name="check_data", log_dir=LOG_DIR) }}
 
 {% block pre %}{% endblock %}
 if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/logs/comlogs -name 'error*.log' -o -name 'tmp*.log' | wc -l` -gt "0" ] ; then

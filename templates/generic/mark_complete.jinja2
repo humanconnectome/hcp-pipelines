@@ -1,5 +1,5 @@
-{% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=LOG_DIR) }}
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name="mark_complete", log_dir=LOG_DIR) }}
 
 {{ PYTHON }} \
     {{ MARK_RUNNING_STATUS_RUNPATH }}

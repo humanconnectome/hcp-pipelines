@@ -1,5 +1,5 @@
-{% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=LOG_DIR, mem=12) }}
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name="put_data", log_dir=LOG_DIR, mem=12) }}
 
 cp {{ CHECK_DATA_DIR }}/* {{ CLEAN_DATA_DIR }}/{{ SESSION }}/ProcessingInfo
 
