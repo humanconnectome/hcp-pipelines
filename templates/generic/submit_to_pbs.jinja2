@@ -40,23 +40,23 @@ CHECK_DATA_JOB_SCRIPT_NAME="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
 # Chain the scripts onto the PBS
 {% if PROCESSING_STAGE not in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
 # {% endif -%}
-PRIOR_JOB=$(qsub $GET_DATA_JOB_SCRIPT_NAME)
+PRIOR_JOB=$(sbatch $GET_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
 {% if PROCESSING_STAGE not in [ "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
 # {% endif -%}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB $PROCESS_DATA_JOB_SCRIPT_NAME)
+PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PROCESS_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
 {% if PROCESSING_STAGE not in [ "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
 # {% endif -%}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB $CLEAN_DATA_SCRIPT_NAME)
+PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CLEAN_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
 {% if PROCESSING_STAGE not in [ "PUT_DATA", "CHECK_DATA" ] -%}
 # {% endif -%}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB $PUT_DATA_SCRIPT_NAME)
+PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PUT_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
 {% if PROCESSING_STAGE not in [ "CHECK_DATA" ] -%}
 # {% endif -%}
-PRIOR_JOB=$(qsub -W depend=afterok:$PRIOR_JOB $CHECK_DATA_JOB_SCRIPT_NAME)
+PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CHECK_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
 
 
 
 # Don't comment out, this should always run last
 # This cleans up the running status marker
-PRIOR_JOB=$(qsub {% if PROCESSING_STAGE in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %} -W depend=afterany:$PRIOR_JOB {% endif %} {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
+PRIOR_JOB=$(sbatch {% if PROCESSING_STAGE in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %} --dependency=afterany:$PRIOR_JOB {% endif %} {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
