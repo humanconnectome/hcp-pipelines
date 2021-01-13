@@ -1,9 +1,8 @@
 {% extends "generic/clean_data.jinja2" %}
 {% block content %}
-mv $StudyFolder/${Session}/MNINonLinear $StudyFolder
-mv $StudyFolder/${Session}/T*w $StudyFolder
-mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
+mv $StudyFolder/sessions/${Session}/hcp/${Session}/* $StudyFolder
 mv $StudyFolder/processing $StudyFolder/ProcessingInfo
+mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
 mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
 mv $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
 mv $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing

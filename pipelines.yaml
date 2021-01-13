@@ -39,7 +39,7 @@ StructuralPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
@@ -115,7 +115,7 @@ StructuralPreprocessingHandEdit:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
@@ -191,7 +191,7 @@ FunctionalPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
@@ -274,7 +274,7 @@ MultiRunIcaFixProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
@@ -357,7 +357,7 @@ MsmAllProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
@@ -428,7 +428,7 @@ DiffusionPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
-      template: generic/XNAT_PUT_WORKING_DIR.py
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:

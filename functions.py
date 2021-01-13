@@ -117,11 +117,13 @@ def set_study_folder(
 
 
 def make_directories(
-    DRYRUN, WORKING_DIR, STUDY_FOLDER, CHECK_DATA_DIR, MARK_COMPLETION_DIR
+    DRYRUN, WORKING_DIR, CLEAN_DATA_DIR, STUDY_FOLDER, CHECK_DATA_DIR, MARK_COMPLETION_DIR
 ):
     if not DRYRUN:
         print("Making ", WORKING_DIR)
         os.makedirs(WORKING_DIR, exist_ok=True)
+        print("Making ", CLEAN_DATA_DIR)
+        os.makedirs(CLEAN_DATA_DIR, exist_ok=True)
         print("Making study folder: ", WORKING_DIR)
         os.makedirs(f"{STUDY_FOLDER}/processing", exist_ok=True)
         print("Making ", CHECK_DATA_DIR)

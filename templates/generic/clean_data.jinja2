@@ -2,24 +2,41 @@
 {{ pbs_head(log_dir=CHECK_DATA_DIR) }}
 
 WorkingDir="{{ WORKING_DIR }}"
+CleanDataDir="{{ CLEAN_DATA_DIR }}"
 Session="{{SESSION}}"
-StudyFolder="$WorkingDir/${Session}"
+StudyFolder="$CleanDataDir/${Session}"
+
+if [ ! -d $WorkingDir ]; then
+	echo "ERROR:  Working directory ($WorkingDir) does not exist!"
+	exit 1
+fi
+if [ ! -d $CleanDataDir ]; then
+	echo "ERROR:  CleanData directory ($CleanDataDirectory) does not exist!"
+	exit 1
+fi
+pushd $WorkingDir
+pax -rwl . $CleanDataDir
+popd
 
 {% block content %}
-mv $StudyFolder/${Session}/MNINonLinear $StudyFolder
-mv $StudyFolder/${Session}/T*w $StudyFolder
-mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
+find $StudyFolder/sessions/${Session}/hcp/${Session} \! -newer $START_FILE -delete
+mv $StudyFolder/sessions/${Session}/hcp/${Session}/* $StudyFolder
 mv $StudyFolder/processing $StudyFolder/ProcessingInfo
+mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
 mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
-mv $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
-mv $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
-find $StudyFolder \
-    -not -path "$StudyFolder/T*w/*" \
-    -not -path "$StudyFolder/ProcessingInfo/*" \
-    -not -path "$StudyFolder/MNINonLinear/*" \
-    -delete
+if [ -f $StudyFolder/sessions/${Session}/session_hcp.txt ] ; then
+	cp -p $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
+fi
+if [ -f $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log ] ; then
+	cp -p $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+fi
+find $StudyFolder -maxdepth 1 -mindepth 1 \
+    \( -type d -not -path "$StudyFolder/ProcessingInfo" \
+    -a -not -path "$StudyFolder/MNINonLinear" \
+    \) -exec rm -rf '{}' \;
+find $StudyFolder -type d -empty -delete
 echo "Removing any XNAT catalog files still around."
-find $WorkingDir -name "*_catalog.xml" -delete
+find $CleanDataDir -name "*_catalog.xml" -delete
 echo "Remaining files:"
 find $StudyFolder
 {% endblock %}
