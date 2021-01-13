@@ -124,4 +124,6 @@ log_Msg "PBS execution node: $(hostname)" >> ${filename}
 #{% endblock pipeline_specific %}
 ### END pipeline_specific ###
 
+}
+
 main $@
