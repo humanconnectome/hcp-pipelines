@@ -124,15 +124,4 @@ log_Msg "PBS execution node: $(hostname)" >> ${filename}
 #{% endblock pipeline_specific %}
 ### END pipeline_specific ###
 
-#########################	exportHCP
-${QUNEXCOMMAND} exportHCP \
-    --sessionsfolder="${StudyFolder}/sessions" \
-    --sessions="${StudyFolder}/processing/batch.txt" \
-    --mapaction="link" \
-    --mapto="${StudyFolder}" \
-    --overwrite="yes" \
-    --verbose="no"
-
-}
-
 main $@
