@@ -3,7 +3,9 @@
 
 WorkingDir="{{ WORKING_DIR }}"
 CleanDataDir="{{ CLEAN_DATA_DIR }}"
+StartTimeFile="{{ STARTTIME_FILE_NAME }}"
 Session="{{SESSION}}"
+ProcessingOutputFolder="$WorkingDir/${Session}/sessions/${Session}/hcp/"
 StudyFolder="$CleanDataDir/${Session}"
 
 if [ ! -d $WorkingDir ]; then
@@ -14,29 +16,42 @@ if [ ! -d $CleanDataDir ]; then
 	echo "ERROR:  CleanData directory ($CleanDataDirectory) does not exist!"
 	exit 1
 fi
-pushd $WorkingDir
+if [ ! -d $ProcessingOutputFolder ]; then
+	echo "ERROR:  Processing Output Folder ($ProcessingOutputFolder) does not exist!"
+	exit 1
+fi
+
+# Using pax rather than cp -al or rsync here because on CHPC build space directories, at least, it does a better job of copying files as 
+# hard links, symlinks as symlinks, and preserving all modification dates.
+pushd ${ProcessingOutputFolder}
 pax -rwl . $CleanDataDir
 popd
+if [ ! -d $StudyFolder ]; then
+	echo "ERROR:  Study folder ($StudyFolder) does not exist!"
+	exit 1
+fi
 
 {% block content %}
-find $StudyFolder/sessions/${Session}/hcp/${Session} \! -newer $START_FILE -delete
-mv $StudyFolder/sessions/${Session}/hcp/${Session}/* $StudyFolder
-mv $StudyFolder/processing $StudyFolder/ProcessingInfo
-mv $StudyFolder/sessions/specs $StudyFolder/ProcessingInfo
-mv $StudyFolder/info/hcpls $StudyFolder/ProcessingInfo
-if [ -f $StudyFolder/sessions/${Session}/session_hcp.txt ] ; then
-	cp -p $StudyFolder/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
+find $StudyFolder \! -newer $StartTimeFile -delete
+if [ -d $StudyFolder/logs/comlogs ]; then
+	# removing copy of comlogs from the putput directory.  We'll keep the copies in the processing/logs directory
+	rm -r $StudyFolder/logs/comlogs
 fi
-if [ -f $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log ] ; then
-	cp -p $StudyFolder/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+cp -rpl $WorkingDir/${Session}/ProcessingInfo $StudyFolder
+cp -rpl $WorkingDir/${Session}/processing $StudyFolder/ProcessingInfo
+cp -rpl $WorkingDir/${Session}/sessions/specs $StudyFolder/ProcessingInfo
+cp -rpl $WorkingDir/${Session}/info/hcpls $StudyFolder/ProcessingInfo
+if [ -f $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt ] ; then
+	cp -p $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
 fi
-find $StudyFolder -maxdepth 1 -mindepth 1 \
-    \( -type d -not -path "$StudyFolder/ProcessingInfo" \
-    -a -not -path "$StudyFolder/MNINonLinear" \
-    \) -exec rm -rf '{}' \;
+if [ -f $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log ] ; then
+	cp -p $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+fi
+echo "Removing any empty directories."
 find $StudyFolder -type d -empty -delete
 echo "Removing any XNAT catalog files still around."
 find $CleanDataDir -name "*_catalog.xml" -delete
 echo "Remaining files:"
 find $StudyFolder
+
 {% endblock %}

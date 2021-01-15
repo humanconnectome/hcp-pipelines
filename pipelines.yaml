@@ -111,7 +111,7 @@ StructuralPreprocessingHandEdit:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
-      template: structuralhe/clean_data.jinja2
+      template: generic/clean_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
@@ -187,7 +187,7 @@ FunctionalPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
-      template: functional/clean_data.jinja2
+      template: generic/clean_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
