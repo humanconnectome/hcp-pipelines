@@ -34,7 +34,7 @@ fi
 {% block content %}
 find $StudyFolder \! -newer $StartTimeFile -delete
 if [ -d $StudyFolder/logs/comlogs ]; then
-	# removing copy of comlogs from the putput directory.  We'll keep the copies in the processing/logs directory
+	# removing copy of comlogs from the output directory.  We'll keep the copies in the processing/logs directory
 	rm -r $StudyFolder/logs/comlogs
 fi
 cp -rpl $WorkingDir/${Session}/ProcessingInfo $StudyFolder
@@ -42,10 +42,10 @@ cp -rpl $WorkingDir/${Session}/processing $StudyFolder/ProcessingInfo
 cp -rpl $WorkingDir/${Session}/sessions/specs $StudyFolder/ProcessingInfo
 cp -rpl $WorkingDir/${Session}/info/hcpls $StudyFolder/ProcessingInfo
 if [ -f $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt ] ; then
-	cp -p $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
+	cp -pl $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
 fi
 if [ -f $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log ] ; then
-	cp -p $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
+	cp -pl $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
 fi
 echo "Removing any empty directories."
 find $StudyFolder -type d -empty -delete
