@@ -4,8 +4,7 @@
     mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
     mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
     mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
-    mv ${StudyFolder}/unprocessed/Diffusion "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
-    json_file=`find "${StudyFolder}" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
+    json_file=`find "${StudyFolder}/unprocessed/Diffusion" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
     echo "json_file=${json_file}"
     
     ######################### hcp_Diffusion
