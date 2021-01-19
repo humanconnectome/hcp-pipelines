@@ -13,4 +13,10 @@ fi
         bindpath=CHECK_DATA_BINDPATH
 ) }}
 
+RC=$?
+if [ $RC -ne 0 ] ; then
+	>&2 echo "ERROR:  Singularity CHECK_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."	
+	exit $RC
+fi
+
 {% block content %}{% endblock %}

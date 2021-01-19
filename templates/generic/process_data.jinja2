@@ -28,6 +28,12 @@
 		nvidia=PROCESS_NVIDIA
 ) }}
 
+RC=$?
+if [ $RC -ne 0 ] ; then
+	>&2 echo "ERROR:  Singularity PROCESS_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."	
+	exit $RC
+fi
+
 {% block content %}
 {% if USE_SCRATCH_FOR_PROCESSING %}
 mv $SCRATCH/$BASE $ORIGINAL

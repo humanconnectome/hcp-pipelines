@@ -7,6 +7,12 @@
         bindpath=GET_DATA_BINDPATH
 ) }}
 
+RC=$?
+if [ $RC -ne 0 ] ; then
+	>&2 echo "ERROR:  Singularity GET_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."	
+	exit $RC
+fi
+
 WorkingDir="{{ WORKING_DIR }}"
 Session="{{SESSION}}"
 StudyFolder="$WorkingDir/${Session}"
