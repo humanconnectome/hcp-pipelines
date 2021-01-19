@@ -6,6 +6,9 @@
 import glob
 import os
 from pathlib import Path
+# Per above TODO:  Let's exit this code in error for now until this is tested, remainder of code is below the sys.exit statement
+import sys
+sys.exit("ERROR:  Use of Pre-Scan Normalized data has not yet been tested")
 
 pathbase = "{{ WORKING_DIR }}/{{ SESSION }}/unprocessed"
 otherfiles = glob.glob(f"{pathbase}/T[12]w*/OTHER_FILES/*")
