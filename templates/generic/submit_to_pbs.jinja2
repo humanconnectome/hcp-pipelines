@@ -26,6 +26,8 @@ mark_running_status(){
       {{ MARK_RUNNING_STATUS_RUNPATH }} \
           --status=queued
   fi
+  # The step above sometimes doesn't successfully update the catalog
+  curl -n https://{{ PUT_SERVER }}/data/services/refresh/catalog?resource=/archive/projects/{{ PROJECT }}/subjects/{{ SUBJECT }}/experiments/{{ SESSION }}/resources/RunningStatus\&options=delete,append,populateStats -X POST -I
 }
 {% if CLEAN_OUTPUT_FIRST %}
   # Delete the resource first
