@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import pbs_head, cmd_options -%}
-{{ pbs_head(log_dir=WORKING_DIR) }}
+{{ pbs_head(log_dir=WORKING_DIR, pbs_email_addr=PBS_EMAIL_ADDR) }}
 
 {% block content %}
 {{ FREESURFER_ASSESSOR_DEST_PATH }}{{ cmd_options(FREESURFER_PARAMS) }}

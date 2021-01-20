@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=CHECK_DATA_DIR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
+{{ pbs_head(log_dir=CHECK_DATA_DIR, pbs_email_addr=PBS_EMAIL_ADDR, haswell=PROCESS_PBS_HASWELL, gpu=PROCESS_PBS_GPU, k20x=PROCESS_PBS_K20X, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
 {% block pre -%}
   {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}

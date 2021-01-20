@@ -1,4 +1,4 @@
-{% macro pbs_head(log_dir, nodes=1, ppn=1, haswell=False, gpu=0, k20x=False, walltime=4, mem=4) -%}
+{% macro pbs_head(log_dir, pbs_email_addr=False, nodes=1, ppn=1, haswell=False, gpu=0, k20x=False, walltime=4, mem=4) -%}
 #PBS -S /bin/bash
 #PBS -l nodes={{ nodes|int }}:ppn={{ ppn|int }}
 
@@ -17,6 +17,10 @@
 ,walltime={{ walltime|int }}:00:00,mem={{ mem|int }}gb
 #PBS -o {{ log_dir }}
 #PBS -e {{ log_dir }}
+{%- if pbs_email_addr %}
+#PBS -M {{ pbs_email_addr }}
+{%- endif -%}
+
 {%- endmacro %}
 
 

@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
-{{ pbs_head(log_dir=CHECK_DATA_DIR) }}
+{{ pbs_head(log_dir=CHECK_DATA_DIR, pbs_email_addr=PBS_EMAIL_ADDR) }}
 
 {{ singularity(
         container=PIPELINES_CONTAINER,
