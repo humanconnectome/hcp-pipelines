@@ -3,7 +3,7 @@ DEFAULT: &default
   RUNTIME_FILES_DIR: $HOME/hcp-pipelines/runtime
   EXPECTED_FILES_LIST: $RUNTIME_FILES_DIR/expected_files/$PIPELINE_NAME.txt
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build
-  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.7a_FSL603.sif
+  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.8_FSL603.sif
   PIPELINES_CONTAINER: /export/HCP/qunex-hcp/production_containers/hcp-pipelines-runner.sif
   GRADIENT_COEFFICIENT_PATH: /export/HCP/gradient_coefficient_files
   LOG_DIR: $HOME/XNAT_LOGS
@@ -152,7 +152,7 @@ diffusion_preprocess: &diffusion_preprocess
   PROCESS_NVIDIA: True
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
   SINGULARITY_BIND_PATH: /NRG-data/NRG/intradb/build_ssd
-  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.7a.sif
+  QUNEX_CONTAINER: /export/HCP/qunex-hcp/production_containers/qunex_0.62.8.sif
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/diffusion_runs
   USE_SCRATCH_FOR_PROCESSING: False
   WALLTIME_LIMIT_HOURS: 24
