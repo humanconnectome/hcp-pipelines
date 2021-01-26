@@ -110,7 +110,7 @@ msmall_process_CCF_HCD:
 
 multirunicafix: &multirunicafix
   <<: *default
-  WALLTIME_LIMIT_HOURS: 48
+  WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 48
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   BUILD_DIR: $HOME/XNAT_BUILD_DIR/$USER/icafix_runs
