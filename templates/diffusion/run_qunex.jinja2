@@ -1,7 +1,6 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
-    mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}/unprocessed/"
     mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
     mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
     json_file=`find "${StudyFolder}/unprocessed/Diffusion" -iname "*dMRI*.json" | grep -v "SBRef" | head -1`
