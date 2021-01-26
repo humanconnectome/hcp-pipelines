@@ -32,7 +32,7 @@ if [ ! -d $StudyFolder ]; then
 fi
 
 {% block content %}
-find $StudyFolder \! -newer $StartTimeFile -delete
+find $StudyFolder \! -newer $StartTimeFile \! -type d -delete
 if [ -d $StudyFolder/logs/comlogs ]; then
 	# removing copy of comlogs from the output directory.  We'll keep the copies in the processing/logs directory
 	rm -r $StudyFolder/logs/comlogs
