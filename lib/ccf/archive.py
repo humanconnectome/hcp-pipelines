@@ -22,8 +22,8 @@ class _ArchiveScanNames:
     def t2w_unproc(self):
         return scan_names_from_paths(self.archive.t2w_unproc())
 
-    def functional_unproc(self):
-        return scan_names_from_paths(self.archive.functional_unproc())
+    def functional_unproc(self, extra=None):
+        return scan_names_from_paths(self.archive.functional_unproc(extra))
 
     def diffusion_unproc(self):
         return scan_names_from_paths(self.archive.diffusion_unproc())
@@ -76,12 +76,15 @@ class CcfArchive(object):
         """
         return ls(self.subject_resources + "/T2w_*unproc")
 
-    def functional_unproc(self):
+    def functional_unproc(self, extra=None):
         """
         List of full paths to any resources containing unprocessed functional scans
         for the specified subject
         """
-        return ls(self.subject_resources + "/*fMRI*unproc")
+        unprocls = ls(self.subject_resources + "/*fMRI*unproc")
+        if not (extra is None or (str(extra).upper() == "ALL")):
+            unprocls = [res for res in unprocls if extra in res]
+        return unprocls;
 
     def diffusion_unproc(self):
         """

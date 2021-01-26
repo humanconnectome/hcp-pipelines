@@ -179,7 +179,7 @@ FunctionalPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
-      template: functional/get_data.jinja2
+      template: generic/get_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
@@ -416,7 +416,7 @@ DiffusionPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
-      template: diffusion/get_data.jinja2
+      template: generic/get_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:

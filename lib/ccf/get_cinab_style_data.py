@@ -87,7 +87,8 @@ class DataRetriever(object):
             # retrieved in reverse chronological order
             funcs.reverse()
         for fn in funcs:
-            fn()
+            if not (fn is None):
+            	fn()
 
     def remove_non_subdirs(self):
         cmd = [
@@ -149,10 +150,10 @@ class DataRetriever(object):
             self.archive.structural_unproc(),
         )
 
-    def get_functional_unproc_data(self):
+    def get_functional_unproc_data(self, extra=None):
         module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
-            self.archive.functional_unproc(),
+            self.archive.functional_unproc(extra),
         )
 
     def get_diffusion_unproc_data(self):
@@ -392,11 +393,11 @@ class PipelinePrereqDownloader:
             r.get_supplemental_structural_preproc_data,
         )
 
-    def functional(self):
+    def functional(self, extra=None):
         print("Getting prereq data for the Functional pipeline.")
         r = self.data_retriever
         r.run(
-            r.get_functional_unproc_data,
+            r.get_functional_unproc_data(extra),
             r.get_structural_preproc_data,
             r.get_supplemental_structural_preproc_data,
         )
@@ -454,7 +455,7 @@ class PipelinePrereqDownloader:
             r.get_bedpostx_data,
         )
 
-    def get_data_for_pipeline(self, pipeline, remove_non_subdirs=False):
+    def get_data_for_pipeline(self, pipeline, extra=None, remove_non_subdirs=False):
         pipeline = pipeline.lower().replace("_", "").replace(" ", "")
 
         if "handedit" in pipeline:
@@ -464,7 +465,7 @@ class PipelinePrereqDownloader:
         elif "diff" in pipeline:
             self.diffusion()
         elif "func" in pipeline:
-            self.functional()
+            self.functional(extra)
         elif "icafix" in pipeline:
             self.multirunicafix()
         elif "msmall" in pipeline:

@@ -29,7 +29,7 @@ prereq = PipelinePrereqDownloader(
     output_dir=tmp_dir,
     ARCHIVE_ROOT=ARCHIVE_ROOT,
 )
-prereq.get_data_for_pipeline(PIPELINE_NAME, remove_non_subdirs=True)
+prereq.get_data_for_pipeline(PIPELINE_NAME, extra, remove_non_subdirs=True)
 
 # {% block post %}
 print("Moving files")
