@@ -2,8 +2,8 @@
 {{ pbs_head(log_dir=LOG_DIR, haswell=False) }}
 
 {% block pre %}{% endblock %}
-if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }} -name 'error*.log' | grep "\/comlogs\/" | wc -l` -gt "0" ] ; then
-	echo "ERROR: One or more QuNex comlogs are error logs"
+if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/logs/comlogs -name 'error*.log' -o -name 'tmp*.log' | wc -l` -gt "0" ] ; the
+	echo "ERROR: One or more QuNex comlogs are error or tmp logs"
 	exit 1
 fi
 
