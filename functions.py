@@ -210,15 +210,17 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
-    if PROJECT == "CCF_HCA_STG" or "CCF_HCA_TST":
+    if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST":
         bold_list_order = BLO_HCA
-    else:
+    elif PROJECT == "CCF_HCD_STG" or PROJECT == "CCF_HCD_TST":
         if SCAN == "YOUNGER":
             bold_list_order = BLO_HCD_YOUNG
         elif SCAN == "OLDER":
             bold_list_order = BLO_HCD_OLDER
         else:
             raise ValueError("The subject subgroup should be YOUNGER or OLDER.")
+    else:
+        raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 
     return {"BOLD_LIST_ORDER": bold_list_order}
 

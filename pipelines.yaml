@@ -243,7 +243,7 @@ MultiRunIcaFixProcessing:
   - function: available_bold_dirs
   - function: set_msm_all_bolds
   - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:$BOLD_LIST_ORDER}
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: multirunicafix/batch.txt.jinja2
@@ -326,7 +326,7 @@ MsmAllProcessing:
   - function: available_bold_dirs
   - function: set_msm_all_bolds
   - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:hca}
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:$BOLD_LIST_ORDER}
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: msmall/batch.txt.jinja2
