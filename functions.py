@@ -1,4 +1,5 @@
 import glob
+import sys
 import os
 import random
 import shutil
@@ -71,9 +72,11 @@ def get_project_acronym(PROJECT):
         proj_acronym = "MDD"
     elif "BWH" in proj:
         proj_acronym = "BWH"
+    elif "BANDA" in proj:
+        proj_acronym = "BANDA"
     else:
         raise ValueError(
-            "Unexpected project value. Expecting HCA, HCD, MDD, or BWH. Got: ", proj
+            "Unexpected project value. Expecting HCA, HCD, MDD, BWH, or BANDA. Got: ", proj
         )
     return {
         "PROJECT_ACRONYM": proj_acronym,
@@ -170,27 +173,46 @@ def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
     available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
 
     def fmrisort(x):
-        priority = [
-            "rfMRI_REST1_AP",
-            "rfMRI_REST1_PA",
-            "rfMRI_REST1a_PA",
-            "rfMRI_REST1a_AP",
-            "rfMRI_REST1b_PA",
-            "rfMRI_REST1b_AP",
-            "tfMRI_GUESSING_PA",
-            "tfMRI_GUESSING_AP",
-            "tfMRI_VISMOTOR_PA",
-            "tfMRI_CARIT_PA",
-            "tfMRI_CARIT_AP",
-            "tfMRI_EMOTION_PA",
-            "tfMRI_FACENAME_PA",
-            "rfMRI_REST2_AP",
-            "rfMRI_REST2_PA",
-            "rfMRI_REST2a_AP",
-            "rfMRI_REST2a_PA",
-            "rfMRI_REST2b_AP",
-            "rfMRI_REST2b_PA",
-        ]
+        if "CCF_HC" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "rfMRI_REST1a_PA",
+                "rfMRI_REST1a_AP",
+                "rfMRI_REST1b_PA",
+                "rfMRI_REST1b_AP",
+                "tfMRI_GUESSING_PA",
+                "tfMRI_GUESSING_AP",
+                "tfMRI_VISMOTOR_PA",
+                "tfMRI_CARIT_PA",
+                "tfMRI_CARIT_AP",
+                "tfMRI_EMOTION_PA",
+                "tfMRI_FACENAME_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA",
+                "rfMRI_REST2a_AP",
+                "rfMRI_REST2a_PA",
+                "rfMRI_REST2b_AP",
+                "rfMRI_REST2b_PA"
+            ]
+        elif "CCF_BANDA" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA",
+                "tfMRI_GAMBLING_AP",
+                "tfMRI_GAMBLING_PA",
+                "tfMRI_FACEMATCHING_AP",
+                "tfMRI_FACEMATCHING_PA",
+                "tfMRI_CONFLICT1_AP",
+                "tfMRI_CONFLICT1_PA",
+                "tfMRI_CONFLICT2_AP",
+                "tfMRI_CONFLICT2_PA"
+            ]
+        else: 
+            sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
+
         return priority.index(x)
 
     available_bolds = sorted(available_bolds, key=fmrisort)
@@ -207,11 +229,14 @@ def set_msm_all_bolds(BOLD_LIST):
 def set_bold_list_order(PROJECT, SCAN):
     # possible values for BOLD_LIST_ORDER
     BLO_HCA = "hca"
+    BLO_BANDA = "banda"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
     if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST":
         bold_list_order = BLO_HCA
+    elif PROJECT == "CCF_BANDA_STG":
+        bold_list_order = BLO_BANDA
     elif PROJECT == "CCF_HCD_STG" or PROJECT == "CCF_HCD_TST":
         if SCAN == "YOUNGER":
             bold_list_order = BLO_HCD_YOUNG

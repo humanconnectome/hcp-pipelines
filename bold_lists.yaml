@@ -1,3 +1,17 @@
+banda:
+  BOLD_LIST_ORDER:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold6:REST2", "rfMRI_REST2_AP"]
+    - ["04: bold7:REST2", "rfMRI_REST2_PA"]
+    - ["05: bold3:GAMBLING", "tfMRI_GAMBLING_AP"]
+    - ["06: bold3:GAMBLING", "tfMRI_GAMBLING_PA"]
+    - ["07: bold3:FACEMATCHING", "tfMRI_FACEMATCHING_AP"]
+    - ["08: bold3:FACEMATCHING", "tfMRI_FACEMATCHING_PA"]
+    - ["09: bold4:CONFLICT1", "tfMRI_CONFLICT1_AP"]
+    - ["10: bold4:CONFLICT1", "tfMRI_CONFLICT1_PA"]
+    - ["11: bold4:CONFLICT2", "tfMRI_CONFLICT2_AP"]
+    - ["12: bold4:CONFLICT2", "tfMRI_CONFLICT2_PA"]
 hca:
   BOLD_LIST_ORDER:
     - ["01: bold1:REST1", "rfMRI_REST1_AP"]
