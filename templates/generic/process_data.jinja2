@@ -3,14 +3,11 @@
 #PBS -m a
 
 {% block pre -%}
-  {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
-	# Make sure to `--bind` this to "/tmp" in the singularity invocation
-	SCRATCH_TMP_DIR="{{ SCRATCH_TMP_DIR }}"
-	mkdir -p $SCRATCH_TMP_DIR
-  {% endif -%}
-
-  {%- if USE_SCRATCH_FOR_PROCESSING %}
-####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
+{%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
+mkdir -p {{ SCRATCH_TMP_DIR }}
+{% endif -%}
+{%- if USE_SCRATCH_FOR_PROCESSING %}
+  ####   FIX FOR "Cannot allocate memory" ERROR IN BUILD SPACE  #####
   BASE="{{ SESSION }}"
   SCRATCH="{{ SCRATCH_SPACE }}/{{ WORKING_DIR_BASENAME }}"
   ORIGINAL="{{ BUILD_SPACE }}/{{ WORKING_DIR_BASENAME }}"
@@ -18,10 +15,12 @@
   mkdir -p $SCRATCH
   mv $ORIGINAL/$BASE $SCRATCH
 
-{% endif %}
+{% endif -%}
 {%- endblock pre -%}
 
-
+{%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
+	{% set PROCESS_DATA_BINDPATH = PROCESS_DATA_BINDPATH + "," + SCRATCH_TMP_DIR + ":/tmp" %}
+{% endif -%}
 {{ singularity(
         container=QUNEX_CONTAINER,
         runpath=RUN_QUNEX_SCRIPT,
@@ -35,9 +34,17 @@ if [ $RC -ne 0 ] ; then
 	exit $RC
 fi
 
-{% block content %}
-{% if USE_SCRATCH_FOR_PROCESSING %}
+{% block content -%}
+{%- if USE_SCRATCH_FOR_PROCESSING %}
 mv $SCRATCH/$BASE $ORIGINAL
-rm -rf $SCRATCH
-{% endif %}
+if [ "$SCRATCH" =~ "/scratch/{{ USER }}/.*$" ] ; then
+	rm -rf $SCRATCH
+fi
+{% endif -%}
+{%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
+if [ "{{ SCRATCH_TMP_DIR }}" =~ "/scratch/{{ USER }}/.*$" ] ; then
+	rm -rf {{ SCRATCH_TMP_DIR }}
+fi
+{% endif -%}
 {% endblock %}
+
