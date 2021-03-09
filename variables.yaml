@@ -187,6 +187,8 @@ multirunicafix_process_CCF_HCD:
 
 multirunicafix_process_CCF_BANDA:
   <<: *multirunicafix
+  # BANDA often exceeds the 48GB memory limit.  It needs to be set higher.
+  MEM_LIMIT_GBS: 60
 
 # 
 # MSM-ALL PROCESSING 
