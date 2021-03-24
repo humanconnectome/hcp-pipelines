@@ -12,6 +12,15 @@ banda:
     - ["10: bold10:CONFLICT1", "tfMRI_CONFLICT1_PA"]
     - ["11: bold11:CONFLICT2", "tfMRI_CONFLICT2_AP"]
     - ["12: bold12:CONFLICT2", "tfMRI_CONFLICT2_PA"]
+mdd:
+  BOLD_LIST_ORDER:
+    - ["01: bold1:REST1", "rfMRI_REST1_AP"]
+    - ["02: bold2:REST1", "rfMRI_REST1_PA"]
+    - ["03: bold3:CARIT", "tfMRI_CARIT_PA"]
+    - ["04: bold4:FACEMATCHING", "tfMRI_FACEMATCHING_AP"]
+    - ["05: bold5:FACEMATCHING", "tfMRI_FACEMATCHING_PA"]
+    - ["06: bold6:REST2", "rfMRI_REST2_AP"]
+    - ["07: bold7:REST2", "rfMRI_REST2_PA"]
 hca:
   BOLD_LIST_ORDER:
     - ["01: bold1:REST1", "rfMRI_REST1_AP"]

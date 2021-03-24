@@ -210,6 +210,16 @@ def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
                 "tfMRI_CONFLICT2_AP",
                 "tfMRI_CONFLICT2_PA"
             ]
+        elif "CCF_MDD" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "tfMRI_CARIT_PA",
+                "tfMRI_FACEMATCHING_AP",
+                "tfMRI_FACEMATCHING_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA"
+            ]
         else: 
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
 
@@ -230,6 +240,7 @@ def set_bold_list_order(PROJECT, SCAN):
     # possible values for BOLD_LIST_ORDER
     BLO_HCA = "hca"
     BLO_BANDA = "banda"
+    BLO_MDD = "mdd"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
@@ -237,6 +248,8 @@ def set_bold_list_order(PROJECT, SCAN):
         bold_list_order = BLO_HCA
     elif PROJECT == "CCF_BANDA_STG":
         bold_list_order = BLO_BANDA
+    elif PROJECT == "CCF_MDD_STG":
+        bold_list_order = BLO_MDD
     elif PROJECT == "CCF_HCD_STG" or PROJECT == "CCF_HCD_TST":
         if SCAN == "YOUNGER":
             bold_list_order = BLO_HCD_YOUNG

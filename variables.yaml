@@ -136,6 +136,9 @@ functional_preprocess_CCF_HCA:
 functional_preprocess_CCF_HCD:
   <<: *functional
 
+functional_preprocess_CCF_MDD:
+  <<: *functional
+
 functional_preprocess_CCF_BANDA:
   <<: *functional
 
@@ -163,6 +166,9 @@ diffusion_preprocess_CCF_HCA:
 diffusion_preprocess_CCF_HCD:
   <<: *diffusion_preprocess
 
+diffusion_preprocess_CCF_MDD:
+  <<: *diffusion_preprocess
+
 diffusion_preprocess_CCF_BANDA:
   <<: *diffusion_preprocess
 
@@ -184,6 +190,9 @@ multirunicafix_process_CCF_HCA:
   <<: *multirunicafix
 
 multirunicafix_process_CCF_HCD:
+  <<: *multirunicafix
+
+multirunicafix_process_CCF_MDD:
   <<: *multirunicafix
 
 multirunicafix_process_CCF_BANDA:
@@ -209,6 +218,9 @@ msmall_process_CCF_HCA:
   <<: *msmall
 
 msmall_process_CCF_HCD:
+  <<: *msmall
+
+msmall_process_CCF_MDD:
   <<: *msmall
 
 msmall_process_CCF_BANDA:
