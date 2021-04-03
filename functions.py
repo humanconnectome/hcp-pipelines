@@ -15,7 +15,13 @@ def check_required_files_are_available(
     GRADIENT_COEFFICIENT_PATH,
     HCP_LIB_DIR,
     FREESURFER_LICENSE_PATH,
+    DRYRUN,
 ):
+    if DRYRUN:
+        print(
+            "Dry-Mode is active: Skipping the checking of required files."
+        )
+        return
     if is_unreadable(QUNEX_CONTAINER):
         raise Exception("QUNEX_CONTAINER is not accessible. Value = ", QUNEX_CONTAINER)
     if is_unreadable(PIPELINES_CONTAINER):
