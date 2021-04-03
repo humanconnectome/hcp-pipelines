@@ -43,3 +43,17 @@ $ python3 -m venv env
 $ source env/bin/activate
 (env) $ pip install -r requirements.txt
 ```
+
+### Making changes to code
+If you want to make changes to the code, but make sure that the generated code
+hasn't changed, then you'll want to run the prunner in `dryrun` mode and you'll
+also want to override all of the variables that aren't deterministic. Currently,
+that includes `TIMESTAMP` and `PUT_SERVER`. Then you'll want to check prior runs
+to current run using a `diff` tool like ***meld***. For example:
+``` bash
+prunner --dryrun MsmAllProcessing CCF_HCA_STG:HCA0123456789:V1_MR:all \
+         --TIMESTAMP=999 --PUT_SERVER="fake-server.nrg.wustl.edu"; \
+         prunner --dryrun MultiRunIcaFixProcessing CCF_HCA_STG:HCA0123456789:V1_MR:all \
+         --TIMESTAMP=999 --PUT_SERVER="fake-server.nrg.wustl.edu"; \
+         meld originals/ generated/
+```
