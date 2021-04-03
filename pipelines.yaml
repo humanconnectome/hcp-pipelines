@@ -225,8 +225,8 @@ MultiRunIcaFixProcessing:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: multirunicafix_process_CCF_${PROJECT_ACRONYM}
+  - load_variables: multirunicafix
+  - function: multirunicafix_process_overrides
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder

@@ -226,7 +226,7 @@ def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
                 "rfMRI_REST2_AP",
                 "rfMRI_REST2_PA"
             ]
-        else: 
+        else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
 
         return priority.index(x)
@@ -282,3 +282,11 @@ def set_qunex_scanlist_bold(BOLD_LIST_ORDER, BOLD_LIST):
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
+def multirunicafix_process_overrides(PROJECT):
+    if "BANDA" in PROJECT:
+        # BANDA often exceeds the 48GB memory limit.  It needs to be set higher.
+        overrides = dict(MEM_LIMIT_GBS = 60)
+    else:
+        overrides = {}
+
+    return overrides
