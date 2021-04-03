@@ -268,8 +268,17 @@ def set_bold_list_order(PROJECT, SCAN):
 
     return {"BOLD_LIST_ORDER": bold_list_order}
 
+def elongate_bold_list_order(bold_list_order):
+    # convert from a list of [..., 'tfMRI_GUESSING_AP', 'tfMRI_CARIT_PA', ...] into
+    # [ ..., ['04: bold4:GUESSING', 'tfMRI_GUESSING_AP'], ['05: bold5:CARIT', 'tfMRI_CARIT_PA'], ..]
+    elongated = []
+    for i, original in enumerate(bold_list_order, start=1):
+        _type, name, _direction = original.split("_")
+        elongated.append(["{i:02d}: bold{i}:{name}".format(i=i, name=name), original])
+    return elongated
 
 def set_qunex_scanlist_bold(BOLD_LIST_ORDER, BOLD_LIST):
+    BOLD_LIST_ORDER = elongate_bold_list_order(BOLD_LIST_ORDER)
     qunex_scanlist = [scan for scan in BOLD_LIST_ORDER if scan[1] in BOLD_LIST]
     return {"QUNEX_SCANLIST": qunex_scanlist}
 
