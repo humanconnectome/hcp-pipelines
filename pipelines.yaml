@@ -5,8 +5,7 @@ StructuralPreprocessing:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: structural_preprocess_CCF_${PROJECT_ACRONYM}
+  - load_variables: structural_preprocess
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -81,8 +80,7 @@ StructuralPreprocessingHandEdit:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: hand_edit_CCF_${PROJECT_ACRONYM}
+  - load_variables: hand_edit
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -157,8 +155,7 @@ FunctionalPreprocessing:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: functional_preprocess_CCF_${PROJECT_ACRONYM}
+  - load_variables: functional_preprocess
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -311,8 +308,7 @@ MsmAllProcessing:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: msmall_process_CCF_${PROJECT_ACRONYM}
+  - load_variables: msmall_process
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
@@ -394,8 +390,7 @@ DiffusionPreprocessing:
       HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
-  - function: get_project_acronym
-  - load_variables: diffusion_preprocess_CCF_${PROJECT_ACRONYM}
+  - load_variables: diffusion_preprocess
   - function: check_required_files_are_available
   - function: choose_put_server
   - function: set_study_folder
