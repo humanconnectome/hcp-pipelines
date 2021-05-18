@@ -76,13 +76,15 @@ def get_project_acronym(PROJECT):
         proj_acronym = "HCD"
     elif "MDD" in proj:
         proj_acronym = "MDD"
+    elif "ECP" in proj:
+        proj_acronym = "ECP"
     elif "BWH" in proj:
         proj_acronym = "BWH"
     elif "BANDA" in proj:
         proj_acronym = "BANDA"
     else:
         raise ValueError(
-            "Unexpected project value. Expecting HCA, HCD, MDD, BWH, or BANDA. Got: ", proj
+            "Unexpected project value. Expecting HCA, HCD, MDD, ECP, BWH, or BANDA. Got: ", proj
         )
     return {
         "PROJECT_ACRONYM": proj_acronym,
@@ -226,6 +228,25 @@ def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
                 "rfMRI_REST2_AP",
                 "rfMRI_REST2_PA"
             ]
+        elif "CCF_ECP" in PROJECT:
+            priority = [
+                "rfMRI_REST1_PE1",
+                "rfMRI_REST1_PE2",
+                "tfMRI_SOC_PE1",
+                "tfMRI_SOC_PE2",
+                "tfMRI_LANG_PE1",
+                "tfMRI_LANG_PE2",
+                "tfMRI_SEM_PE1",
+                "tfMRI_SEM_PE2",
+                "rfMRI_REST2_PE1",
+                "rfMRI_REST2_PE2",
+                "rfMRI_REST3_PE1",
+                "rfMRI_REST3_PE2",
+                "tfMRI_EMOT_PE1",
+                "tfMRI_EMOT_PE2",
+                "rfMRI_REST4_PE1",
+                "rfMRI_REST4_PE2"
+            ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
 
@@ -247,6 +268,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCA = "hca"
     BLO_BANDA = "banda"
     BLO_MDD = "mdd"
+    BLO_ECP = "ecp"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
@@ -256,6 +278,8 @@ def set_bold_list_order(PROJECT, SCAN):
         bold_list_order = BLO_BANDA
     elif PROJECT == "CCF_MDD_STG":
         bold_list_order = BLO_MDD
+    elif PROJECT == "CCF_ECP_STG":
+        bold_list_order = BLO_ECP
     elif PROJECT == "CCF_HCD_STG" or PROJECT == "CCF_HCD_TST":
         if SCAN == "YOUNGER":
             bold_list_order = BLO_HCD_YOUNG

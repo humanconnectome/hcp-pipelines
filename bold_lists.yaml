@@ -13,6 +13,25 @@ banda:
     - tfMRI_CONFLICT2_AP
     - tfMRI_CONFLICT2_PA
 
+ecp:
+  BOLD_LIST_ORDER:
+    - rfMRI_REST1_PE1
+    - rfMRI_REST1_PE2
+    - tfMRI_SOC_PE1
+    - tfMRI_SOC_PE2
+    - tfMRI_LANG_PE1
+    - tfMRI_LANG_PE2
+    - tfMRI_SEM_PE1
+    - tfMRI_SEM_PE2
+    - rfMRI_REST2_PE1
+    - rfMRI_REST2_PE2
+    - rfMRI_REST3_PE1
+    - rfMRI_REST3_PE2
+    - tfMRI_EMOT_PE1
+    - tfMRI_EMOT_PE2
+    - rfMRI_REST4_PE1
+    - rfMRI_REST4_PE2
+
 mdd:
   BOLD_LIST_ORDER:
     - rfMRI_REST1_AP
