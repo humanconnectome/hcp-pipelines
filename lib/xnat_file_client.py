@@ -48,8 +48,8 @@ def reference_path(filepath):
     filepath = os.path.realpath(filepath)
     return (
         filepath
-        if not filepath.startswith("/NRG-data/NRG/")
-        else "/data/" + filepath[14:]
+        if not filepath.startswith("/ceph/")
+        else "/data/" + filepath[6:]
     )
 
 
