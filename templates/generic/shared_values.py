@@ -1,5 +1,11 @@
 import subprocess
 
+# Import path modification
+import sys
+sys.path.append('{{ PYTHON_IMPORT_DIR }}')
+
+# Path modification (above) must occur before
+# these imports below. Otherwise, you'll get a "ModuleNotFoundError".
 from ccf.archive import CcfArchive
 from xnat_file_client import XnatFileClient
 

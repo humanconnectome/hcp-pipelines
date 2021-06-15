@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-from ccf.one_subject_completion_xnat_checker import OneSubjectCompletionXnatChecker
 from shared_values import (
     client,
     project,
@@ -16,6 +15,7 @@ from shared_values import (
     EXPECTED_FILES_LIST,
     print_system_info,
 )
+from ccf.one_subject_completion_xnat_checker import OneSubjectCompletionXnatChecker
 
 
 completion_checker = OneSubjectCompletionXnatChecker(

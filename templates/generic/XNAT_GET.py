@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-from ccf.get_cinab_style_data import PipelinePrereqDownloader
 from shared_values import (
     project,
     subject,
@@ -13,6 +12,7 @@ from shared_values import (
     WORKING_DIR,
     print_system_info,
 )
+from ccf.get_cinab_style_data import PipelinePrereqDownloader
 
 print_system_info()
 tmp_dir = f"{WORKING_DIR}/tmp"
