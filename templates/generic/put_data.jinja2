@@ -3,10 +3,7 @@
 
 cp {{ CHECK_DATA_DIR }}/* {{ CLEAN_DATA_DIR }}/{{ SESSION }}/ProcessingInfo
 
-{{ singularity(
-        container=PIPELINES_CONTAINER,
-        runpath=PUT_DATA_RUNPATH,
-        bindpath=PUT_DATA_BINDPATH
-) }}
+{{ PYTHON }} \
+    {{ PUT_DATA_RUNPATH }}
 
 {% block content %}{% endblock %}

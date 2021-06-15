@@ -1,11 +1,8 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=CHECK_DATA_DIR, pbs_email_addr=PBS_EMAIL_ADDR) }}
 
-{{ singularity(
-        container=PIPELINES_CONTAINER,
-        runpath=GET_DATA_RUNPATH,
-        bindpath=GET_DATA_BINDPATH
-) }}
+{{ PYTHON }} \
+    {{ GET_DATA_RUNPATH }}
 
 RC=$?
 if [ $RC -ne 0 ] ; then

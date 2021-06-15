@@ -1,31 +1,17 @@
 #!/usr/bin/env bash
 
-if [ -z "$SINGULARITY_CONTAINER" ]; then
-	module load singularity-3.5.2
-fi
 
 delete_resource(){
   echo "Deleting the resource from the XNAT server"
-  if [ -z "$SINGULARITY_CONTAINER" ]; then
-      singularity exec \
-      {{ PIPELINES_CONTAINER }} \
-      python3 -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
-  else
-      python3 -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
-  fi
+  {{ PYTHON }} \
+        -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
 }
 
 mark_running_status(){
   echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
-  if [ -z "$SINGULARITY_CONTAINER" ]; then
-    singularity exec \
-      {{ PIPELINES_CONTAINER }} \
+  {{ PYTHON }} \
       {{ MARK_RUNNING_STATUS_RUNPATH }} \
           --status=queued
-  else
-      {{ MARK_RUNNING_STATUS_RUNPATH }} \
-          --status=queued
-  fi
   # The step above sometimes doesn't successfully update the catalog
   curl -n https://{{ PUT_SERVER }}/data/services/refresh/catalog?resource=/archive/projects/{{ PROJECT }}/subjects/{{ SUBJECT }}/experiments/{{ SESSION }}/resources/RunningStatus\&options=delete,append,populateStats -X POST -I
 }

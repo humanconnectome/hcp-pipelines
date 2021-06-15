@@ -1,11 +1,8 @@
 {% from 'components.jinja2' import pbs_head, singularity -%}
 {{ pbs_head(log_dir=LOG_DIR) }}
 
-{{ singularity(
-        container=PIPELINES_CONTAINER,
-        runpath=MARK_RUNNING_STATUS_RUNPATH,
-        bindpath=MARK_RUNNING_STATUS_BINDPATH
-) }}
+{{ PYTHON }} \
+    {{ MARK_RUNNING_STATUS_RUNPATH }}
 
 {% block content %}
 rm -rf {{ MARK_COMPLETION_DIR }}

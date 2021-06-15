@@ -7,11 +7,8 @@ if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/lo
 	exit 1
 fi
 
-{{ singularity(
-        container=PIPELINES_CONTAINER,
-        runpath=CHECK_DATA_RUNPATH,
-        bindpath=CHECK_DATA_BINDPATH
-) }}
+{{ PYTHON }} \
+    {{ CHECK_DATA_RUNPATH }}
 
 RC=$?
 if [ $RC -ne 0 ] ; then

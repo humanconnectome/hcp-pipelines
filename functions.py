@@ -8,7 +8,6 @@ from .util import escape_path, keep_resting_state_scans, shell_run, is_unreadabl
 
 def check_required_files_are_available(
     QUNEX_CONTAINER,
-    PIPELINES_CONTAINER,
     XNAT_CREDENTIALS_FILE,
     EXPECTED_FILES_LIST,
     GRADIENT_COEFFICIENT_PATH,
@@ -23,8 +22,6 @@ def check_required_files_are_available(
         return
     if is_unreadable(QUNEX_CONTAINER):
         raise Exception("QUNEX_CONTAINER is not accessible. Value = ", QUNEX_CONTAINER)
-    if is_unreadable(PIPELINES_CONTAINER):
-        raise Exception("PIPELINES_CONTAINER is not accessible. Value = ", PIPELINES_CONTAINER)
     if is_unreadable(XNAT_CREDENTIALS_FILE):
         raise Exception("XNAT_CREDENTIALS_FILE is not accessible. Value = ", XNAT_CREDENTIALS_FILE)
     if is_unreadable(EXPECTED_FILES_LIST):
