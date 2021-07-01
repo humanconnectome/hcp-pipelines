@@ -61,7 +61,7 @@ DEFAULT: &default
 # 
 
 structural_process: &structural_process
-  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE,$SCRATCH_SPACE"
+  PROCESS_DATA_BINDPATH: "$GRADIENT_COEFFICIENT_PATH,$ARCHIVE_ROOT,$SINGULARITY_BIND_PATH,$BUILD_SPACE"
 
 # 
 # STRUCTURAL PREPROCESSING 
@@ -72,7 +72,6 @@ structural_preprocess:
   <<: *structural_process
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
-  BUILD_ROOT: $HOME/XNAT_OLDBUILD_DIR/$USER
   BUILD_DIR: $BUILD_ROOT/structural_runs
   USE_SCRATCH_FOR_PROCESSING: True
   WALLTIME_LIMIT_HOURS: 72
@@ -91,7 +90,6 @@ hand_edit:
   HAND_EDIT_PROCESSING_DIR: /scratch/$USER/hand_edit_buildspace
   SINGULARITY_BIND_PATH: /ceph/intradb/build,/scratch/$USER/hand_edit_buildspace
   BUILD_DIR: $BUILD_ROOT/handedit_runs
-  USE_SCRATCH_FOR_PROCESSING: True
 
 #
 # FUNCTIONAL PREPROCESSING 
@@ -117,7 +115,6 @@ diffusion_preprocess:
   SINGULARITY_BIND_PATH: /ceph/intradb/build
   QUNEX_CONTAINER: /ceph/intradb/build/aux/production_containers/qunex_0.62.8.sif
   BUILD_DIR: $BUILD_ROOT/diffusion_runs
-  USE_SCRATCH_FOR_PROCESSING: False
   MEM_LIMIT_GBS: 32
   WALLTIME_LIMIT_HOURS: 24
   #WALLTIME_LIMIT_HOURS: 60
