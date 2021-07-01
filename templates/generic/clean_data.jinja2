@@ -24,7 +24,7 @@ fi
 # Using pax rather than cp -al or rsync here because on CHPC build space directories, at least, it does a better job of copying files as 
 # hard links, symlinks as symlinks, and preserving all modification dates.
 pushd ${ProcessingOutputFolder}
-pax -rwl . $CleanDataDir
+cp -al . $CleanDataDir
 popd
 if [ ! -d $StudyFolder ]; then
 	echo "ERROR:  Study folder ($StudyFolder) does not exist!"
