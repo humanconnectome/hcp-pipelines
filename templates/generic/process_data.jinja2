@@ -37,12 +37,12 @@ fi
 {% block content -%}
 {%- if USE_SCRATCH_FOR_PROCESSING %}
 mv $SCRATCH/$BASE $ORIGINAL
-if [ "$SCRATCH" =~ "/scratch/{{ USER }}/.*$" ] ; then
+if [[ "$SCRATCH" =~ /scratch/{{ USER }}/.*$ ]] ; then
 	rm -rf $SCRATCH
 fi
 {% endif -%}
 {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
-if [ "{{ SCRATCH_TMP_DIR }}" =~ "/scratch/{{ USER }}/.*$" ] ; then
+if [[ "{{ SCRATCH_TMP_DIR }}" =~ /scratch/{{ USER }}/.*$ ]] ; then
 	rm -rf {{ SCRATCH_TMP_DIR }}
 fi
 {% endif -%}
