@@ -25,6 +25,20 @@
 
 
 
+{% macro slurm_head(job_name, log_dir, nodes=1, ppn=1, gpu=0, walltime=4, mem=4) -%}
+#!/bin/bash
+#SBATCH --job-name="{{ job_name }}"
+#SBATCH --nodes={{ nodes|int }} --ntasks-per-node={{ ppn|int }}
+{%- if gpu %}
+#SBATCH --partition=gpu --gres=gpu:{{ gpu|int }}
+{%- endif %}
+#SBATCH --time={{ walltime|int }}:00:00 --mem={{ mem|int }}000
+#SBATCH --output="{{ log_dir }}/{{ job_name }}.%j.stdout"
+#SBATCH --error="{{ log_dir }}/{{ job_name }}.%j.stderr"
+{%- endmacro %}
+
+
+
 {% macro cmd_options(params, terminal_slash=False) %}
 {%- if params is defined and params %} \
     {%- for key, value in params.items() %}
