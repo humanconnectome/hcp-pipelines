@@ -24,7 +24,7 @@ _hcp_matlab_mode        : compiled
 
 # -------------------------> PreFS
 
-_hcp_gdcoeffs           : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_gdcoeffs           : default:{{ GRADIENT_COEFFICIENT_PATH }}/Prisma_3T_coeff_AS82.grad
 _hcp_brainsize          : 150
 _hcp_avgrdcmethod       : NONE
 _hcp_topupconfig        : b02b0.cnf
@@ -56,7 +56,7 @@ _hcp_lowresmesh         : 32
 
 # -------------------------> fMRIVolume
 
-_hcp_bold_gdcoeffs        : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_bold_gdcoeffs        : default:{{ GRADIENT_COEFFICIENT_PATH }}/Prisma_3T_coeff_AS82.grad
 _hcp_bold_sbref           : USE  # Specifies whether SBRef image should be used as the "Scout" (default is NONE)
 _hcp_bold_res             : 2
 _hcp_bold_biascorrection  : SEBASED
@@ -78,7 +78,7 @@ _hcp_bold_smoothFWHM    : 2
 
 # -------------------------> dMRI settings
 
-_hcp_dwi_gdcoeffs       : default:/export/HCP/gradient_coefficient_files/Prisma_3T_coeff_AS82.grad
+_hcp_dwi_gdcoeffs       : default:{{ GRADIENT_COEFFICIENT_PATH }}/Prisma_3T_coeff_AS82.grad
 _hcp_dwi_echospacing    : # 0.6899980000  # ==> Default "EffectiveEchoSpacing" value (in **msec**)
 _hcp_dwi_phasepos       : PA
 _hcp_dwi_selectbestb0   : TRUE
