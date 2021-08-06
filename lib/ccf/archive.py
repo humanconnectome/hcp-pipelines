@@ -93,6 +93,9 @@ class CcfArchive(object):
         """
         return ls(self.subject_resources + "/Diffusion_unproc")
 
+    def asl_unproc(self):
+        return ls(self.subject_resources + "/mbPCASLhr_unproc")
+
     # preprocessed data paths and names
 
     def running_status(self):
@@ -151,6 +154,13 @@ class CcfArchive(object):
         data for the specified subject
         """
         return ls(self.subject_resources + "/MSMAllReg")
+
+    def msmall_proc(self):
+        """
+        List of full paths to any resource containing preprocessed diffusion data
+        for the specified subject
+        """
+        return ls(self.subject_resources + "/MsmAll_proc")
 
     def multirun_icafix(self):
         """

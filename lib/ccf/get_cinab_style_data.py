@@ -162,6 +162,12 @@ class DataRetriever(object):
             self.archive.diffusion_unproc(),
         )
 
+    def get_asl_unproc_data(self):
+        module_logger.debug(debug_utils.get_name())
+        self._get_unprocessed_data(
+            self.archive.asl_unproc(),
+        )
+
     def get_unproc_data(self):
         self.run(
             self.get_structural_unproc_data,
@@ -214,6 +220,12 @@ class DataRetriever(object):
         )
 
     # get processed data
+    def get_msmall_processed_data(self):
+        module_logger.debug(debug_utils.get_name())
+
+        self._get_processed_data(
+            self.archive.msmall_proc()
+        )
 
     def get_msmall_registration_data(self):
         module_logger.debug(debug_utils.get_name())
@@ -369,6 +381,15 @@ class PipelinePrereqDownloader:
             ARCHIVE_ROOT,
         )
 
+    def asl(self):
+        print("Getting prereq data for the ASL pipeline.")
+        r = self.data_retriever
+        r.run(
+            r.get_asl_unproc_data,
+            r.get_structural_preproc_data,
+            r.get_msmall_processed_data,
+        )
+
     def struct(self):
         print("Getting prereq data for the Structural pipeline.")
         r = self.data_retriever
@@ -458,7 +479,9 @@ class PipelinePrereqDownloader:
     def get_data_for_pipeline(self, pipeline, extra=None, remove_non_subdirs=False):
         pipeline = pipeline.lower().replace("_", "").replace(" ", "")
 
-        if "handedit" in pipeline:
+        if "asl" in pipeline:
+            self.asl()
+        elif "handedit" in pipeline:
             self.struct_hand_edit()
         elif "struct" in pipeline:
             self.struct()
