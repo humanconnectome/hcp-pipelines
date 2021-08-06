@@ -1,0 +1,838 @@
+hcp_asl_report.ipynb
+ASL distortion_estimation.log
+ASL gradient_unwarp gdc_corr_vol1.nii.gz
+ASL gradient_unwarp fullWarp_abs.nii.gz
+ASL topup fmapmag.nii.gz
+ASL topup merged_sefms_gdc.topup_log
+ASL topup merged_sefms_gdc.nii.gz
+ASL topup merged_sefms.nii.gz
+ASL topup topup_movpar.txt
+ASL topup fmapmagbrain.nii.gz
+ASL topup WarpField_02.nii.gz
+ASL topup WarpField_01.nii.gz
+ASL topup corrected_sefms.nii.gz
+ASL topup fmap.nii.gz
+ASL topup Jacobian_01.nii.gz
+ASL topup topup_params.txt
+ASL topup Jacobian_02.nii.gz
+ASL topup topup_fieldcoef.nii.gz
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat.mincost
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat.log
+ASL topup fmap_struct_reg asl2struct.mat
+ASL topup fmap_struct_reg asl2struct_reg.log
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat.param
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat~
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat.sum
+ASL topup fmap_struct_reg asl2orig_mgz_initial_bbr.dat
+ASL topup topup_fmap_hz.nii.gz
+ASL topup MotionMatrix_01.mat
+ASL topup MotionMatrix_02.mat
+ASL Calib Calib0 aslfs_mask.nii.gz
+ASL Calib Calib0 calib0.nii.gz
+ASL Calib Calib0 calib_timing.nii.gz
+ASL Calib Calib0 DistCorr struct2asl.mat
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.mincost
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.log
+ASL Calib Calib0 DistCorr asl2struct.mat
+ASL Calib Calib0 DistCorr gdc_calib0.nii.gz
+ASL Calib Calib0 DistCorr asl2struct_reg.log
+ASL Calib Calib0 DistCorr gdc_dc_calib0.nii.gz
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.param
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat~
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.sum
+ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat
+ASL Calib Calib0 BiasCorr calib0_bias.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr_roi_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_biasraw_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr.nii.gz
+ASL Calib Calib0 BiasCorr SEbased sebased_bias_dil.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_bias.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_biasroi_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased CorticalGreyMatter.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased AllGreyMatter.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_biasroi.nii.gz
+ASL Calib Calib0 BiasCorr SEbased ratio_std.txt
+ASL Calib Calib0 BiasCorr SEbased M0_greyroi.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEBCdivM0_brain.nii.gz
+ASL Calib Calib0 BiasCorr SEbased fmapmag_calib0spc.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_greyroi_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain.nii.gz
+ASL Calib Calib0 BiasCorr SEbased calib0_secorr.nii.gz
+ASL Calib Calib0 BiasCorr SEbased Dropouts_inv.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_bias.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_grey_s5.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_grey.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr_roi.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SubcorticalGreyMatter.nii.gz
+ASL Calib Calib0 BiasCorr SEbased SpinEchoMean_brain_BC.nii.gz
+ASL Calib Calib0 BiasCorr SEbased M0_bias_raw.nii.gz
+ASL Calib Calib0 BiasCorr SEbased ratio_median.txt
+ASL Calib Calib0 BiasCorr SEbased Dropouts.nii.gz
+ASL Calib Calib0 BiasCorr SEbased sebased_bias.nii.gz
+ASL Calib Calib0 BiasCorr calib0_gdc_dc_restore.nii.gz
+ASL Calib Calib0 MTCorr calib0_mtcorr_gdc_dc_restore.nii.gz
+ASL Calib Calib0 MTCorr mtcorr_gdc_calib0.nii.gz
+ASL Calib Calib1 aslfs_mask.nii.gz
+ASL Calib Calib1 DistCorr struct2asl.mat
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat.mincost
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat.log
+ASL Calib Calib1 DistCorr asl2struct.mat
+ASL Calib Calib1 DistCorr gdc_calib1.nii.gz
+ASL Calib Calib1 DistCorr asl2struct_reg.log
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat.param
+ASL Calib Calib1 DistCorr gdc_dc_calib1.nii.gz
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat~
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat.sum
+ASL Calib Calib1 DistCorr asl2orig_mgz_initial_bbr.dat
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr_roi_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_biasraw_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr.nii.gz
+ASL Calib Calib1 BiasCorr SEbased sebased_bias_dil.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_bias.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_biasroi_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased fmapmag_calib1spc.nii.gz
+ASL Calib Calib1 BiasCorr SEbased CorticalGreyMatter.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased AllGreyMatter.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_biasroi.nii.gz
+ASL Calib Calib1 BiasCorr SEbased ratio_std.txt
+ASL Calib Calib1 BiasCorr SEbased M0_greyroi.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEBCdivM0_brain.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_greyroi_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain.nii.gz
+ASL Calib Calib1 BiasCorr SEbased calib0_secorr.nii.gz
+ASL Calib Calib1 BiasCorr SEbased Dropouts_inv.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_bias.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_grey_s5.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_grey.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr_roi.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SubcorticalGreyMatter.nii.gz
+ASL Calib Calib1 BiasCorr SEbased SpinEchoMean_brain_BC.nii.gz
+ASL Calib Calib1 BiasCorr SEbased M0_bias_raw.nii.gz
+ASL Calib Calib1 BiasCorr SEbased ratio_median.txt
+ASL Calib Calib1 BiasCorr SEbased Dropouts.nii.gz
+ASL Calib Calib1 BiasCorr SEbased sebased_bias.nii.gz
+ASL Calib Calib1 BiasCorr calib1_bias.nii.gz
+ASL Calib Calib1 BiasCorr calib1_gdc_dc_restore.nii.gz
+ASL Calib Calib1 calib1.nii.gz
+ASL Calib Calib1 MTCorr mtcorr_gdc_calib1.nii.gz
+ASL Calib Calib1 MTCorr calib1_mtcorr_gdc_dc_restore.nii.gz
+ASL Calib correct_M0.log
+ASL single_step_resample_to_asl0.log
+ASL TIs aslfs_mask.nii.gz
+ASL TIs tis_gdc_dc_moco_restore_bandcorr.nii.gz
+ASL TIs STCorr2 st_scaling_factors.nii.gz
+ASL TIs STCorr2 tis_gdc_dc_restore_mtcorr_stcorr.nii.gz
+ASL TIs STCorr2 combined_scaling_factors_asln.nii.gz
+ASL TIs MoCo final_registration_TIs.nii.gz
+ASL TIs MoCo tis_gdc_dc_moco.nii.gz
+ASL TIs MoCo initial_registration_TIs.nii.gz.par
+ASL TIs MoCo final_registration_TIs.nii.gz.par
+ASL TIs MoCo temp_reg_dc_tis_mtcorr.nii.gz
+ASL TIs MoCo initial_registration_TIs.nii.gz
+ASL TIs MoCo temp_reg_dc_tis_mtcorr_odd.nii.gz
+ASL TIs MoCo temp_reg_dc_tis_mtcorr_even.nii.gz
+ASL TIs MoCo reg_mt_scaling_factors.nii.gz
+ASL TIs MoCo reg_gdc_dc_tis_biascorr.nii.gz
+ASL TIs SatRecov nospatial mean_T1t.nii.gz
+ASL TIs SatRecov nospatial mean_M0t.nii.gz
+ASL TIs SatRecov nospatial mean_A.nii.gz
+ASL TIs SatRecov nospatial logfile
+ASL TIs SatRecov nospatial finalMVN.nii.gz
+ASL TIs SatRecov spatial mean_T1t.nii.gz
+ASL TIs SatRecov spatial mean_M0t.nii.gz
+ASL TIs SatRecov spatial mean_A.nii.gz
+ASL TIs SatRecov spatial mean_T1t_filt.nii.gz
+ASL TIs SatRecov spatial logfile
+ASL TIs OxfordASL oxford_asl.log
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl var_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl asldata.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl var_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl pwi.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl nativeref.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl diffdata_mean.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil params.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 freeEnergy.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 mean_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 mean_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 zstat_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 mean_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 std_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 noise_stdevs.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 modelfit.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 std_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 mean_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 uname.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 std_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 std_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 noise_means.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 zstat_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 zstat_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 zstat_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step1 info.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 var_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 freeEnergy.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 mean_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 mean_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 var_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 zstat_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 mean_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 std_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 noise_stdevs.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 modelfit.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 var_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 std_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 mean_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 var_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 uname.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 std_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 std_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 noise_means.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 zstat_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 zstat_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 zstat_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil step2 info.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl diffdata.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init var_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init var_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil params.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 freeEnergy.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 mean_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 mean_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 zstat_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 mean_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 std_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 noise_stdevs.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 modelfit.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 std_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 mean_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 uname.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 std_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 std_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 noise_means.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 zstat_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 zstat_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 zstat_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step1 info.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 var_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 freeEnergy.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 mean_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 mean_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 var_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 zstat_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 mean_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 std_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 noise_stdevs.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 modelfit.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 var_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 std_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 mean_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 var_fblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 uname.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 std_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 std_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 noise_means.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 zstat_delttiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 zstat_deltblood.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 zstat_ftiss.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil step2 info.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil logfile
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init basil_options.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl init finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl mask.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl mask_dil.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl paramnames.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil_options.txt
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl finalMVN.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl asldata_orig.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl meanasl.nii.gz
+ASL TIs OxfordASL fsl_u1rd6q67_ox_asl basil_options_core.txt
+ASL TIs OxfordASL logfile
+ASL TIs OxfordASL native_space aCBV.nii.gz
+ASL TIs OxfordASL native_space arrival.nii.gz
+ASL TIs OxfordASL native_space perfusion.nii.gz
+ASL TIs OxfordASL native_space perfusion_var.nii.gz
+ASL TIs OxfordASL native_space mask.nii.gz
+ASL TIs OxfordASL native_space arrival_var.nii.gz
+ASL TIs DistCorr FirstPass gdc_dc_tis.nii.gz
+ASL TIs DistCorr FirstPass tis_gdc.nii.gz
+ASL TIs DistCorr FirstPass temp_reg_gdc_dc_tis.nii.gz
+ASL TIs STCorr st_scaling_factors.nii.gz
+ASL TIs STCorr tis_stcorr.nii.gz
+ASL TIs BiasCorr tis_gdc_dc_restore.nii.gz
+ASL TIs BiasCorr tis_biascorr.nii.gz
+ASL TIs combined_scaling_factors.nii.gz
+ASL TIs SatRecov2 nospatial mean_T1t.nii.gz
+ASL TIs SatRecov2 nospatial mean_M0t.nii.gz
+ASL TIs SatRecov2 nospatial mean_A.nii.gz
+ASL TIs SatRecov2 nospatial logfile
+ASL TIs SatRecov2 nospatial finalMVN.nii.gz
+ASL TIs SatRecov2 spatial mean_T1t_filt_asln.nii.gz
+ASL TIs SatRecov2 spatial mean_T1t.nii.gz
+ASL TIs SatRecov2 spatial mean_M0t.nii.gz
+ASL TIs SatRecov2 spatial mean_A.nii.gz
+ASL TIs SatRecov2 spatial mean_T1t_filt.nii.gz
+ASL TIs SatRecov2 spatial logfile
+ASL TIs tis.nii.gz
+ASL TIs Betas beta_perf.nii.gz
+ASL TIs Betas beta_baseline.nii.gz
+ASL TIs MTCorr tis_mtcorr_odd.nii.gz
+ASL TIs MTCorr tis_mtcorr.nii.gz
+ASL TIs MTCorr tis_gdc_dc_restore_mtcorr.nii.gz
+ASL TIs MTCorr tis_mtcorr_even.nii.gz
+T1w ASL pvcorr_perfusion_calib_gm_mean.txt
+T1w ASL PVEs pve_GM.nii.gz
+T1w ASL PVEs pve_CSF.nii.gz
+T1w ASL PVEs vent_csf_mask.nii.gz
+T1w ASL PVEs pv_est.log
+T1w ASL PVEs pve_WM.nii.gz
+T1w ASL perfusion_calib.nii.gz
+T1w ASL arrival.nii.gz
+T1w ASL pvcorr_perfusion_wm_calib_masked.nii.gz
+T1w ASL pvcorr_perfusion_gm_calib_masked.nii.gz
+T1w ASL pvcorr_arrival_gm_masked.nii.gz
+T1w ASL perfusion_var_calib.nii.gz
+T1w ASL pvcorr_arrival_wm_mean.txt
+T1w ASL arrival_wm_mean.txt
+T1w ASL reg wmmask.nii.gz
+T1w ASL reg ASL_grid_T1w_acpc_dc_restore.nii.gz
+T1w ASL aCBV_calib.nii.gz
+T1w ASL pvcorr_perfusion_calib_wm_mean.txt
+T1w ASL perfusion_calib_gm_mean.txt
+T1w ASL Calib Calib0 calib0_corr_aslt1w.nii.gz
+T1w ASL Calib Calib0 DistCorr calib_mt_scaling_factors.nii.gz
+T1w ASL Calib Calib0 DistCorr calib0_gdc_dc.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr_roi_s5.nii.gz
+T1w ASL Calib Calib0 SEbased M0_biasraw_s5.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr.nii.gz
+T1w ASL Calib Calib0 SEbased sebased_bias_dil.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain_bias.nii.gz
+T1w ASL Calib Calib0 SEbased M0_biasroi_s5.nii.gz
+T1w ASL Calib Calib0 SEbased CorticalGreyMatter.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr_s5.nii.gz
+T1w ASL Calib Calib0 SEbased AllGreyMatter.nii.gz
+T1w ASL Calib Calib0 SEbased M0_biasroi.nii.gz
+T1w ASL Calib Calib0 SEbased ratio_std.txt
+T1w ASL Calib Calib0 SEbased M0_greyroi.nii.gz
+T1w ASL Calib Calib0 SEbased SEBCdivM0_brain.nii.gz
+T1w ASL Calib Calib0 SEbased M0_greyroi_s5.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain.nii.gz
+T1w ASL Calib Calib0 SEbased calib0_secorr.nii.gz
+T1w ASL Calib Calib0 SEbased Dropouts_inv.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0.nii.gz
+T1w ASL Calib Calib0 SEbased M0_bias.nii.gz
+T1w ASL Calib Calib0 SEbased M0_grey_s5.nii.gz
+T1w ASL Calib Calib0 SEbased M0_grey.nii.gz
+T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr_roi.nii.gz
+T1w ASL Calib Calib0 SEbased SubcorticalGreyMatter.nii.gz
+T1w ASL Calib Calib0 SEbased SpinEchoMean_brain_BC.nii.gz
+T1w ASL Calib Calib0 SEbased M0_bias_raw.nii.gz
+T1w ASL Calib Calib0 SEbased sebased_bias_dilall.nii.gz
+T1w ASL Calib Calib0 SEbased ratio_median.txt
+T1w ASL Calib Calib0 SEbased Dropouts.nii.gz
+T1w ASL Calib Calib0 SEbased sebased_bias.nii.gz
+T1w ASL Calib Calib0 calib_aslt1w_timing.nii.gz
+T1w ASL Calib Calib0 calib_aslt1w_stcorr_factors.nii.gz
+T1w ASL pvcorr_arrival_gm_var_masked.nii.gz
+T1w ASL pvcorr_perfusion_gm_var_calib_masked.nii.gz
+T1w ASL pvcorr_perfusion_wm_var_calib_masked.nii.gz
+T1w ASL TIs timing_img_aslt1w.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl wmmask.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl ftiss_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl calib_orig.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl calib_wholehead.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl asldata.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl var_ftiss_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl gmmask.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pwi.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl nativeref.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl diffdata_mean.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil params.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step1 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 var_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 var_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil step2 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl diffdata.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvwm_inasl.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvgm_inasl.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl gmmask_pure.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil params.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step1 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 var_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 var_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil step2 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init basil_options.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl init finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl mask.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl mask_dil.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil_options.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl wmmask_pure.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl asldata_orig.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl meanasl.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_ftisswm_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr ftiss_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_ftiss_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_ftisswm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 mean_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 var_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step3 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil wmcbfterm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil wmcbf_init.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil temp_pgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil temp_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil params.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 mean_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step1 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 freeEnergy.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_fblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 noise_stdevs.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 modelfit.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_fwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 uname.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 mean_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_pvwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 std_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_pvgm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 noise_means.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_delttiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_deltblood.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 zstat_ftiss.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil step2 info.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil gmcbf_init.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil logfile
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr var_deltwm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr ftisswm.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr paramnames.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr basil_options.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr finalMVN.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr ftisswm_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl pvcorr fblood_calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl calib_brain.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl calib.nii.gz
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl basil_options_core.txt
+T1w ASL TIs OxfordASL fsl_f_7460gk_ox_asl fblood_calib.nii.gz
+T1w ASL TIs OxfordASL oxford_aslt1w.log
+T1w ASL TIs OxfordASL calib refmask.nii.gz
+T1w ASL TIs OxfordASL calib M0.txt
+T1w ASL TIs OxfordASL calib logfile
+T1w ASL TIs OxfordASL oxford_asl_inputs timing_img_aslt1w.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs pve_GM.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs calib0_corr_aslt1w.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs vent_csf_mask.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs beta_perf.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs pve_WM.nii.gz
+T1w ASL TIs OxfordASL oxford_asl_inputs ASL_FoV_brain_mask.nii.gz
+T1w ASL TIs OxfordASL logfile
+T1w ASL TIs OxfordASL native_space aCBV.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_calib.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_var_norm.nii.gz
+T1w ASL TIs OxfordASL native_space wm_roi.nii.gz
+T1w ASL TIs OxfordASL native_space arrival.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_norm.nii.gz
+T1w ASL TIs OxfordASL native_space gm_roi.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_var_calib.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_wm_mean.txt
+T1w ASL TIs OxfordASL native_space wm_mask.nii.gz
+T1w ASL TIs OxfordASL native_space arrival_wm_mean.txt
+T1w ASL TIs OxfordASL native_space perfusion_gm_mean.txt
+T1w ASL TIs OxfordASL native_space aCBV_calib.nii.gz
+T1w ASL TIs OxfordASL native_space gm_mask.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_calib_gm_mean.txt
+T1w ASL TIs OxfordASL native_space pvwm_inasl.nii.gz
+T1w ASL TIs OxfordASL native_space pvgm_inasl.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_var.nii.gz
+T1w ASL TIs OxfordASL native_space mask.nii.gz
+T1w ASL TIs OxfordASL native_space perfusion_calib_wm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr aCBV.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_calib.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_wm_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_wm_var.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_var_norm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_wm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_norm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_wm_wm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_var_calib.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_wm_var_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_calib_wm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_gm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr arrival_wm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr aCBV_calib.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_calib.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_calib_gm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr arrival_var_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_var.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_calib_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_var.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_var_norm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_var_calib_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_var_calib.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_norm.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr arrival_gm_mean.txt
+T1w ASL TIs OxfordASL native_space pvcorr arrival_var.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_wm_calib_masked.nii.gz
+T1w ASL TIs OxfordASL native_space pvcorr perfusion_var_calib_masked.nii.gz
+T1w ASL TIs OxfordASL native_space arrival_gm_mean.txt
+T1w ASL TIs OxfordASL native_space arrival_var.nii.gz
+T1w ASL TIs asl_corr.nii.gz
+T1w ASL TIs DistCorr tis_gdc_dc_moco.nii.gz
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.mincost
+T1w ASL TIs reg fmapmag_aslt1w.nii.gz
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.log
+T1w ASL TIs reg ASL_FoV_mask.nii.gz
+T1w ASL TIs reg ASL_grid_T1w_brain_mask.nii.gz
+T1w ASL TIs reg mean_T1t_filt_aslt1w.nii.gz
+T1w ASL TIs reg asl2struct.mat
+T1w ASL TIs reg asl2struct_reg.log
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.param
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat~
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.sum
+T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat
+T1w ASL TIs reg ASL_FoV_brain_mask.nii.gz
+T1w ASL TIs combined_scaling_factors.nii.gz
+T1w ASL TIs Betas beta_perf.nii.gz
+T1w ASL TIs Betas beta_baseline.nii.gz
+T1w ASL TIs single_step_resample_to_aslt1w.log
+T1w ASL perfusion_calib_wm_mean.txt
+T1w ASL pvcorr_arrival_gm_mean.txt
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib.L.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib.R.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival.R.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib_precision.nii.gz
+T1w ASL Results OutputtoMSMAll_32k arrival_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival.L.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_precision.nii.gz
+T1w ASL Results OutputtoMSMAll_32k arrival_var_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib_precision.nii.gz
+T1w ASL Results OutputtoMSMAll_32k arrival.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var_precision.nii.gz
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib.L.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_var_calib.R.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var.L.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k perfusion_calib_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_var.R.native.func.gii
+T1w ASL Results OutputtoMSMAll_32k arrival_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib.L.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib.R.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival.R.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib_precision.nii.gz
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival.L.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_precision.nii.gz
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib_precision.nii.gz
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var_precision.nii.gz
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib.R.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib.L.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_var_calib.R.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival.L.badvert_ribbonroi.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var.L.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k perfusion_calib_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_var.R.native.func.gii
+T1w ASL Results pvcorr OutputtoMSMAll_32k arrival_s2.atlasroi.R.32k_fs_LR.func.gii
+T1w ASL pvcorr_arrival_wm_masked.nii.gz
+T1w ASL arrival_gm_mean.txt
+T1w ASL roi_stats fsl_identity.txt
+T1w ASL roi_stats roi_stats.log
+T1w ASL roi_stats roi_stats_gm.csv
+T1w ASL roi_stats roi_stats_wm.csv
+T1w ASL roi_stats roi_stats.csv
+T1w ASL pvcorr_aCBV_calib.nii.gz
+T1w ASL arrival_var.nii.gz
+T1w ASL pvcorr_arrival_wm_var_masked.nii.gz
+{subjectid}_hcp_asl.log
+project.log
+MNINonLinear ASL perfusion_calib.nii.gz
+MNINonLinear ASL pvcorr_perfusion_calib_Atlas.dscalar.nii
+MNINonLinear ASL arrival.nii.gz
+MNINonLinear ASL arrival_Atlas.dscalar.nii
+MNINonLinear ASL pvcorr_perfusion_wm_calib_masked.nii.gz
+MNINonLinear ASL pvcorr_perfusion_gm_calib_masked.nii.gz
+MNINonLinear ASL pvcorr_arrival_gm_masked.nii.gz
+MNINonLinear ASL pvcorr_perfusion_calib_cifti_mean_nonzero.txt
+MNINonLinear ASL pvcorr_arrival_Atlas.dscalar.nii
+MNINonLinear ASL perfusion_calib_cifti_mean_nonzero.txt
+MNINonLinear ASL perfusion_calib_Atlas.dscalar.nii
+MNINonLinear ASL Results OutputtoCIFTI asl_grid_mni.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI arrival_Atlas.dscalar.nii
+MNINonLinear ASL Results OutputtoCIFTI arrival_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_calib_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI arrival_MNI.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_calib_MNI.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_var_calib_Atlas.dscalar.nii
+MNINonLinear ASL Results OutputtoCIFTI arrival_var_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_var_calib_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_calib_Atlas.dscalar.nii
+MNINonLinear ASL Results OutputtoCIFTI arrival_var_Atlas.dscalar.nii
+MNINonLinear ASL Results OutputtoCIFTI arrival_var_MNI.nii.gz
+MNINonLinear ASL Results OutputtoCIFTI perfusion_var_calib_MNI.nii.gz
+MNINonLinear ASL Results OxfordASL std_space perfusion_calib.nii.gz
+MNINonLinear ASL Results OxfordASL std_space arrival.nii.gz
+MNINonLinear ASL Results OxfordASL std_space perfusion_var_calib.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr arrival_gm_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr arrival_wm_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr arrival_wm_var_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr perfusion_gm_var_calib_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr arrival_gm_var_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr perfusion_wm_var_calib_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr perfusion_wm_calib_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space pvcorr perfusion_gm_calib_masked.nii.gz
+MNINonLinear ASL Results OxfordASL std_space arrival_var.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI asl_grid_mni.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_Atlas.dscalar.nii
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_calib_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_MNI.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_calib_MNI.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_var_calib_Atlas.dscalar.nii
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_var_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_var_calib_AtlasSubcortical_s2.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_calib_Atlas.dscalar.nii
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_var_Atlas.dscalar.nii
+MNINonLinear ASL Results pvcorr OutputtoCIFTI arrival_var_MNI.nii.gz
+MNINonLinear ASL Results pvcorr OutputtoCIFTI perfusion_var_calib_MNI.nii.gz
+MNINonLinear ASL pvcorr_arrival_wm_masked.nii.gz
+MNINonLinear ASL arrival_cifti_mean_nonzero.txt
+MNINonLinear ASL pvcorr_arrival_cifti_mean_nonzero.txt

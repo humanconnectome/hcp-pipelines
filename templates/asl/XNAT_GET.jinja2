@@ -1,0 +1,7 @@
+{% extends "generic/XNAT_GET.py" %}
+{% block get_data %} 
+print("Getting prereq data for the ASL pipeline.")
+resources.get_msmall_processed_data()
+resources.get_structural_preproc_data()
+resources.get_asl_unproc_data()
+{% endblock get_data %}

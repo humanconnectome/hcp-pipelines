@@ -426,3 +426,69 @@ DiffusionPreprocessing:
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
+
+
+AslProcessing:
+  - function: generate_timestamp
+  - function: split_subject_components
+  - load_variables: asl_process
+  - function: check_required_files_are_available
+  - function: choose_put_server
+  - function: set_study_folder
+  - function: make_directories
+  - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
+  - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
+  - generate_file:
+      template: asl/run_qunex.jinja2
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
+      variable: RUN_QUNEX_SCRIPT
+  - generate_file:
+      template: asl/XNAT_GET.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
+      template: generic/get_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      variable: GET_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/process_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      variable: PROCESS_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/clean_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      variable: CLEAN_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
+      template: generic/put_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      variable: CHECK_DATA_RUNPATH
+  - generate_file:
+      template: generic/check_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
+  - generate_file:
+      template: generic/mark_complete.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/submit_to_pbs.jinja2
+      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      variable: SUBMIT_TO_PBS_SCRIPT
+  - function: launch_main_script
