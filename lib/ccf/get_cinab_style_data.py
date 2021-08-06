@@ -199,10 +199,10 @@ class DataRetriever(object):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(self.archive.hand_edit())
 
-    def get_functional_preproc_data(self):
+    def get_functional_preproc_data(self, extra=None):
         module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
-            self.archive.functional_preproc(),
+            self.archive.functional_preproc(extra),
         )
 
     def get_diffusion_preproc_data(self):
@@ -456,12 +456,12 @@ class PipelinePrereqDownloader:
         # HCP_1200
         r.get_msm_group_average_drift_data("HCP_1200")
 
-    def task(self):
+    def task(self, extra=None):
         print("Getting prereq data for the Task fMRI pipeline.")
         r = self.data_retriever
         r.run(
             r.get_structural_preproc_data,
-            r.get_functional_preproc_data,
+            r.get_functional_preproc_data(extra),
             r.get_icafix_data,
         )
 
@@ -507,7 +507,7 @@ class PipelinePrereqDownloader:
         elif "reapplyfix" in pipeline:
             self.reapplyfix()
         elif "task" in pipeline:
-            self.task()
+            self.task(extra)
 
         if remove_non_subdirs:
             # remove any non-subdirectory data at the output study directory level

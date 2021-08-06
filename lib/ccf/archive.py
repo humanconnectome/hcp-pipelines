@@ -139,12 +139,15 @@ class CcfArchive(object):
         """
         return ls(self.subject_resources + "/Diffusion_preproc")
 
-    def functional_preproc(self):
+    def functional_preproc(self, extra=None):
         """
         List of full paths to any resource containing preprocessed functional data
         for the specified subject
         """
-        return ls(self.subject_resources + "/*fMRI*preproc")
+        files = ls(self.subject_resources + "/*fMRI*preproc")
+        if not (extra is None or (str(extra).upper() == "ALL")):
+            files = [res for res in files if extra in res]
+        return files
 
     # processed data paths and names
 
