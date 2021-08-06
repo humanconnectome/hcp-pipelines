@@ -456,6 +456,15 @@ class PipelinePrereqDownloader:
         # HCP_1200
         r.get_msm_group_average_drift_data("HCP_1200")
 
+    def task(self):
+        print("Getting prereq data for the Task fMRI pipeline.")
+        r = self.data_retriever
+        r.run(
+            r.get_structural_preproc_data,
+            r.get_functional_preproc_data,
+            r.get_icafix_data,
+        )
+
     def reapplyfix(self):
         print("Getting prereq data for the ReapplyFix pipeline.")
         self.all_pipeline_data()
@@ -497,6 +506,8 @@ class PipelinePrereqDownloader:
             self.dedriftandresample()
         elif "reapplyfix" in pipeline:
             self.reapplyfix()
+        elif "task" in pipeline:
+            self.task()
 
         if remove_non_subdirs:
             # remove any non-subdirectory data at the output study directory level
