@@ -30,8 +30,8 @@ LogFile="$StudyFolder/processing/logs/${scriptName}_${TimeStamp}.log"
 
 # only if overriding the default setting of /opt/HCP/HCPpipelines
 #export con_HCPPIPEDIR="/opt/HCP/HCPpipelines"
-source /opt/qunex/env/qunex_environment.sh  >> ${LogFile}
-source /opt/qunex/env/qunex_container_env_status.sh --envstatus >> ${LogFile}
+source /opt/qunex/library/environment/qunex_environment.sh  >> ${LogFile}
+source /opt/qunex/library/environment/qunex_envStatus.sh --envstatus >> ${LogFile}
 
 parsessions=1   # the number of sessions to process in parallel
 threads=1       # the number of bold files to process in parallel
@@ -58,7 +58,7 @@ echo ""                                                                         
 echo "   "                                                                        2>&1 | tee -a ${LogFile}
 
 # -- Define QUNEX command
-QUNEXCOMMAND="bash $QUNEXPATH/bin/qunex"
+QUNEXCOMMAND="bash $QUNEXCONNPATH/qunex"
 
 log_Msg()
 {
@@ -79,14 +79,14 @@ log_Msg()
 main() {
 
 #########################	createStudy
-${QUNEXCOMMAND} create_study --studyfolder="${StudyFolder}"
+${QUNEXCOMMAND} createStudy --studyfolder="${StudyFolder}"
 cd ${StudyFolder}/sessions
 
 ### BEGIN qunex_setup ###
 #{% block qunex_setup %}
 
   #########################	importHCP
-	${QUNEXCOMMAND} import_hcp \
+	${QUNEXCOMMAND} importHCP \
 		--sessionsfolder="${StudyFolder}/sessions"  \
 		--inbox="${StudyFolder}/unprocessed" \
 		--action="link" \
@@ -94,13 +94,13 @@ cd ${StudyFolder}/sessions
 		--archive="leave"
 
 	#########################	setupHCP
-	${QUNEXCOMMAND} setup_hcp \
+	${QUNEXCOMMAND} setupHCP \
 	    --sessionsfolder="${StudyFolder}/sessions" \
 	    --sessions="${Session}" \
 	    --hcp_filename="original" 
 
 	#########################	createBatch
-	${QUNEXCOMMAND} create_batch \
+	${QUNEXCOMMAND} createBatch \
 	 --sessionsfolder="${StudyFolder}/sessions" \
 	 --overwrite="append" \
 	 --paramfile="$ParametersFile"
