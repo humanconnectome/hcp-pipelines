@@ -11,17 +11,49 @@ import sys
 import ccf.archive as ccf_archive
 import utils.debug_utils as debug_utils
 import utils.file_utils as file_utils
-import utils.os_utils as os_utils
-
-# authorship information
-__author__ = "Timothy B. Brown"
-__copyright__ = "Copyright 2019, Connectome Coordination Facility"
-__maintainer__ = "Junil Chang"
 
 
 
-def link_directory(get_from, put_to, show_log=True):
-    os_utils.lndir(get_from, put_to, show_log, ignore_existing_dst_files=True)
+def link_directory(source, destination, show_log=True):
+    if not source.is_dir():
+        raise OSError(f"ERROR: {source} is not a valid directory.")
+    if destination.exists():
+        if not destination.is_dir():
+            raise OSError(f"ERROR: {destination} exists but is not a valid directory.")
+    else:
+        destination.mkdir(parents=True, exist_ok=True)
+
+    visited = set()
+
+    def recursively_link_files(source_dir, destination_dir):
+        source_dir = source_dir.resolve().absolute()
+        visited.add(str(source_dir))
+        for source in source_dir.iterdir():
+            destination = destination_dir / source.name
+            if source.is_file():
+                if not destination.exists():
+                    if show_log:
+                        print(
+                            f"linking: {destination.absolute()} --> {source.absolute()}"
+                        )
+                    destination.symlink_to(source.absolute())
+                else:
+                    if show_log:
+                        print(f"skipping: {destination.absolute()}")
+            elif source.is_dir():
+                if source.is_symlink():
+                    resolved_path = str(source.resolve())
+                    # keep track if already visited, to avoid infinite recursion from circular symlinks
+                    if resolved_path in visited:
+                        print("Skipping, because already visited: ", resolved_path)
+                        continue
+                if show_log:
+                    print("dirname: " + str(destination.absolute()))
+                if not destination.exists():
+                    destination.mkdir()
+                recursively_link_files(source, destination)
+
+    recursively_link_files(source, destination)
 
 
 class DataRetriever(object):
