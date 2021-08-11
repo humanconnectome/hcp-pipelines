@@ -10,32 +10,6 @@ import os
 from pathlib import Path
 
 
-class _ArchiveScanNames:
-    def __init__(self, archive):
-        self.archive = archive
-
-    def structural_unproc(self):
-        return scan_names_from_paths(self.archive.structural_unproc())
-
-    def t1w_unproc(self):
-        return scan_names_from_paths(self.archive.t1w_unproc())
-
-    def t2w_unproc(self):
-        return scan_names_from_paths(self.archive.t2w_unproc())
-
-    def functional_unproc(self, extra=None):
-        return scan_names_from_paths(self.archive.functional_unproc(extra))
-
-    def diffusion_unproc(self):
-        return scan_names_from_paths(self.archive.diffusion_unproc())
-
-    def functional_preproc(self):
-        return scan_names_from_paths(self.archive.functional_preproc())
-
-    def reapplyfix(self):
-        return scan_names_from_paths(self.archive.reapplyfix())
-
-
 class CcfArchive(object):
     """
     This class provides access to a CCF project data archive.
@@ -49,7 +23,6 @@ class CcfArchive(object):
     def __init__(self, project, session, ARCHIVE_ROOT):
         self.ARCHIVE_ROOT = Path(ARCHIVE_ROOT)
         self.SESSION_RESOURCES = self.ARCHIVE_ROOT / project / "arc001" / session / "RESOURCES"
-        self.scans = _ArchiveScanNames(self)
 
     def get_resource_path(self, path_expression, extra=None):
         files = sorted(self.SESSION_RESOURCES.glob(path_expression))
@@ -140,45 +113,3 @@ class CcfArchive(object):
         return self.ARCHIVE_ROOT / project_id / "resources"
 
 
-    
-
-
-def _get_scan_name_from_path(path):
-    basename = os.path.basename(path)
-    last_position = basename.rfind("_")
-    scan_name = basename[:last_position]
-    return scan_name
-
-
-def scan_names_from_paths(dir_list):
-    """List of names (not full paths) of scans
-
-    If the full paths available are:
-
-    /HCP/hcpdb/archive/HCP_Staging_7T/arc001/102311_7T/RESOURCES/rfMRI_REST1_PA_unproc
-    /HCP/hcpdb/archive/HCP_Staging_7T/arc001/102311_7T/RESOURCES/rfMRI_REST2_AP_unproc
-    /HCP/hcpdb/archive/HCP_Staging_7T/arc001/102311_7T/RESOURCES/tfMRI_RETCCW_AP_unproc
-
-    then the scan names available are:
-
-    rfMRI_REST1_PA
-    rfMRI_REST2_AP
-    tfMRI_RETCCW_AP
-    """
-    return [_get_scan_name_from_path(d) for d in dir_list]
-
-
-def is_resting_state_scan_name(scan_name):
-    """
-    Return an indication of whether the specified name is for a
-    resting state scan
-    """
-    return scan_name.startswith("rfMRI")
-
-
-def is_task_scan_name(scan_name):
-    """
-    Return an indication of whethe the specified name is for a
-    task scan
-    """
-    return scan_name.startswith("tfMRI")
