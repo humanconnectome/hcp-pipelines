@@ -29,7 +29,7 @@ g_scan = "{{ _SCAN }}"
 
 client = XnatFileClient(project, subject, session, serverlist, credentials_file)
 archive = CcfArchive(project, session, ARCHIVE_ROOT)
-resources_root = archive.subject_resources
+resources_root = archive.SESSION_RESOURCES
 
 
 def print_system_info():

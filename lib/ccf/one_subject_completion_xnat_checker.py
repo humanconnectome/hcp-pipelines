@@ -34,8 +34,7 @@ class OneSubjectCompletionXnatChecker:
             return self.archive.structural_preproc()
 
     def my_resource(self):
-        archive = self.archive
-        return archive.subject_resources + "/" + self.OUTPUT_RESOURCE_NAME
+        return self.archive.SESSION_RESOURCES / self.OUTPUT_RESOURCE_NAME
 
     def list_of_expected_files(self, working_dir):
         if not os.path.isfile(self.EXPECTED_FILES_LIST):

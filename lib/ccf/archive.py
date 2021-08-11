@@ -7,6 +7,7 @@ ccf/archive.py: Provides direct access to a CCF project archive.
 # import of built-in modules
 import glob
 import os
+from pathlib import Path
 
 
 class _ArchiveScanNames:
@@ -46,186 +47,100 @@ class CcfArchive(object):
     """
 
     def __init__(self, project, session, ARCHIVE_ROOT):
-        self.ARCHIVE_ROOT = ARCHIVE_ROOT
-        self.subject_resources = f"{ARCHIVE_ROOT}/{project}/arc001/{session}/RESOURCES"
+        self.ARCHIVE_ROOT = Path(ARCHIVE_ROOT)
+        self.SESSION_RESOURCES = self.ARCHIVE_ROOT / project / "arc001" / session / "RESOURCES"
         self.scans = _ArchiveScanNames(self)
+
+    def get_resource_path(self, path_expression, extra=None):
+        files = sorted(self.SESSION_RESOURCES.glob(path_expression))
+
+        if type(extra) is not str or extra.upper() == 'ALL':
+            return files
+        else:
+            scans = extra.split("@")
+            return [x for individual_scan in scans for x in files if x.name.startswith(individual_scan)]
 
     # Unprocessed data paths and names
 
     def reapplyfix(self):
-        return ls(self.subject_resources + "/*ReApplyFix")
+        return self.get_resource_path("*ReApplyFix")
 
     def structural_unproc(self):
-        """
-        List of full paths to any resources containing unprocessed structural scans
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/T[12]w_*unproc")
+        return self.get_resource_path("T[12]w_*unproc")
 
     def t1w_unproc(self):
-        """
-        List of full paths to any resources containing unprocessed T1w scans
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/T1w_*unproc")
+        return self.get_resource_path("T1w_*unproc")
 
     def t2w_unproc(self):
-        """
-        List of full paths to any resources containing unprocessed T2w scans
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/T2w_*unproc")
+        return self.get_resource_path("T2w_*unproc")
 
     def functional_unproc(self, extra=None):
-        """
-        List of full paths to any resources containing unprocessed functional scans
-        for the specified subject
-        """
-        unprocls = ls(self.subject_resources + "/*fMRI*unproc")
-        if not (extra is None or (str(extra).upper() == "ALL")):
-            unprocls = [res for res in unprocls if extra in res]
-        return unprocls;
+        return self.get_resource_path("*fMRI*unproc", extra)
 
     def diffusion_unproc(self):
-        """
-        List of full paths to any resources containing unprocessing diffusion scans
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Diffusion_unproc")
+        return self.get_resource_path("Diffusion_unproc")
 
     def asl_unproc(self):
-        return ls(self.subject_resources + "/mbPCASLhr_unproc")
+        return self.get_resource_path("mbPCASLhr_unproc")
 
     # preprocessed data paths and names
 
     def running_status(self):
-        """
-        List of full paths to the running status directories
-        """
-        return ls(self.subject_resources + "/RunningStatus")
+        return self.get_resource_path("RunningStatus")
 
     def structural_preproc_hand_edit(self):
-        """
-        List of full paths to any resource containing preprocessed structural data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Structural_preproc_handedit")
+        return self.get_resource_path("Structural_preproc_handedit")
 
     def structural_preproc(self):
-        """
-        List of full paths to any resource containing preprocessed structural data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Structural_preproc")
+        return self.get_resource_path("Structural_preproc")
 
     def supplemental_structural_preproc(self):
-        """
-        List of full paths to any resource containing supplemental preprocessed structural
-        data for the specified subject
-        """
-        return ls(self.subject_resources + "/Structural_preproc/supplemental")
+        return self.get_resource_path("Structural_preproc/supplemental")
 
     def hand_edit(self):
-        """
-        List of full paths to any resource containing preprocessed structural data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Structural_Hand_Edit")
+        return self.get_resource_path("Structural_Hand_Edit")
 
     def diffusion_preproc(self):
-        """
-        List of full paths to any resource containing preprocessed diffusion data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Diffusion_preproc")
+        return self.get_resource_path("Diffusion_preproc")
 
     def functional_preproc(self, extra=None):
-        """
-        List of full paths to any resource containing preprocessed functional data
-        for the specified subject
-        """
-        files = ls(self.subject_resources + "/*fMRI*preproc")
-        if not (extra is None or (str(extra).upper() == "ALL")):
-            files = [res for res in files if extra in res]
-        return files
+        return self.get_resource_path("*fMRI*preproc", extra)
 
     # processed data paths and names
 
     def msmall_registration(self):
-        """
-        List of full paths to any resource containing msmall registration results
-        data for the specified subject
-        """
-        return ls(self.subject_resources + "/MSMAllReg")
+        return self.get_resource_path("MSMAllReg")
 
     def msmall_proc(self):
-        """
-        List of full paths to any resource containing preprocessed diffusion data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/MsmAll_proc")
+        return self.get_resource_path("MsmAll_proc")
 
     def multirun_icafix(self):
-        """
-        List of full paths to any resource containing preprocessed diffusion data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/MultiRunIcaFix_proc")
+        return self.get_resource_path("MultiRunIcaFix_proc")
 
     def fix_processed(self):
-        """
-        List of full paths to any resource containing FIX processed results data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/*FIX")
+        return self.get_resource_path("*FIX")
 
     def msmall_dedrift_and_resample(self):
-        """
-        List of full paths to any resource containing msmall dedrift and resample results
-        data for the specified subject
-        """
-        return ls(self.subject_resources + "/MSMAllDeDrift")
+        return self.get_resource_path("MSMAllDeDrift")
 
     def rss_processed(self):
-        """
-        List of full paths to any resource containing RestingStateStats processed results data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/*RSS")
+        return self.get_resource_path("*RSS")
 
     def postfix_processed(self):
-        """
-        List of full paths to any resource containing PostFix processed results data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/*PostFix")
+        return self.get_resource_path("*PostFix")
 
     def task_processed(self):
-        """
-        List of full paths to any resource containing Task Analysis processed results data
-        for the specified subject
-        """
-        dir_list = ls(self.subject_resources + "/tfMRI*")
-        return sorted([d for d in dir_list if os.path.basename(d).count("_") <= 1])
+        dir_list = self.get_resource_path("tfMRI*")
+        return [d for d in dir_list if d.name.count("_") <= 1]
 
     def bedpostx_processed(self):
-        """
-        List of full paths to any resource containing bedpostx processed results data
-        for the specified subject
-        """
-        return ls(self.subject_resources + "/Diffusion_bedpostx")
+        return self.get_resource_path("Diffusion_bedpostx")
 
     def project_resources_dir_full_path(self, project_id):
-        """
-        The full path to the project-level resources directory
-        for the specified project
-        """
-        return self.ARCHIVE_ROOT + "/" + project_id + "/resources"
+        return self.ARCHIVE_ROOT / project_id / "resources"
 
 
-def ls(path_expression):
-    items = glob.glob(path_expression)
-    return sorted(items)
+    
 
 
 def _get_scan_name_from_path(path):
