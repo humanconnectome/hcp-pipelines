@@ -8,7 +8,8 @@ import glob
 import os
 import subprocess
 import sys
-import ccf.archive as ccf_archive
+from pathlib import Path
+
 import utils.debug_utils as debug_utils
 import utils.file_utils as file_utils
 
@@ -70,15 +71,29 @@ class DataRetriever(object):
         self.SUBJECT = subject
         session = f"{subject}_{classifier}"
         self.SESSION = session
-        self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
-        self.output_dir = output_dir
+        self.ARCHIVE_ROOT = Path(ARCHIVE_ROOT)
+        self.SESSION_RESOURCES = (
+            self.ARCHIVE_ROOT / project / "arc001" / session / "RESOURCES"
+        )
+        self.output_dir = Path(output_dir)
         self.show_log = log
 
+    def get_resource_path(self, path_expression, extra=None):
+        files = sorted(self.SESSION_RESOURCES.glob(path_expression))
+
+        if type(extra) is not str or extra.upper() == "ALL":
+            return files
+        else:
+            return [
+                x
+                for x in files
+                if extra in x.name
+            ]
 
     def remove_non_subdirs(self):
         cmd = [
             "find",
-            self.output_dir,
+            self.output_dir.absolute(),
             "-maxdepth",
             "1",
             "-not",
@@ -88,60 +103,37 @@ class DataRetriever(object):
         ]
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, universal_newlines=True)
 
-    def _get_unprocessed_data(self, directories):
-        for get_from in directories:
-            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
+    def get_unprocessed_data(self, glob, extra=None):
+        unprocessed_dir = self.output_dir  / self.SESSION / "unprocessed"
+        for source in self.get_resource_path(glob, extra):
+            # Remove the "_unproc" suffix
+            basename_with_no_suffix = source.name[:-7]
 
-            base = os.path.basename(get_from)
-            sub_dir = base[: base.rfind("_unproc")]
-            put_to = (
-                self.output_dir + "/" + self.SESSION + "/unprocessed/" + sub_dir
-            )
-            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
+            destination = unprocessed_dir / basename_with_no_suffix
+            link_directory(source, destination, self.show_log)
 
-            link_directory(get_from, put_to, self.show_log)
+    def get_preprocessed_data(self, glob, extra=None):
+        # currently has same implementation
+        # so just make it an alias
+        return self.get_processed_data(glob, extra)
 
-    def _get_preprocessed_data(self, directories):
-        for directory in directories:
-            get_from = directory
-            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
-
-            put_to = self.output_dir
-            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
-
-		    link_directory(get_from, put_to, self.show_log)
-
-
-    def _get_processed_data(self, directories):
-        for directory in directories:
-            get_from = directory
-            module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
-
-            put_to = self.output_dir
-            module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
-
-            link_directory(get_from, put_to, self.show_log)
+    def get_processed_data(self, glob, extra=None):
+        destination = self.output_dir
+        for source in self.get_resource_path(glob, extra):
+            link_directory(source, destination, self.show_log)
 
     # get unprocessed data
     def get_structural_unproc_data(self):
-        self._get_unprocessed_data(
-            self.archive.structural_unproc(),
-        )
+        self.get_unprocessed_data("T[12]w_*unproc")
 
     def get_functional_unproc_data(self, extra=None):
-        self._get_unprocessed_data(
-            self.archive.functional_unproc(extra),
-        )
+        self.get_unprocessed_data("*fMRI*unproc", extra)
 
     def get_diffusion_unproc_data(self):
-        self._get_unprocessed_data(
-            self.archive.diffusion_unproc(),
-        )
+        self.get_unprocessed_data("Diffusion_unproc")
 
     def get_asl_unproc_data(self):
-        self._get_unprocessed_data(
-            self.archive.asl_unproc(),
-        )
+        self.get_unprocessed_data("mbPCASLhr_unproc")
 
     def get_unproc_data(self):
         self.get_diffusion_unproc_data()
@@ -151,32 +143,22 @@ class DataRetriever(object):
     # get preprocessed data
 
     def get_structural_preproc_data(self):
-        self._get_preprocessed_data(
-            self.archive.structural_preproc(),
-        )
+        self.get_preprocessed_data("Structural_preproc")
 
     def get_icafix_data(self):
-        self._get_processed_data(
-            self.archive.multirun_icafix(),
-        )
+        self.get_processed_data("MultiRunIcaFix_proc")
 
     def get_supplemental_structural_preproc_data(self):
-        self._get_preprocessed_data(
-            self.archive.supplemental_structural_preproc(),
-        )
+        self.get_preprocessed_data("Structural_preproc/supplemental")
 
     def get_hand_edit_data(self):
-        self._get_preprocessed_data(self.archive.hand_edit())
+        self.get_preprocessed_data("Structural_Hand_Edit")
 
     def get_functional_preproc_data(self, extra=None):
-        self._get_preprocessed_data(
-            self.archive.functional_preproc(extra),
-        )
+        self.get_preprocessed_data("*fMRI*preproc", extra)
 
     def get_diffusion_preproc_data(self):
-        self._get_preprocessed_data(
-            self.archive.diffusion_preproc(),
-        )
+        self.get_preprocessed_data("Diffusion_preproc")
 
     def get_preproc_data(self):
         self.get_diffusion_preproc_data()
@@ -186,44 +168,26 @@ class DataRetriever(object):
 
     # get processed data
     def get_msmall_processed_data(self):
-        self._get_processed_data(
-            self.archive.msmall_proc()
-        )
+        self.get_processed_data("MsmAll_proc")
 
     def get_msmall_registration_data(self):
-        self._get_processed_data(
-            self.archive.msmall_registration(),
-        )
+        self.get_processed_data("MSMAllReg")
 
     def get_fix_processed_data(self):
-        self._get_processed_data(
-            self.archive.fix_processed(),
-        )
+        self.get_processed_data("*FIX")
 
     def get_dedriftandresample_processed_data(self):
-        self._get_processed_data(
-            self.archive.msmall_dedrift_and_resample(),
-        )
+        self.get_processed_data("MSMAllDeDrift")
 
     def get_resting_state_stats_data(self):
-        self._get_processed_data(
-            self.archive.rss_processed(),
-        )
+        self.get_processed_data("*RSS")
 
     def get_postfix_data(self):
-        self._get_processed_data(
-            self.archive.postfix_processed(),
-        )
-
-    def get_taskfmri_data(self):
-        self._get_processed_data(
-            self.archive.task_processed(),
-        )
+        self.get_processed_data("*PostFix")
 
     def get_bedpostx_data(self):
-        self._get_processed_data(
-            self.archive.bedpostx_processed(),
-        )
+        self.get_processed_data("Diffusion_bedpostx")
+
 
 
 
