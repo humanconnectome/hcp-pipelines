@@ -234,88 +234,6 @@ class DataRetriever(object):
             self.archive.bedpostx_processed(),
         )
 
-    # prerequisites data for specific pipelines
-
-    def _copy_some_dedriftandresample_links(self):
-        """
-        Some files that already exist prior to running the DeDriftAndResample pipeline
-        are opened for writing/modification by the pipeline script. If these files are
-        left as symbolic links to files in the archive, they will not be able to be
-        opened for writing. Each of these files needs to be copied instead of linked.
-        """
-
-        output_dir = self.output_dir
-        session = self.SESSION
-        subject_id = self.SUBJECT
-        t1w_native_spec_file = (
-            f"{output_dir}/{session}/T1w/Native/{subject_id}.native.wb.spec"
-        )
-        file_utils.make_link_into_copy(t1w_native_spec_file, verbose=True)
-
-        native_spec_file = (
-            f"{output_dir}/{session}/MNINonLinear/Native/{subject_id}.native.wb.spec"
-        )
-        file_utils.make_link_into_copy(native_spec_file, verbose=True)
-
-    def _remove_some_dedriftandresample_ica_files(self):
-        """
-        Some files need to be re-created by the ReApplyFixPipeline.sh script which
-        is invoked by the DeDriftAndResample pipeline. For the ReApplyFixPipeline
-        to work correctly, those files need to be removed before processing begins.
-        """
-        path_expr = self.output_dir + "/" + self.SESSION
-        path_expr += "/MNINonLinear/Results/*"
-
-        dir_list = sorted(glob.glob(path_expr))
-
-        for dir in dir_list:
-            ica_dir_expr = dir + "/*.ica"
-            ica_dir_list = sorted(glob.glob(ica_dir_expr))
-
-            for ica_dir in ica_dir_list:
-                atlas_dtseries_file = ica_dir + "/Atlas.dtseries.nii"
-                file_utils.rm_file_if_exists(atlas_dtseries_file, verbose=True)
-
-                atlas_file = ica_dir + "/Atlas.nii.gz"
-                file_utils.rm_file_if_exists(atlas_file, verbose=True)
-
-                filtered_func_data_file = ica_dir + "/filtered_func_data.nii.gz"
-                file_utils.rm_file_if_exists(filtered_func_data_file, verbose=True)
-
-                mc_dir = ica_dir + "/mc"
-                file_utils.rm_dir_if_exists(mc_dir, verbose=True)
-
-                atlas_preclean_dtseries_file = (
-                    ica_dir + "/Atlas_hp_preclean.dtseries.nii"
-                )
-                file_utils.rm_file_if_exists(atlas_preclean_dtseries_file, verbose=True)
-
-    def get_msm_group_average_drift_data(self, project_id):
-        """
-        Get the group average drift data stored in the specified project
-        """
-        get_from = self.archive.project_resources_dir_full_path(project_id)
-        get_from += "/MSMAllDeDrift"
-        put_to = self.output_dir
-
-        self._from_to(get_from, put_to)
-
-    def _copy_some_reapplyfix_links(self):
-        """
-        Some files that already exist prio to running the ReApplyFix pipeline are
-        opened for writing/modification by the pipeline script. If these files are
-        left as symbolic links to file in the archive, they will not be able to be
-        opened for writing. Each of these files need to be copied instead of linked.
-        """
-
-        # find all paths that end with '.ica'
-        paths = glob.iglob(self.output_dir + "/**/*.ica", recursive=True)
-        for path in paths:
-            if os.path.isdir(path):
-                for root, dirs, files in os.walk(path):
-                    for file in files:
-                        file_to_copy = os.path.join(root, file)
-                        file_utils.make_link_into_copy(file_to_copy, verbose=True)
 
 
 class PipelinePrereqDownloader:
@@ -402,24 +320,6 @@ class PipelinePrereqDownloader:
             r.get_icafix_data,
         )
 
-    def dedriftandresample(self):
-        print("Getting prereq data for the Dedrift & Resample pipeline.")
-        r = self.data_retriever
-        r.run(
-            r.get_preproc_data,
-            r.get_fix_processed_data,
-            r.get_msmall_registration_data,
-        )
-
-        if not r.copy:
-            r._copy_some_dedriftandresample_links()
-        r._remove_some_dedriftandresample_ica_files()
-
-        # Get the group average drift data
-        # As of February 2017, the group average drift data has been moved from HCP_Staging to
-        # HCP_1200
-        r.get_msm_group_average_drift_data("HCP_1200")
-
     def task(self, extra=None):
         print("Getting prereq data for the Task fMRI pipeline.")
         r = self.data_retriever
@@ -428,11 +328,6 @@ class PipelinePrereqDownloader:
             r.get_functional_preproc_data(extra),
             r.get_icafix_data,
         )
-
-    def reapplyfix(self):
-        print("Getting prereq data for the ReapplyFix pipeline.")
-        self.all_pipeline_data()
-        self.data_retriever._copy_some_reapplyfix_links()
 
     def all_pipeline_data(self):
         print("Getting all pipeline data...")
@@ -445,7 +340,6 @@ class PipelinePrereqDownloader:
             r.get_dedriftandresample_processed_data,
             r.get_resting_state_stats_data,
             r.get_postfix_data,
-            r.get_taskfmri_data,
             r.get_bedpostx_data,
         )
 
@@ -466,10 +360,6 @@ class PipelinePrereqDownloader:
             self.multirunicafix()
         elif "msmall" in pipeline:
             self.msmall()
-        elif "dedrift" in pipeline:
-            self.dedriftandresample()
-        elif "reapplyfix" in pipeline:
-            self.reapplyfix()
         elif "task" in pipeline:
             self.task(extra)
 
