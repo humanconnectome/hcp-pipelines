@@ -24,7 +24,6 @@ prereq = PipelinePrereqDownloader(
     subject,
     classifier,
     extra,
-    copy=False,
     log=False,
     output_dir=tmp_dir,
     ARCHIVE_ROOT=ARCHIVE_ROOT,

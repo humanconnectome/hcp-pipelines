@@ -20,21 +20,6 @@ __maintainer__ = "Junil Chang"
 
 
 
-def copy_with_rsync(get_from, put_to, show_log=True):
-    if show_log:
-        rsync_cmd = "rsync -auLv "
-    else:
-        rsync_cmd = "rsync -auL "
-    rsync_cmd += get_from + "/* " + put_to
-    completed_rsync_process = subprocess.run(
-        rsync_cmd,
-        shell=True,
-        check=True,
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-    )
-
-
 def link_directory(get_from, put_to, show_log=True):
     os_utils.lndir(get_from, put_to, show_log, ignore_existing_dst_files=True)
 
@@ -46,7 +31,6 @@ class DataRetriever(object):
         subject,
         classifier,
         scan,
-        copy,
         log,
         output_dir,
         ARCHIVE_ROOT,
@@ -56,22 +40,8 @@ class DataRetriever(object):
         self.SESSION = session
         self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
         self.output_dir = output_dir
-        self.copy = copy
         self.show_log = log
 
-    def run(self, *funcs):
-        funcs = list(funcs)
-        if self.copy:
-            # when copying (via rsync), data should be retrieved in chronological order
-            # (i.e. the order in which the pipelines are run)
-            pass
-        else:
-            # when creating symbolic links, data should be
-            # retrieved in reverse chronological order
-            funcs.reverse()
-        for fn in funcs:
-            if not (fn is None):
-            	fn()
 
     def remove_non_subdirs(self):
         cmd = [
@@ -88,10 +58,7 @@ class DataRetriever(object):
 
     def _from_to(self, source, destination):
         os.makedirs(destination, exist_ok=True)
-        if self.copy:
-            copy_with_rsync(source, destination, self.show_log)
-        else:
-            link_directory(source, destination, self.show_log)
+        link_directory(source, destination, self.show_log)
 
     def _get_unprocessed_data(self, directories):
         for get_from in directories:
@@ -148,11 +115,9 @@ class DataRetriever(object):
         )
 
     def get_unproc_data(self):
-        self.run(
-            self.get_structural_unproc_data,
-            self.get_functional_unproc_data,
-            self.get_diffusion_unproc_data,
-        )
+        self.get_diffusion_unproc_data()
+        self.get_functional_unproc_data()
+        self.get_structural_unproc_data()
 
     # get preprocessed data
 
@@ -185,12 +150,10 @@ class DataRetriever(object):
         )
 
     def get_preproc_data(self):
-        self.run(
-            self.get_structural_preproc_data,
-            self.get_supplemental_structural_preproc_data,
-            self.get_functional_preproc_data,
-            self.get_diffusion_preproc_data,
-        )
+        self.get_diffusion_preproc_data()
+        self.get_functional_preproc_data()
+        self.get_supplemental_structural_preproc_data()
+        self.get_structural_preproc_data()
 
     # get processed data
     def get_msmall_processed_data(self):
@@ -246,7 +209,6 @@ class PipelinePrereqDownloader:
         subject,
         classifier,
         scan,
-        copy,
         log,
         output_dir,
         ARCHIVE_ROOT,
@@ -256,7 +218,6 @@ class PipelinePrereqDownloader:
             subject,
             classifier,
             scan,
-            copy,
             log,
             output_dir,
             ARCHIVE_ROOT,
@@ -265,82 +226,55 @@ class PipelinePrereqDownloader:
     def asl(self):
         print("Getting prereq data for the ASL pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_asl_unproc_data,
-            r.get_structural_preproc_data,
-            r.get_msmall_processed_data,
-        )
+        r.get_msmall_processed_data()
+        r.get_structural_preproc_data()
+        r.get_asl_unproc_data()
 
     def struct(self):
         print("Getting prereq data for the Structural pipeline.")
         r = self.data_retriever
-        r.run(r.get_structural_unproc_data)
+        r.get_structural_unproc_data()
 
     def struct_hand_edit(self):
         print("Getting prereq data for the Structural HandEditting pipeline.")
         r = self.data_retriever
-        r.run(
-            # r.get_structural_unproc_data,
-            r.get_structural_preproc_data,
-            r.get_hand_edit_data,
-            r.get_supplemental_structural_preproc_data,
-        )
+        r.get_supplemental_structural_preproc_data()
+        r.get_hand_edit_data()
+        r.get_structural_preproc_data()
+        # r.get_structural_unproc_data()
 
     def diffusion(self):
         print("Getting prereq data for the Diffusion pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_diffusion_unproc_data,
-            r.get_structural_preproc_data,
-            r.get_supplemental_structural_preproc_data,
-        )
+        r.get_supplemental_structural_preproc_data()
+        r.get_structural_preproc_data()
+        r.get_diffusion_unproc_data()
 
     def functional(self, extra=None):
         print("Getting prereq data for the Functional pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_functional_unproc_data(extra),
-            r.get_structural_preproc_data,
-            r.get_supplemental_structural_preproc_data,
-        )
+        r.get_supplemental_structural_preproc_data()
+        r.get_structural_preproc_data()
+        r.get_functional_unproc_data(extra)()
 
     def multirunicafix(self):
         print("Getting prereq data for the Multi-run ICA Fix pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_preproc_data,
-        )
+        r.get_preproc_data()
 
     def msmall(self):
         print("Getting prereq data for the Msm-All pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_preproc_data,
-            r.get_icafix_data,
-        )
+        r.get_icafix_data()
+        r.get_preproc_data()
 
     def task(self, extra=None):
         print("Getting prereq data for the Task fMRI pipeline.")
         r = self.data_retriever
-        r.run(
-            r.get_structural_preproc_data,
-            r.get_functional_preproc_data(extra),
-            r.get_icafix_data,
-        )
+        r.get_icafix_data()
+        r.get_functional_preproc_data(extra)()
+        r.get_structural_preproc_data()
 
-    def all_pipeline_data(self):
-        print("Getting all pipeline data...")
-        r = self.data_retriever
-        r.run(
-            r.get_unproc_data,
-            r.get_preproc_data,
-            r.get_fix_processed_data,
-            r.get_msmall_registration_data,
-            r.get_dedriftandresample_processed_data,
-            r.get_resting_state_stats_data,
-            r.get_postfix_data,
-            r.get_bedpostx_data,
-        )
 
     def get_data_for_pipeline(self, pipeline, extra=None, remove_non_subdirs=False):
         pipeline = pipeline.lower().replace("_", "").replace(" ", "")
