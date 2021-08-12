@@ -57,7 +57,11 @@ def link_directory(source, destination, show_log=True):
     recursively_link_files(source, destination)
 
 
-class DataRetriever(object):
+class PipelinePrereqDownloader:
+    """
+    Get the data necessary to run the specific pipelines
+    """
+
     def __init__(
         self,
         project,
@@ -104,7 +108,7 @@ class DataRetriever(object):
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, universal_newlines=True)
 
     def get_unprocessed_data(self, glob, extra=None):
-        unprocessed_dir = self.output_dir  / self.SESSION / "unprocessed"
+        unprocessed_dir = self.output_dir / self.SESSION / "unprocessed"
         for source in self.get_resource_path(glob, extra):
             # Remove the "_unproc" suffix
             basename_with_no_suffix = source.name[:-7]
@@ -188,86 +192,49 @@ class DataRetriever(object):
     def get_bedpostx_data(self):
         self.get_processed_data("Diffusion_bedpostx")
 
-
-
-
-class PipelinePrereqDownloader:
-    """
-    Get the data necessary to run the specific pipelines
-    """
-
-    def __init__(
-        self,
-        project,
-        subject,
-        classifier,
-        scan,
-        log,
-        output_dir,
-        ARCHIVE_ROOT,
-    ):
-        self.data_retriever = DataRetriever(
-            project,
-            subject,
-            classifier,
-            scan,
-            log,
-            output_dir,
-            ARCHIVE_ROOT,
-        )
-
     def asl(self):
         print("Getting prereq data for the ASL pipeline.")
-        r = self.data_retriever
-        r.get_msmall_processed_data()
-        r.get_structural_preproc_data()
-        r.get_asl_unproc_data()
+        self.get_msmall_processed_data()
+        self.get_structural_preproc_data()
+        self.get_asl_unproc_data()
 
     def struct(self):
         print("Getting prereq data for the Structural pipeline.")
-        r = self.data_retriever
-        r.get_structural_unproc_data()
+        self.get_structural_unproc_data()
 
     def struct_hand_edit(self):
         print("Getting prereq data for the Structural HandEditting pipeline.")
-        r = self.data_retriever
-        r.get_supplemental_structural_preproc_data()
-        r.get_hand_edit_data()
-        r.get_structural_preproc_data()
-        # r.get_structural_unproc_data()
+        self.get_supplemental_structural_preproc_data()
+        self.get_hand_edit_data()
+        self.get_structural_preproc_data()
+        # self.get_structural_unproc_data()
 
     def diffusion(self):
         print("Getting prereq data for the Diffusion pipeline.")
-        r = self.data_retriever
-        r.get_supplemental_structural_preproc_data()
-        r.get_structural_preproc_data()
-        r.get_diffusion_unproc_data()
+        self.get_supplemental_structural_preproc_data()
+        self.get_structural_preproc_data()
+        self.get_diffusion_unproc_data()
 
     def functional(self, extra=None):
         print("Getting prereq data for the Functional pipeline.")
-        r = self.data_retriever
-        r.get_supplemental_structural_preproc_data()
-        r.get_structural_preproc_data()
-        r.get_functional_unproc_data(extra)()
+        self.get_supplemental_structural_preproc_data()
+        self.get_structural_preproc_data()
+        self.get_functional_unproc_data(extra)
 
     def multirunicafix(self):
         print("Getting prereq data for the Multi-run ICA Fix pipeline.")
-        r = self.data_retriever
-        r.get_preproc_data()
+        self.get_preproc_data()
 
     def msmall(self):
         print("Getting prereq data for the Msm-All pipeline.")
-        r = self.data_retriever
-        r.get_icafix_data()
-        r.get_preproc_data()
+        self.get_icafix_data()
+        self.get_preproc_data()
 
     def task(self, extra=None):
         print("Getting prereq data for the Task fMRI pipeline.")
-        r = self.data_retriever
-        r.get_icafix_data()
-        r.get_functional_preproc_data(extra)()
-        r.get_structural_preproc_data()
-
+        self.get_icafix_data()
+        self.get_functional_preproc_data(extra)
+        self.get_structural_preproc_data()
 
     def get_data_for_pipeline(self, pipeline, extra=None, remove_non_subdirs=False):
         pipeline = pipeline.lower().replace("_", "").replace(" ", "")
@@ -291,4 +258,4 @@ class PipelinePrereqDownloader:
 
         if remove_non_subdirs:
             # remove any non-subdirectory data at the output study directory level
-            self.data_retriever.remove_non_subdirs()
+            self.remove_non_subdirs()
