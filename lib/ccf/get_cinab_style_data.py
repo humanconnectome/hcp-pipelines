@@ -88,10 +88,6 @@ class DataRetriever(object):
         ]
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, universal_newlines=True)
 
-    def _from_to(self, source, destination):
-        os.makedirs(destination, exist_ok=True)
-        link_directory(source, destination, self.show_log)
-
     def _get_unprocessed_data(self, directories):
         for get_from in directories:
             module_logger.debug(debug_utils.get_name() + " get_from: " + get_from)
@@ -103,7 +99,7 @@ class DataRetriever(object):
             )
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
 
-            self._from_to(get_from, put_to)
+            link_directory(get_from, put_to, self.show_log)
 
     def _get_preprocessed_data(self, directories):
         for directory in directories:
@@ -113,7 +109,8 @@ class DataRetriever(object):
             put_to = self.output_dir
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
 
-            self._from_to(get_from, put_to)
+		    link_directory(get_from, put_to, self.show_log)
+
 
     def _get_processed_data(self, directories):
         for directory in directories:
@@ -123,7 +120,7 @@ class DataRetriever(object):
             put_to = self.output_dir
             module_logger.debug(debug_utils.get_name() + "   put_to: " + put_to)
 
-            self._from_to(get_from, put_to)
+            link_directory(get_from, put_to, self.show_log)
 
     # get unprocessed data
     def get_structural_unproc_data(self):
