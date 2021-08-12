@@ -5,7 +5,6 @@ for a specified subject within a specified project.
 """
 
 import glob
-import logging.config
 import os
 import subprocess
 import sys
@@ -20,14 +19,6 @@ __author__ = "Timothy B. Brown"
 __copyright__ = "Copyright 2019, Connectome Coordination Facility"
 __maintainer__ = "Junil Chang"
 
-# create a module logger
-module_logger = logging.getLogger(__name__)
-module_logger.setLevel(
-    logging.WARNING
-)  # Note: This can be overridden by log file configuration
-sh = logging.StreamHandler(sys.stdout)
-sh.setFormatter(logging.Formatter("%(name)s: %(message)s"))
-module_logger.addHandler(sh)
 
 
 def copy_with_rsync(get_from, put_to, show_log=True):
@@ -36,7 +27,6 @@ def copy_with_rsync(get_from, put_to, show_log=True):
     else:
         rsync_cmd = "rsync -auL "
     rsync_cmd += get_from + "/* " + put_to
-    module_logger.debug(debug_utils.get_name() + " rsync_cmd: " + rsync_cmd)
     completed_rsync_process = subprocess.run(
         rsync_cmd,
         shell=True,
@@ -44,15 +34,9 @@ def copy_with_rsync(get_from, put_to, show_log=True):
         stdout=subprocess.PIPE,
         universal_newlines=True,
     )
-    module_logger.debug(
-        debug_utils.get_name() + " stdout: " + completed_rsync_process.stdout
-    )
 
 
 def link_directory(get_from, put_to, show_log=True):
-    module_logger.debug(
-        debug_utils.get_name() + " linking " + put_to + " to " + get_from
-    )
     os_utils.lndir(get_from, put_to, show_log, ignore_existing_dst_files=True)
 
 
@@ -145,25 +129,21 @@ class DataRetriever(object):
 
     # get unprocessed data
     def get_structural_unproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
             self.archive.structural_unproc(),
         )
 
     def get_functional_unproc_data(self, extra=None):
-        module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
             self.archive.functional_unproc(extra),
         )
 
     def get_diffusion_unproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
             self.archive.diffusion_unproc(),
         )
 
     def get_asl_unproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_unprocessed_data(
             self.archive.asl_unproc(),
         )
@@ -178,35 +158,29 @@ class DataRetriever(object):
     # get preprocessed data
 
     def get_structural_preproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
             self.archive.structural_preproc(),
         )
 
     def get_icafix_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_processed_data(
             self.archive.multirun_icafix(),
         )
 
     def get_supplemental_structural_preproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
             self.archive.supplemental_structural_preproc(),
         )
 
     def get_hand_edit_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(self.archive.hand_edit())
 
     def get_functional_preproc_data(self, extra=None):
-        module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
             self.archive.functional_preproc(extra),
         )
 
     def get_diffusion_preproc_data(self):
-        module_logger.debug(debug_utils.get_name())
         self._get_preprocessed_data(
             self.archive.diffusion_preproc(),
         )
@@ -221,36 +195,26 @@ class DataRetriever(object):
 
     # get processed data
     def get_msmall_processed_data(self):
-        module_logger.debug(debug_utils.get_name())
-
         self._get_processed_data(
             self.archive.msmall_proc()
         )
 
     def get_msmall_registration_data(self):
-        module_logger.debug(debug_utils.get_name())
-
         self._get_processed_data(
             self.archive.msmall_registration(),
         )
 
     def get_fix_processed_data(self):
-        module_logger.debug(debug_utils.get_name())
-
         self._get_processed_data(
             self.archive.fix_processed(),
         )
 
     def get_dedriftandresample_processed_data(self):
-        module_logger.debug(debug_utils.get_name())
-
         self._get_processed_data(
             self.archive.msmall_dedrift_and_resample(),
         )
 
     def get_resting_state_stats_data(self):
-        module_logger.debug(debug_utils.get_name())
-
         self._get_processed_data(
             self.archive.rss_processed(),
         )
@@ -562,18 +526,6 @@ def main():
     args.phase = args.phase.upper()
 
     # show arguments
-    module_logger.info("Arguments:")
-    module_logger.info("            Project: " + args.project)
-    module_logger.info("            Subject: " + args.subject)
-    module_logger.info(" Session Classifier: " + args.session_classifier)
-    module_logger.info("         Output Dir: " + args.output_study_dir)
-    module_logger.info("              Phase: " + args.phase)
-    if args.copy:
-        module_logger.info("               Copy: " + str(args.copy))
-    if args.log:
-        module_logger.info("                Log: " + str(args.log))
-    if args.remove_non_subdirs:
-        module_logger.info(" Remove Non-Subdirs: " + str(args.remove_non_subdirs))
 
     prereq = PipelinePrereqDownloader(
         args.project,
@@ -590,10 +542,4 @@ def main():
 
 
 if __name__ == "__main__":
-    logging_config_file_name = file_utils.get_logging_config_file_name(
-        __file__, use_env_variable=False
-    )
-    print("logging_config_file_name:", logging_config_file_name)
-
-    logging.config.fileConfig(logging_config_file_name, disable_existing_loggers=False)
     main()
