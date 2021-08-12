@@ -51,7 +51,7 @@ def link_directory(source, destination, show_log=True):
     recursively_link_files(source, destination)
 
 
-class PipelinePrereqDownloader:
+class PipelineResources:
     """
     Get the data necessary to run the specific pipelines
     """
@@ -61,7 +61,6 @@ class PipelinePrereqDownloader:
         project,
         subject,
         classifier,
-        scan,
         log,
         output_dir,
         ARCHIVE_ROOT,
@@ -120,11 +119,6 @@ class PipelinePrereqDownloader:
     def get_asl_unproc_data(self):
         self.get_unprocessed_data("mbPCASLhr_unproc")
 
-    def get_unproc_data(self):
-        self.get_diffusion_unproc_data()
-        self.get_functional_unproc_data()
-        self.get_structural_unproc_data()
-
     # get preprocessed data
 
     def get_structural_preproc_data(self):
@@ -144,12 +138,6 @@ class PipelinePrereqDownloader:
 
     def get_diffusion_preproc_data(self):
         self.get_preprocessed_data("Diffusion_preproc")
-
-    def get_preproc_data(self):
-        self.get_diffusion_preproc_data()
-        self.get_functional_preproc_data()
-        self.get_supplemental_structural_preproc_data()
-        self.get_structural_preproc_data()
 
     # get processed data
     def get_msmall_processed_data(self):
@@ -172,67 +160,3 @@ class PipelinePrereqDownloader:
 
     def get_bedpostx_data(self):
         self.get_processed_data("Diffusion_bedpostx")
-
-    def asl(self):
-        print("Getting prereq data for the ASL pipeline.")
-        self.get_msmall_processed_data()
-        self.get_structural_preproc_data()
-        self.get_asl_unproc_data()
-
-    def struct(self):
-        print("Getting prereq data for the Structural pipeline.")
-        self.get_structural_unproc_data()
-
-    def struct_hand_edit(self):
-        print("Getting prereq data for the Structural HandEditting pipeline.")
-        self.get_supplemental_structural_preproc_data()
-        self.get_hand_edit_data()
-        self.get_structural_preproc_data()
-        # self.get_structural_unproc_data()
-
-    def diffusion(self):
-        print("Getting prereq data for the Diffusion pipeline.")
-        self.get_supplemental_structural_preproc_data()
-        self.get_structural_preproc_data()
-        self.get_diffusion_unproc_data()
-
-    def functional(self, extra=None):
-        print("Getting prereq data for the Functional pipeline.")
-        self.get_supplemental_structural_preproc_data()
-        self.get_structural_preproc_data()
-        self.get_functional_unproc_data(extra)
-
-    def multirunicafix(self):
-        print("Getting prereq data for the Multi-run ICA Fix pipeline.")
-        self.get_preproc_data()
-
-    def msmall(self):
-        print("Getting prereq data for the Msm-All pipeline.")
-        self.get_icafix_data()
-        self.get_preproc_data()
-
-    def task(self, extra=None):
-        print("Getting prereq data for the Task fMRI pipeline.")
-        self.get_icafix_data()
-        self.get_functional_preproc_data(extra)
-        self.get_structural_preproc_data()
-
-    def get_data_for_pipeline(self, pipeline, extra=None):
-        pipeline = pipeline.lower().replace("_", "").replace(" ", "")
-
-        if "asl" in pipeline:
-            self.asl()
-        elif "handedit" in pipeline:
-            self.struct_hand_edit()
-        elif "struct" in pipeline:
-            self.struct()
-        elif "diff" in pipeline:
-            self.diffusion()
-        elif "func" in pipeline:
-            self.functional(extra)
-        elif "icafix" in pipeline:
-            self.multirunicafix()
-        elif "msmall" in pipeline:
-            self.msmall()
-        elif "task" in pipeline:
-            self.task(extra)

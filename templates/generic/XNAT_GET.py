@@ -12,23 +12,25 @@ from shared_values import (
     WORKING_DIR,
     print_system_info,
 )
-from ccf.get_cinab_style_data import PipelinePrereqDownloader
+from ccf.get_cinab_style_data import PipelineResources
 
 print_system_info()
 tmp_dir = f"{WORKING_DIR}/tmp"
 os.makedirs(tmp_dir, exist_ok=True)
 os.makedirs(f"{WORKING_DIR}/{session}", exist_ok=True)
 
-prereq = PipelinePrereqDownloader(
+resources = PipelineResources(
     project,
     subject,
     classifier,
-    extra,
     log=False,
     output_dir=tmp_dir,
     ARCHIVE_ROOT=ARCHIVE_ROOT,
 )
-prereq.get_data_for_pipeline(PIPELINE_NAME, extra)
+
+print('Getting Data...')
+# {% block get_data %}
+# {% endblock get_data %}
 
 # {% block post %}
 print("Remove metadata")

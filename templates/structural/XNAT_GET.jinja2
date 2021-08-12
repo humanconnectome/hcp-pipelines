@@ -1,4 +1,8 @@
 {% extends "generic/XNAT_GET.py" %}
+{% block get_data %}
+print("Getting prereq data for the Structural pipeline.")
+resources.get_structural_unproc_data()
+{% endblock get_data %}
 {% block post %}
 {{ super() }}
 {% if USE_PRESCAN_NORMALIZED is defined and USE_PRESCAN_NORMALIZED %}

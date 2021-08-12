@@ -97,7 +97,7 @@ StructuralPreprocessingHandEdit:
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: generic/XNAT_GET.py
+      template: structuralhe/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
@@ -172,7 +172,7 @@ FunctionalPreprocessing:
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: generic/XNAT_GET.py
+      template: functional/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
@@ -254,7 +254,7 @@ MultiRunIcaFixProcessing:
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: generic/XNAT_GET.py
+      template: multirunicafix/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
@@ -336,7 +336,7 @@ MsmAllProcessing:
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: generic/XNAT_GET.py
+      template: msmall/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
@@ -406,7 +406,7 @@ DiffusionPreprocessing:
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: generic/XNAT_GET.py
+      template: diffusion/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
       variable: GET_DATA_RUNPATH
   - generate_file:

@@ -1,0 +1,9 @@
+{% extends "generic/XNAT_GET.py" %}
+{% block get_data %} 
+print("Getting prereq data for the Msm-All pipeline.")
+resources.get_icafix_data()
+resources.get_diffusion_preproc_data()
+resources.get_functional_preproc_data()
+resources.get_supplemental_structural_preproc_data()
+resources.get_structural_preproc_data()
+{% endblock get_data %}
