@@ -11,7 +11,6 @@ import sys
 import ccf.archive as ccf_archive
 import utils.debug_utils as debug_utils
 import utils.file_utils as file_utils
-import argparse
 import utils.os_utils as os_utils
 
 # authorship information
@@ -366,70 +365,3 @@ class PipelinePrereqDownloader:
         if remove_non_subdirs:
             # remove any non-subdirectory data at the output study directory level
             self.data_retriever.remove_non_subdirs()
-
-
-def main():
-    # create a parser object for getting the command line arguments
-    parser = argparse.ArgumentParser()
-
-    # mandatory arguments
-    parser.add_argument("-p", "--project", dest="project", required=True, type=str)
-    parser.add_argument("-s", "--subject", dest="subject", required=True, type=str)
-    parser.add_argument(
-        "-d", "--study-dir", dest="output_study_dir", required=True, type=str
-    )
-
-    # optional arguments
-    parser.add_argument(
-        "-a", "--scan", dest="scan", required=False, type=str, default=None
-    )
-    parser.add_argument(
-        "-c", "--copy", dest="copy", action="store_true", required=False, default=False
-    )
-    parser.add_argument(
-        "-l", "--log", dest="log", action="store_true", required=False, default=False
-    )
-    parser.add_argument(
-        "-r",
-        "--remove-non-subdirs",
-        dest="remove_non_subdirs",
-        action="store_true",
-        required=False,
-        default=False,
-    )
-
-    parser.add_argument("-ph", "--phase", dest="phase", required=True, type=str)
-
-    parser.add_argument(
-        "-cl",
-        "--classifier",
-        dest="session_classifier",
-        required=False,
-        type=str,
-        default="3T",
-    )
-
-    # parse the command line arguments
-    args = parser.parse_args()
-
-    # convert phase argument to uppercase
-    args.phase = args.phase.upper()
-
-    # show arguments
-
-    prereq = PipelinePrereqDownloader(
-        args.project,
-        args.subject,
-        args.session_classifier,
-        args.scan,
-        args.copy,
-        args.log,
-        args.output_study_dir,
-        os.getenv("ARCHIVE_ROOT"),
-    )
-
-    prereq.get_data_for_pipeline(args.phase, args.remove_non_subdirs)
-
-
-if __name__ == "__main__":
-    main()
