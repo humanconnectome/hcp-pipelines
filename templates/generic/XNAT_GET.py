@@ -28,9 +28,15 @@ prereq = PipelinePrereqDownloader(
     output_dir=tmp_dir,
     ARCHIVE_ROOT=ARCHIVE_ROOT,
 )
-prereq.get_data_for_pipeline(PIPELINE_NAME, extra, remove_non_subdirs=True)
+prereq.get_data_for_pipeline(PIPELINE_NAME, extra)
 
 # {% block post %}
+print("Remove metadata")
+os.system(
+    f'find  {tmp_dir} -maxdepth 1 -not -type d -delete'
+)
+
+
 print("Moving files")
 os.system(
     f'find  {tmp_dir}/{session}/* -maxdepth 0 -type d ! -name "ProcessingInfo" -exec mv {"{}"} {WORKING_DIR}/{session} \;'

@@ -6,13 +6,7 @@ for a specified subject within a specified project.
 
 import glob
 import os
-import subprocess
-import sys
 from pathlib import Path
-
-import utils.debug_utils as debug_utils
-import utils.file_utils as file_utils
-
 
 
 def link_directory(source, destination, show_log=True):
@@ -93,19 +87,6 @@ class PipelinePrereqDownloader:
                 for x in files
                 if extra in x.name
             ]
-
-    def remove_non_subdirs(self):
-        cmd = [
-            "find",
-            self.output_dir.absolute(),
-            "-maxdepth",
-            "1",
-            "-not",
-            "-type",
-            "d",
-            "-delete",
-        ]
-        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, universal_newlines=True)
 
     def get_unprocessed_data(self, glob, extra=None):
         unprocessed_dir = self.output_dir / self.SESSION / "unprocessed"
@@ -236,7 +217,7 @@ class PipelinePrereqDownloader:
         self.get_functional_preproc_data(extra)
         self.get_structural_preproc_data()
 
-    def get_data_for_pipeline(self, pipeline, extra=None, remove_non_subdirs=False):
+    def get_data_for_pipeline(self, pipeline, extra=None):
         pipeline = pipeline.lower().replace("_", "").replace(" ", "")
 
         if "asl" in pipeline:
@@ -255,7 +236,3 @@ class PipelinePrereqDownloader:
             self.msmall()
         elif "task" in pipeline:
             self.task(extra)
-
-        if remove_non_subdirs:
-            # remove any non-subdirectory data at the output study directory level
-            self.remove_non_subdirs()
