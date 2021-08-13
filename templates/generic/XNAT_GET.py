@@ -33,7 +33,7 @@ print('Getting Data...')
 # {% endblock get_data %}
 
 # {% block post %}
-print("Remove metadata")
+print("Removing metadata")
 os.system(
     f'find  {tmp_dir} -maxdepth 1 -not -type d -delete'
 )
@@ -42,6 +42,13 @@ os.system(
 print("Moving files")
 os.system(
     f'find  {tmp_dir}/{session}/* -maxdepth 0 -type d ! -name "ProcessingInfo" -exec mv {"{}"} {WORKING_DIR}/{session} \;'
+)
+
+print("Moving root directories to location qunex expects it")
+destination = f'{WORKING_DIR}/{session}/sessions/{session}/hcp/{session}/'
+os.makedirs(destination, exist_ok=True)
+os.system(
+    "mv %s/{MNINonLinear,T1w,T2w} %s" % (f"{WORKING_DIR}/{session}", destination)
 )
 
 print("Removing tmp dir")

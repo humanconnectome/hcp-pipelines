@@ -4,10 +4,6 @@
 {% endblock qunex_setup %}
 {% block pipeline_specific %}
 
-	mkdir -p "${StudyFolder}/sessions/${Session}/hcp/${Session}"
-	mv ${StudyFolder}/T*w "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
-	mv ${StudyFolder}/MNINonLinear "${StudyFolder}/sessions/${Session}/hcp/${Session}/"
-
 	######################### hcp_MSMAll
 	${QUNEXCOMMAND} hcp_MSMAll \
 		--sessions="${StudyFolder}/processing/batch.txt" \
