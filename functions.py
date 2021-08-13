@@ -54,36 +54,20 @@ def split_subject_components(RUNNER_ARGS):
         scan = ""
     _scan = "_" + scan if scan else ""
 
+    # find the unique project identifier e.g., HCA, HCD, MDD, ECP, BWH, BANDA
+    if proj.startswith("CCF_"):
+        pid = proj[4:proj.find("_", 4)]
+    else:
+        pid = "UNKNOWN"
+
     return {
+        "PROJECT_ID": pid,
         "PROJECT": proj,
         "SUBJECT": subject_id,
         "CLASSIFIER": classifier,
         "SCAN": scan,
         "_SCAN": _scan,
         "SESSION": f"{subject_id}_{classifier}",
-    }
-
-
-def get_project_acronym(PROJECT):
-    proj = PROJECT
-    if "HCA" in proj:
-        proj_acronym = "HCA"
-    elif "HCD" in proj:
-        proj_acronym = "HCD"
-    elif "MDD" in proj:
-        proj_acronym = "MDD"
-    elif "ECP" in proj:
-        proj_acronym = "ECP"
-    elif "BWH" in proj:
-        proj_acronym = "BWH"
-    elif "BANDA" in proj:
-        proj_acronym = "BANDA"
-    else:
-        raise ValueError(
-            "Unexpected project value. Expecting HCA, HCD, MDD, ECP, BWH, or BANDA. Got: ", proj
-        )
-    return {
-        "PROJECT_ACRONYM": proj_acronym,
     }
 
 
