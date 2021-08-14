@@ -128,6 +128,7 @@ multirunicafix:
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   BUILD_DIR: $BUILD_ROOT/icafix_runs
   SINGULARITY_BIND_PATH: /ceph/intradb/build
+  USE_CUSTOM_BATCH: True
 
 # 
 # MSM-ALL PROCESSING 
@@ -141,4 +142,5 @@ msmall_process:
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   BUILD_DIR: $BUILD_ROOT/msmall_runs
   SINGULARITY_BIND_PATH: /ceph/intradb/build
+  USE_CUSTOM_BATCH: True
 

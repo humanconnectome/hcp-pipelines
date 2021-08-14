@@ -82,8 +82,10 @@ main() {
 ${QUNEXCOMMAND} createStudy --studyfolder="${StudyFolder}"
 cd ${StudyFolder}/sessions
 
-### BEGIN qunex_setup ###
-#{% block qunex_setup %}
+### BEGIN qunex_setup ### {% block qunex_setup %}
+# {% if USE_CUSTOM_BATCH is defined %}
+## This pipeline uses a template-based approach to generate the id/scan portion of batch.txt, rather than 'createBatch'
+# {% else %}
 
   #########################	importHCP
 	${QUNEXCOMMAND} importHCP \
@@ -105,7 +107,7 @@ cd ${StudyFolder}/sessions
 	 --overwrite="append" \
 	 --paramfile="$ParametersFile"
 
-#{% endblock qunex_setup %}
+#{% endif %}{% endblock qunex_setup %}
 ### END qunex_setup ###
 
 sleep 5
