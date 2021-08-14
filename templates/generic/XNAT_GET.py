@@ -10,6 +10,7 @@ from shared_values import (
     ARCHIVE_ROOT,
     session,
     WORKING_DIR,
+    CHECK_DATA_DIR,
     print_system_info,
 )
 from ccf.get_cinab_style_data import PipelineResources
@@ -54,3 +55,20 @@ os.system(
 print("Removing tmp dir")
 os.system(f"rm -r {tmp_dir}")
 # {% endblock post %}
+
+print("Copying generated batch_parameters.txt to expected location")
+destination = f'{WORKING_DIR}/{session}/sessions/specs/'
+os.makedirs(destination, exist_ok=True)
+os.system(
+    f"cp -p  {CHECK_DATA_DIR}/batch_parameters.txt {destination}"
+)
+
+#
+# {% if USE_CUSTOM_BATCH is defined %}
+print("Copying generated batch.txt to expected location")
+destination = f'{WORKING_DIR}/{session}/processing/'
+os.makedirs(destination, exist_ok=True)
+os.system(
+    f"cp -p  {CHECK_DATA_DIR}/batch.txt {destination}"
+)
+# {% endif %}

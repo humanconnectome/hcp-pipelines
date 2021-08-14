@@ -13,14 +13,5 @@ fi
 WorkingDir="{{ WORKING_DIR }}"
 Session="{{SESSION}}"
 StudyFolder="$WorkingDir/${Session}"
-## Copy any generated batch_parameters.txt and batch.txt files to their expected location 
-if [ -f {{CHECK_DATA_DIR}}/batch_parameters.txt ]; then
-	mkdir -p $WorkingDir/${Session}/sessions/specs
-	cp -p  {{CHECK_DATA_DIR}}/batch_parameters.txt $WorkingDir/${Session}/sessions/specs
-fi
-if [ -f {{CHECK_DATA_DIR}}/batch.txt ]; then
-	mkdir -p $WorkingDir/${Session}/processing
-	cp -p  {{CHECK_DATA_DIR}}/batch.txt $WorkingDir/${Session}/processing
-fi
 
 {% block content %}{% endblock %}
