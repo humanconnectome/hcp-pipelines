@@ -20,24 +20,20 @@ Session='{{ SESSION }}'
 SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
-SessionName="{{ SESSION }}{{ _SCAN }}"
+start_time_file="{{ STARTTIME_FILE_NAME }}"
+parsessions=1   # the number of sessions to process in parallel
+threads=1       # the number of bold files to process in parallel
+BatchFile="${StudyFolder}/processing/batch.txt"
 
-export StudyFolder Session SubjectPart
+export StudyFolder Session SubjectPart parsessions threads BatchFile
 
 TimeStamp=`date +%Y-%m-%d-%H-%M-%S`
 mkdir -p $StudyFolder/processing/logs &> /dev/null
 LogFile="$StudyFolder/processing/logs/${scriptName}_${TimeStamp}.log"
 
-# only if overriding the default setting of /opt/HCP/HCPpipelines
-#export con_HCPPIPEDIR="/opt/HCP/HCPpipelines"
 source /opt/qunex/env/qunex_environment.sh  >> ${LogFile}
 source /opt/qunex/env/qunex_container_env_status.sh --envstatus >> ${LogFile}
 
-parsessions=1   # the number of sessions to process in parallel
-threads=1       # the number of bold files to process in parallel
-
-# -- Derivative variables
-BatchFile="${StudyFolder}/processing/batch.txt"
 
 # -- Report options
 echo "-- ${scriptName}: Specified Command-Line Options - Start --"                2>&1 | tee -a ${LogFile}
@@ -60,23 +56,6 @@ echo "   "                                                                      
 # -- Define QUNEX command
 QUNEXCOMMAND="bash $QUNEXPATH/bin/qunex"
 
-log_Msg()
-{
-	local msg="$*"
-	local dateTime
-	dateTime=$(date)
-	local toolname
-
-	if [ -z "${log_toolName}" ]; then
-		toolname=$(basename ${0})
-	else
-		toolname="${log_toolName}"
-	fi
-
-	echo ${dateTime} "-" ${toolname} "-" "${msg}"
-}
-
-main() {
 
 #########################	createStudy
 ${QUNEXCOMMAND} create_study --studyfolder="${StudyFolder}"
@@ -110,20 +89,9 @@ cd ${StudyFolder}/sessions
 
 sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
-
-start_time_file="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.starttime"
-g_script_name=$(basename "${0}" .sh)
-filename="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${g_script_name}.execinfo"
 echo $(date) > ${start_time_file}
-log_Msg "PBS_JOBID: ${PBS_JOBID}" > ${filename}
-log_Msg "PBS execution node: $(hostname)" >> ${filename}
 
 
 ### BEGIN pipeline_specific ###
-#{% block pipeline_specific %}
-#{% endblock pipeline_specific %}
+#{% block pipeline_specific %} NOT YET IMPLEMENTED !!! {% endblock pipeline_specific %}
 ### END pipeline_specific ###
-
-}
-
-main $@
