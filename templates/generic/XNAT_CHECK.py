@@ -9,11 +9,11 @@ from shared_values import (
     extra,
     OUTPUT_RESOURCE_NAME,
     PIPELINE_NAME,
-    ARCHIVE_ROOT,
     CHECK_DATA_DIR,
     session,
     EXPECTED_FILES_LIST,
     print_system_info,
+    RESOURCES_ROOT,
 )
 from ccf.one_subject_completion_xnat_checker import is_processing_complete
 
@@ -27,12 +27,10 @@ dest_dir = f"{session}/ProcessingInfo"
 
 print_system_info()
 check_cmd_ret_code = is_processing_complete(
-    project,
+    RESOURCES_ROOT,
     extra,
     session,
     OUTPUT_RESOURCE_NAME,
-    PIPELINE_NAME,
-    ARCHIVE_ROOT,
     EXPECTED_FILES_LIST,
     log_filepath
 )

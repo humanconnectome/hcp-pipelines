@@ -7,7 +7,7 @@ from shared_values import (
     classifier,
     extra,
     PIPELINE_NAME,
-    ARCHIVE_ROOT,
+    RESOURCES_ROOT,
     session,
     WORKING_DIR,
     CHECK_DATA_DIR,
@@ -21,12 +21,10 @@ os.makedirs(tmp_dir, exist_ok=True)
 os.makedirs(f"{WORKING_DIR}/{session}", exist_ok=True)
 
 resources = PipelineResources(
-    project,
-    subject,
-    classifier,
+    RESOURCES_ROOT,
+    session,
     log=False,
     output_dir=tmp_dir,
-    ARCHIVE_ROOT=ARCHIVE_ROOT,
 )
 
 print('Getting Data...')

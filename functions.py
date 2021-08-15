@@ -149,16 +149,13 @@ def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
         shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
-def available_bold_dirs(ARCHIVE_ROOT, SESSION, PROJECT):
+def available_bold_dirs(RESOURCES_ROOT, PROJECT):
     """
     List of full paths to any resource containing preprocessed functional data
     for the specified subject
     """
-
-    archive_root = f"{ARCHIVE_ROOT}/{PROJECT}/arc001"
-    functional_preproc_dir = f"{archive_root}/{SESSION}/RESOURCES/*fMRI*preproc"
-    dir_list = sorted(glob.glob(functional_preproc_dir))
-    available_bolds = [d[d.rindex("/") + 1 : d.index("_preproc")] for d in dir_list]
+    dir_list = sorted(RESOURCES_ROOT.glob("[rt]fMRI*preproc"))
+    available_bolds = [x.name[:-8] for x in dir_list]
 
     def fmrisort(x):
         if "CCF_HC" in PROJECT:

@@ -13,6 +13,7 @@ DEFAULT: &default
   GRADIENT_COEFFICIENT_PATH: /ceph/intradb/build/aux/gradient_coefficient_files
   LOG_DIR: /ceph/intradb/build/chpc/logs/$USER
   ARCHIVE_ROOT: /ceph/intradb/archive
+  RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   XNAT_SERVER: hcpi-dev-cephprod1.nrg.wustl.edu
   PUT_SERVER_LIST: hcpi-dev-cephprod1.nrg.wustl.edu
   FREESURFER_LICENSE_PATH: /ceph/intradb/build/aux/freesurfer/license.txt

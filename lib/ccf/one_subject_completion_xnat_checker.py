@@ -7,12 +7,10 @@ from pathlib import Path
 
 
 def is_processing_complete(
-        project,
+        RESOURCES_ROOT,
         scan,
         session,
         OUTPUT_RESOURCE_NAME,
-        PIPELINE_NAME,
-        ARCHIVE_ROOT,
         EXPECTED_FILES_LIST,
         output=None,
 ):
@@ -21,14 +19,7 @@ def is_processing_complete(
     else:
         output = open(output, "w")
 
-    resource = (
-            Path(ARCHIVE_ROOT)
-            / project
-            / "arc001"
-            / session
-            / "RESOURCES"
-            / OUTPUT_RESOURCE_NAME
-    )
+    resource = RESOURCES_ROOT / OUTPUT_RESOURCE_NAME
 
     # Check if it exists
     if not resource.is_dir():

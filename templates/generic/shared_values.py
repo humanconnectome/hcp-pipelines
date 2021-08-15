@@ -2,6 +2,8 @@ import subprocess
 
 # Import path modification
 import sys
+from pathlib import Path
+
 sys.path.append('{{ PYTHON_IMPORT_DIR }}')
 
 # Path modification (above) must occur before
@@ -10,7 +12,7 @@ from xnat_file_client import XnatFileClient
 
 OUTPUT_RESOURCE_NAME = "{{ OUTPUT_RESOURCE_NAME }}"
 PIPELINE_NAME = "{{ PIPELINE_NAME }}"
-ARCHIVE_ROOT = "{{ ARCHIVE_ROOT }}"
+RESOURCES_ROOT = Path("{{ RESOURCES_ROOT }}")
 CHECK_DATA_DIR = "{{ CHECK_DATA_DIR }}"
 WORKING_DIR = "{{ WORKING_DIR }}"
 CLEAN_DATA_DIR = "{{ CLEAN_DATA_DIR }}"

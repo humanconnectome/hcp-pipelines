@@ -58,25 +58,18 @@ class PipelineResources:
 
     def __init__(
         self,
-        project,
-        subject,
-        classifier,
+        RESOURCES_ROOT,
+        session,
         log,
         output_dir,
-        ARCHIVE_ROOT,
     ):
-        self.SUBJECT = subject
-        session = f"{subject}_{classifier}"
         self.SESSION = session
-        self.ARCHIVE_ROOT = Path(ARCHIVE_ROOT)
-        self.SESSION_RESOURCES = (
-            self.ARCHIVE_ROOT / project / "arc001" / session / "RESOURCES"
-        )
+        self.RESOURCES_ROOT = RESOURCES_ROOT
         self.output_dir = Path(output_dir)
         self.show_log = log
 
     def get_resource_path(self, path_expression, extra=None):
-        files = sorted(self.SESSION_RESOURCES.glob(path_expression))
+        files = sorted(self.RESOURCES_ROOT.glob(path_expression))
 
         if type(extra) is not str or extra.upper() == "ALL":
             return files
