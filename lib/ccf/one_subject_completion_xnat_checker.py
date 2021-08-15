@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 
-"""
-Abstract Base Class for One Subject Completion Checker Classes
-"""
 import os
+import re
 import sys
-from utils import file_utils
-import ccf.archive as ccf_archive
+from pathlib import Path
 
 
-class OneSubjectCompletionXnatChecker:
-    def __init__(
-        self,
+def is_processing_complete(
         project,
         scan,
         session,
@@ -19,84 +14,110 @@ class OneSubjectCompletionXnatChecker:
         PIPELINE_NAME,
         ARCHIVE_ROOT,
         EXPECTED_FILES_LIST,
-    ):
-        self.EXPECTED_FILES_LIST = EXPECTED_FILES_LIST
-        self.SCAN = scan
-        self.SESSION = session
-        self.OUTPUT_RESOURCE_NAME = OUTPUT_RESOURCE_NAME
-        self.PIPELINE_NAME = PIPELINE_NAME
-        self.archive = ccf_archive.CcfArchive(project, session, ARCHIVE_ROOT)
+        output=None,
+):
+    if output is None:
+        output = sys.stdout
+    else:
+        output = open(output, "w")
 
-    def prereq_dirs(self):
-        if self.PIPELINE_NAME == "StructuralPreprocessing":
-            return self.archive.structural_unproc()
-        else:
-            return self.archive.structural_preproc()
+    resource = (
+            Path(ARCHIVE_ROOT)
+            / project
+            / "arc001"
+            / session
+            / "RESOURCES"
+            / OUTPUT_RESOURCE_NAME
+    )
 
-    def my_resource(self):
-        return self.archive.SESSION_RESOURCES / self.OUTPUT_RESOURCE_NAME
+    # Check if it exists
+    if not resource.is_dir():
+        print(f"resource: {resource} DOES NOT EXIST", file=output)
+        print("Completion Check was unsuccessful", file=output)
+        return False
 
-    def list_of_expected_files(self, working_dir):
-        if not os.path.isfile(self.EXPECTED_FILES_LIST):
-            raise Exception(
-                "The list of expected files was not found in the specified location:",
-                self.EXPECTED_FILES_LIST,
-            )
+    # check to see if all the expected files exist
+    expected_files = filename_list(EXPECTED_FILES_LIST, dict(
+        subjectid=(session),
+        scan=(scan)
+    ))
 
-        with open(self.EXPECTED_FILES_LIST) as fd:
-            root_dir = os.path.join(working_dir, self.SESSION)
-            l = file_utils.build_filename_list_from_file(
-                fd,
-                root_dir,
-                subjectid=self.SESSION,
-                scan=self.SCAN,
-            )
-            return l
-
-    def is_processing_complete(self, output=None):
-        if output is None:
-            output = sys.stdout
-        else:
-            output = open(output, "w")
-
-        resource = self.my_resource()
-
-        # Check if it exists
-        if not os.path.isdir(resource):
-            print(f"resource: {resource} DOES NOT EXIST", file=output)
-            print("Completion Check was unsuccessful", file=output)
-            return False
-
-        prereq_timestamps = map(os.path.getmtime, self.prereq_dirs())
-        max_prereq_timestamp = max(prereq_timestamps, default=0)
-        resource_timestamp = os.path.getmtime(resource)
-
-        # Make sure the resource is newer (larger timestamp) than the newest prereq file
-        if resource_timestamp > max_prereq_timestamp:
-            # resource is newer than all the prerequisite resources
-            # check to see if all the expected files exist
-            expected_file_list = self.list_of_expected_files(resource)
-            success = do_all_files_exist(expected_file_list, output)
-            if success:
-                print("Completion Check was successful", file=output)
-            else:
-                print("Completion Check was unsuccessful", file=output)
-            return success
-        else:
-            print(
-                f"resource: {resource} IS NOT NEWER THAN ALL PREREQUISITES", file=output
-            )
-            print("Completion Check was unsuccessful", file=output)
-            return False
+    success = do_all_files_exist(expected_files, resource / session, output)
+    if success:
+        print("Completion Check was successful", file=output)
+    else:
+        print("Completion Check was unsuccessful", file=output)
+    return success
 
 
-def do_all_files_exist(file_name_list, output=sys.stdout):
+def do_all_files_exist(file_name_list, root_dir=None, output=sys.stdout):
+    if root_dir is None:
+        root_dir = Path("/")
+
+    print("Checking for existence of files. Files that exist are prefaced with OKAY.")
+    print("--------------------------------------------------------------------------------")
     all_files_exist = True
-
-    for file_name in file_name_list:
-        print("Checking for existence of: " + file_name, file=output)
-        if not os.path.exists(file_name):
-            print("FILE DOES NOT EXIST: " + file_name, file=output)
+    for filename in file_name_list:
+        file = root_dir / filename
+        if file.exists():
+            preface = "OKAY:  "
+        else:
+            preface = "ERROR: "
             all_files_exist = False
+        print(preface, file.absolute(), file=output)
 
     return all_files_exist
+
+
+def filename_list(expected_files_list, substitutions):
+    """
+    Create a list of partial filepaths based on the content of the expected_files_list.
+
+    The content of the expected_files_path should be a list with one filepath per line.
+    The parts of the filepath should be seperated with whitespace, not with the "/".
+    Placeholders in the fileparts should be contained in curly brackets {}. The substitution
+    parameter will be used to replace the placeholders.
+
+    --------
+
+    Suppose the file specified contains the following lines:
+
+        MNINonLinear fsaverage {subjectid}.L.sphere.164k_fs_L.surf.gii # this is a comment
+        MNINonLinear fsaverage {subjectid}.R.sphere.164k_fs_R.surf.gii
+        # Full line comment
+        MNINonLinear Results {scan} brainmask_fs.2.nii.gz
+        MNINonLinear Results {scan} {scan}_Atlas.dtseries.nii
+
+    and  substitutions = { "subjectid": "HCA6005242, "scan":"rfMRI_REST2_PA" }
+
+    This would be the result:
+
+        /mydir/MNINonLinear/fsaverage/HCA6005242.L.sphere.164k_fs_L.surf.gii
+        /mydir/MNINonLinear/fsaverage/HCA6005242.R.sphere.164k_fs_L.surf.gii
+        /mydir/MNINonLinear/Results/rfMRI_REST2_PA/brainmask_fs.2.nii.gz
+        /mydir/MNINonLinear/Results/rfMRI_REST2_PA/rfMRI_REST2_PA_Atlas.dtseries.nii
+
+    Notice that:
+
+    * The comments are discarded
+    * the correct path separator, '/', has been put where internal whitespace was
+    * {subjectid} has been replaced with HCA6005242
+    * {scan} has been replaced with rfMRI_REST2_PA
+    """
+    with open(expected_files_list, "r") as f:
+        content = f.read()
+
+    # remove comments starting with pound sign ('#')
+    content = re.sub("#.+", "", content)
+
+    # loop through substitutions, replacing all "{key}" with "value"
+    for k, v in substitutions.items():
+        content = content.replace("{" + k + "}", v)
+
+    # replace " " between filepath directories, with "/"
+    expected_files = [
+        os.sep.join(line.split())
+        for line in content.splitlines()
+        if line.strip()
+    ]
+    return expected_files
