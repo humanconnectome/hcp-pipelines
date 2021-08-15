@@ -1,0 +1,43 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+FsfDir="/opt/HCP/HCPpipelines/Examples/fsf_templates"
+ResultsFolder="$StudyFolder/sessions/$Session/hcp/$Session/MNINonLinear/Results"
+
+    # Copy over the FSF files
+{% for TASK in LEVEL1_TASKS.split("@") %}
+    FSF="$FsfDir/{{ TASK }}_hp200_s4_level1.fsf"
+    if [ ! -f "$FSF" ]; then
+        echo "ERROR: The FSF file is missing. Expected location: $FSF"
+        exit 1
+    fi
+    mkdir -p $ResultsFolder/{{ TASK }}/ &> /dev/null
+    cp $FSF $ResultsFolder/{{ TASK }}/
+{% endfor %}
+{%- if LEVEL2_TASKS is defined %}
+{% for TASK in LEVEL2_TASKS.split("@") %}
+    FSF="$FsfDir/{{ TASK }}_hp200_s4_level2.fsf"
+    if [ ! -f "$FSF" ]; then
+        echo "ERROR: The FSF file is missing. Expected location: $FSF"
+        exit 1
+    fi
+    mkdir -p $ResultsFolder/{{ TASK }}/ &> /dev/null
+    cp $FSF $ResultsFolder/{{ TASK }}/
+{% endfor %}
+{%- endif %}
+
+    ${QUNEXCOMMAND} hcp_task_fmri_analysis \
+	--sessionsfolder="${StudyFolder}/sessions" \
+	--sessions="${StudyFolder}/processing/batch.txt" \
+	--sessionids="${Session}" \
+	--hcp_task_lvl1tasks="{{ LEVEL1_TASKS }}" \
+{%- if LEVEL2_TASKS is defined %}
+    --hcp_task_lvl2task="{{ LEVEL2_TASKS }}" \
+{%- else %}
+	--hcp_task_summaryname="{{ TASK_SUMMARY_NAME }}" \
+{%- endif %}
+	--hcp_task_procstring="hp0_clean" \
+	--hcp_task_vba \
+	--overwrite="yes" \
+
+{% endblock pipeline_specific %}

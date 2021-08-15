@@ -1,0 +1,15 @@
+{% extends "generic/XNAT_GET.py" %}
+{% block get_data %} 
+print("Getting prereq data for the Task fMRI pipeline.")
+resources.get_icafix_data()
+resources.get_functional_preproc_data(extra)
+resources.get_structural_preproc_data()
+
+print("Getting EV files")
+for dir in resources._get_resource_path("tfMRI_*_unproc", extra):
+    no_suffix = dir.name[:dir.name.rfind("_")]
+    source = dir / "LINKED_DATA/PSYCHOPY/EVs"
+    destination = tmp_dir / session / "MNINonLinear/Results" / no_suffix / "EVs"
+    link_directory(source, destination, False)
+
+{% endblock get_data %}

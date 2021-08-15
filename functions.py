@@ -71,6 +71,24 @@ def split_subject_components(_1):
     }
 
 
+def get_tasks(SCAN, RESOURCES_ROOT):
+    mutations = {}
+    tfMRI_SCAN = f"tfMRI_{SCAN}"
+    mutations["TASK_SUMMARY_NAME"] = f"{tfMRI_SCAN}/{tfMRI_SCAN}"
+
+    from pathlib import Path
+    dir_list = sorted(Path(RESOURCES_ROOT).glob(f"{tfMRI_SCAN}_*_preproc"))
+    available_bolds = [x.name[:-8] for x in dir_list]
+    mutations["LEVEL1_TASKS"] = "@".join(available_bolds)
+    mutations["QUNEX_SCANLIST"] = elongate_bold_list_order(available_bolds)
+
+    # if there are two level1, then do a level2 analysis
+    if "@" in mutations["LEVEL1_TASKS"]:
+        mutations["LEVEL2_TASKS"] = tfMRI_SCAN
+
+    return mutations
+
+
 def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
     if PUT_SERVER is not None:
         print("PUT_SERVER has already been set. Skipping regeneration.")
