@@ -4,21 +4,24 @@
 DEFAULT: &default
   USER: $ENV_USER
   HOME: $ENV_HOME
-  PYTHON: /ceph/intradb/build/aux/virtualenv/bin/python
+  PYTHON: $BUILD_MOUNT_ROOT/aux/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
   ASSETS_DIR: $PIPELINE_REPO/assets
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
   EXPECTED_FILES_LIST: $ASSETS_DIR/expected_files/$PIPELINE_NAME.txt
-  SINGULARITY_BIND_PATH: /ceph/intradb/build
-  QUNEX_CONTAINER: /ceph/intradb/build/aux/production_containers/qunex_0.62.8_FSL603.sif
-  GRADIENT_COEFFICIENT_PATH: /ceph/intradb/build/aux/gradient_coefficient_files
-  LOG_DIR: /ceph/intradb/build/chpc/logs/$USER
+  BUILD_MOUNT_ROOT: /ceph/scratch/intradb/build
+  BUILD_ROOT: $BUILD_MOUNT_ROOT/chpc/build/$USER
+  BUILD_DIR: $BUILD_ROOT/$PIPELINE
+  LOG_DIR: $BUILD_MOUNT_ROOT/chpc/logs/$USER
+  GRADIENT_COEFFICIENT_PATH: $BUILD_MOUNT_ROOT/aux/gradient_coefficient_files
+  FREESURFER_LICENSE_PATH: $BUILD_MOUNT_ROOT/aux/freesurfer/license.txt
+  CONTAINERS_DIR: $BUILD_MOUNT_ROOT/aux/production_containers
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.7.sif
   ARCHIVE_ROOT: /ceph/intradb/archive
   RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   XNAT_SERVER: hcpi-dev-cephprod1.nrg.wustl.edu
   PUT_SERVER_LIST: hcpi-dev-cephprod1.nrg.wustl.edu
-  FREESURFER_LICENSE_PATH: /ceph/intradb/build/aux/freesurfer/license.txt
   CLEAN_OUTPUT_FIRST: false
   WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 8
@@ -66,6 +69,7 @@ DEFAULT: &default
 
 structural_preprocess:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
   BUILD_DIR: $BUILD_ROOT/structural_runs
@@ -77,6 +81,7 @@ structural_preprocess:
 
 hand_edit:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 72
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
@@ -90,9 +95,9 @@ hand_edit:
 
 functional_preprocess:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   OUTPUT_RESOURCE_NAME: ${SCAN}_preproc
   BUILD_DIR: $BUILD_ROOT/functional_runs
-  SINGULARITY_BIND_PATH: /ceph/intradb/build
 
 # 
 # DIFFUSION PREPROCESSING 
@@ -100,12 +105,11 @@ functional_preprocess:
 
 diffusion_preprocess:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8.sif
   PROCESS_PBS_K20X: True
   PROCESS_PBS_GPU: 1
   PROCESS_NVIDIA: True
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
-  SINGULARITY_BIND_PATH: /ceph/intradb/build
-  QUNEX_CONTAINER: /ceph/intradb/build/aux/production_containers/qunex_0.62.8.sif
   BUILD_DIR: $BUILD_ROOT/diffusion_runs
   MEM_LIMIT_GBS: 32
   WALLTIME_LIMIT_HOURS: 24
@@ -117,12 +121,12 @@ diffusion_preprocess:
 
 multirunicafix:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 48
   WALLTIME_LIMIT_HOURS: 24
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   BUILD_DIR: $BUILD_ROOT/icafix_runs
-  SINGULARITY_BIND_PATH: /ceph/intradb/build
   USE_CUSTOM_BATCH: True
 
 # 
@@ -131,11 +135,11 @@ multirunicafix:
 
 msmall_process:
   <<: *default
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 20
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   BUILD_DIR: $BUILD_ROOT/msmall_runs
-  SINGULARITY_BIND_PATH: /ceph/intradb/build
   USE_CUSTOM_BATCH: True
 
