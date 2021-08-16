@@ -12,11 +12,11 @@ mark_running_status(){
   {{ PYTHON }} \
       {{ MARK_RUNNING_STATUS_RUNPATH }} \
           --status=queued
-  # The step above sometimes doesn't successfully update the catalog
+  ### The step above sometimes doesn't successfully update the catalog
   curl -n https://{{ PUT_SERVER }}/data/services/refresh/catalog?resource=/archive/projects/{{ PROJECT }}/subjects/{{ SUBJECT }}/experiments/{{ SESSION }}/resources/RunningStatus\&options=delete,append,populateStats -X POST -I
 }
 {% if CLEAN_OUTPUT_FIRST %}
-  # Delete the resource first
+  ### Delete the resource first
   delete_resource
 {% else %}
   ### Deleting the resource first has been disabled
@@ -24,10 +24,11 @@ mark_running_status(){
   #delete_resource
 {% endif %}
 
-# Run Script to create running status marker file
+### Run Script to create running status marker file
+{% if STAGE > PREPARE_SCRIPTS %}# {% endif -%}
 mark_running_status
 
-# List of generated scripts
+### List of generated scripts
 GET_DATA_JOB_SCRIPT_NAME="{{ GET_DATA_JOB_SCRIPT_NAME }}"
 PROCESS_DATA_JOB_SCRIPT_NAME="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
 {% if FREESURFER_SCRIPT_NAME is defined -%}
@@ -37,26 +38,21 @@ CLEAN_DATA_SCRIPT_NAME="{{ CLEAN_DATA_SCRIPT_NAME }}"
 PUT_DATA_SCRIPT_NAME="{{ PUT_DATA_SCRIPT_NAME }}"
 CHECK_DATA_JOB_SCRIPT_NAME="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
 
-# Chain the scripts onto the PBS
-{% if PROCESSING_STAGE not in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
-# {% endif -%}
+### Chain the scripts onto the PBS
+{% if STAGE < GET_DATA %}# {% endif -%}
 PRIOR_JOB=$(sbatch $GET_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if PROCESSING_STAGE not in [ "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
-# {% endif -%}
+{% if STAGE < PROCESS_DATA %}# {% endif -%}
 PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PROCESS_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if PROCESSING_STAGE not in [ "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] -%}
-# {% endif -%}
+{% if STAGE < CLEAN_DATA %}# {% endif -%}
 PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CLEAN_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if PROCESSING_STAGE not in [ "PUT_DATA", "CHECK_DATA" ] -%}
-# {% endif -%}
+{% if STAGE < PUT_DATA %}# {% endif -%}
 PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PUT_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if PROCESSING_STAGE not in [ "CHECK_DATA" ] -%}
-# {% endif -%}
+{% if STAGE < CHECK_DATA %}# {% endif -%}
 PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CHECK_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
 
 
 
-# Don't comment out, this should always run last
-# This cleans up the running status marker
-PRIOR_JOB=$(sbatch {% if PROCESSING_STAGE in [ "GET_DATA", "PROCESS_DATA", "CLEAN_DATA", "PUT_DATA", "CHECK_DATA" ] %} --dependency=afterany:$PRIOR_JOB {% endif %} {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
+### This cleans up the running status marker and should always run last
+{% if STAGE > PREPARE_SCRIPTS %}# {% endif -%}
+PRIOR_JOB=$(sbatch --dependency=afterany:$PRIOR_JOB {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
