@@ -12,12 +12,12 @@ def is_processing_complete(
         session,
         OUTPUT_RESOURCE_NAME,
         EXPECTED_FILES_LIST,
-        output=None,
+        log_file=None,
 ):
-    if output is None:
+    if log_file is None:
         output = sys.stdout
     else:
-        output = open(output, "w")
+        output = log_file.open("w")
 
     resource = RESOURCES_ROOT / OUTPUT_RESOURCE_NAME
 
@@ -38,6 +38,10 @@ def is_processing_complete(
         print("Completion Check was successful", file=output)
     else:
         print("Completion Check was unsuccessful", file=output)
+
+    if output != sys.stdout:
+        output.close()
+
     return success
 
 
@@ -95,8 +99,7 @@ def filename_list(expected_files_list, substitutions):
     * {subjectid} has been replaced with HCA6005242
     * {scan} has been replaced with rfMRI_REST2_PA
     """
-    with open(expected_files_list, "r") as f:
-        content = f.read()
+    content = expected_files_list.read_text()
 
     # remove comments starting with pound sign ('#')
     content = re.sub("#.+", "", content)

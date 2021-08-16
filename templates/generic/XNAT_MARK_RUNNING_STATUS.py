@@ -9,7 +9,9 @@ client = get_xnat_client()
 g_resource = "RunningStatus"
 
 
-directory = f"{{BUILD_DIR}}/{{PROJECT}}/{{ PIPELINE_NAME }}.{{SESSION}}{{_SCAN}}_RUNNING_STATUS"
+directory = (
+    f"{{BUILD_DIR}}/{{PROJECT}}/{{ PIPELINE_NAME }}.{{SESSION}}{{_SCAN}}_RUNNING_STATUS"
+)
 file = f"{{ PIPELINE_NAME }}.{{SESSION}}{{_SCAN}}.RUNNING"
 existing_file = RESOURCES_ROOT / "RunningStatus" / file
 path = f"{directory}/{file}"
