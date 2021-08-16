@@ -26,9 +26,8 @@ def check_required_files_are_available(
         raise Exception("XNAT_CREDENTIALS_FILE is not accessible. Value = ", XNAT_CREDENTIALS_FILE)
     if is_unreadable(EXPECTED_FILES_LIST):
         raise Exception("EXPECTED_FILES_LIST is not accessible. Value = ", EXPECTED_FILES_LIST)
-    #MRH:  Not sure why the path is showing up as unreadable by os.access, but let's not check it
-    #if is_unreadable(GRADIENT_COEFFICIENT_PATH):
-    #    raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
+    if is_unreadable(GRADIENT_COEFFICIENT_PATH):
+       raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
     if is_unreadable(PYTHON_IMPORT_DIR):
         raise Exception("PYTHON_IMPORT_DIR is not accessible. Value = ", PYTHON_IMPORT_DIR)
     if is_unreadable(FREESURFER_LICENSE_PATH):
