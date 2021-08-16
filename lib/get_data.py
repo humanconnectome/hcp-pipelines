@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ccf.get_cinab_style_data.py: Get (copy or link) a CinaB style directory tree of data
+get_data.py: Get (copy or link) a CinaB style directory tree of data
 for a specified subject within a specified project.
 """
 

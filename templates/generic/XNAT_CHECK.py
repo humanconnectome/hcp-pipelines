@@ -15,7 +15,7 @@ from shared_values import (
     print_system_info,
     RESOURCES_ROOT,
 )
-from ccf.one_subject_completion_xnat_checker import is_processing_complete
+from check import is_processing_complete
 
 client = get_xnat_client()
 script_name = f"{PIPELINE_NAME}.XNAT_CHECK"

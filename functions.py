@@ -3,6 +3,8 @@ import sys
 import os
 import random
 import time
+
+from .lib.get_data import PipelineResources
 from .util import escape_path, keep_resting_state_scans, shell_run, is_unreadable
 
 

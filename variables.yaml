@@ -5,9 +5,9 @@ DEFAULT: &default
   PYTHON: /ceph/intradb/build/aux/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
-  RUNTIME_FILES_DIR: $PIPELINE_REPO/runtime
+  ASSETS_DIR: $PIPELINE_REPO/assets
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
-  EXPECTED_FILES_LIST: $RUNTIME_FILES_DIR/expected_files/$PIPELINE_NAME.txt
+  EXPECTED_FILES_LIST: $ASSETS_DIR/expected_files/$PIPELINE_NAME.txt
   SINGULARITY_BIND_PATH: /ceph/intradb/build
   QUNEX_CONTAINER: /ceph/intradb/build/aux/production_containers/qunex_0.62.8_FSL603.sif
   GRADIENT_COEFFICIENT_PATH: /ceph/intradb/build/aux/gradient_coefficient_files

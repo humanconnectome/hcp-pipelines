@@ -13,7 +13,7 @@ from shared_values import (
     CHECK_DATA_DIR,
     print_system_info,
 )
-from ccf.get_cinab_style_data import PipelineResources
+from get_data import PipelineResources, link_directory
 
 print_system_info()
 tmp_dir = WORKING_DIR / "tmp"
