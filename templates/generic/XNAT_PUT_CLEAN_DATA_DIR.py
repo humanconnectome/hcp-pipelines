@@ -2,7 +2,7 @@
 
 import subprocess
 from shared_values import (
-    client,
+    get_xnat_client,
     OUTPUT_RESOURCE_NAME,
     PIPELINE_NAME,
     WORKING_DIR,
@@ -12,6 +12,7 @@ from shared_values import (
 
 reason = PIPELINE_NAME
 resource = OUTPUT_RESOURCE_NAME
+client = get_xnat_client()
 
 
 print_system_info()

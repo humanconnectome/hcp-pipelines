@@ -2,9 +2,10 @@
 import argparse
 import os
 import subprocess
-from shared_values import client
+from shared_values import get_xnat_client
 
 
+client = get_xnat_client()
 g_resource = "RunningStatus"
 
 

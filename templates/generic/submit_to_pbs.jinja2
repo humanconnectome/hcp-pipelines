@@ -4,7 +4,7 @@
 delete_resource(){
   echo "Deleting the resource from the XNAT server"
   {{ PYTHON }} \
-        -c 'from shared_values import client; client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
+        -c 'from shared_values import get_xnat_client; client = get_xnat_client(); client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
 }
 
 mark_running_status(){

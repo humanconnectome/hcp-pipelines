@@ -2,7 +2,7 @@
 
 import os
 from shared_values import (
-    client,
+    get_xnat_client,
     project,
     subject,
     classifier,
@@ -17,7 +17,7 @@ from shared_values import (
 )
 from ccf.one_subject_completion_xnat_checker import OneSubjectCompletionXnatChecker
 
-
+client = get_xnat_client()
 completion_checker = OneSubjectCompletionXnatChecker(
     project,
     extra,

@@ -6,7 +6,6 @@ sys.path.append('{{ PYTHON_IMPORT_DIR }}')
 
 # Path modification (above) must occur before
 # these imports below. Otherwise, you'll get a "ModuleNotFoundError".
-from ccf.archive import CcfArchive
 from xnat_file_client import XnatFileClient
 
 OUTPUT_RESOURCE_NAME = "{{ OUTPUT_RESOURCE_NAME }}"
@@ -27,10 +26,8 @@ session = "{{ SESSION }}"
 credentials_file = "{{ XNAT_CREDENTIALS_FILE }}"
 g_scan = "{{ _SCAN }}"
 
-client = XnatFileClient(project, subject, session, serverlist, credentials_file)
-archive = CcfArchive(project, session, ARCHIVE_ROOT)
-resources_root = archive.SESSION_RESOURCES
-
+def get_xnat_client():
+    return XnatFileClient(project, subject, session, serverlist, credentials_file)
 
 def print_system_info():
     platform = subprocess.check_output(["uname", "-a"]).decode()
