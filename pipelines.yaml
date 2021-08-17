@@ -1,8 +1,4 @@
 StructuralPreprocessing:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: structural_preprocess
@@ -74,10 +70,6 @@ StructuralPreprocessing:
 
 
 StructuralPreprocessingHandEdit:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: hand_edit
@@ -149,10 +141,6 @@ StructuralPreprocessingHandEdit:
 
 
 FunctionalPreprocessing:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: functional_preprocess
@@ -219,10 +207,6 @@ FunctionalPreprocessing:
 
 
 MultiRunIcaFixProcessing:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: multirunicafix
@@ -239,7 +223,7 @@ MultiRunIcaFixProcessing:
   # Only for msmall and multirunicafix
   - function: available_bold_dirs
   - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:$BOLD_LIST_ORDER}
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER_NAME}
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: multirunicafix/batch.txt.jinja2
@@ -301,10 +285,6 @@ MultiRunIcaFixProcessing:
 
 
 MsmAllProcessing:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: msmall_process
@@ -321,7 +301,7 @@ MsmAllProcessing:
   - function: available_bold_dirs
   - function: set_msm_all_bolds
   - function: set_bold_list_order
-  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER:$BOLD_LIST_ORDER}
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER_NAME}
   - function: set_qunex_scanlist_bold
   - generate_file:
       template: msmall/batch.txt.jinja2
@@ -383,10 +363,6 @@ MsmAllProcessing:
 
 
 DiffusionPreprocessing:
-  - set_from_env:
-      RUNNER_ARGS: $_1
-      USER: $USER
-      HOME: /home/$USER
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: diffusion_preprocess

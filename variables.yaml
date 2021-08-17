@@ -2,6 +2,8 @@
 # DEFAULT VARIABLE ASSIGNMENTS
 #
 DEFAULT: &default
+  USER: $ENV_USER
+  HOME: $ENV_HOME
   PYTHON: /ceph/intradb/build/aux/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines

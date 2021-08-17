@@ -3,7 +3,7 @@ chardet==3.0.4
 idna==2.10
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-prunner==0.3.12
+prunner==0.4.3
 PyYAML==5.3.1
 requests==2.25.0
 requests-toolbelt==0.9.1

@@ -36,17 +36,16 @@ def check_required_files_are_available(
         raise Exception("FREESURFER_LICENSE_PATH is not accessible. Value = ", FREESURFER_LICENSE_PATH)
 
 
-def generate_timestamp(TIMESTAMP=None):
-    if TIMESTAMP is None:
-        return {"TIMESTAMP": str(int(time.time()))}
+def generate_timestamp():
+    return {"TIMESTAMP": str(int(time.time()))}
 
 
-def split_subject_components(RUNNER_ARGS):
-    components = RUNNER_ARGS.split(":")
+def split_subject_components(_1):
+    components = _1.split(":")
     if len(components) != 4:
         raise ValueError(
-            "Expecting a colon-delimited RUNNER_ARGS in the format AA:BB:CC:DD, instead got: ",
-            RUNNER_ARGS,
+            "Expecting the first CLI Argument to be in the format AA:BB:CC:DD, instead got: ",
+            _1,
         )
 
     proj, subject_id, classifier, scan = components
@@ -268,7 +267,7 @@ def set_bold_list_order(PROJECT, SCAN):
     else:
         raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 
-    return {"BOLD_LIST_ORDER": bold_list_order}
+    return {"BOLD_LIST_ORDER_NAME": bold_list_order}
 
 def elongate_bold_list_order(bold_list_order):
     # convert from a list of [..., 'tfMRI_GUESSING_AP', 'tfMRI_CARIT_PA', ...] into
