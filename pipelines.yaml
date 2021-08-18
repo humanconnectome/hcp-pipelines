@@ -19,35 +19,35 @@ StructuralPreprocessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: structural/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: structural/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -90,35 +90,35 @@ StructuralPreprocessingHandEdit:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: structuralhe/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -161,35 +161,35 @@ FunctionalPreprocessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: functional/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -239,35 +239,35 @@ MultiRunIcaFixProcessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: multirunicafix/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -317,35 +317,35 @@ MsmAllProcessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: msmall/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: msmall/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -383,35 +383,35 @@ DiffusionPreprocessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: diffusion/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: diffusion/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -449,35 +449,35 @@ AslProcessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: asl/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
@@ -520,35 +520,35 @@ TaskProcessing:
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
       template: task/XNAT_GET.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
       template: generic/get_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_GET_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/process_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.PROCESS_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
       variable: PROCESS_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/clean_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.CLEAN_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
       variable: CLEAN_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
       variable: PUT_DATA_RUNPATH
   - generate_file:
       template: generic/put_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_PUT_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
       variable: PUT_DATA_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_CHECK.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
       variable: CHECK_DATA_RUNPATH
   - generate_file:
       template: generic/check_data.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_CHECK_DATA_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py

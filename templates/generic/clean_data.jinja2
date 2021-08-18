@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
-{{ slurm_head(job_name="clean_data", log_dir=CHECK_DATA_DIR) }}
+{{ slurm_head(job_name=SCRIPTNAME_CLEAN, log_dir=CHECK_DATA_DIR) }}
 
 WorkingDir="{{ WORKING_DIR }}"
 CleanDataDir="{{ CLEAN_DATA_DIR }}"
