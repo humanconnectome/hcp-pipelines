@@ -93,8 +93,12 @@ class XnatFileClient:
         else:
             return requests.put(url, auth=self.auth)
 
+    def __post(self, url):
+        print("POST:", url)
+        return requests.post(url, auth=self.auth)
+
     def __delete(self, url):
-        print(url)
+        print("DELETE:", url)
         return requests.delete(url, auth=self.auth)
 
     def __get_session_id(self, request_url, session):
@@ -146,3 +150,9 @@ class XnatFileClient:
     def delete_resource(self, resource):
         resource_url = f"{self.api_base}/resources/{resource}?removeFiles=true"
         return self.__delete(resource_url)
+
+    def refresh_catalog(self, project, subject, session, resource):
+        resource_url = f"{self.protocol}://{self.server}/data/services/refresh/catalog" \
+                       f"?resource=/archive/projects/{project}/subjects/{subject}/experiments/{session}/resources/{resource}" \
+                        "&options=delete,append,populateStats"
+        return self.__post(resource_url)
