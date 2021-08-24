@@ -45,12 +45,7 @@ def get_server(serverlist):
 
 
 def reference_path(filepath):
-    filepath = os.path.realpath(filepath)
-    return (
-        filepath
-        if not filepath.startswith("/ceph/")
-        else "/data/" + filepath[6:]
-    )
+    return os.path.realpath(filepath)
 
 
 class XnatFileClient:
