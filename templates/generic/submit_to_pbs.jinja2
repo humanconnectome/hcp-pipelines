@@ -5,33 +5,49 @@ mark_running_status(){
     {{ MARK_RUNNING_STATUS_RUNPATH }} \
         --status=queued
 }
+submit(){
+    if [ -z "$PRIOR_JOBID" ]; then
+        PRIOR_JOBID=$(sbatch $1 | tr " " '\n' | tail -1)
+    else
+        PRIOR_JOBID=$(sbatch --dependency=afterok:$PRIOR_JOBID $1 | tr " " '\n' | tail -1)
+    fi
+}
 
-### Run Script to create running status marker file
-{% if STAGE > PREPARE_SCRIPTS %}# {% endif -%}
-mark_running_status
 
 ### List of generated scripts
-GET_DATA_JOB_SCRIPT_NAME="{{ GET_DATA_JOB_SCRIPT_NAME }}"
-PROCESS_DATA_JOB_SCRIPT_NAME="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
-CLEAN_DATA_SCRIPT_NAME="{{ CLEAN_DATA_SCRIPT_NAME }}"
-PUT_DATA_SCRIPT_NAME="{{ PUT_DATA_SCRIPT_NAME }}"
-CHECK_DATA_JOB_SCRIPT_NAME="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
+GET="{{ GET_DATA_JOB_SCRIPT_NAME }}"
+PROCESS="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
+CLEAN="{{ CLEAN_DATA_SCRIPT_NAME }}"
+PUT="{{ PUT_DATA_SCRIPT_NAME }}"
+CHECK="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
 
 ### Chain the scripts onto the PBS
-{% if STAGE < GET_DATA %}# {% endif -%}
-PRIOR_JOB=$(sbatch $GET_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if STAGE < PROCESS_DATA %}# {% endif -%}
-PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PROCESS_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if STAGE < CLEAN_DATA %}# {% endif -%}
-PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CLEAN_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if STAGE < PUT_DATA %}# {% endif -%}
-PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $PUT_DATA_SCRIPT_NAME | tr " " '\n' | tail -1)
-{% if STAGE < CHECK_DATA %}# {% endif -%}
-PRIOR_JOB=$(sbatch --dependency=afterok:$PRIOR_JOB $CHECK_DATA_JOB_SCRIPT_NAME | tr " " '\n' | tail -1)
+{%- set stages=['GET','PROCESS','CLEAN','PUT','CHECK'] %}
+first_run(){
+{%- for job in stages[:STAGE] %}
+    submit ${{ job }}
+{%- endfor %}
+}
+second_run(){
+{%- for job in stages[STAGE:] %}
+    submit ${{ job }}
+{%- endfor %}
+}
 
+
+
+### Run Script to create running status marker file
+mark_running_status
+
+if [[ $* == *--continue* ]]; then
+    second_run
+else
+    first_run
+fi
 
 
 ### This cleans up the running status marker and should always run last
-{% if STAGE > PREPARE_SCRIPTS %}# {% endif -%}
-PRIOR_JOB=$(sbatch --dependency=afterany:$PRIOR_JOB {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
+PRIOR_JOBID=$(sbatch --dependency=afterany:$PRIOR_JOBID {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
+### Export variable in case attempting to chain multiple jobs in series
+export $PRIOR_JOBID
