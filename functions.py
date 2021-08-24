@@ -141,18 +141,6 @@ def make_directories(
         #os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
-# def copy_free_surfer_assessor_script(
-#     DRYRUN, XNAT_PBS_JOBS, PIPELINE_NAME, WORKING_DIR, PRUNNER_CONFIG_DIR
-# ):
-#     source = f"{XNAT_PBS_JOBS}/{PIPELINE_NAME}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-#     dest = f"{WORKING_DIR}/{PIPELINE_NAME}.XNAT_CREATE_FREESURFER_ASSESSOR"
-#     if not DRYRUN:
-#         shutil.copy(source, dest)
-#         os.chmod(dest, 0o770)
-#
-#     return {"FREESURFER_ASSESSOR_DEST_PATH": dest}
-
-
 def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
     if DRYRUN:
         print(

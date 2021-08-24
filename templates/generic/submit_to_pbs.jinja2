@@ -1,25 +1,10 @@
 #!/usr/bin/env bash
 
-
-delete_resource(){
-  echo "Deleting the resource from the XNAT server"
-  {{ PYTHON }} \
-        -c 'from shared_values import get_xnat_client; client = get_xnat_client(); client.delete_resource("{{OUTPUT_RESOURCE_NAME}}")'
-}
-
 mark_running_status(){
     echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
     {{ MARK_RUNNING_STATUS_RUNPATH }} \
         --status=queued
 }
-{% if CLEAN_OUTPUT_FIRST %}
-  ### Delete the resource first
-  delete_resource
-{% else %}
-  ### Deleting the resource first has been disabled
-  ### Uncomment line below to re-enable
-  #delete_resource
-{% endif %}
 
 ### Run Script to create running status marker file
 {% if STAGE > PREPARE_SCRIPTS %}# {% endif -%}
@@ -28,9 +13,6 @@ mark_running_status
 ### List of generated scripts
 GET_DATA_JOB_SCRIPT_NAME="{{ GET_DATA_JOB_SCRIPT_NAME }}"
 PROCESS_DATA_JOB_SCRIPT_NAME="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
-{% if FREESURFER_SCRIPT_NAME is defined -%}
-FREESURFER_SCRIPT_NAME="{{ FREESURFER_SCRIPT_NAME }}"
-{%- endif %}
 CLEAN_DATA_SCRIPT_NAME="{{ CLEAN_DATA_SCRIPT_NAME }}"
 PUT_DATA_SCRIPT_NAME="{{ PUT_DATA_SCRIPT_NAME }}"
 CHECK_DATA_JOB_SCRIPT_NAME="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
