@@ -89,11 +89,7 @@ def get_tasks(SCAN, RESOURCES_ROOT):
     return mutations
 
 
-def choose_put_server(PUT_SERVER_LIST, PUT_SERVER=None):
-    if PUT_SERVER is not None:
-        print("PUT_SERVER has already been set. Skipping regeneration.")
-        return
-
+def choose_put_server(PUT_SERVER_LIST):
     server_list = PUT_SERVER_LIST.split(" ")
     chosen = random.choice(server_list)
 

@@ -19,7 +19,6 @@ CLEAN_DATA_DIR = Path("{{ CLEAN_DATA_DIR }}")
 EXPECTED_FILES_LIST = Path("{{ EXPECTED_FILES_LIST }}")
 
 serverlist = "{{ PUT_SERVER_LIST }}"
-server = "{{ PUT_SERVER }}"
 project = "{{ PROJECT }}"
 subject = "{{ SUBJECT }}"
 classifier = "{{ CLASSIFIER }}"

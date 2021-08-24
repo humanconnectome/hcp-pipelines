@@ -3,7 +3,6 @@ StructuralPreprocessing:
   - function: split_subject_components
   - load_variables: structural_preprocess
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -135,7 +134,6 @@ FunctionalPreprocessing:
   - function: split_subject_components
   - load_variables: functional_preprocess
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -202,7 +200,6 @@ MultiRunIcaFixProcessing:
   - load_variables: multirunicafix
   - function: multirunicafix_process_overrides
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -279,7 +276,6 @@ MsmAllProcessing:
   - function: split_subject_components
   - load_variables: msmall_process
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -357,7 +353,6 @@ DiffusionPreprocessing:
   - function: split_subject_components
   - load_variables: diffusion_preprocess
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -423,7 +418,6 @@ AslProcessing:
   - function: split_subject_components
   - load_variables: asl_process
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: make_directories
   - generate_file:
@@ -489,7 +483,6 @@ TaskProcessing:
   - function: split_subject_components
   - load_variables: task_process
   - function: check_required_files_are_available
-  - function: choose_put_server
   - function: set_study_folder
   - function: get_tasks
   - function: make_directories
