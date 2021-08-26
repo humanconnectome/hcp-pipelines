@@ -101,6 +101,10 @@ class XnatFileClient:
         print("DELETE:", url)
         return requests.delete(url, auth=self.auth)
 
+    def _get(self, url):
+        print("GET:", url)
+        return requests.get(url, auth=self.auth)
+
     def __get_session_id(self, request_url, session):
         response = requests.get(request_url, auth=self.auth)
         if response.status_code != 200:
@@ -156,3 +160,8 @@ class XnatFileClient:
                        f"?resource=/archive/projects/{project}/subjects/{subject}/experiments/{session}/resources/{resource}" \
                         "&options=delete,append,populateStats"
         return self._post(resource_url)
+
+    def resource_exists(self, resource):
+        resource_url = f"{self.api_base}/resources/{resource}"
+        r = self._get(resource_url)
+        return r.status_code == 200
