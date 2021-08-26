@@ -1,6 +1,15 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
 {{ slurm_head(job_name=SCRIPTNAME_CLEAN, log_dir=CHECK_DATA_DIR) }}
 
+{{ PYTHON }} \
+    {{ CLEAN_DATA_RUNPATH }}
+
+RC=$?
+if [ $RC -ne 0 ] ; then
+    >&2 echo "ERROR:  CLEAN_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."
+    exit $RC
+fi
+
 WorkingDir="{{ WORKING_DIR }}"
 CleanDataDir="{{ CLEAN_DATA_DIR }}"
 StartTimeFile="{{ STARTTIME_FILE_NAME }}"
@@ -8,50 +17,4 @@ Session="{{SESSION}}"
 ProcessingOutputFolder="$WorkingDir/${Session}/sessions/${Session}/hcp/"
 StudyFolder="$CleanDataDir/${Session}"
 
-if [ ! -d $WorkingDir ]; then
-	echo "ERROR:  Working directory ($WorkingDir) does not exist!"
-	exit 1
-fi
-if [ ! -d $CleanDataDir ]; then
-	echo "ERROR:  CleanData directory ($CleanDataDirectory) does not exist!"
-	exit 1
-fi
-if [ ! -d $ProcessingOutputFolder ]; then
-	echo "ERROR:  Processing Output Folder ($ProcessingOutputFolder) does not exist!"
-	exit 1
-fi
-
-# Using pax rather than cp -al or rsync here because on CHPC build space directories, at least, it does a better job of copying files as 
-# hard links, symlinks as symlinks, and preserving all modification dates.
-pushd ${ProcessingOutputFolder}
-cp -al . $CleanDataDir
-popd
-if [ ! -d $StudyFolder ]; then
-	echo "ERROR:  Study folder ($StudyFolder) does not exist!"
-	exit 1
-fi
-
-{% block content %}
-find $StudyFolder \! -newer $StartTimeFile \! -type d -delete
-if [ -d $StudyFolder/logs/comlogs ]; then
-	# removing copy of comlogs from the output directory.  We'll keep the copies in the processing/logs directory
-	rm -r $StudyFolder/logs/comlogs
-fi
-cp -rpl $WorkingDir/${Session}/ProcessingInfo $StudyFolder
-cp -rpl $WorkingDir/${Session}/processing $StudyFolder/ProcessingInfo
-cp -rpl $WorkingDir/${Session}/sessions/specs $StudyFolder/ProcessingInfo
-cp -rpl $WorkingDir/${Session}/info/hcpls $StudyFolder/ProcessingInfo
-if [ -f $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt ] ; then
-	cp -pl $WorkingDir/${Session}/sessions/${Session}/session_hcp.txt $StudyFolder/ProcessingInfo/processing
-fi
-if [ -f $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log ] ; then
-	cp -pl $WorkingDir/${Session}/sessions/${Session}/hcpls/hcpls2nii.log $StudyFolder/ProcessingInfo/processing
-fi
-echo "Removing any empty directories."
-find $StudyFolder -type d -empty -delete
-echo "Removing any XNAT catalog files still around."
-find $CleanDataDir -name "*_catalog.xml" -delete
-echo "Remaining files:"
-find $StudyFolder
-
-{% endblock %}
+{% block content %}{% endblock %}
