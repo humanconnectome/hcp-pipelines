@@ -26,6 +26,7 @@ extra = "{{ SCAN }}"
 session = "{{ SESSION }}"
 credentials_file = "{{ XNAT_CREDENTIALS_FILE }}"
 g_scan = "{{ _SCAN }}"
+CLOBBER_RESOURCE = {{ CLOBBER_RESOURCE }}
 
 
 def get_xnat_client():

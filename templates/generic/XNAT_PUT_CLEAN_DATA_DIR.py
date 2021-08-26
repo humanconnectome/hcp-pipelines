@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import subprocess
+import sys
+
 from shared_values import (
     get_xnat_client,
     OUTPUT_RESOURCE_NAME,
@@ -8,17 +10,23 @@ from shared_values import (
     WORKING_DIR,
     CLEAN_DATA_DIR,
     print_system_info,
+    CLOBBER_RESOURCE,
 )
 
 reason = PIPELINE_NAME
 resource = OUTPUT_RESOURCE_NAME
 client = get_xnat_client()
 
-
 print_system_info()
 
-print("Delete previous resource")
-client.delete_resource(resource)
+if client.resource_exists(resource):
+    if CLOBBER_RESOURCE:
+        print("Deleting existing resource from prior run.")
+        client.delete_resource(resource)
+    else:
+        print(f"WARN: The resource {resource} already exists. To force overwrite set `CLOBBER_RESOURCE=True` in shared_values.py")
+        print("Terminating early.")
+        sys.exit(0)
 
 print("Making processing job log files readable so they can be pushed into database.")
 subprocess.call(["chmod", "--recursive", "a+r", str(CLEAN_DATA_DIR)])
