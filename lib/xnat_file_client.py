@@ -81,7 +81,7 @@ class XnatFileClient:
         self.sessionId = sessionId
         self.api_base = f"{api_base}/{sessionId}"
 
-    def __put(self, url, filepath=None):
+    def _put(self, url, filepath=None):
         print(url, filepath)
         if filepath:
             m = MultipartEncoder(
@@ -93,11 +93,11 @@ class XnatFileClient:
         else:
             return requests.put(url, auth=self.auth)
 
-    def __post(self, url):
+    def _post(self, url):
         print("POST:", url)
         return requests.post(url, auth=self.auth)
 
-    def __delete(self, url):
+    def _delete(self, url):
         print("DELETE:", url)
         return requests.delete(url, auth=self.auth)
 
@@ -132,27 +132,27 @@ class XnatFileClient:
             if os.path.isdir(filepath):
                 resource_url += "&extract=true"
                 tmp_zip_file = make_zip_from_dir(filepath)
-                r = self.__put(resource_url, tmp_zip_file)
+                r = self._put(resource_url, tmp_zip_file)
                 os.remove(tmp_zip_file)
             else:
                 # otherwise send file directly
-                r = self.__put(resource_url, filepath)
+                r = self._put(resource_url, filepath)
         else:
             # if file is local to XNAT server, send file path as reference
             resource_url += "&reference=" + reference_path(filepath)
-            r = self.__put(resource_url)
+            r = self._put(resource_url)
         return r
 
     def remove_resource_filepath(self, resource, resource_filepath):
         resource_url = f"{self.api_base}/resources/{resource}/files/{resource_filepath}"
-        return self.__delete(resource_url)
+        return self._delete(resource_url)
 
     def delete_resource(self, resource):
         resource_url = f"{self.api_base}/resources/{resource}?removeFiles=true"
-        return self.__delete(resource_url)
+        return self._delete(resource_url)
 
     def refresh_catalog(self, project, subject, session, resource):
         resource_url = f"{self.protocol}://{self.server}/data/services/refresh/catalog" \
                        f"?resource=/archive/projects/{project}/subjects/{subject}/experiments/{session}/resources/{resource}" \
                         "&options=delete,append,populateStats"
-        return self.__post(resource_url)
+        return self._post(resource_url)
