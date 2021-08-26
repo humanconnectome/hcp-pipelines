@@ -17,7 +17,7 @@ fs.copy(
 
 print("Remove old files, keep files newer than start_time_file.")
 start_time_file = Path("{{ STARTTIME_FILE_NAME }}")
-start_time = start_time_file.stat().st_ctime
+start_time = start_time_file.stat().st_mtime
 fs.remove(lambda src, dest: src.stat().st_mtime < start_time)
 
 print("Remove comlogs. Copies available at ProcessingInfo/processing/logs")
