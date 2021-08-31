@@ -1,7 +1,7 @@
 import shutil
 from collections import Iterable
 from os import stat_result
-from pathlib import PosixPath
+from pathlib import PosixPath, Path
 
 
 class CachedPath(PosixPath):
@@ -54,13 +54,28 @@ class VirtualFileSystem:
             self._add(src.resolve().absolute(), dest.resolve().absolute())
 
     def remove(self, filter_func):
-        new_mappings = {}
+        keep = {}
+        remove = {}
         for dest, src in self.mappings.items():
             should_remove = filter_func(src, dest)
-            if not should_remove:
-                new_mappings[dest] = src
+            if should_remove:
+                remove[dest] = src
+            else:
+                keep[dest] = src
 
-        self.mappings = new_mappings
+        self.mappings = keep
+        return remove
+
+    def ls(self, reference_path=None, paths=None):
+        if reference_path is None:
+            reference_path = Path(".")
+        if paths is None:
+            paths = self.mappings.values()
+        for p in paths:
+            try:
+                print(p.relative_to(reference_path))
+            except ValueError:
+                pass
 
     def sync(self):
         for dest, src in self.mappings.items():
