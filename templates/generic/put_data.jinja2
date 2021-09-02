@@ -6,4 +6,10 @@ cp {{ CHECK_DATA_DIR }}/* {{ CLEAN_DATA_DIR }}/{{ SESSION }}/ProcessingInfo
 {{ PYTHON }} \
     {{ PUT_DATA_RUNPATH }}
 
+RC=$?
+if [ $RC -ne 0 ] ; then
+    >&2 echo "ERROR:  PUT_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."
+    exit $RC
+fi
+
 {% block content %}{% endblock %}

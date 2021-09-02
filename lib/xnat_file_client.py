@@ -4,6 +4,7 @@ from requests_toolbelt import MultipartEncoder
 import requests
 import subprocess
 import time
+import sys
 
 
 def make_zip_from_dir(dirpath):
@@ -151,9 +152,27 @@ class XnatFileClient:
         resource_url = f"{self.api_base}/resources/{resource}/files/{resource_filepath}"
         return self._delete(resource_url)
 
-    def delete_resource(self, resource):
+    def delete_resource(self, resource, RESOURCES_ROOT, attempts=3):
         resource_url = f"{self.api_base}/resources/{resource}?removeFiles=true"
-        return self._delete(resource_url)
+        resource_path = str(RESOURCES_ROOT / resource)
+
+        for i in range(attempts):
+            print(f'Delete attempt #{i + 1}')
+            response = self._delete(resource_url)
+
+            # check every 10 seconds that cummulative filesize is shrinking (ie, deletion in progress)
+            old_size, new_size = sys.maxsize, get_size(resource_path)
+            while old_size > new_size:
+                if new_size == 0:
+                    print("Successfully deleted.")
+                    return response
+
+                time.sleep(10)
+                old_size, new_size = new_size, get_size(resource_path)
+                print("Current size: ", new_size)
+        else:
+            print("ERROR: Deletion failed three times. Quitting.")
+            sys.exit(1)
 
     def refresh_catalog(self, project, subject, session, resource):
         resource_url = f"{self.protocol}://{self.server}/data/services/refresh/catalog" \
@@ -165,3 +184,14 @@ class XnatFileClient:
         resource_url = f"{self.api_base}/resources/{resource}"
         r = self._get(resource_url)
         return r.status_code == 200
+
+
+def get_size(p):
+    if not os.path.exists(p):
+        return 0
+    try:
+        size = subprocess.check_output(["du", "-s", p]).decode()
+        size = int(size[:size.find("\t")])
+        return size
+    except:
+        return -1

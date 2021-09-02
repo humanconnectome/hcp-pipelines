@@ -11,6 +11,7 @@ from shared_values import (
     CLEAN_DATA_DIR,
     print_system_info,
     CLOBBER_RESOURCE,
+    RESOURCES_ROOT,
 )
 
 reason = PIPELINE_NAME
@@ -22,7 +23,7 @@ print_system_info()
 if client.resource_exists(resource):
     if CLOBBER_RESOURCE:
         print("Deleting existing resource from prior run.")
-        client.delete_resource(resource)
+        client.delete_resource(resource, RESOURCES_ROOT)
     else:
         print(f"WARN: The resource {resource} already exists. To force overwrite set `CLOBBER_RESOURCE=True` in shared_values.py")
         print("Terminating early.")
