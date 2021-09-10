@@ -3,6 +3,7 @@ import sys
 import os
 import random
 import time
+from pathlib import Path
 
 from .lib.get_data import PipelineResources
 from .util import escape_path, keep_resting_state_scans, shell_run, is_unreadable
@@ -76,7 +77,6 @@ def get_tasks(SCAN, RESOURCES_ROOT):
     tfMRI_SCAN = f"tfMRI_{SCAN}"
     mutations["TASK_SUMMARY_NAME"] = f"{tfMRI_SCAN}/{tfMRI_SCAN}"
 
-    from pathlib import Path
     dir_list = sorted(Path(RESOURCES_ROOT).glob(f"{tfMRI_SCAN}_*_preproc"))
     available_bolds = [x.name[:-8] for x in dir_list]
     mutations["LEVEL1_TASKS"] = "@".join(available_bolds)
@@ -156,7 +156,7 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
     List of full paths to any resource containing preprocessed functional data
     for the specified subject
     """
-    dir_list = sorted(RESOURCES_ROOT.glob("[rt]fMRI*preproc"))
+    dir_list = sorted(Path(RESOURCES_ROOT).glob("[rt]fMRI*preproc"))
     available_bolds = [x.name[:-8] for x in dir_list]
 
     def fmrisort(x):
