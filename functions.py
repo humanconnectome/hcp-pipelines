@@ -11,8 +11,6 @@ from .util import escape_path, keep_resting_state_scans, shell_run, is_unreadabl
 
 def check_required_files_are_available(
     QUNEX_CONTAINER,
-    XNAT_CREDENTIALS_FILE,
-    EXPECTED_FILES_LIST,
     GRADIENT_COEFFICIENT_PATH,
     PYTHON_IMPORT_DIR,
     FREESURFER_LICENSE_PATH,
@@ -25,10 +23,6 @@ def check_required_files_are_available(
         return
     if is_unreadable(QUNEX_CONTAINER):
         raise Exception("QUNEX_CONTAINER is not accessible. Value = ", QUNEX_CONTAINER)
-    if is_unreadable(XNAT_CREDENTIALS_FILE):
-        raise Exception("XNAT_CREDENTIALS_FILE is not accessible. Value = ", XNAT_CREDENTIALS_FILE)
-    if is_unreadable(EXPECTED_FILES_LIST):
-        raise Exception("EXPECTED_FILES_LIST is not accessible. Value = ", EXPECTED_FILES_LIST)
     if is_unreadable(GRADIENT_COEFFICIENT_PATH):
        raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
     if is_unreadable(PYTHON_IMPORT_DIR):

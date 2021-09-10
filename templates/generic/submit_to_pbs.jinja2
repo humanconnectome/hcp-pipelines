@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-mark_running_status(){
-    echo "Creating \"Running Status Marker\" file to indicate that jobs are queued."
-    {{ MARK_RUNNING_STATUS_RUNPATH }} \
-        --status=queued
-}
 submit(){
     if [ -z "$PRIOR_JOBID" ]; then
         PRIOR_JOBID=$(sbatch $1 | tr " " '\n' | tail -1)
@@ -17,37 +12,6 @@ submit(){
 ### List of generated scripts
 GET="{{ GET_DATA_JOB_SCRIPT_NAME }}"
 PROCESS="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
-CLEAN="{{ CLEAN_DATA_SCRIPT_NAME }}"
-PUT="{{ PUT_DATA_SCRIPT_NAME }}"
-CHECK="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
 
-### Chain the scripts onto the PBS
-{%- set stages=['GET','PROCESS','CLEAN','PUT','CHECK'] %}
-first_run(){
-{%- for job in stages[:STAGE] %}
-    submit ${{ job }}
-{%- endfor %}
-}
-second_run(){
-{%- for job in stages[STAGE:] %}
-    submit ${{ job }}
-{%- endfor %}
-}
-
-
-
-### Run Script to create running status marker file
-mark_running_status
-
-if [[ $* == *--continue* ]]; then
-    second_run
-else
-    first_run
-fi
-
-
-### This cleans up the running status marker and should always run last
-PRIOR_JOBID=$(sbatch --dependency=afterany:$PRIOR_JOBID {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
-
-### Export variable in case attempting to chain multiple jobs in series
-export $PRIOR_JOBID
+submit $GET
+submit $PROCESS

@@ -15,22 +15,13 @@ PIPELINE_NAME = "{{ PIPELINE_NAME }}"
 RESOURCES_ROOT = Path("{{ RESOURCES_ROOT }}")
 CHECK_DATA_DIR = Path("{{ CHECK_DATA_DIR }}")
 WORKING_DIR = Path("{{ WORKING_DIR }}")
-CLEAN_DATA_DIR = Path("{{ CLEAN_DATA_DIR }}")
-EXPECTED_FILES_LIST = Path("{{ EXPECTED_FILES_LIST }}")
 
-serverlist = "{{ PUT_SERVER_LIST }}"
 project = "{{ PROJECT }}"
 subject = "{{ SUBJECT }}"
 classifier = "{{ CLASSIFIER }}"
 extra = "{{ SCAN }}"
 session = "{{ SESSION }}"
-credentials_file = "{{ XNAT_CREDENTIALS_FILE }}"
 g_scan = "{{ _SCAN }}"
-CLOBBER_RESOURCE = {{ CLOBBER_RESOURCE }}
-
-
-def get_xnat_client():
-    return XnatFileClient(project, subject, session, serverlist, credentials_file)
 
 
 def print_system_info():
