@@ -10,9 +10,9 @@ DEFAULT: &default
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
   EXPECTED_FILES_LIST: $ASSETS_DIR/expected_files/$PIPELINE_NAME.txt
   BUILD_MOUNT_ROOT: /ceph/scratch/intradb/build
-  BUILD_ROOT: $BUILD_MOUNT_ROOT/chpc/build/$USER
+  BUILD_ROOT: /scratch/$USER
   BUILD_DIR: $BUILD_ROOT/$PIPELINE
-  LOG_DIR: $BUILD_MOUNT_ROOT/chpc/logs/$USER
+  LOG_DIR: $BUILD_ROOT/logs
   GRADIENT_COEFFICIENT_PATH: $BUILD_MOUNT_ROOT/aux/gradient_coefficient_files
   FREESURFER_LICENSE_PATH: $BUILD_MOUNT_ROOT/aux/freesurfer/license.txt
   CONTAINERS_DIR: $BUILD_MOUNT_ROOT/aux/production_containers
