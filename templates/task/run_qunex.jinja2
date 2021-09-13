@@ -1,7 +1,7 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
-FsfDir="/opt/HCP/HCPpipelines/Examples/fsf_templates"
+FsfDir="/opt/HCP/HCPpipelines/Examples/fsf_templates{{ "/HCP-Aging" if PROJECT_ID == "HCA" else "" }}"
 ResultsFolder="$StudyFolder/sessions/$Session/hcp/$Session/MNINonLinear/Results"
 
     # Copy over the FSF files
