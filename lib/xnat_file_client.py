@@ -18,7 +18,7 @@ def make_zip_from_dir(dirpath):
 
 
 def ping(server):
-    _server = server if server.startswith("http") else f"https://{server}"
+    _server = server if server.startswith("https") else f"http://{server}:8080"
     try:
         r = requests.get(_server)
         return r.status_code == 200
@@ -57,7 +57,7 @@ class XnatFileClient:
         session,
         serverlist,
         credentials_file=None,
-        protocol="https",
+        protocol="http",
         username=None,
         password=None,
     ):
@@ -77,7 +77,7 @@ class XnatFileClient:
         self.project = project
         self.subject = subject
         self.session = session
-        api_base = f"{protocol}://{server}/REST/projects/{project}/subjects/{subject}/experiments"
+        api_base = f"{protocol}://{server}:8080/REST/projects/{project}/subjects/{subject}/experiments"
         sessionId = self.__get_session_id(api_base, session)
         self.sessionId = sessionId
         self.api_base = f"{api_base}/{sessionId}"

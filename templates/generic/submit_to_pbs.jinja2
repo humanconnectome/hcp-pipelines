@@ -29,6 +29,7 @@ first_run(){
 {%- endfor %}
 }
 second_run(){
+    echo "CONTINUE PROCESSING"
 {%- for job in stages[STAGE:] %}
     submit ${{ job }}
 {%- endfor %}
