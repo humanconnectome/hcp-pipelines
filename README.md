@@ -52,8 +52,8 @@ that includes `TIMESTAMP` and `PUT_SERVER`. Then you'll want to check prior runs
 to current run using a `diff` tool like ***meld***. For example:
 ``` bash
 prunner --dryrun MsmAllProcessing CCF_HCA_STG:HCA0123456789:V1_MR:all \
-         --TIMESTAMP=999 --PUT_SERVER="fake-server.nrg.wustl.edu"; \
+         --TIMESTAMP=999 --PUT_SERVER="https://fake-server.nrg.wustl.edu"; \
          prunner --dryrun MultiRunIcaFixProcessing CCF_HCA_STG:HCA0123456789:V1_MR:all \
-         --TIMESTAMP=999 --PUT_SERVER="fake-server.nrg.wustl.edu"; \
+         --TIMESTAMP=999 --PUT_SERVER="https://fake-server.nrg.wustl.edu"; \
          meld originals/ generated/
 ```
