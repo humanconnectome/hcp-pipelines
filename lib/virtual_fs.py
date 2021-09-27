@@ -27,9 +27,9 @@ class VirtualFileSystem:
     def _add(self, src, dest_parent_dir, visited=None):
         if visited is None:
             visited = set()
+        dest = dest_parent_dir / src.name
         if src.is_symlink():
             src = src.resolve().absolute()
-        dest = dest_parent_dir / src.name
 
         if src.is_file():
             self.mappings[CachedPath(dest)] = CachedPath(src)
