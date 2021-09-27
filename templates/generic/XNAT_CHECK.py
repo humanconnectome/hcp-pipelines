@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import os
+import subprocess
+
 from shared_values import (
     get_xnat_client,
     project,
@@ -14,6 +16,8 @@ from shared_values import (
     EXPECTED_FILES_LIST,
     print_system_info,
     RESOURCES_ROOT,
+    WORKING_DIR,
+    CLEAN_DATA_DIR,
 )
 from check import is_processing_complete
 
@@ -44,6 +48,15 @@ if check_cmd_ret_code:
         success_filepath,
         resource_filepath=f"{dest_dir}/{success_filename}",
     )
+
+    # Delete original data only after successful check
+    # otherwise, don't delete original directories for troubleshooting
+    print("Removing working_dir: ", str(WORKING_DIR))
+    subprocess.call(["rm", "-rf", str(WORKING_DIR)])
+
+    print("Removing clean_data_dir: ", str(CLEAN_DATA_DIR))
+    subprocess.call(["rm", "-rf", str(CLEAN_DATA_DIR)])
+
 else:
     print("Completion Check was unsuccessful")
     if os.path.exists(success_filename):

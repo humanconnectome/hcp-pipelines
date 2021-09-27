@@ -27,7 +27,6 @@ DEFAULT: &default
   USE_SCRATCH_FOR_PROCESSING: False
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
-  DELETE_DATA_AFTER_PUT: True
   AUTOLAUNCH_AT_END: True
   PREPARE_SCRIPTS: 0
   GET_DATA: 1
