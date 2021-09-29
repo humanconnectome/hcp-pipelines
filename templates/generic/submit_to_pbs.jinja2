@@ -51,4 +51,4 @@ fi
 PRIOR_JOBID=$(sbatch --dependency=afterany:$PRIOR_JOBID {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
 
 ### Export variable in case attempting to chain multiple jobs in series
-export $PRIOR_JOBID
+export PRIOR_JOBID
