@@ -8,6 +8,8 @@ mark_running_status(){
 submit(){
     if [ -z "$PRIOR_JOBID" ]; then
         PRIOR_JOBID=$(sbatch $1 | tr " " '\n' | tail -1)
+    elif [ "$2" == "afterany" ]; then
+        PRIOR_JOBID=$(sbatch --dependency=afterany:$PRIOR_JOBID $1 | tr " " '\n' | tail -1)
     else
         PRIOR_JOBID=$(sbatch --dependency=afterok:$PRIOR_JOBID $1 | tr " " '\n' | tail -1)
     fi
@@ -20,6 +22,7 @@ PROCESS="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
 CLEAN="{{ CLEAN_DATA_SCRIPT_NAME }}"
 PUT="{{ PUT_DATA_SCRIPT_NAME }}"
 CHECK="{{ CHECK_DATA_JOB_SCRIPT_NAME }}"
+NO_LONGER_RUNNING="{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}"
 
 ### Chain the scripts onto the PBS
 {%- set stages=['GET','PROCESS','CLEAN','PUT','CHECK'] %}
@@ -48,7 +51,7 @@ fi
 
 
 ### This cleans up the running status marker and should always run last
-PRIOR_JOBID=$(sbatch --dependency=afterany:$PRIOR_JOBID {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }})
+submit $NO_LONGER_RUNNING afterany
 
 ### Export variable in case attempting to chain multiple jobs in series
 export PRIOR_JOBID
