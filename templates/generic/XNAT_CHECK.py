@@ -71,3 +71,8 @@ client.upload_resource_filepath(
     str(log_filepath),
     resource_filepath=f"{dest_dir}/{log_filename}",
 )
+
+if check_cmd_ret_code:
+    # Clean up last remaining directory after successful run
+    print("Removing check_data_dir: ", str(CLEAN_DATA_DIR))
+    subprocess.call(["rm", "-rf", str(CHECK_DATA_DIR)])
