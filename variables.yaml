@@ -32,7 +32,7 @@ DEFAULT: &default
     http://hcpi-shadow18.nrg.wustl.edu:8080
     http://hcpi-shadow19.nrg.wustl.edu:8080
 
-  CLOBBER_RESOURCE: False
+  CLOBBER_RESOURCE: True
   WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 8
   USE_SCRATCH_FOR_PROCESSING: False
