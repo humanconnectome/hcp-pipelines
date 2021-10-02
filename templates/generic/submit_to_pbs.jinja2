@@ -28,12 +28,14 @@ NO_LONGER_RUNNING="{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}"
 {%- set stages=['GET','PROCESS','CLEAN','PUT','CHECK'] %}
 first_run(){
 {%- for job in stages[:STAGE] %}
+    echo "Submitting '{{ job }}' job to queue."
     submit ${{ job }}
 {%- endfor %}
 }
 second_run(){
     echo "CONTINUE PROCESSING"
 {%- for job in stages[STAGE:] %}
+    echo "Submitting '{{ job }}' job to queue."
     submit ${{ job }}
 {%- endfor %}
 }
