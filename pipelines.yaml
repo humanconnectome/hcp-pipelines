@@ -506,7 +506,7 @@ AslProcessing:
   - function: launch_main_script
 
 
-TaskProcessing:
+TaskAnalysisProcessing:
   - function: generate_timestamp
   - function: split_subject_components
   - load_variables: task_process
