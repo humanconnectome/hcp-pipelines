@@ -1,0 +1,117 @@
+MNINonLinear
+MNINonLinear Results
+MNINonLinear Results tfMRI_{scan}
+MNINonLinear Results tfMRI_{scan}_PA
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_Atlas_hp200_s2_hp0_clean.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_Atlas_s2_hp0_clean.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.con
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design_cov.png
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design_cov.ppm
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.frf
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.fsf
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.fts
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.mat
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.min
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.png
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.ppm
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat design.trg
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats cope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats cope2.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats cope3.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats cope4.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats dof
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats fstat1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats logfile
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats pe1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats pe2.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats res4d.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats sigmasquareds.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats threshac1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats tstat1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats tstat2.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats tstat3.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats tstat4.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats varcope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats varcope2.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats varcope3.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats varcope4.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats zfstat1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats zstat1.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats zstat2.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats zstat3.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat GrayordinatesStats zstat4.dtseries.nii
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats cope1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats cope2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats cope3.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats cope4.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats dof
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats fstat1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats logfile
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats pe1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats pe2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats res4d.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats sigmasquareds.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats threshac1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats tstat1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats tstat2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats tstat3.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats tstat4.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats varcope1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats varcope2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats varcope3.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats varcope4.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats zfstat1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats zstat1.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats zstat2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats zstat3.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat StandardVolumeStats zstat4.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s2_level1_hp0_clean.feat tfMRI_{scan}_PA_hp200_s2.nii.gz
+MNINonLinear Results tfMRI_{scan}_PA tfMRI_{scan}_PA_hp200_s4_level1.fsf
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat Contrasts.txt
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope1.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope1.feat cope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope1.feat mask.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope1.feat tdof_t1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope1.feat varcope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope2.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope2.feat cope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope2.feat mask.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope2.feat tdof_t1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope2.feat varcope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope3.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope3.feat cope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope3.feat mask.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope3.feat tdof_t1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope3.feat varcope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope4.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope4.feat cope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope4.feat mask.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope4.feat tdof_t1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat GrayordinatesStats cope4.feat varcope1.dtseries.nii
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope1.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope1.feat cope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope1.feat mask.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope1.feat tdof_t1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope1.feat varcope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope2.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope2.feat cope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope2.feat mask.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope2.feat tdof_t1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope2.feat varcope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope3.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope3.feat cope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope3.feat mask.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope3.feat tdof_t1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope3.feat varcope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope4.feat
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope4.feat cope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope4.feat mask.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope4.feat tdof_t1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat StandardVolumeStats cope4.feat varcope1.nii.gz
+MNINonLinear Results tfMRI_{scan} tfMRI_{scan}_hp200_s2_hp0_clean_subjectSummary.feat TaskfMRIAnalysisSummary.txt
