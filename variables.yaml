@@ -87,7 +87,7 @@ structural_preprocess:
   QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
-  BUILD_DIR: $BUILD_ROOT/structural_runs
+  BUILD_DIR: $BUILD_ROOT/test_structural_runs
   WALLTIME_LIMIT_HOURS: 72
   USE_SCRATCH_FOR_PROCESSING: True
 
