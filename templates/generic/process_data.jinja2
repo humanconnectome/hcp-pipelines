@@ -1,7 +1,6 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
 {{ slurm_head(job_name=SCRIPTNAME_PROCESS, log_dir=CHECK_DATA_DIR, gpu=PROCESS_PBS_GPU, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
-{% block pre -%}
 {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 mkdir -p {{ SCRATCH_TMP_DIR }}
 {% endif -%}
@@ -14,8 +13,8 @@ mkdir -p {{ SCRATCH_TMP_DIR }}
   mkdir -p $SCRATCH
   mv $ORIGINAL/$BASE $SCRATCH
 
+{% set PROCESS_DATA_BINDPATH = PROCESS_DATA_BINDPATH + ",$SCRATCH" %}
 {% endif -%}
-{%- endblock pre -%}
 
 {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	{% set PROCESS_DATA_BINDPATH = PROCESS_DATA_BINDPATH + "," + SCRATCH_TMP_DIR + ":/tmp" %}
