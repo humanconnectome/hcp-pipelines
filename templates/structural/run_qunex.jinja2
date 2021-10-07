@@ -82,34 +82,6 @@ g_script_name=$(basename "${0}" .sh)
 filename="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${g_script_name}.execinfo"
 echo $(date) > ${start_time_file}
 
-
-### BEGIN pipeline_specific ###
-{% block pipeline_specific %}
-
-	######################### hcp1
-	${QUNEXCOMMAND} hcp1 \
-		--sessions="${StudyFolder}/processing/batch.txt" \
-		--sessionsfolder="${StudyFolder}/sessions" \
-		--overwrite="${Overwrite}" \
-		--parsessions="${parsessions}"
-
-	######################### hcp2
-	${QUNEXCOMMAND} hcp2 \
-		--sessions="${StudyFolder}/processing/batch.txt" \
-		--sessionsfolder="${StudyFolder}/sessions" \
-		--overwrite="${Overwrite}" \
-		--parsessions="${parsessions}"
-
-	######################### hcp3
-	${QUNEXCOMMAND} hcp3 \
-		--sessions="${StudyFolder}/processing/batch.txt" \
-		--sessionsfolder="${StudyFolder}/sessions" \
-		--overwrite="${Overwrite}" \
-		--parsessions="${parsessions}"
-
-{% endblock pipeline_specific %}
-### END pipeline_specific ###
-
 }
 
 main $@
