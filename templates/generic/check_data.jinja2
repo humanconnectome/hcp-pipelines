@@ -1,19 +1,107 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
 {{ slurm_head(job_name=SCRIPTNAME_CHECK, log_dir=LOG_DIR) }}
 
-{% block pre %}{% endblock %}
-if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/logs/comlogs -name 'error*.log' -o -name 'tmp*.log' | wc -l` -gt "0" ] ; then
-	echo "ERROR: One or more QuNex comlogs are error or tmp logs"
-	exit 1
+check_all_expected_files_exist(){
+    local basedir="$1"
+    if [ ! -e "$basedir" ]; then
+        echo "ERROR: Directory does not exist. ${basedir}"
+        exit 1
+    fi
+    pushd "$1"
+
+    missing_files=0
+    source {{ ASSETS_DIR }}/filecheck.sh \
+        {{ PIPELINE_NAME }} \
+        {{ SESSION }} \
+        {{ SCAN }}
+    success=$?
+
+    popd
+    return $success
+}
+
+CHECK_DATA_DIR="{{ CHECK_DATA_DIR }}"
+WORKING_DIR="{{ WORKING_DIR }}"
+CLEAN_DATA_DIR="{{ CLEAN_DATA_DIR }}"
+scriptname="{{ SESSION }}.{{ PIPELINE_NAME }}.XNAT_CHECK"
+logfile="${CHECK_DATA_DIR}/${scriptname}.log"
+successfile="${CHECK_DATA_DIR}/${scriptname}.success"
+resource_dir="{{ RESOURCES_ROOT }}/{{ OUTPUT_RESOURCE_NAME }}/{{ SESSION }}"
+dest_dir="{{ SESSION }}/ProcessingInfo"
+
+if [ `find $WORKING_DIR/{{SESSION}}/processing/logs/comlogs -name 'error*.log' -o -name 'tmp*.log' | wc -l` -gt "0" ] ; then
+    echo "ERROR: One or more QuNex comlogs are error or tmp logs"
+    exit 1
 fi
 
-{{ PYTHON }} \
-    {{ CHECK_DATA_RUNPATH }}
+check_all_expected_files_exist $resource_dir > $logfile
+if [ $missing_files -ne 0 ] ; then
+{% block check_failed %}
+    echo "Completion Check was unsuccessful"
+    rm $successfile 2> /dev/null
+    {{ PYTHON }} << END_PYTHON_CODE
+    from shared_values import (
+    get_xnat_client,
+    OUTPUT_RESOURCE_NAME,
+    )
 
-RC=$?
-if [ $RC -ne 0 ] ; then
-	>&2 echo "ERROR:  Singularity CHECK_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."	
-	exit $RC
+    print("Establishing connection to IntraDB.")
+    client = get_xnat_client()
+
+
+    print("Removing `success` file, if it exists.")
+    client.remove_resource_filepath(
+    OUTPUT_RESOURCE_NAME, "${dest_dir}/${scriptname}.success"
+    )
+
+    print("Uploading check log.")
+    client.upload_resource_filepath(
+    OUTPUT_RESOURCE_NAME,
+    "${logfile}",
+    resource_filepath="${dest_dir}/${scriptname}.log"
+    )
+    END_PYTHON_CODE
+{% endblock check_failed %}
+
+>&2 echo "ERROR:  There are $missing_files missing files.  Let's not proceed.  Exiting."
+exit 1
 fi
 
-{% block content %}{% endblock %}
+{% block check_succeeded %}
+    echo "Completion Check was successful."
+    echo "Completion Check was successful." > $successfile
+
+    {{ PYTHON }} << END_PYTHON_CODE
+    from shared_values import (
+    get_xnat_client,
+    OUTPUT_RESOURCE_NAME,
+    )
+
+    print("Establishing connection to IntraDB.")
+    client = get_xnat_client()
+
+    print("Uploading check log.")
+    client.upload_resource_filepath(
+    OUTPUT_RESOURCE_NAME,
+    "${logfile}",
+    resource_filepath="${dest_dir}/${scriptname}.log"
+    )
+    print("Uploading success file.")
+    client.upload_resource_filepath(
+    OUTPUT_RESOURCE_NAME,
+    "${successfile}",
+    resource_filepath="${dest_dir}/${scriptname}.success"
+    )
+    END_PYTHON_CODE
+
+    # Original data was kept for troubleshooting purposes. However,
+    # this run was successful and original data is no longer needed.
+    # Deleting everything.
+
+    echo "Removing CHECK_DATA_DIR."
+    rm -rf $CHECK_DATA_DIR
+    echo "Removing WORKING_DIR."
+    rm -rf $WORKING_DIR
+    echo "Removing CLEAN_DATA_DIR."
+    rm -rf $CLEAN_DATA_DIR
+{% endblock check_succeeded %}
