@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/home/moises/miniconda3/bin/python3
 
 from pathlib import Path
 import sys
