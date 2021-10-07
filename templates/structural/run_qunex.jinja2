@@ -19,6 +19,7 @@ ParametersFile="$StudyFolder/sessions/specs/batch_parameters.txt"
 Session='{{ SESSION }}'
 SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
+Action='{{ QUNEX_ACTION|default("link", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
 SessionName="{{ SESSION }}{{ _SCAN }}"
 
@@ -40,12 +41,23 @@ BatchFile="${StudyFolder}/processing/batch.txt"
 
 QUNEXCOMMAND="bash $QUNEXCONNPATH/qunex"
 
-main() {
+CDD="{{ CHECK_DATA_DIR }}"
 
+reset_time(){
+    mintime=$(date +%s)
+}
+
+snapshot(){
+    {{ ASSETS_DIR }}/logfiles.py $StudyFolder $mintime > $CDD/${1}
+    reset_time
+}
+
+main() {
+reset_time
 #########################	createStudy
 ${QUNEXCOMMAND} createStudy --studyfolder="${StudyFolder}"
 cd ${StudyFolder}/sessions
-
+snapshot 0.createstudy.txt
 ### BEGIN qunex_setup ### {% block qunex_setup %}
     # {% if USE_CUSTOM_BATCH is defined %}
         ## This pipeline uses a template-based approach to generate the id/scan portion of batch.txt, rather than 'createBatch'
@@ -55,9 +67,11 @@ cd ${StudyFolder}/sessions
         ${QUNEXCOMMAND} importHCP \
         --sessionsfolder="${StudyFolder}/sessions"  \
         --inbox="${StudyFolder}/unprocessed" \
-        --action="link" \
+        --action="${Action}" \
         --overwrite="${Overwrite}" \
         --archive="leave"
+
+        snapshot 1.importHCP.txt
 
         #########################	setupHCP
         ${QUNEXCOMMAND} setupHCP \
@@ -65,12 +79,15 @@ cd ${StudyFolder}/sessions
         --sessions="${Session}" \
         --hcp_filename="original"
 
+        snapshot 2.setupHCP.txt
+
         #########################	createBatch
         ${QUNEXCOMMAND} createBatch \
         --sessionsfolder="${StudyFolder}/sessions" \
         --overwrite="append" \
         --paramfile="$ParametersFile"
 
+        snapshot 3.createBatch.txt
         #{% endif %}{% endblock qunex_setup %}
 ### END qunex_setup ###
 
@@ -82,6 +99,7 @@ g_script_name=$(basename "${0}" .sh)
 filename="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${g_script_name}.execinfo"
 echo $(date) > ${start_time_file}
 
+snapshot 4.pre-processing.txt
 }
 
 main $@
