@@ -54,11 +54,11 @@ StructuralPreprocessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -124,11 +124,11 @@ StructuralPreprocessingHandEdit:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -193,11 +193,11 @@ FunctionalPreprocessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -274,11 +274,11 @@ MultiRunIcaFixProcessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -355,11 +355,11 @@ MsmAllProcessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -424,11 +424,11 @@ DiffusionPreprocessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -493,11 +493,11 @@ AslProcessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
@@ -567,11 +567,11 @@ TaskAnalysisProcessing:
       variable: CHECK_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/XNAT_MARK_RUNNING_STATUS.py
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.XNAT_MARK_RUNNING_STATUS.py"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
       variable: MARK_RUNNING_STATUS_RUNPATH
   - generate_file:
       template: generic/mark_complete.jinja2
-      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME}.MARK_COMPLETE_RUNNING_STATUS_job.sh"
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
       template: generic/submit_to_pbs.jinja2
