@@ -45,10 +45,3 @@ if [ $RC -ne 0 ] ; then
     >&2 echo "ERROR:  Singularity PROCESS_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."
     exit $RC
 fi
-
-# Qunex does not always throw a non-zero exit code on error. Therefore,
-# check for presence of error logs. If found, exit with correct error exit status.
-if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/logs/comlogs -name 'error*.log' -o -name 'tmp*.log' | wc -l` -gt "0" ] ; then
-    echo "ERROR: One or more QuNex comlogs are error or tmp logs"
-    exit 1
-fi
