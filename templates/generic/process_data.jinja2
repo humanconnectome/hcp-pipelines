@@ -28,13 +28,8 @@ mkdir -p {{ SCRATCH_TMP_DIR }}
 ) }}
 
 RC=$?
-if [ $RC -ne 0 ] ; then
-	>&2 echo "ERROR:  Singularity PROCESS_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."	
-	exit $RC
-fi
 
-{% block content -%}
-{%- if USE_SCRATCH_FOR_PROCESSING %}
+{% if USE_SCRATCH_FOR_PROCESSING -%}
 mv $SCRATCH/$BASE $ORIGINAL
 if [[ "$SCRATCH" =~ /scratch/{{ USER }}/.*$ ]] ; then
 	rm -rf $SCRATCH
@@ -44,6 +39,9 @@ fi
 if [[ "{{ SCRATCH_TMP_DIR }}" =~ /scratch/{{ USER }}/.*$ ]] ; then
 	rm -rf {{ SCRATCH_TMP_DIR }}
 fi
-{% endif -%}
-{% endblock %}
+{%- endif %}
 
+if [ $RC -ne 0 ] ; then
+    >&2 echo "ERROR:  Singularity PROCESS_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."
+    exit $RC
+fi
