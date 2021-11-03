@@ -15,7 +15,7 @@ def check_required_files_are_available(
     EXPECTED_FILES_LIST,
     GRADIENT_COEFFICIENT_PATH,
     PYTHON_IMPORT_DIR,
-    FREESURFER_LICENSE_PATH,
+    #FREESURFER_LICENSE_PATH,
     DRYRUN,
 ):
     if DRYRUN:
@@ -33,8 +33,8 @@ def check_required_files_are_available(
        raise Exception("GRADIENT_COEFFICIENT_PATH is not accessible. Value = ", GRADIENT_COEFFICIENT_PATH)
     if is_unreadable(PYTHON_IMPORT_DIR):
         raise Exception("PYTHON_IMPORT_DIR is not accessible. Value = ", PYTHON_IMPORT_DIR)
-    if is_unreadable(FREESURFER_LICENSE_PATH):
-        raise Exception("FREESURFER_LICENSE_PATH is not accessible. Value = ", FREESURFER_LICENSE_PATH)
+    #if is_unreadable(FREESURFER_LICENSE_PATH):
+        #raise Exception("FREESURFER_LICENSE_PATH is not accessible. Value = ", FREESURFER_LICENSE_PATH)
 
 
 def generate_timestamp():
