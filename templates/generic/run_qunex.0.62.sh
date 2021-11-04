@@ -8,6 +8,7 @@ echo " -- Reading inputs... "
 echo ""
 
 # -- Define script name
+scriptNameWithoutSuffix=$(basename "${0}" .sh)
 scriptName=$(basename ${0})
 scriptPath=$(dirname ${0})
 
@@ -21,6 +22,8 @@ SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
 SessionName="{{ SESSION }}{{ _SCAN }}"
+start_time_file="$StudyFolder/{{ STARTTIME_FILE_NAME }}"
+execinfo_file="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${scriptNameWithoutSuffix}.execinfo"
 
 export StudyFolder Session SubjectPart
 
@@ -60,20 +63,9 @@ echo "   "                                                                      
 # -- Define QUNEX command
 QUNEXCOMMAND="bash $QUNEXCONNPATH/qunex"
 
-log_Msg()
-{
+log_Msg() {
 	local msg="$*"
-	local dateTime
-	dateTime=$(date)
-	local toolname
-
-	if [ -z "${log_toolName}" ]; then
-		toolname=$(basename ${0})
-	else
-		toolname="${log_toolName}"
-	fi
-
-	echo ${dateTime} "-" ${toolname} "-" "${msg}"
+	echo $(date) "-" ${scriptName} "-" "${msg}"
 }
 
 main() {
@@ -113,12 +105,9 @@ cd ${StudyFolder}/sessions
 sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
 
-start_time_file="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.starttime"
-g_script_name=$(basename "${0}" .sh)
-filename="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${g_script_name}.execinfo"
 echo $(date) > ${start_time_file}
-log_Msg "PBS_JOBID: ${PBS_JOBID}" > ${filename}
-log_Msg "PBS execution node: $(hostname)" >> ${filename}
+log_Msg "JOBID: ${SLURM_JOBID}" > ${execinfo_file}
+log_Msg "execution node: $(hostname)" >> ${execinfo_file}
 
 
 ### BEGIN pipeline_specific ###

@@ -8,6 +8,7 @@ echo " -- Reading inputs... "
 echo ""
 
 # -- Define script name
+scriptNameWithoutSuffix=$(basename "${0}" .sh)
 scriptName=$(basename ${0})
 scriptPath=$(dirname ${0})
 
@@ -20,7 +21,9 @@ Session='{{ SESSION }}'
 SubjectPart='{{ SUBJECT }}'
 Overwrite='{{ QUNEX_OVERWRITE|default("yes", true) }}'
 HCPpipelineProcess='{{ PIPELINE_NAME }}'
-start_time_file="{{ STARTTIME_FILE_NAME }}"
+start_time_file="$StudyFolder/{{ STARTTIME_FILE_NAME }}"
+SessionName="{{ SESSION }}{{ _SCAN }}"
+execinfo_file="${StudyFolder}/ProcessingInfo/${SessionName}.${HCPpipelineProcess}.${scriptNameWithoutSuffix}.execinfo"
 parsessions=1   # the number of sessions to process in parallel
 threads=1       # the number of bold files to process in parallel
 BatchFile="${StudyFolder}/processing/batch.txt"
@@ -91,6 +94,14 @@ cd ${StudyFolder}/sessions
 sleep 5
 mkdir ${StudyFolder}/ProcessingInfo
 echo $(date) > ${start_time_file}
+
+log_Msg() {
+	local msg="$*"
+	echo $(date) "-" ${scriptName} "-" "${msg}"
+}
+
+log_Msg "JOBID: ${SLURM_JOBID}" > ${execinfo_file}
+log_Msg "execution node: $(hostname)" >> ${execinfo_file}
 
 
 ### BEGIN pipeline_specific ###
