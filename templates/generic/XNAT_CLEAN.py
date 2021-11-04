@@ -1,5 +1,4 @@
 import sys
-from pathlib import Path
 
 from shared_values import WORKING_DIR, CLEAN_DATA_DIR, session
 from virtual_fs import VirtualFileSystem
@@ -16,7 +15,7 @@ fs.copy(
 )
 
 print("Remove old files, keep files newer than start_time_file.")
-start_time_file = Path("{{ STARTTIME_FILE_NAME }}")
+start_time_file = WORKING_DIR / session / "{{ STARTTIME_FILE_NAME }}"
 start_time = start_time_file.stat().st_mtime
 fs.remove(lambda src, dest: src.stat().st_mtime < start_time)
 
