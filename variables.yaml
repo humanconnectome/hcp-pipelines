@@ -22,16 +22,16 @@ DEFAULT: &default
   ARCHIVE_ROOT: /ceph/intradb/archive
   RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   PUT_SERVER_LIST: >-
-    http://hcpi-shadow10.nrg.wustl.edu:8080
-    http://hcpi-shadow11.nrg.wustl.edu:8080
-    http://hcpi-shadow12.nrg.wustl.edu:8080
-    http://hcpi-shadow13.nrg.wustl.edu:8080
-    http://hcpi-shadow14.nrg.wustl.edu:8080
-    http://hcpi-shadow15.nrg.wustl.edu:8080
-    http://hcpi-shadow16.nrg.wustl.edu:8080
-    http://hcpi-shadow17.nrg.wustl.edu:8080
-    http://hcpi-shadow18.nrg.wustl.edu:8080
-    http://hcpi-shadow19.nrg.wustl.edu:8080
+    http://10.27.113.140:8080
+    http://10.27.113.141:8080
+    http://10.27.113.142:8080
+    http://10.27.113.143:8080
+    http://10.27.113.144:8080
+    http://10.27.113.145:8080
+    http://10.27.113.146:8080
+    http://10.27.113.147:8080
+    http://10.27.113.148:8080
+    http://10.27.113.149:8080
 
   CLOBBER_RESOURCE: True
   WALLTIME_LIMIT_HOURS: 24
