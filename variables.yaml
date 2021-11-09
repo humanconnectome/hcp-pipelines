@@ -124,7 +124,8 @@ diffusion_preprocess:
   <<: *default
   QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8.sif
   PROCESS_PBS_K20X: True
-  PROCESS_PBS_GPU: 1
+  # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
+  PROCESS_PBS_GPU: "tesla_v100S:1"
   PROCESS_NVIDIA: True
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
   BUILD_DIR: $BUILD_ROOT/diffusion_runs
