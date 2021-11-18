@@ -1,10 +1,14 @@
 {% extends "generic/get_data.jinja2" %}
 {% block content %}
-rm -rf $StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS
+if [ -d "$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS" ] ; then
+    rm -rf $StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS
+fi
 ## Convert FreeSurfer output from links to files for rerun
 if [ -d "$StudyFolder" ] ; then
     pushd $StudyFolder
     find . -type l | xargs -I '{}' sh -c 'cp --remove-destination $(readlink {}) {}'
+    # In case structural preproc output is locked, we need to be able to run hand editing.
+    chmod -R u+w $StudyFolder
     popd
 fi
 {% endblock content %}
