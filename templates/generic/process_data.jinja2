@@ -41,6 +41,11 @@ if [[ "{{ SCRATCH_TMP_DIR }}" =~ /scratch/{{ USER }}/.*$ ]] ; then
 fi
 {%- endif %}
 
+cd {{ WORKING_DIR }} && \
+    find . -type d ! -perm 750 -exec chmod 750 {} \; && \
+    find . -type f ! -perm 640 -exec chmod 640 {} \; && \
+    echo "chmod file permissions to minimum."
+
 if [ $RC -ne 0 ] ; then
     >&2 echo "ERROR:  Singularity PROCESS_DATA process failed (RC=$RC).  Let's not proceed.  Exiting."
     exit $RC

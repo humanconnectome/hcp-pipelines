@@ -18,3 +18,8 @@ ProcessingOutputFolder="$WorkingDir/${Session}/sessions/${Session}/hcp/"
 StudyFolder="$CleanDataDir/${Session}"
 
 {% block content %}{% endblock %}
+
+cd $CleanDataDir && \
+    find . -type d ! -perm 750 -exec chmod 750 {} \; && \
+    find . -type f ! -perm 640 -exec chmod 640 {} \; && \
+    echo "chmod file permissions to minimum."
