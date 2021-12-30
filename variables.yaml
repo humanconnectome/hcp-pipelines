@@ -87,7 +87,7 @@ DEFAULT: &default
 
 structural_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.11.sif
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
   WALLTIME_LIMIT_HOURS: 72
