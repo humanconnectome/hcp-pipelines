@@ -87,6 +87,7 @@ DEFAULT: &default
 structural_preprocess:
   <<: *default
   QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.11.sif
+  USE_SCRATCH_FOR_PROCESSING: True
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
   WALLTIME_LIMIT_HOURS: 72
