@@ -98,7 +98,6 @@ structural_preprocess:
 
 hand_edit:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 72
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
