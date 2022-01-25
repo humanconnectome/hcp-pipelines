@@ -18,7 +18,7 @@ DEFAULT: &default
   GRADIENT_COEFFICIENT_PATH: $AUX_DIR/gradient_coefficient_files
   FREESURFER_LICENSE_PATH: $AUX_DIR/freesurfer/license.txt
   CONTAINERS_DIR: $AUX_DIR/containers
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.7.sif
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.11.sif
   ARCHIVE_ROOT: /ceph/intradb/archive
   RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   PUT_SERVER_LIST: >-
@@ -87,7 +87,6 @@ DEFAULT: &default
 
 structural_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.11.sif
   USE_SCRATCH_FOR_PROCESSING: True
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
