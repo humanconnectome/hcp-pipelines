@@ -145,7 +145,6 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 20
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
