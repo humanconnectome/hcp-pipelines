@@ -110,7 +110,6 @@ hand_edit:
 
 functional_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   OUTPUT_RESOURCE_NAME: ${SCAN}_preproc
 
 # 
