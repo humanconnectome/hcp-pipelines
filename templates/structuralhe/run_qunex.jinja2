@@ -1,11 +1,11 @@
-{% extends "generic/run_qunex.0.62.sh" %}
+{% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
 	# We want to keep source files that may have been edited.  Let's modify the timestamps of those.
 	find ${StudyFolder} -type f | egrep "\/wm.mgz*|\/wm.gz*|\/control.dat*|\/brainmask.mgz*" | xargs touch
 
 	######################### hcp2
-	${QUNEXCOMMAND} hcp2 \
+	${QUNEXCOMMAND} hcp_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
@@ -15,7 +15,7 @@
 
 
 	######################### hcp3
-	${QUNEXCOMMAND} hcp3 \
+	${QUNEXCOMMAND} hcp_post_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \

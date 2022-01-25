@@ -18,7 +18,8 @@ DEFAULT: &default
   GRADIENT_COEFFICIENT_PATH: $AUX_DIR/gradient_coefficient_files
   FREESURFER_LICENSE_PATH: $AUX_DIR/freesurfer/license.txt
   CONTAINERS_DIR: $AUX_DIR/containers
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.7.sif
+  QUNEX_VERSION: 0.91.11
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_${QUNEX_VERSION}.sif
   ARCHIVE_ROOT: /ceph/intradb/archive
   RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   PUT_SERVER_LIST: >-
@@ -87,7 +88,6 @@ DEFAULT: &default
 
 structural_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.11.sif
   USE_SCRATCH_FOR_PROCESSING: True
   USE_PRESCAN_NORMALIZED: False
   OUTPUT_RESOURCE_NAME: Structural_preproc
@@ -99,7 +99,6 @@ structural_preprocess:
 
 hand_edit:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 72
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
@@ -112,7 +111,6 @@ hand_edit:
 
 functional_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   OUTPUT_RESOURCE_NAME: ${SCAN}_preproc
 
 # 
@@ -121,7 +119,6 @@ functional_preprocess:
 
 diffusion_preprocess:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8.sif
   PROCESS_PBS_K20X: True
   # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
   PROCESS_PBS_GPU: "tesla_v100S:1"
@@ -137,7 +134,6 @@ diffusion_preprocess:
 
 multirunicafix:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 48
   WALLTIME_LIMIT_HOURS: 24
   #WALLTIME_LIMIT_HOURS: 60
@@ -150,7 +146,6 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 20
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
@@ -163,7 +158,6 @@ msmall_process:
 
 asl_process:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.7.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 12
   OUTPUT_RESOURCE_NAME: ASL_proc

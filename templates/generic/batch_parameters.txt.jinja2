@@ -13,9 +13,9 @@ _log                    : study|hcp
 
 # -------------------------> General HCP settings
 
-_hcp_Pipeline           : ${HCPPIPEDIR}
+_hcp_pipeline           : ${HCPPIPEDIR}
 _hcp_folderstructure    : hcpls
-_hcp_filename           : original
+_hcp_filename           : userdefined
 _hcp_processing_mode    : HCPStyleData
 _hcp_regname            : MSMSulc
 _hcp_cifti_tail         : _Atlas
@@ -62,7 +62,7 @@ _hcp_bold_res             : 2
 _hcp_bold_biascorrection  : SEBASED
 
 # Following parameters related to susceptibility distortion correction
-# Note: HCPpipelines assumes that the BOLD and SEFMs have the same echo-spacing within fMRIVolume (hcp4)
+# Note: HCPpipelines assumes that the BOLD and SEFMs have the same echo-spacing within hcp_fmri_volume
 _hcp_bold_echospacing     : # 0.0005800090  # ==> Default "EffectiveEchoSpacing" value (in sec)
 _hcp_bold_dcmethod        : TOPUP
 _hcp_bold_topupconfig     : b02b0.cnf

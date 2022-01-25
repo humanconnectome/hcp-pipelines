@@ -2,21 +2,21 @@
 {% block pipeline_specific %}
 
 	######################### hcp1
-	${QUNEXCOMMAND} hcp1 \
+	${QUNEXCOMMAND} hcp_pre_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
 		--parsessions="${parsessions}"
 
 	######################### hcp2
-	${QUNEXCOMMAND} hcp2 \
+	${QUNEXCOMMAND} hcp_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
 		--parsessions="${parsessions}"
 
 	######################### hcp3
-	${QUNEXCOMMAND} hcp3 \
+	${QUNEXCOMMAND} hcp_post_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \

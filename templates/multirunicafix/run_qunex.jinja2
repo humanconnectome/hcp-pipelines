@@ -1,10 +1,10 @@
-{% extends "generic/run_qunex.0.62.sh" %}
+{% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
 	######################### hcp_ICAFix
 	## No hcp_ReApplyFix (run automatically as part of hcp_ICAFix)
 	## NOTE:  As part of setting up batch.txt, we've included only scans that exist, and they're in the preferred order
-	${QUNEXCOMMAND} hcp_ICAFix \
+	${QUNEXCOMMAND} hcp_icafix \
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \

@@ -80,7 +80,7 @@ cd ${StudyFolder}/sessions
 	${QUNEXCOMMAND} setup_hcp \
 	    --sessionsfolder="${StudyFolder}/sessions" \
 	    --sessions="${Session}" \
-	    --hcp_filename="original" 
+	    --hcp_filename="userdefined"
 
 	#########################	createBatch
 	${QUNEXCOMMAND} create_batch \
