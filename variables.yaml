@@ -133,7 +133,6 @@ diffusion_preprocess:
 
 multirunicafix:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.62.8_FSL603.sif
   MEM_LIMIT_GBS: 48
   WALLTIME_LIMIT_HOURS: 24
   #WALLTIME_LIMIT_HOURS: 60
