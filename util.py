@@ -1,5 +1,7 @@
+import logging
 import os
 import subprocess
+import shlex
 
 
 def escape_path(text):
@@ -11,10 +13,31 @@ def keep_resting_state_scans(scans):
 
 
 def shell_run(cmd):
-    return subprocess.check_output(cmd, shell=True, universal_newlines=True).strip()
-    # result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-    # print(result.returncode, result.stdout, result.stderr)
-    # return None;
+    """
+    Run a shell command and log stdout and stderr.
+
+    Source: https://stackoverflow.com/a/21953948/11953415
+    """
+    logger = logging.getLogger("shell_run")
+    logger.info('running subprocess: %s', cmd)
+    command_line_args = shlex.split(cmd)
+    try:
+        command_line_process = subprocess.Popen(
+            command_line_args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        stdout, _ = command_line_process.communicate()
+        logger.info("stdout:\n--------------------\n%s", stdout.decode())
+    except (OSError, subprocess.CalledProcessError) as exception:
+        logger.critical('Exception occured: ' + str(exception))
+        logger.warning('Subprocess failed.')
+        return False
+    else:
+        # no exception was raised
+        logger.info('Subprocess finished.')
+
+    return True
 
 
 def is_unreadable(filename):
