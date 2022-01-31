@@ -1,8 +1,10 @@
 import glob
+import logging
 import sys
 import os
 import random
 import time
+from datetime import datetime
 from pathlib import Path
 
 from .lib.get_data import PipelineResources
@@ -19,7 +21,7 @@ def check_required_files_are_available(
     DRYRUN,
 ):
     if DRYRUN:
-        print(
+        logging.warning(
             "Dry-Mode is active: Skipping the checking of required files."
         )
         return
@@ -125,29 +127,30 @@ def make_directories(
     DRYRUN, WORKING_DIR, CLEAN_DATA_DIR, STUDY_FOLDER, CHECK_DATA_DIR, MARK_COMPLETION_DIR
 ):
     if not DRYRUN:
-        print("Making ", WORKING_DIR)
+        logging.debug("Making %s", WORKING_DIR)
         os.makedirs(WORKING_DIR, exist_ok=True)
-        print("Making ", CLEAN_DATA_DIR)
+        logging.debug("Making %s", CLEAN_DATA_DIR)
         os.makedirs(CLEAN_DATA_DIR, exist_ok=True)
-        print("Making study folder: ", WORKING_DIR)
+        logging.debug("Making study folder: %s", WORKING_DIR)
         os.makedirs(f"{STUDY_FOLDER}/processing", exist_ok=True)
-        print("Making ", CHECK_DATA_DIR)
+        logging.debug("Making %s", CHECK_DATA_DIR)
         os.makedirs(CHECK_DATA_DIR, exist_ok=True)
-        #print("Making ", MARK_COMPLETION_DIR)
+        #logging.debug("Making ", MARK_COMPLETION_DIR)
         #os.makedirs(MARK_COMPLETION_DIR, exist_ok=True)
 
 
 def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
     if DRYRUN:
-        print(
+        logging.warning(
             "Dry-Mode is active: Skipping the launch of the main script to prevent side-effects."
         )
     elif not AUTOLAUNCH_AT_END:
-        print(
+        logging.warning(
             "AUTOLAUNCH_AT_END has been set to False. Change that in common_vars section of variables.yaml to autolaunch."
         )
     else:
-        print("Launching main Bash script...")
+        launch_time = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+        logging.info("Launching main Bash script... at %s", launch_time)
         shell_run(SUBMIT_TO_PBS_SCRIPT)
 
 
