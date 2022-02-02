@@ -42,8 +42,10 @@ second_run(){
 
 
 
+{% if USE_RUNNING_STATUS is defined and USE_RUNNING_STATUS == True %}
 ### Run Script to create running status marker file
 mark_running_status
+{% endif %}
 
 if [[ $* == *--continue* ]]; then
     second_run
@@ -52,8 +54,10 @@ else
 fi
 
 
+{% if USE_RUNNING_STATUS is defined and USE_RUNNING_STATUS == True %}
 ### This cleans up the running status marker and should always run last
 submit $NO_LONGER_RUNNING afterany
+{% endif %}
 
 ### Export variable in case attempting to chain multiple jobs in series
 export PRIOR_JOBID
