@@ -37,6 +37,7 @@ DEFAULT: &default
   CLOBBER_RESOURCE: True
   WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 8
+  USE_RUNNING_STATUS: False
   USE_SCRATCH_FOR_PROCESSING: False
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
@@ -47,7 +48,7 @@ DEFAULT: &default
   CLEAN_DATA: 3
   PUT_DATA: 4
   CHECK_DATA: 5
-  STAGE: $CHECK_DATA
+  STAGE: $PROCESS_DATA
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
