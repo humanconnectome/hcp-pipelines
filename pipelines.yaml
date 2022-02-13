@@ -64,6 +64,9 @@ StructuralPreprocessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -134,6 +137,9 @@ StructuralPreprocessingHandEdit:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -203,6 +209,9 @@ FunctionalPreprocessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -284,6 +293,9 @@ MultiRunIcaFixProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -365,6 +377,9 @@ MsmAllProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -434,6 +449,9 @@ DiffusionPreprocessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -503,6 +521,9 @@ AslProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
 
 
@@ -577,4 +598,7 @@ TaskAnalysisProcessing:
       template: generic/submit_to_pbs.jinja2
       filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
       variable: SUBMIT_TO_PBS_SCRIPT
+  - generate_file:
+      template: generic/Makefile
+      filepath: "${CHECK_DATA_DIR}/Makefile"
   - function: launch_main_script
