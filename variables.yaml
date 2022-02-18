@@ -168,7 +168,6 @@ asl_process:
 
 task_process:
   <<: *default
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_0.91.7.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 12
   OUTPUT_RESOURCE_NAME: ${SCAN}_analysis_proc
