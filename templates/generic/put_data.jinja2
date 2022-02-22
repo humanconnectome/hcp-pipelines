@@ -1,5 +1,9 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
 {{ slurm_head(job_name=SCRIPTNAME_PUT, log_dir=LOG_DIR, mem=12) }}
+# Cron jobs remove this directory if it is old.  Let's check and recreate if necessary.
+if [ ! -d $LOG_DIR ] ; then
+	mkdir -p $LOG_DIR
+fi
 
 cp {{ CHECK_DATA_DIR }}/* {{ CLEAN_DATA_DIR }}/{{ SESSION }}/ProcessingInfo
 
