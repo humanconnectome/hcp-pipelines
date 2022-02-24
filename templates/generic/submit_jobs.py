@@ -58,7 +58,7 @@ def main(start_index, end_index, do_marker=True, dry_run=False, prior_job=None):
     return prior_job
 
 
-breakpoint = "{{ STAGE }}"
+breakpoint = "{{ BREAKPOINT }}"
 choices = ['get', 'process', 'clean', 'put', 'check']
 scripts = dict(
     get="{{ GET_DATA_JOB_SCRIPT_NAME }}",
@@ -74,9 +74,9 @@ parser.add_argument('--start', '-s', choices=choices, default='get', help='Start
 parser.add_argument('--end', '-e', choices=choices, default='check', help='Stop after this step.')
 parser.add_argument('--dry-run', '-n', action='store_true',
                     help='Do not submit jobs, just print commands that would run.')
-parser.add_argument('--all', '-a', action='store_true', help='Run all steps, ignoring the breakpoint (`STAGE`).')
-parser.add_argument('--normal-start', '-b', action='store_true', help='Go from `start` til breakpoint (`STAGE`).')
-parser.add_argument('--resume', '-r', action='store_true', help='Continue from the breakpoint (`STAGE`) til end.')
+parser.add_argument('--all', '-a', action='store_true', help='Run all steps, ignoring the `BREAKPOINT`.')
+parser.add_argument('--normal-start', '-b', action='store_true', help='Go from `start` til `BREAKPOINT`.')
+parser.add_argument('--resume', '-r', action='store_true', help='Continue from step after the `BREAKPOINT` til end.')
 parser.add_argument('--skip-marker', action='store_true', help='Do not add, then remove, a status marker on IntraDB.')
 
 if __name__ == "__main__":

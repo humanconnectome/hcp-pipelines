@@ -41,13 +41,8 @@ DEFAULT: &default
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   AUTOLAUNCH_AT_END: True
-  PREPARE_SCRIPTS: 0
-  GET_DATA: 1
-  PROCESS_DATA: 2
-  CLEAN_DATA: 3
-  PUT_DATA: 4
-  CHECK_DATA: 5
-  STAGE: $CHECK_DATA
+  # Choices for BREAKPOINT: get, process, clean, put, check
+  BREAKPOINT: check
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT

@@ -27,14 +27,14 @@ NO_LONGER_RUNNING="{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}"
 ### Chain the scripts onto the PBS
 {%- set stages=['GET','PROCESS','CLEAN','PUT','CHECK'] %}
 first_run(){
-{%- for job in stages[:STAGE] %}
+{%- for job in stages[:BREAKPOINT] %}
     echo "Submitting '{{ job }}' job to queue."
     submit ${{ job }}
 {%- endfor %}
 }
 second_run(){
     echo "CONTINUE PROCESSING"
-{%- for job in stages[STAGE:] %}
+{%- for job in stages[BREAKPOINT:] %}
     echo "Submitting '{{ job }}' job to queue."
     submit ${{ job }}
 {%- endfor %}
