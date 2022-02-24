@@ -61,8 +61,8 @@ StructuralPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -131,8 +131,8 @@ StructuralPreprocessingHandEdit:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -200,8 +200,8 @@ FunctionalPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -281,8 +281,8 @@ MultiRunIcaFixProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -362,8 +362,8 @@ MsmAllProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -431,8 +431,8 @@ DiffusionPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -500,8 +500,8 @@ AslProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
 
@@ -574,7 +574,7 @@ TaskAnalysisProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
-      template: generic/submit_to_pbs.jinja2
-      filepath: ${CHECK_DATA_DIR}/submit_to_pbs.sh
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script
