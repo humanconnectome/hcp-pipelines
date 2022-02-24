@@ -46,7 +46,7 @@ def main(start_index, end_index, do_marker=True, dry_run=False, prior_job=None):
     """
     if do_marker:
         print('Creating "Running Status Marker" file to indicate that jobs are queued.')
-        shell([scripts['marker'], '--status=queued'])
+        shell([scripts['marker'], '--status=queued'], dry_run)
 
     for step in choices[start_index:end_index + 1]:
         prior_job = slurm_chain(scripts[step], prior_job, 'afterok', dry_run)
@@ -74,23 +74,24 @@ parser.add_argument('--start', '-s', choices=choices, default='get', help='Start
 parser.add_argument('--end', '-e', choices=choices, default='check', help='Stop after this step.')
 parser.add_argument('--dry-run', '-n', action='store_true',
                     help='Do not submit jobs, just print commands that would run.')
-parser.add_argument('--all', '-a', action='store_true', help='Run all steps, ignoring the `BREAKPOINT`.')
-parser.add_argument('--normal-start', '-b', action='store_true', help='Go from `start` til `BREAKPOINT`.')
+parser.add_argument('--show-breakpoint', '-b', action='store_true', help='Show the `BREAKPOINT` value.')
+parser.add_argument('--normal-start', '-a', action='store_true', help='Go from `start` til `BREAKPOINT`.')
 parser.add_argument('--resume', '-r', action='store_true', help='Continue from step after the `BREAKPOINT` til end.')
-parser.add_argument('--skip-marker', action='store_true', help='Do not add, then remove, a status marker on IntraDB.')
+parser.add_argument('--skip-marker', '-m', action='store_true', help='Do not add, then remove, a status marker on IntraDB.')
 
 if __name__ == "__main__":
     args = parser.parse_args()
+
+    if args.show_breakpoint:
+        print(f"BREAKPOINT={breakpoint}")
+        exit(0)
 
     start_index = choices.index(args.start)
     end_index = choices.index(args.end)
     if start_index > end_index:
         raise ValueError("Start step must be before end step.")
 
-    if args.all:
-        start_index = 0
-        end_index = len(choices) - 1
-    elif args.resume:
+    if args.resume:
         start_index = choices.index(breakpoint) + 1
     elif args.normal_start:
         end_index = choices.index(breakpoint)
