@@ -151,7 +151,7 @@ def launch_main_script(SUBMIT_TO_PBS_SCRIPT, DRYRUN, AUTOLAUNCH_AT_END):
     else:
         launch_time = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
         logging.info("Launching main Bash script... at %s", launch_time)
-        shell_run(SUBMIT_TO_PBS_SCRIPT)
+        shell_run(f"{SUBMIT_TO_PBS_SCRIPT} --normal-start")
 
 
 def available_bold_dirs(RESOURCES_ROOT, PROJECT):
