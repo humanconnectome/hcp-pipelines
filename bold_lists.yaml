@@ -42,6 +42,13 @@ mdd:
     - rfMRI_REST2_AP
     - rfMRI_REST2_PA
 
+bwh:
+  BOLD_LIST_ORDER:
+    - rfMRI_REST1_AP
+    - rfMRI_REST1_PA
+    - rfMRI_REST2_AP
+    - rfMRI_REST2_PA
+
 hca:
   BOLD_LIST_ORDER:
     - rfMRI_REST1_AP

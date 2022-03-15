@@ -210,6 +210,13 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "rfMRI_REST2_AP",
                 "rfMRI_REST2_PA"
             ]
+        elif "CCF_BWH" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA"
+            ]
         elif "CCF_ECP" in PROJECT:
             priority = [
                 "rfMRI_REST1_PE1",
@@ -250,6 +257,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCA = "hca"
     BLO_BANDA = "banda"
     BLO_MDD = "mdd"
+    BLO_BWH = "bwh"
     BLO_ECP = "ecp"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
@@ -260,6 +268,8 @@ def set_bold_list_order(PROJECT, SCAN):
         bold_list_order = BLO_BANDA
     elif PROJECT == "CCF_MDD_STG":
         bold_list_order = BLO_MDD
+    elif PROJECT == "CCF_BWH_STG":
+        bold_list_order = BLO_BWH
     elif PROJECT == "CCF_ECP_STG":
         bold_list_order = BLO_ECP
     elif PROJECT == "CCF_HCD_STG" or PROJECT == "CCF_HCD_TST":
