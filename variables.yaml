@@ -94,6 +94,7 @@ structural_preprocess:
 
 hand_edit:
   <<: *default
+  USE_SCRATCH_FOR_PROCESSING: True
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 72
   OUTPUT_RESOURCE_NAME: Structural_preproc_handedit
