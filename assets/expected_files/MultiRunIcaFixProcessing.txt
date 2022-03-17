@@ -29,7 +29,6 @@ MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica filtered_func_data.
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica filtered_func_data.ica melodic_unmix
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica filtered_func_data.ica melodic_white
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica filtered_func_data.ica Noise__inv.nii.gz
-MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica fix4melview_HCP_Style_Single_Multirun_Dedrift_thr10.txt
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica fix fastsg_mixeltype.nii.gz
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica fix fastsg_pveseg.nii.gz
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica fix fastsg_seg.nii.gz
