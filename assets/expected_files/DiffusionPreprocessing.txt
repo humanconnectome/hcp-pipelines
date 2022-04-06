@@ -72,16 +72,10 @@ Diffusion rawdata all_Pos_b0s.nii.gz
 Diffusion rawdata Neg_1.bval
 Diffusion rawdata Neg_1.bvec
 Diffusion rawdata Neg_1.nii.gz
-Diffusion rawdata Neg_2.bval
-Diffusion rawdata Neg_2.bvec
-Diffusion rawdata Neg_2.nii.gz
 Diffusion rawdata Neg_SeriesCorrespVolNum.txt
 Diffusion rawdata Pos_1.bval
 Diffusion rawdata Pos_1.bvec
 Diffusion rawdata Pos_1.nii.gz
-Diffusion rawdata Pos_2.bval
-Diffusion rawdata Pos_2.bvec
-Diffusion rawdata Pos_2.nii.gz
 Diffusion rawdata Pos_SeriesCorrespVolNum.txt
 Diffusion rawdata select_b0_Neg all_b0s_mcf_avg.nii.gz
 Diffusion rawdata select_b0_Neg all_b0s_mcf.nii.gz
