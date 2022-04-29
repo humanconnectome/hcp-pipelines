@@ -77,7 +77,7 @@ def split_subject_components(_1):
 def get_tasks(SCAN, RESOURCES_ROOT):
     mutations = {}
     tfMRI_SCAN = f"tfMRI_{SCAN}"
-    mutations["TASK_SUMMARY_NAME"] = f"{tfMRI_SCAN}/{tfMRI_SCAN}"
+    mutations["TASK_SUMMARY_NAME"] = f"{tfMRI_SCAN}"
 
     dir_list = sorted(Path(RESOURCES_ROOT).glob(f"{tfMRI_SCAN}_*_preproc"))
     available_bolds = [x.name[:-8] for x in dir_list]
