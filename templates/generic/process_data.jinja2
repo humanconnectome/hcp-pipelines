@@ -1,5 +1,7 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
 {{ slurm_head(job_name=SCRIPTNAME_PROCESS, log_dir=CHECK_DATA_DIR, gpu=PROCESS_PBS_GPU, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
+## Temporary SBATCH to exclude specific problematic nodes
+## #SBATCH --exclude=node18,node25
 
 {% block pre %}{% endblock pre -%}
 {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
