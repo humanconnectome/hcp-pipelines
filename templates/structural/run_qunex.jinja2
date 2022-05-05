@@ -1,6 +1,11 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
 
+	## temporary environment variable to keep FreeSurferPipeline.sh from running recon-all with 8 threads (-openmp option)
+	## 2022/04/15:  A changeset is being committed to the pipelines repository to remove the need for this, so future versions of QuNex
+	## should not require this to be set
+	export NSLOTS=1; 
+
 	######################### hcp1
 	${QUNEXCOMMAND} hcp_pre_freesurfer \
 		--sessions="${StudyFolder}/processing/batch.txt" \
