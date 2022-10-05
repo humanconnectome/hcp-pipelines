@@ -3,8 +3,6 @@ ASL distortion_estimation.log
 ASL gradient_unwarp gdc_corr_vol1.nii.gz
 ASL gradient_unwarp fullWarp_abs.nii.gz
 ASL topup fmapmag.nii.gz
-ASL topup merged_sefms_gdc.topup_log
-ASL topup merged_sefms_gdc.nii.gz
 ASL topup merged_sefms.nii.gz
 ASL topup topup_movpar.txt
 ASL topup fmapmagbrain.nii.gz
@@ -41,7 +39,6 @@ ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.param
 ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat~
 ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat.sum
 ASL Calib Calib0 DistCorr asl2orig_mgz_initial_bbr.dat
-ASL Calib Calib0 BiasCorr calib0_bias.nii.gz
 ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr_roi_s5.nii.gz
 ASL Calib Calib0 BiasCorr SEbased M0_biasraw_s5.nii.gz
 ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain_thr.nii.gz
@@ -55,7 +52,6 @@ ASL Calib Calib0 BiasCorr SEbased M0_biasroi.nii.gz
 ASL Calib Calib0 BiasCorr SEbased ratio_std.txt
 ASL Calib Calib0 BiasCorr SEbased M0_greyroi.nii.gz
 ASL Calib Calib0 BiasCorr SEbased SEBCdivM0_brain.nii.gz
-ASL Calib Calib0 BiasCorr SEbased fmapmag_calib0spc.nii.gz
 ASL Calib Calib0 BiasCorr SEbased M0_greyroi_s5.nii.gz
 ASL Calib Calib0 BiasCorr SEbased SEdivM0_brain.nii.gz
 ASL Calib Calib0 BiasCorr SEbased calib0_secorr.nii.gz
@@ -71,8 +67,6 @@ ASL Calib Calib0 BiasCorr SEbased M0_bias_raw.nii.gz
 ASL Calib Calib0 BiasCorr SEbased ratio_median.txt
 ASL Calib Calib0 BiasCorr SEbased Dropouts.nii.gz
 ASL Calib Calib0 BiasCorr SEbased sebased_bias.nii.gz
-ASL Calib Calib0 BiasCorr calib0_gdc_dc_restore.nii.gz
-ASL Calib Calib0 MTCorr calib0_mtcorr_gdc_dc_restore.nii.gz
 ASL Calib Calib0 MTCorr mtcorr_gdc_calib0.nii.gz
 ASL Calib Calib1 aslfs_mask.nii.gz
 ASL Calib Calib1 DistCorr struct2asl.mat
@@ -92,7 +86,6 @@ ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr.nii.gz
 ASL Calib Calib1 BiasCorr SEbased sebased_bias_dil.nii.gz
 ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_bias.nii.gz
 ASL Calib Calib1 BiasCorr SEbased M0_biasroi_s5.nii.gz
-ASL Calib Calib1 BiasCorr SEbased fmapmag_calib1spc.nii.gz
 ASL Calib Calib1 BiasCorr SEbased CorticalGreyMatter.nii.gz
 ASL Calib Calib1 BiasCorr SEbased SEdivM0_brain_thr_s5.nii.gz
 ASL Calib Calib1 BiasCorr SEbased AllGreyMatter.nii.gz
@@ -115,20 +108,14 @@ ASL Calib Calib1 BiasCorr SEbased M0_bias_raw.nii.gz
 ASL Calib Calib1 BiasCorr SEbased ratio_median.txt
 ASL Calib Calib1 BiasCorr SEbased Dropouts.nii.gz
 ASL Calib Calib1 BiasCorr SEbased sebased_bias.nii.gz
-ASL Calib Calib1 BiasCorr calib1_bias.nii.gz
-ASL Calib Calib1 BiasCorr calib1_gdc_dc_restore.nii.gz
 ASL Calib Calib1 calib1.nii.gz
 ASL Calib Calib1 MTCorr mtcorr_gdc_calib1.nii.gz
-ASL Calib Calib1 MTCorr calib1_mtcorr_gdc_dc_restore.nii.gz
 ASL Calib correct_M0.log
 ASL single_step_resample_to_asl0.log
 ASL TIs aslfs_mask.nii.gz
-ASL TIs tis_gdc_dc_moco_restore_bandcorr.nii.gz
 ASL TIs STCorr2 st_scaling_factors.nii.gz
-ASL TIs STCorr2 tis_gdc_dc_restore_mtcorr_stcorr.nii.gz
 ASL TIs STCorr2 combined_scaling_factors_asln.nii.gz
 ASL TIs MoCo final_registration_TIs.nii.gz
-ASL TIs MoCo tis_gdc_dc_moco.nii.gz
 ASL TIs MoCo initial_registration_TIs.nii.gz.par
 ASL TIs MoCo final_registration_TIs.nii.gz.par
 ASL TIs MoCo temp_reg_dc_tis_mtcorr.nii.gz
@@ -136,7 +123,6 @@ ASL TIs MoCo initial_registration_TIs.nii.gz
 ASL TIs MoCo temp_reg_dc_tis_mtcorr_odd.nii.gz
 ASL TIs MoCo temp_reg_dc_tis_mtcorr_even.nii.gz
 ASL TIs MoCo reg_mt_scaling_factors.nii.gz
-ASL TIs MoCo reg_gdc_dc_tis_biascorr.nii.gz
 ASL TIs SatRecov nospatial mean_T1t.nii.gz
 ASL TIs SatRecov nospatial mean_M0t.nii.gz
 ASL TIs SatRecov nospatial mean_A.nii.gz
@@ -155,12 +141,9 @@ ASL TIs OxfordASL native_space perfusion.nii.gz
 ASL TIs OxfordASL native_space perfusion_var.nii.gz
 ASL TIs OxfordASL native_space mask.nii.gz
 ASL TIs OxfordASL native_space arrival_var.nii.gz
-ASL TIs DistCorr FirstPass gdc_dc_tis.nii.gz
 ASL TIs DistCorr FirstPass tis_gdc.nii.gz
-ASL TIs DistCorr FirstPass temp_reg_gdc_dc_tis.nii.gz
 ASL TIs STCorr st_scaling_factors.nii.gz
 ASL TIs STCorr tis_stcorr.nii.gz
-ASL TIs BiasCorr tis_gdc_dc_restore.nii.gz
 ASL TIs BiasCorr tis_biascorr.nii.gz
 ASL TIs combined_scaling_factors.nii.gz
 ASL TIs SatRecov2 nospatial mean_T1t.nii.gz
@@ -179,7 +162,6 @@ ASL TIs Betas beta_perf.nii.gz
 ASL TIs Betas beta_baseline.nii.gz
 ASL TIs MTCorr tis_mtcorr_odd.nii.gz
 ASL TIs MTCorr tis_mtcorr.nii.gz
-ASL TIs MTCorr tis_gdc_dc_restore_mtcorr.nii.gz
 ASL TIs MTCorr tis_mtcorr_even.nii.gz
 T1w ASL pvcorr_perfusion_calib_gm_mean.txt
 T1w ASL PVEs pve_GM.nii.gz
@@ -202,7 +184,6 @@ T1w ASL pvcorr_perfusion_calib_wm_mean.txt
 T1w ASL perfusion_calib_gm_mean.txt
 T1w ASL Calib Calib0 calib0_corr_aslt1w.nii.gz
 T1w ASL Calib Calib0 DistCorr calib_mt_scaling_factors.nii.gz
-T1w ASL Calib Calib0 DistCorr calib0_gdc_dc.nii.gz
 T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr_roi_s5.nii.gz
 T1w ASL Calib Calib0 SEbased M0_biasraw_s5.nii.gz
 T1w ASL Calib Calib0 SEbased SEdivM0_brain_thr.nii.gz
@@ -308,7 +289,6 @@ T1w ASL TIs OxfordASL native_space pvcorr perfusion_var_calib_masked.nii.gz
 T1w ASL TIs OxfordASL native_space arrival_gm_mean.txt
 T1w ASL TIs OxfordASL native_space arrival_var.nii.gz
 T1w ASL TIs asl_corr.nii.gz
-T1w ASL TIs DistCorr tis_gdc_dc_moco.nii.gz
 T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.mincost
 T1w ASL TIs reg fmapmag_aslt1w.nii.gz
 T1w ASL TIs reg asl2orig_mgz_initial_bbr.dat.log
