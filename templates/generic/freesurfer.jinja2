@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import slurm_head, cmd_options -%}
-{{ slurm_head(job_name="freesurfer", log_dir=WORKING_DIR) }}
+{{ slurm_head(job_name="freesurfer", log_dir=WORKING_DIR, timestamp=TIMESTAMP) }}
 
 {% block content %}
 {{ FREESURFER_ASSESSOR_DEST_PATH }}{{ cmd_options(FREESURFER_PARAMS) }}

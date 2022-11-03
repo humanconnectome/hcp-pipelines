@@ -4,6 +4,7 @@
 DEFAULT: &default
   USER: $ENV_USER
   HOME: $ENV_HOME
+  TIMESTAMP: $TIMESTAMP
   PYTHON: $AUX_DIR/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines

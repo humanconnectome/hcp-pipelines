@@ -25,9 +25,9 @@
 
 
 
-{% macro slurm_head(job_name, log_dir, nodes=1, ppn=1, gpu=0, walltime=4, mem=4) -%}
+{% macro slurm_head(job_name, log_dir, timestamp, nodes=1, ppn=1, gpu=0, walltime=4, mem=4) -%}
 #!/bin/bash
-#SBATCH --job-name="{{ job_name }}"
+#SBATCH --job-name="{{ job_name }}.{{ timestamp }}"
 #SBATCH --nodes={{ nodes|int }} --ntasks-per-node={{ ppn|int }}
 {%- if gpu %}
 #SBATCH --partition=gpu --gres=gpu:{{ gpu }}

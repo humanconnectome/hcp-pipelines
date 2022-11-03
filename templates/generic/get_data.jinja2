@@ -1,5 +1,5 @@
 {% from 'components.jinja2' import slurm_head, singularity -%}
-{{ slurm_head(job_name=SCRIPTNAME_GET, log_dir=CHECK_DATA_DIR) }}
+{{ slurm_head(job_name=SCRIPTNAME_GET, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP) }}
 
 {{ PYTHON }} \
     {{ GET_DATA_RUNPATH }}
