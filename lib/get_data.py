@@ -88,9 +88,19 @@ class PipelineResources:
                 if str_contains_pattern in x.name
             ]
 
-    def get_unprocessed_data(self, glob, extra=None):
+    def link_unprocessed_files(self, glob_pattern:str, contains_pattern:typing.Optional[str]=None)->None:
+        """
+        Create FS links to unprocessed data in CinaB style
+
+        This function removes the "_unproc" from the end of the folder name, and then
+        creates the link in "unprocessed" folder.
+
+        Args:
+            glob_pattern: glob pattern to match
+            contains_pattern: string that must be contained in the filename
+        """
         unprocessed_dir = self.output_dir / self.SESSION / "unprocessed"
-        for source in self.list_resources(glob, extra):
+        for source in self.list_resources(glob_pattern, contains_pattern):
             # Remove the "_unproc" suffix
             basename_with_no_suffix = source.name[:-7]
 
@@ -109,16 +119,16 @@ class PipelineResources:
 
     # get unprocessed data
     def get_structural_unproc_data(self):
-        self.get_unprocessed_data("T[12]w_*unproc")
+        self.link_unprocessed_files("T[12]w_*unproc")
 
     def get_functional_unproc_data(self, extra=None):
-        self.get_unprocessed_data("*fMRI*unproc", extra)
+        self.link_unprocessed_files("*fMRI*unproc", extra)
 
     def get_diffusion_unproc_data(self):
-        self.get_unprocessed_data("Diffusion_unproc")
+        self.link_unprocessed_files("Diffusion_unproc")
 
     def get_asl_unproc_data(self):
-        self.get_unprocessed_data("mbPCASLhr_unproc")
+        self.link_unprocessed_files("mbPCASLhr_unproc")
 
     # get preprocessed data
 
