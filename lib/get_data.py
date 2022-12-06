@@ -3,9 +3,7 @@
 get_data.py: Get (copy or link) a CinaB style directory tree of data
 for a specified subject within a specified project.
 """
-
-import glob
-import os
+import typing
 from pathlib import Path
 
 
@@ -68,21 +66,31 @@ class PipelineResources:
         self.output_dir = Path(output_dir)
         self.show_log = log
 
-    def get_resource_path(self, path_expression, extra=None):
-        files = sorted(self.RESOURCES_ROOT.glob(path_expression))
+    def list_resources(self, glob_pattern:str, str_contains_pattern:typing.Optional[str]=None)->typing.List[Path]:
+        """
+        List of files/folders matching the pattern(s)
 
-        if type(extra) is not str or extra.upper() == "ALL":
+        Args:
+            glob_pattern: glob pattern to match
+            str_contains_pattern: string that must be contained in the filename
+
+        Returns:
+            list of paths
+        """
+        files = sorted(self.RESOURCES_ROOT.glob(glob_pattern))
+
+        if type(str_contains_pattern) is not str or str_contains_pattern.upper() == "ALL":
             return files
         else:
             return [
                 x
                 for x in files
-                if extra in x.name
+                if str_contains_pattern in x.name
             ]
 
     def get_unprocessed_data(self, glob, extra=None):
         unprocessed_dir = self.output_dir / self.SESSION / "unprocessed"
-        for source in self.get_resource_path(glob, extra):
+        for source in self.list_resources(glob, extra):
             # Remove the "_unproc" suffix
             basename_with_no_suffix = source.name[:-7]
 
@@ -96,7 +104,7 @@ class PipelineResources:
 
     def get_processed_data(self, glob, extra=None):
         destination = self.output_dir
-        for source in self.get_resource_path(glob, extra):
+        for source in self.list_resources(glob, extra):
             link_directory(source, destination, self.show_log)
 
     # get unprocessed data
