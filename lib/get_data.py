@@ -107,14 +107,16 @@ class PipelineResources:
             destination = unprocessed_dir / basename_with_no_suffix
             link_directory(source, destination, self.show_log)
 
-    def get_preprocessed_data(self, glob, extra=None):
-        # currently has same implementation
-        # so just make it an alias
-        return self.get_processed_data(glob, extra)
+    def mirror_folders_in_output(self, glob_pattern:str, contains_pattern:typing.Optional[str]=None)->None:
+        """
+        Create FS links to mirror the folders from IntraDB to the output directory
 
-    def get_processed_data(self, glob, extra=None):
+        Args:
+            glob_pattern: glob pattern to match
+            contains_pattern: string that must be contained in the filename
+        """
         destination = self.output_dir
-        for source in self.list_resources(glob, extra):
+        for source in self.list_resources(glob_pattern, contains_pattern):
             link_directory(source, destination, self.show_log)
 
     # get unprocessed data
@@ -133,41 +135,41 @@ class PipelineResources:
     # get preprocessed data
 
     def get_structural_preproc_data(self):
-        self.get_preprocessed_data("Structural_preproc")
+        self.mirror_folders_in_output("Structural_preproc")
 
     def get_icafix_data(self):
-        self.get_processed_data("MultiRunIcaFix_proc")
+        self.mirror_folders_in_output("MultiRunIcaFix_proc")
 
     def get_supplemental_structural_preproc_data(self):
-        self.get_preprocessed_data("Structural_preproc/supplemental")
+        self.mirror_folders_in_output("Structural_preproc/supplemental")
 
     def get_hand_edit_data(self):
-        self.get_preprocessed_data("Structural_Hand_Edit")
+        self.mirror_folders_in_output("Structural_Hand_Edit")
 
     def get_functional_preproc_data(self, extra=None):
-        self.get_preprocessed_data("*fMRI*preproc", extra)
+        self.mirror_folders_in_output("*fMRI*preproc", extra)
 
     def get_diffusion_preproc_data(self):
-        self.get_preprocessed_data("Diffusion_preproc")
+        self.mirror_folders_in_output("Diffusion_preproc")
 
     # get processed data
     def get_msmall_processed_data(self):
-        self.get_processed_data("MsmAll_proc")
+        self.mirror_folders_in_output("MsmAll_proc")
 
     def get_msmall_registration_data(self):
-        self.get_processed_data("MSMAllReg")
+        self.mirror_folders_in_output("MSMAllReg")
 
     def get_fix_processed_data(self):
-        self.get_processed_data("*FIX")
+        self.mirror_folders_in_output("*FIX")
 
     def get_dedriftandresample_processed_data(self):
-        self.get_processed_data("MSMAllDeDrift")
+        self.mirror_folders_in_output("MSMAllDeDrift")
 
     def get_resting_state_stats_data(self):
-        self.get_processed_data("*RSS")
+        self.mirror_folders_in_output("*RSS")
 
     def get_postfix_data(self):
-        self.get_processed_data("*PostFix")
+        self.mirror_folders_in_output("*PostFix")
 
     def get_bedpostx_data(self):
-        self.get_processed_data("Diffusion_bedpostx")
+        self.mirror_folders_in_output("Diffusion_bedpostx")
