@@ -1,7 +1,8 @@
 {% extends "generic/XNAT_GET.py" %}
 {% block get_data %} 
-print("Getting prereq data for the Diffusion pipeline.")
-resources.get_supplemental_structural_preproc_data()
+print("Getting prereq data for the BedpostX pipeline.")
+resources.get_diffusion_preproc_data()
+resources.get_functional_preproc_data()
 resources.get_structural_preproc_data()
-resources.get_diffusion_unproc_data()
+resources.get_supplemental_structural_preproc_data()
 {% endblock get_data %}
