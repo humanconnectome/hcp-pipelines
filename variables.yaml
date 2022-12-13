@@ -133,9 +133,10 @@ bedpostx:
   # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
   PROCESS_PBS_GPU: "tesla_v100S:1"
   PROCESS_NVIDIA: True
-  OUTPUT_RESOURCE_NAME: Bedpostx_preproc
-  MEM_LIMIT_GBS: 32
-  WALLTIME_LIMIT_HOURS: 24
+  OUTPUT_RESOURCE_NAME: Diffusion_bedpostx
+  MEM_LIMIT_GBS: 8
+  WALLTIME_LIMIT_HOURS: 3
+  USE_CUSTOM_BATCH: True
 #
 # ICA-FIX PROCESSING 
 # 
