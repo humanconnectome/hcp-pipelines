@@ -3,9 +3,7 @@
 get_data.py: Get (copy or link) a CinaB style directory tree of data
 for a specified subject within a specified project.
 """
-
-import glob
-import os
+import typing
 from pathlib import Path
 
 
@@ -68,88 +66,110 @@ class PipelineResources:
         self.output_dir = Path(output_dir)
         self.show_log = log
 
-    def get_resource_path(self, path_expression, extra=None):
-        files = sorted(self.RESOURCES_ROOT.glob(path_expression))
+    def list_resources(self, glob_pattern:str, str_contains_pattern:typing.Optional[str]=None)->typing.List[Path]:
+        """
+        List of files/folders matching the pattern(s)
 
-        if type(extra) is not str or extra.upper() == "ALL":
+        Args:
+            glob_pattern: glob pattern to match
+            str_contains_pattern: string that must be contained in the filename
+
+        Returns:
+            list of paths
+        """
+        files = sorted(self.RESOURCES_ROOT.glob(glob_pattern))
+
+        if type(str_contains_pattern) is not str or str_contains_pattern.upper() == "ALL":
             return files
         else:
             return [
                 x
                 for x in files
-                if extra in x.name
+                if str_contains_pattern in x.name
             ]
 
-    def get_unprocessed_data(self, glob, extra=None):
+    def link_unprocessed_files(self, glob_pattern:str, contains_pattern:typing.Optional[str]=None)->None:
+        """
+        Create FS links to unprocessed data in CinaB style
+
+        This function removes the "_unproc" from the end of the folder name, and then
+        creates the link in "unprocessed" folder.
+
+        Args:
+            glob_pattern: glob pattern to match
+            contains_pattern: string that must be contained in the filename
+        """
         unprocessed_dir = self.output_dir / self.SESSION / "unprocessed"
-        for source in self.get_resource_path(glob, extra):
+        for source in self.list_resources(glob_pattern, contains_pattern):
             # Remove the "_unproc" suffix
             basename_with_no_suffix = source.name[:-7]
 
             destination = unprocessed_dir / basename_with_no_suffix
             link_directory(source, destination, self.show_log)
 
-    def get_preprocessed_data(self, glob, extra=None):
-        # currently has same implementation
-        # so just make it an alias
-        return self.get_processed_data(glob, extra)
+    def mirror_folders_in_output(self, glob_pattern:str, contains_pattern:typing.Optional[str]=None)->None:
+        """
+        Create FS links to mirror the folders from IntraDB to the output directory
 
-    def get_processed_data(self, glob, extra=None):
+        Args:
+            glob_pattern: glob pattern to match
+            contains_pattern: string that must be contained in the filename
+        """
         destination = self.output_dir
-        for source in self.get_resource_path(glob, extra):
+        for source in self.list_resources(glob_pattern, contains_pattern):
             link_directory(source, destination, self.show_log)
 
     # get unprocessed data
     def get_structural_unproc_data(self):
-        self.get_unprocessed_data("T[12]w_*unproc")
+        self.link_unprocessed_files("T[12]w_*unproc")
 
     def get_functional_unproc_data(self, extra=None):
-        self.get_unprocessed_data("*fMRI*unproc", extra)
+        self.link_unprocessed_files("*fMRI*unproc", extra)
 
     def get_diffusion_unproc_data(self):
-        self.get_unprocessed_data("Diffusion_unproc")
+        self.link_unprocessed_files("Diffusion_unproc")
 
     def get_asl_unproc_data(self):
-        self.get_unprocessed_data("mbPCASLhr_unproc")
+        self.link_unprocessed_files("mbPCASLhr_unproc")
 
     # get preprocessed data
 
     def get_structural_preproc_data(self):
-        self.get_preprocessed_data("Structural_preproc")
+        self.mirror_folders_in_output("Structural_preproc")
 
     def get_icafix_data(self):
-        self.get_processed_data("MultiRunIcaFix_proc")
+        self.mirror_folders_in_output("MultiRunIcaFix_proc")
 
     def get_supplemental_structural_preproc_data(self):
-        self.get_preprocessed_data("Structural_preproc/supplemental")
+        self.mirror_folders_in_output("Structural_preproc/supplemental")
 
     def get_hand_edit_data(self):
-        self.get_preprocessed_data("Structural_Hand_Edit")
+        self.mirror_folders_in_output("Structural_Hand_Edit")
 
     def get_functional_preproc_data(self, extra=None):
-        self.get_preprocessed_data("*fMRI*preproc", extra)
+        self.mirror_folders_in_output("*fMRI*preproc", extra)
 
     def get_diffusion_preproc_data(self):
-        self.get_preprocessed_data("Diffusion_preproc")
+        self.mirror_folders_in_output("Diffusion_preproc")
 
     # get processed data
     def get_msmall_processed_data(self):
-        self.get_processed_data("MsmAll_proc")
+        self.mirror_folders_in_output("MsmAll_proc")
 
     def get_msmall_registration_data(self):
-        self.get_processed_data("MSMAllReg")
+        self.mirror_folders_in_output("MSMAllReg")
 
     def get_fix_processed_data(self):
-        self.get_processed_data("*FIX")
+        self.mirror_folders_in_output("*FIX")
 
     def get_dedriftandresample_processed_data(self):
-        self.get_processed_data("MSMAllDeDrift")
+        self.mirror_folders_in_output("MSMAllDeDrift")
 
     def get_resting_state_stats_data(self):
-        self.get_processed_data("*RSS")
+        self.mirror_folders_in_output("*RSS")
 
     def get_postfix_data(self):
-        self.get_processed_data("*PostFix")
+        self.mirror_folders_in_output("*PostFix")
 
     def get_bedpostx_data(self):
-        self.get_processed_data("Diffusion_bedpostx")
+        self.mirror_folders_in_output("Diffusion_bedpostx")

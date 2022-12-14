@@ -1,0 +1,15 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+    ######################### BedPostX
+    ${QUNEXCOMMAND} dwi_bedpostx_gpu \
+    --sessions="${Session}" \
+    --sessionsfolder="${StudyFolder}/sessions" \
+    --overwrite="${Overwrite}" \
+    --fibers="3" \
+    --burnin="3000" \
+    --rician="yes" \
+    --gradnonlin="yes" \
+    --model='3'
+
+{% endblock pipeline_specific %}

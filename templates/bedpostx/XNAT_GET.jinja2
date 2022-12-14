@@ -1,0 +1,5 @@
+{% extends "generic/XNAT_GET.py" %}
+{% block get_data %} 
+print("Getting prereq data for the BedpostX pipeline.")
+resources.get_diffusion_preproc_data()
+{% endblock get_data %}
