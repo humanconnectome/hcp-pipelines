@@ -1,0 +1,109 @@
+T1w Diffusion.bedpostX bvals
+T1w Diffusion.bedpostX bvecs
+T1w Diffusion.bedpostX commands.txt
+T1w Diffusion.bedpostX dyads1.nii.gz
+T1w Diffusion.bedpostX dyads1_dispersion.nii.gz
+T1w Diffusion.bedpostX dyads2.nii.gz
+T1w Diffusion.bedpostX dyads2_dispersion.nii.gz
+T1w Diffusion.bedpostX dyads2_thr0.05.nii.gz
+T1w Diffusion.bedpostX dyads2_thr0.05_modf2.nii.gz
+T1w Diffusion.bedpostX dyads3.nii.gz
+T1w Diffusion.bedpostX dyads3_dispersion.nii.gz
+T1w Diffusion.bedpostX dyads3_thr0.05.nii.gz
+T1w Diffusion.bedpostX dyads3_thr0.05_modf3.nii.gz
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0000
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0001
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0002
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0003
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0004
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0005
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0006
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0007
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0008
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0009
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0010
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0011
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0012
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0013
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0014
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0015
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0016
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0017
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0018
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0019
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0020
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0021
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0022
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0023
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0024
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0025
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0026
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0027
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0028
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0029
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0030
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0031
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0032
+T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0033
+T1w Diffusion.bedpostX logs monitor 0
+T1w Diffusion.bedpostX logs monitor 1
+T1w Diffusion.bedpostX logs monitor 10
+T1w Diffusion.bedpostX logs monitor 11
+T1w Diffusion.bedpostX logs monitor 12
+T1w Diffusion.bedpostX logs monitor 13
+T1w Diffusion.bedpostX logs monitor 14
+T1w Diffusion.bedpostX logs monitor 15
+T1w Diffusion.bedpostX logs monitor 16
+T1w Diffusion.bedpostX logs monitor 17
+T1w Diffusion.bedpostX logs monitor 18
+T1w Diffusion.bedpostX logs monitor 19
+T1w Diffusion.bedpostX logs monitor 2
+T1w Diffusion.bedpostX logs monitor 20
+T1w Diffusion.bedpostX logs monitor 21
+T1w Diffusion.bedpostX logs monitor 22
+T1w Diffusion.bedpostX logs monitor 23
+T1w Diffusion.bedpostX logs monitor 24
+T1w Diffusion.bedpostX logs monitor 25
+T1w Diffusion.bedpostX logs monitor 26
+T1w Diffusion.bedpostX logs monitor 27
+T1w Diffusion.bedpostX logs monitor 28
+T1w Diffusion.bedpostX logs monitor 29
+T1w Diffusion.bedpostX logs monitor 3
+T1w Diffusion.bedpostX logs monitor 30
+T1w Diffusion.bedpostX logs monitor 31
+T1w Diffusion.bedpostX logs monitor 32
+T1w Diffusion.bedpostX logs monitor 33
+T1w Diffusion.bedpostX logs monitor 4
+T1w Diffusion.bedpostX logs monitor 5
+T1w Diffusion.bedpostX logs monitor 6
+T1w Diffusion.bedpostX logs monitor 7
+T1w Diffusion.bedpostX logs monitor 8
+T1w Diffusion.bedpostX logs monitor 9
+T1w Diffusion.bedpostX logs postproc_ID
+T1w Diffusion.bedpostX mean_Rsamples.nii.gz
+T1w Diffusion.bedpostX mean_S0samples.nii.gz
+T1w Diffusion.bedpostX mean_d_stdsamples.nii.gz
+T1w Diffusion.bedpostX mean_dsamples.nii.gz
+T1w Diffusion.bedpostX mean_f1samples.nii.gz
+T1w Diffusion.bedpostX mean_f2samples.nii.gz
+T1w Diffusion.bedpostX mean_f3samples.nii.gz
+T1w Diffusion.bedpostX mean_fsumsamples.nii.gz
+T1w Diffusion.bedpostX mean_ph1samples.nii.gz
+T1w Diffusion.bedpostX mean_ph2samples.nii.gz
+T1w Diffusion.bedpostX mean_ph3samples.nii.gz
+T1w Diffusion.bedpostX mean_tausamples.nii.gz
+T1w Diffusion.bedpostX mean_th1samples.nii.gz
+T1w Diffusion.bedpostX mean_th2samples.nii.gz
+T1w Diffusion.bedpostX mean_th3samples.nii.gz
+T1w Diffusion.bedpostX merged_f1samples.nii.gz
+T1w Diffusion.bedpostX merged_f2samples.nii.gz
+T1w Diffusion.bedpostX merged_f3samples.nii.gz
+T1w Diffusion.bedpostX merged_ph1samples.nii.gz
+T1w Diffusion.bedpostX merged_ph2samples.nii.gz
+T1w Diffusion.bedpostX merged_ph3samples.nii.gz
+T1w Diffusion.bedpostX merged_th1samples.nii.gz
+T1w Diffusion.bedpostX merged_th2samples.nii.gz
+T1w Diffusion.bedpostX merged_th3samples.nii.gz
+T1w Diffusion.bedpostX monitor
+T1w Diffusion.bedpostX nodif_brain_mask.nii.gz
+T1w Diffusion.bedpostX xfms eye.mat
