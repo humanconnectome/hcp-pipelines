@@ -116,7 +116,7 @@ functional_preprocess:
 
 diffusion_preprocess:
   <<: *default
-  QUNEX_VERSION: 0.96.2
+  QUNEX_VERSION: 0.96.2a
   QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_suite-${QUNEX_VERSION}.sif
   PROCESS_PBS_K20X: True
   # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
