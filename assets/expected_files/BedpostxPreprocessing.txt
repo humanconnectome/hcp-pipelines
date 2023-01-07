@@ -40,11 +40,6 @@ T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0025
 T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0026
 T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0027
 T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0028
-T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0029
-T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0030
-T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0031
-T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0032
-T1w Diffusion.bedpostX logs logs_gpu part_0000-subpart_0033
 T1w Diffusion.bedpostX logs monitor 0
 T1w Diffusion.bedpostX logs monitor 1
 T1w Diffusion.bedpostX logs monitor 10
@@ -67,12 +62,7 @@ T1w Diffusion.bedpostX logs monitor 25
 T1w Diffusion.bedpostX logs monitor 26
 T1w Diffusion.bedpostX logs monitor 27
 T1w Diffusion.bedpostX logs monitor 28
-T1w Diffusion.bedpostX logs monitor 29
 T1w Diffusion.bedpostX logs monitor 3
-T1w Diffusion.bedpostX logs monitor 30
-T1w Diffusion.bedpostX logs monitor 31
-T1w Diffusion.bedpostX logs monitor 32
-T1w Diffusion.bedpostX logs monitor 33
 T1w Diffusion.bedpostX logs monitor 4
 T1w Diffusion.bedpostX logs monitor 5
 T1w Diffusion.bedpostX logs monitor 6
