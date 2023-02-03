@@ -18,6 +18,9 @@
 		--sessions="${StudyFolder}/processing/batch.txt" \
 		--sessionsfolder="${StudyFolder}/sessions" \
 		--overwrite="${Overwrite}" \
+		{%- if PIPELINE_ARGS is defined and PIPELINE_ARGS %}
+		--hcp_fs_extra_reconall="{{ PIPELINE_ARGS }}" \
+		{%- endif %}
 		--parsessions="${parsessions}"
 
 	######################### hcp3
