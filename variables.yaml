@@ -19,8 +19,10 @@ DEFAULT: &default
   GRADIENT_COEFFICIENT_PATH: $AUX_DIR/gradient_coefficient_files
   FREESURFER_LICENSE_PATH: $AUX_DIR/freesurfer/license.txt
   CONTAINERS_DIR: $AUX_DIR/containers
-  QUNEX_VERSION: 0.93.2
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_${QUNEX_VERSION}.sif
+  QUNEX_VERSION: 0.96.2a
+  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_suite-${QUNEX_VERSION}.sif
+  ## OLD (0.93.2 and earlier)
+  #QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_${QUNEX_VERSION}.sif
   ARCHIVE_ROOT: /ceph/intradb/archive
   RESOURCES_ROOT: ${ARCHIVE_ROOT}/${PROJECT}/arc001/${SESSION}/RESOURCES
   PUT_SERVER_LIST: >-
@@ -116,8 +118,6 @@ functional_preprocess:
 
 diffusion_preprocess:
   <<: *default
-  QUNEX_VERSION: 0.96.2a
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_suite-${QUNEX_VERSION}.sif
   PROCESS_PBS_K20X: True
   # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
   PROCESS_PBS_GPU: "tesla_v100S:1"
@@ -167,8 +167,6 @@ msmall_process:
 
 asl_process:
   <<: *default
-  QUNEX_VERSION: 0.94.14
-  QUNEX_CONTAINER: $CONTAINERS_DIR/qunex_suite-${QUNEX_VERSION}.sif
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 12
   OUTPUT_RESOURCE_NAME: ASL_proc
