@@ -163,7 +163,7 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
     available_bolds = [x.name[:-8] for x in dir_list]
 
     def fmrisort(x):
-        if "CCF_HC" in PROJECT:
+        if "CCF_HC" in PROJECT or "AABC_STG" in PROJECT:
             priority = [
                 "rfMRI_REST1_AP",
                 "rfMRI_REST1_PA",
@@ -262,7 +262,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
 
-    if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST":
+    if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST" or PROJECT == "AABC_STG":
         bold_list_order = BLO_HCA
     elif PROJECT == "CCF_BANDA_STG":
         bold_list_order = BLO_BANDA
