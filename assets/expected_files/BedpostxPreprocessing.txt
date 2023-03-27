@@ -53,7 +53,6 @@ T1w Diffusion.bedpostX logs monitor 6
 T1w Diffusion.bedpostX logs monitor 7
 T1w Diffusion.bedpostX logs monitor 8
 T1w Diffusion.bedpostX logs monitor 9
-T1w Diffusion.bedpostX logs postproc_ID
 T1w Diffusion.bedpostX mean_Rsamples.nii.gz
 T1w Diffusion.bedpostX mean_S0samples.nii.gz
 T1w Diffusion.bedpostX mean_d_stdsamples.nii.gz
