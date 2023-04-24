@@ -8,6 +8,7 @@ DEFAULT: &default
   PYTHON: $AUX_DIR/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
+  #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
   ASSETS_DIR: $PIPELINE_REPO/assets
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
   EXPECTED_FILES_LIST: $ASSETS_DIR/expected_files/$PIPELINE_NAME.txt
@@ -44,8 +45,10 @@ DEFAULT: &default
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   AUTOLAUNCH_AT_END: True
+  #AUTOLAUNCH_AT_END: False
   # Choices for BREAKPOINT: get, process, clean, put, check
   BREAKPOINT: check
+  #BREAKPOINT: clean
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
@@ -159,6 +162,17 @@ msmall_process:
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
+  USE_CUSTOM_BATCH: True
+
+# 
+# REAPPLY FIX PROCESSING 
+# 
+
+reapplyfix_process:
+  <<: *default
+  MEM_LIMIT_GBS: 20
+  WALLTIME_LIMIT_HOURS: 24
+  OUTPUT_RESOURCE_NAME: ReapplyFix_proc
   USE_CUSTOM_BATCH: True
 
 #

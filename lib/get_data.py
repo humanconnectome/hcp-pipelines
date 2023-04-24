@@ -159,6 +159,10 @@ class PipelineResources:
     def get_msmall_registration_data(self):
         self.mirror_folders_in_output("MSMAllReg")
 
+    # get processed data
+    def get_reapplyfix_processed_data(self):
+        self.mirror_folders_in_output("ReapplyFix_proc")
+
     def get_fix_processed_data(self):
         self.mirror_folders_in_output("*FIX")
 

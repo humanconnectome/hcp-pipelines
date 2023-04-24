@@ -1,0 +1,11 @@
+{% extends "generic/clean_data.jinja2" %}
+{% block content %} 
+pushd $CleanDataDir 1> /dev/null
+echo "NOTE:  Renaming the recleaned files"
+for CLEANFILE in `find . -iname "*_clean*"`; do
+	CLEANRENAME=`echo "$CLEANFILE" | sed -e "s/_clean/&_rclean/g"`
+	echo "mv $CLEANFILE $CLEANRENAME"
+	mv $CLEANFILE $CLEANRENAME
+done
+popd 1> /dev/null
+{% endblock content %}
