@@ -6,7 +6,7 @@ if [ -d "$StudyFolder" ] ; then
     #find . -type l | egrep "\.spec$|prefiltered_func_data.*clean*" | xargs -I '{}' sh -c 'cp --remove-destination $(readlink {}) {}'
     find . -type l | egrep "*hp.*_clean*" | xargs -I '{}' sh -c 'cp --remove-destination $(readlink {}) {}'
     #find . -type f | xargs -I '{}' touch -d "2 days ago" {}
-    find . -type f | grep "fMRI_CONCAT_ALL" | grep "Atlas_MSM*.*hp.*clean.dtseries.nii" | xargs rm
+    find . -type f | grep "fMRI_CONCAT_ALL" | grep "Atlas.*hp.*clean.dtseries.nii" | xargs rm
     popd
 fi
 {% endblock content %}

@@ -47,8 +47,8 @@ DEFAULT: &default
   AUTOLAUNCH_AT_END: True
   #AUTOLAUNCH_AT_END: False
   # Choices for BREAKPOINT: get, process, clean, put, check
-  BREAKPOINT: check
-  #BREAKPOINT: clean
+  #BREAKPOINT: check
+  BREAKPOINT: clean
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
@@ -170,7 +170,7 @@ msmall_process:
 
 reapplyfix_process:
   <<: *default
-  MEM_LIMIT_GBS: 20
+  MEM_LIMIT_GBS: 48
   WALLTIME_LIMIT_HOURS: 24
   OUTPUT_RESOURCE_NAME: ReapplyFix_proc
   USE_CUSTOM_BATCH: True
