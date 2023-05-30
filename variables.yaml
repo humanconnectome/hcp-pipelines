@@ -47,8 +47,7 @@ DEFAULT: &default
   AUTOLAUNCH_AT_END: True
   #AUTOLAUNCH_AT_END: False
   # Choices for BREAKPOINT: get, process, clean, put, check
-  #BREAKPOINT: check
-  BREAKPOINT: clean
+  BREAKPOINT: check
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
@@ -174,6 +173,20 @@ reapplyfix_process:
   WALLTIME_LIMIT_HOURS: 24
   OUTPUT_RESOURCE_NAME: ReapplyFix_proc
   USE_CUSTOM_BATCH: True
+
+# 
+# TICA FIX PROCESSING 
+# 
+
+tica_process:
+  <<: *default
+  MEM_LIMIT_GBS: 24
+  WALLTIME_LIMIT_HOURS: 4
+  OUTPUT_RESOURCE_NAME: tICA_proc
+  USE_CUSTOM_BATCH: True
+  BREAKPOINT: put
+  QUNEX_VERSION: 0.96.4a
+  PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/tICA
 
 #
 # ASL PROCESSING

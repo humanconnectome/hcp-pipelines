@@ -251,6 +251,13 @@ def set_msm_all_bolds(BOLD_LIST):
 
     return {"MSM_ALL_BOLDS": MSM_ALL_BOLDS}
 
+def set_all_bolds(BOLD_LIST):
+    # Just to get a comma separated list of all bolds
+    all_bolds = BOLD_LIST
+    ALL_BOLDS = ",".join(all_bolds)
+
+    return {"ALL_BOLDS": ALL_BOLDS}
+
 
 def set_bold_list_order(PROJECT, SCAN):
     # possible values for BOLD_LIST_ORDER

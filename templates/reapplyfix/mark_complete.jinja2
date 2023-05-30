@@ -1,5 +1,0 @@
-{% from 'components.jinja2' import slurm_head, singularity -%}
-{{ slurm_head(job_name=SCRIPTNAME_MARK_STATUS, log_dir=LOG_DIR, timestamp=TIMESTAMP) }}
-
-echo "TEMPORARILY SKIPPING MARK_STATUS PROCESSING"
-

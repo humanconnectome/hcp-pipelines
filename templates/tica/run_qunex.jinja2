@@ -1,0 +1,73 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+{%- if PROJECT_ID == "HCA" %}
+
+GROUP_NAME="HCA1798_MSMAll"
+PCA_INTERNAL_DIM="2721"
+PCA_OUT_DIM="2721"
+TICA_TIMEPOINTS="2721"
+SICADIM_OVERRIDE="86"
+CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCA/$GROUP_NAME"
+
+{%- elif PROJECT_ID == "HCD" %}
+
+GROUP_NAME="HCD1695_MSMAll"
+PCA_INTERNAL_DIM="3200"
+PCA_OUT_DIM="3200"
+TICA_TIMEPOINTS="3200"
+SICADIM_OVERRIDE="122"
+CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCD/$GROUP_NAME"
+
+{%- else %}
+
+# HOPEFULLY FORCE A FAILURE
+GROUP_NAME="XXXXXX"
+PCA_INTERNAL_DIM="0"
+PCA_OUT_DIM="0"
+TICA_TIMEPOINTS="0"
+SICADIM_OVERRIDE="0"
+CLEAN_FOLDER="/ceph/intradb/chpc_resources/XXXXXX/$GROUP_NAME"
+
+{%- endif %}
+
+TICA_STUDYFOLDER="`dirname $StudyFolder`"
+
+
+${QUNEXCOMMAND} hcp_temporal_ica \
+	--sessionsfolder="${StudyFolder}/sessions" \
+	--sessions="${Session}" \
+	--batchfile="${BatchFile}" \
+	--overwrite="yes" \
+	--hcp_tica_outfmriname="fMRI_CONCAT_ALL" \
+	--hcp_tica_procstring="_Atlas_MSMAll_hp0_clean_rclean" \
+	--hcp_icafix_highpass="0" \
+	--hcp_outgroupname="$GROUP_NAME" \
+	--hcp_tica_surfregname="MSMAll" \
+	--hcp_tica_icamode="REUSE_TICA" \
+	--hcp_tica_pca_internal_dim="$PCA_INTERNAL_DIM" \
+	--hcp_tica_pca_out_dim="$PCA_OUTL_DIM" \
+	--hcp_tica_num_wishart="6" \
+	--hcp_tica_sicadim_override="$SICADIM_OVERRIDE" \
+	--hcp_tica_timepoints="$TICA_TIMEPOINTS" \
+	--hcp_tica_reclean_mode="YES" \
+	--hcp_tica_starting_step="MIGP" \
+	--hcp_tica_stop_after_step="CleanData" \
+	--hcp_tica_fix_legacy_bias="NO" \
+	--hcp_tica_precomputed_clean_folder="$CLEAN_FOLDER" \
+	--hcp_tica_precomputed_fmri_name="fMRI_CONCAT_ALL" \
+	--hcp_tica_precomputed_group_name="$GROUP_NAME" \
+	--hcp_parallel_limit="4"
+
+
+#--------------------------->	--hcp_tica_studyfolder="$TICA_STUDYFOLDER" \
+#--------------------------->	--hcp_tica_bolds="fMRI_CONCAT_ALL" \
+#--------------------------->     --batchfile=<path_to_batch_file> \
+#--------------------------->     --hcp_icafix_bolds=<same_as_for_initial_icafix_run> \
+#---------------------------> --hcp_icafix_regname=<MSMAll if needed, NONE is default>
+
+{% endblock pipeline_specific %}
+
+
+
+

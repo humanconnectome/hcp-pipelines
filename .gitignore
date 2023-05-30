@@ -132,3 +132,6 @@ original/
 
 # Singularity containers
 *.sif
+
+# MRH Added
+run_scripts/
