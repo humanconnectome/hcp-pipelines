@@ -61,6 +61,10 @@ StructuralPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -131,6 +135,10 @@ StructuralPreprocessingHandEdit:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -199,6 +207,10 @@ FunctionalPreprocessing:
       template: generic/mark_complete.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
@@ -281,6 +293,10 @@ MultiRunIcaFixProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -362,6 +378,10 @@ MsmAllProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -442,6 +462,10 @@ ReapplyFixProcessing:
       template: generic/mark_complete.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
@@ -525,6 +549,10 @@ TicaProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -593,6 +621,10 @@ BedpostxPreprocessing:
       template: generic/mark_complete.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
@@ -663,6 +695,10 @@ DiffusionPreprocessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
   - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
       variable: SUBMIT_TO_PBS_SCRIPT
@@ -731,6 +767,10 @@ AslProcessing:
       template: generic/mark_complete.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs
@@ -805,6 +845,10 @@ TaskAnalysisProcessing:
       template: generic/mark_complete.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
       variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
   - generate_file:
       template: generic/submit_jobs.py
       filepath: ${CHECK_DATA_DIR}/submit_jobs

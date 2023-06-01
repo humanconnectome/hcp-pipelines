@@ -1,0 +1,18 @@
+{% from 'components.jinja2' import slurm_head, singularity -%}
+{{ slurm_head(job_name=SCRIPTNAME_RUNALL, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP, gpu=PROCESS_PBS_GPU, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
+
+{% block pre %}{% endblock pre -%}
+
+{{ GET_DATA_JOB_SCRIPT_NAME }}
+
+{{ PROCESS_DATA_JOB_SCRIPT_NAME }}
+
+{{ CLEAN_DATA_SCRIPT_NAME }}
+
+{{ PUT_DATA_SCRIPT_NAME }}
+
+{{ CHECK_DATA_JOB_SCRIPT_NAME }}
+
+{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}
+
+

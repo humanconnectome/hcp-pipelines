@@ -17,6 +17,7 @@ submit(){
 
 
 ### List of generated scripts
+RUNALL="{{ RUNALL_DATA_JOB_SCRIPT_NAME }}"
 GET="{{ GET_DATA_JOB_SCRIPT_NAME }}"
 PROCESS="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}"
 CLEAN="{{ CLEAN_DATA_SCRIPT_NAME }}"
@@ -45,15 +46,24 @@ second_run(){
 ### Run Script to create running status marker file
 mark_running_status
 
-if [[ $* == *--continue* ]]; then
-    second_run
+if [[ $* == @--runall ]] ; then
+
+    echo "Submitting '{{ RUNALL }}' job to queue."
+    submit ${{ RUNALL }}
+
 else
-    first_run
+
+	if [[ $* == *--continue* ]]; then
+	    second_run
+	else
+	    first_run
+	fi
+	
+	
+	### This cleans up the running status marker and should always run last
+	submit $NO_LONGER_RUNNING afterany
+
 fi
-
-
-### This cleans up the running status marker and should always run last
-submit $NO_LONGER_RUNNING afterany
 
 ### Export variable in case attempting to chain multiple jobs in series
 export PRIOR_JOBID

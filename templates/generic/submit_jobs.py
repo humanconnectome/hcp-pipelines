@@ -59,31 +59,53 @@ def main(start_index, end_index, do_marker=True, dry_run=False, prior_job=None):
 
 
 breakpoint = "{{ BREAKPOINT }}"
-choices = ['get', 'process', 'clean', 'put', 'check']
-scripts = dict(
-    get="{{ GET_DATA_JOB_SCRIPT_NAME }}",
-    process="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}",
-    clean="{{ CLEAN_DATA_SCRIPT_NAME }}",
-    put="{{ PUT_DATA_SCRIPT_NAME }}",
-    check="{{ CHECK_DATA_JOB_SCRIPT_NAME }}",
-    marker="{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}",
-)
+if (breakpoint == 'run_all'):
+    choices = ['run_all']
+    scripts = dict(
+        run_all="{{ RUNALL_DATA_JOB_SCRIPT_NAME }}"
+    )
+    parser = argparse.ArgumentParser(description='Submit jobs to the cluster.')
+    parser.add_argument('--dry-run', '-n', action='store_true',
+                        help='Do not submit jobs, just print commands that would run.')
+    parser.add_argument('--show-breakpoint', '-b', action='store_true', help='Show the `BREAKPOINT` value.')
+    parser.add_argument('--normal-start', '-a', action='store_true', help='Go from `start` til `BREAKPOINT`.')
+else: 
+    choices = ['get', 'process', 'clean', 'put', 'check']
+    scripts = dict(
+        get="{{ GET_DATA_JOB_SCRIPT_NAME }}",
+        process="{{ PROCESS_DATA_JOB_SCRIPT_NAME }}",
+        clean="{{ CLEAN_DATA_SCRIPT_NAME }}",
+        put="{{ PUT_DATA_SCRIPT_NAME }}",
+        check="{{ CHECK_DATA_JOB_SCRIPT_NAME }}",
+        marker="{{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}",
+    )
+    parser = argparse.ArgumentParser(description='Submit jobs to the cluster.')
+    parser.add_argument('--start', '-s', choices=choices, default='get', help='Start from this step.')
+    parser.add_argument('--end', '-e', choices=choices, default='check', help='Stop after this step.')
+    parser.add_argument('--dry-run', '-n', action='store_true',
+                        help='Do not submit jobs, just print commands that would run.')
+    parser.add_argument('--show-breakpoint', '-b', action='store_true', help='Show the `BREAKPOINT` value.')
+    parser.add_argument('--normal-start', '-a', action='store_true', help='Go from `start` til `BREAKPOINT`.')
+    parser.add_argument('--resume', '-r', action='store_true', help='Continue from step after the `BREAKPOINT` til end.')
+    parser.add_argument('--skip-marker', '-m', action='store_true', help='Do not add, then remove, a status marker on IntraDB.')
+ 
 
-parser = argparse.ArgumentParser(description='Submit jobs to the cluster.')
-parser.add_argument('--start', '-s', choices=choices, default='get', help='Start from this step.')
-parser.add_argument('--end', '-e', choices=choices, default='check', help='Stop after this step.')
-parser.add_argument('--dry-run', '-n', action='store_true',
-                    help='Do not submit jobs, just print commands that would run.')
-parser.add_argument('--show-breakpoint', '-b', action='store_true', help='Show the `BREAKPOINT` value.')
-parser.add_argument('--normal-start', '-a', action='store_true', help='Go from `start` til `BREAKPOINT`.')
-parser.add_argument('--resume', '-r', action='store_true', help='Continue from step after the `BREAKPOINT` til end.')
-parser.add_argument('--skip-marker', '-m', action='store_true', help='Do not add, then remove, a status marker on IntraDB.')
 
 if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.show_breakpoint:
         print(f"BREAKPOINT={breakpoint}")
+        exit(0)
+
+    if (breakpoint == 'run_all'):
+        job_id = main(
+            start_index=0,
+            end_index=0,
+            do_marker=False,
+            dry_run=args.dry_run,
+            prior_job=None,
+        )
         exit(0)
 
     start_index = choices.index(args.start)

@@ -42,12 +42,14 @@ DEFAULT: &default
   WALLTIME_LIMIT_HOURS: 24
   MEM_LIMIT_GBS: 8
   USE_SCRATCH_FOR_PROCESSING: False
+  RUN_COMBINED_STEPS: False
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   AUTOLAUNCH_AT_END: True
   #AUTOLAUNCH_AT_END: False
-  # Choices for BREAKPOINT: get, process, clean, put, check
-  BREAKPOINT: check
+  # Choices for BREAKPOINT: get, process, clean, put, check or run_all to run the combined script
+  #BREAKPOINT: check
+  BREAKPOINT: run_all
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
@@ -75,6 +77,7 @@ DEFAULT: &default
   SCRIPTNAME: ${SESSION}${_SCAN}.${PIPELINE_NAME}
   SCRIPTNAME_GET: ${SCRIPTNAME}.XNAT_GET_DATA_job
   SCRIPTNAME_PROCESS: ${SCRIPTNAME}.PROCESS_DATA_job
+  SCRIPTNAME_RUNALL: ${SCRIPTNAME}.RUNALL_DATA_job
   SCRIPTNAME_CLEAN: ${SCRIPTNAME}.CLEAN_DATA_job
   SCRIPTNAME_PUT: ${SCRIPTNAME}.XNAT_PUT_DATA_job
   SCRIPTNAME_CHECK: ${SCRIPTNAME}.XNAT_CHECK_DATA_job
@@ -184,7 +187,6 @@ tica_process:
   WALLTIME_LIMIT_HOURS: 4
   OUTPUT_RESOURCE_NAME: tICA_proc
   USE_CUSTOM_BATCH: True
-  BREAKPOINT: put
   QUNEX_VERSION: 0.96.4a
   PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/tICA
 
