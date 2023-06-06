@@ -1,12 +1,15 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
-
+#
+# NOTE:  The PCA_INTERNAL_DIM and PCA_OUT_DIM values match the exptected TICA_TIMEPOINTS (complete subjects) value rather than 
+#        the one we compute.  Per 2023-06-06 e-mail, this is okay because these values aren't doing anything anyway with the 
+#        steps we run (because we are not rerunning MIGP with REUSE). 
+#
 {%- if PROJECT_ID == "HCA" %}
 
 GROUP_NAME="HCA1798_MSMAll"
 PCA_INTERNAL_DIM="2721"
 PCA_OUT_DIM="2721"
-TICA_TIMEPOINTS="2721"
 SICADIM_OVERRIDE="86"
 CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCA/$GROUP_NAME"
 
@@ -15,7 +18,6 @@ CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCA/$GROUP_NAME"
 GROUP_NAME="HCD1695_MSMAll"
 PCA_INTERNAL_DIM="3200"
 PCA_OUT_DIM="3200"
-TICA_TIMEPOINTS="3200"
 SICADIM_OVERRIDE="122"
 CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCD/$GROUP_NAME"
 
@@ -32,6 +34,7 @@ CLEAN_FOLDER="/ceph/intradb/chpc_resources/XXXXXX/$GROUP_NAME"
 {%- endif %}
 
 TICA_STUDYFOLDER="`dirname $StudyFolder`"
+TICA_TIMEPOINTS=`${WORKBENCHDIR}/wb_command -file-information ${StudyFolder}/sessions/${Session}/hcp/${Session}/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas.dtseries.nii -only-number-of-maps`
 
 
 ${QUNEXCOMMAND} hcp_temporal_ica \
@@ -46,7 +49,7 @@ ${QUNEXCOMMAND} hcp_temporal_ica \
 	--hcp_tica_surfregname="MSMAll" \
 	--hcp_tica_icamode="REUSE_TICA" \
 	--hcp_tica_pca_internal_dim="$PCA_INTERNAL_DIM" \
-	--hcp_tica_pca_out_dim="$PCA_OUTL_DIM" \
+	--hcp_tica_pca_out_dim="$PCA_OUT_DIM" \
 	--hcp_tica_num_wishart="6" \
 	--hcp_tica_sicadim_override="$SICADIM_OVERRIDE" \
 	--hcp_tica_timepoints="$TICA_TIMEPOINTS" \
@@ -59,7 +62,6 @@ ${QUNEXCOMMAND} hcp_temporal_ica \
 	--hcp_tica_precomputed_group_name="$GROUP_NAME" \
 	--hcp_parallel_limit="4"
 
-
 #--------------------------->	--hcp_tica_studyfolder="$TICA_STUDYFOLDER" \
 #--------------------------->	--hcp_tica_bolds="fMRI_CONCAT_ALL" \
 #--------------------------->     --batchfile=<path_to_batch_file> \
@@ -67,7 +69,6 @@ ${QUNEXCOMMAND} hcp_temporal_ica \
 #---------------------------> --hcp_icafix_regname=<MSMAll if needed, NONE is default>
 
 {% endblock pipeline_specific %}
-
 
 
 
