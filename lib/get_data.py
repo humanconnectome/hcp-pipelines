@@ -177,3 +177,10 @@ class PipelineResources:
 
     def get_bedpostx_data(self):
         self.mirror_folders_in_output("Diffusion_bedpostx")
+
+    def get_tica_processed_data(self):
+        self.mirror_folders_in_output("tICA_proc")
+
+    def get_ptfcmm_processed_data(self):
+        self.mirror_folders_in_output("PTFCMM_proc")
+

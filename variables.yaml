@@ -8,6 +8,7 @@ DEFAULT: &default
   PYTHON: $AUX_DIR/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
+  #PIPELINE_REPO: $HOME/hcp-pipelines-patch
   #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
   ASSETS_DIR: $PIPELINE_REPO/assets
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
@@ -165,6 +166,18 @@ msmall_process:
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   USE_CUSTOM_BATCH: True
+
+# 
+# PATCH PROCESSING 
+# 
+
+patch_run:
+  <<: *default
+  MEM_LIMIT_GBS: 24
+  WALLTIME_LIMIT_HOURS: 24
+  OUTPUT_RESOURCE_NAME: PatchFiles
+  USE_CUSTOM_BATCH: True
+  PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/patch_runs
 
 # 
 # REAPPLY FIX PROCESSING 
