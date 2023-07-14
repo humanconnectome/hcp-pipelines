@@ -5,25 +5,33 @@
 CINAB="/ceph/intradb/archive/CinaB/"
 PROJECT=`echo "${StudyFolder}" | sed -e "s/\/PatchProcessing[^\/].*$//" -e "s/^.*\///"`
 STUDY_FOLDER="${StudyFolder}/sessions/${Session}/hcp"
-#echo "CINAB=$CINAB"
-#echo "PROJECT=$PROJECT"
-#echo "STUDY_FOLDER=$STUDY_FOLDER"
-MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep "\-\-multirun-fix-names" | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u`
-MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep "\-\-multirun-fix-names-to-use" | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u`
+MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs grep "\-\-multirun-fix-names" | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u`
+MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs grep "\-\-multirun-fix-names-to-use" | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u`
+echo -e "\nCOMPUTED VARIABLES:\n"
+echo "CINAB=$CINAB"
+echo "PROJECT=$PROJECT"
+echo "STUDY_FOLDER=$STUDY_FOLDER"
+echo "MULTI_RUN_FIX_NAMES=$MULTI_RUN_FIX_NAMES"
+echo "MULTI_RUN_FIX_TO_USE=$MULTI_RUN_FIX_TO_USE"
 
 cp ${STUDY_FOLDER}/$Session/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_clean_rclean_tclean_vn.dscalar.nii ${STUDY_FOLDER}/${Session}/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_Atlas_MSMAll_hp0_clean_rclean_tclean_vn.dscalar.nii
 cp ${STUDY_FOLDER}/${Session}/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_hp0_clean_rclean_tclean_vn.nii.gz ${STUDY_FOLDER}/${Session}/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_hp0_clean_rclean_tclean_vn.nii.gz
 
-/ceph/intradb/chpc_resources/patch_runs/202307/ExtractFromMRFIXConcat.sh \
-	--study-folder=${STUDY_FOLDER} \
-	--subject=${Session} \
-	$MULTI_RUN_FIX_NAMES \
-	$MULTI_RUN_FIX_TO_USE \
-	--concat-volume-input=$STUDY_FOLDER/$Session/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_hp0_clean_rclean_tclean.nii.gz \
-	--volume-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_hp0_clean_rclean_tclean.nii.gz \
-	--surf-reg-name=MSMAll \
-	--concat-cifti-input=$STUDY_FOLDER/$Session/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_clean_rclean_tclean.dtseries.nii \
-	--cifti-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_Atlas_MSMAll_hp0_clean_rclean_tclean.dtseries.nii \
-	--csv-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_Runs.csv
+CMD_TO_RUN="/ceph/intradb/chpc_resources/patch_runs/202307/ExtractFromMRFIXConcat.sh \
+        --study-folder=${STUDY_FOLDER} \
+        --subject=${Session} \
+        $MULTI_RUN_FIX_NAMES \
+        $MULTI_RUN_FIX_TO_USE \
+        --concat-volume-input=$STUDY_FOLDER/$Session/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_hp0_clean_rclean_tclean.nii.gz \
+        --volume-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_hp0_clean_rclean_tclean.nii.gz \
+        --surf-reg-name=MSMAll \
+        --concat-cifti-input=$STUDY_FOLDER/$Session/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas_MSMAll_hp0_clean_rclean_tclean.dtseries.nii \
+        --cifti-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_Atlas_MSMAll_hp0_clean_rclean_tclean.dtseries.nii"
+	## Not generating below file because it lists all scans, not just the resting state scans that are used
+        ##--csv-out=$STUDY_FOLDER/$Session/MNINonLinear/Results/rfMRI_REST/rfMRI_REST_Runs.csv"
+echo -e "\nCOMMAND TO RUN:\n"
+echo "$CMD_TO_RUN"
+echo -e "\nRUN COMMAND:\n"
+eval $CMD_TO_RUN
 
 {% endblock pipeline_specific %}
