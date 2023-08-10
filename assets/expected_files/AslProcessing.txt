@@ -186,7 +186,6 @@ ASL topup topup_movpar.txt
 ASL topup topup_params.txt
 ASL topup WarpField_01.nii.gz
 ASL topup WarpField_02.nii.gz
-_catalog.xml
 MNINonLinear ASL arrival_Atlas.dscalar.nii
 MNINonLinear ASL arrival_cifti_mean_nonzero.txt
 MNINonLinear ASL arrival.nii.gz
