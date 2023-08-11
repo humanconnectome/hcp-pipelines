@@ -245,7 +245,7 @@ T1w ASL arrival_var.nii.gz
 T1w ASL arrival_wm_mean.txt
 T1w ASL asl_corr.nii.gz
 T1w ASL asl_corr_subtracted.nii.gz
-T1w ASL ASLQC {subjectid}_hcp_asl_qc.scene
+T1w ASL ASLQC {subjectid}_hcp_asl_qc.wb_scene
 T1w ASL ASLQC {subjectid}_hcp_asl_report.ipynb
 T1w ASL Calib Calib0 calib0_corr.nii.gz
 T1w ASL Calib Calib0 calib0_noncorr.nii.gz
