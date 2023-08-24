@@ -5,8 +5,8 @@
 CINAB="/ceph/intradb/archive/CinaB/"
 PROJECT=`echo "${StudyFolder}" | sed -e "s/\/PatchProcessing[^\/].*$//" -e "s/^.*\///"`
 STUDY_FOLDER="${StudyFolder}/sessions/${Session}/hcp"
-MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs grep "\-\-multirun-fix-names" | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u`
-MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs grep "\-\-multirun-fix-names-to-use" | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u`
+MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}' grep "\-\-multirun-fix-names" {} | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
+MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}'  grep "\-\-multirun-fix-names-to-use" {} | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
 echo -e "\nCOMPUTED VARIABLES:\n"
 echo "CINAB=$CINAB"
 echo "PROJECT=$PROJECT"
