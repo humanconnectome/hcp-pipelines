@@ -46,9 +46,11 @@ DEFAULT: &default
   RUN_COMBINED_STEPS: False
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
   SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
+  #SCRATCH_TMP_DIR: /ceph/scratch/intradb/tmp/chpc_runs/$USER/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   AUTOLAUNCH_AT_END: True
   #AUTOLAUNCH_AT_END: False
   # Choices for BREAKPOINT: get, process, clean, put, check or run_all to run the combined script
+  #BREAKPOINT: process
   #BREAKPOINT: check
   BREAKPOINT: run_all
 
@@ -211,6 +213,8 @@ asl_process:
   <<: *default
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 12
+  QUNEX_VERSION: 0.98.3a_RC
+  #PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/home/NRG-SVC-HCPi/qunex_repo/hcp-asl:/opt/HCP/hcp-asl
   OUTPUT_RESOURCE_NAME: ASL_proc
 
 #
@@ -224,3 +228,4 @@ task_process:
   OUTPUT_RESOURCE_NAME: ${SCAN}_analysis_proc
   TASK_FILES: $ASSETS_DIR/TaskAnalysis/$PROJECT_ID
   USE_CUSTOM_BATCH: True
+
