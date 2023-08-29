@@ -109,10 +109,6 @@ ASL TIs combined_scaling_factors.nii.gz
 ASL TIs DistCorr FirstPass dc_tis.nii.gz
 ASL TIs DistCorr FirstPass temp_reg_dc_tis.nii.gz
 ASL TIs DistCorr FirstPass tis_gdc.nii.gz
-ASL TIs MoCo asln2m0_final.mat MAT_0000
-ASL TIs MoCo asln2m0_final.mat MAT_0001
-ASL TIs MoCo asln2m0.mat MAT_0000
-ASL TIs MoCo asln2m0.mat MAT_0001
 ASL TIs MoCo final_registration_TIs.nii.gz
 ASL TIs MoCo final_registration_TIs.nii.gz.par
 ASL TIs MoCo fov_mask_initial.nii.gz
@@ -186,33 +182,23 @@ ASL topup topup_movpar.txt
 ASL topup topup_params.txt
 ASL topup WarpField_01.nii.gz
 ASL topup WarpField_02.nii.gz
-MNINonLinear ASL arrival_Atlas.dscalar.nii
-MNINonLinear ASL arrival_cifti_mean_nonzero.txt
 MNINonLinear ASL arrival.nii.gz
-MNINonLinear ASL CIFTIPrepare arrival_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare arrival_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare arrival_MNI.nii.gz
-MNINonLinear ASL CIFTIPrepare arrival_var_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare arrival_var_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare arrival_var_MNI.nii.gz
 MNINonLinear ASL CIFTIPrepare asl_grid_mni.nii.gz
-MNINonLinear ASL CIFTIPrepare perfusion_calib_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare perfusion_calib_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare perfusion_calib_MNI.nii.gz
-MNINonLinear ASL CIFTIPrepare perfusion_var_calib_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare perfusion_var_calib_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare perfusion_var_calib_MNI.nii.gz
-MNINonLinear ASL CIFTIPrepare pvcorr arrival_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare pvcorr arrival_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare pvcorr arrival_MNI.nii.gz
-MNINonLinear ASL CIFTIPrepare pvcorr arrival_var_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare pvcorr arrival_var_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare pvcorr arrival_var_MNI.nii.gz
 MNINonLinear ASL CIFTIPrepare pvcorr asl_grid_mni.nii.gz
-MNINonLinear ASL CIFTIPrepare pvcorr perfusion_calib_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare pvcorr perfusion_calib_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare pvcorr perfusion_calib_MNI.nii.gz
-MNINonLinear ASL CIFTIPrepare pvcorr perfusion_var_calib_Atlas.dscalar.nii
 MNINonLinear ASL CIFTIPrepare pvcorr perfusion_var_calib_AtlasSubcortical_s2.nii.gz
 MNINonLinear ASL CIFTIPrepare pvcorr perfusion_var_calib_MNI.nii.gz
 MNINonLinear ASL OxfordASL std_space arrival.nii.gz
@@ -227,15 +213,9 @@ MNINonLinear ASL OxfordASL std_space pvcorr perfusion_gm_calib_masked.nii.gz
 MNINonLinear ASL OxfordASL std_space pvcorr perfusion_gm_var_calib_masked.nii.gz
 MNINonLinear ASL OxfordASL std_space pvcorr perfusion_wm_calib_masked.nii.gz
 MNINonLinear ASL OxfordASL std_space pvcorr perfusion_wm_var_calib_masked.nii.gz
-MNINonLinear ASL perfusion_calib_Atlas.dscalar.nii
-MNINonLinear ASL perfusion_calib_cifti_mean_nonzero.txt
 MNINonLinear ASL perfusion_calib.nii.gz
-MNINonLinear ASL pvcorr_arrival_Atlas.dscalar.nii
-MNINonLinear ASL pvcorr_arrival_cifti_mean_nonzero.txt
 MNINonLinear ASL pvcorr_arrival_gm_masked.nii.gz
 MNINonLinear ASL pvcorr_arrival_wm_masked.nii.gz
-MNINonLinear ASL pvcorr_perfusion_calib_Atlas.dscalar.nii
-MNINonLinear ASL pvcorr_perfusion_calib_cifti_mean_nonzero.txt
 MNINonLinear ASL pvcorr_perfusion_gm_calib_masked.nii.gz
 MNINonLinear ASL pvcorr_perfusion_wm_calib_masked.nii.gz
 T1w ASL aCBV_calib.nii.gz
@@ -245,6 +225,10 @@ T1w ASL arrival_var.nii.gz
 T1w ASL arrival_wm_mean.txt
 T1w ASL asl_corr.nii.gz
 T1w ASL asl_corr_subtracted.nii.gz
+T1w ASL ASLQC snapshots {subjectid}_hcp_asl_qc.wb_scene1.png
+T1w ASL ASLQC snapshots {subjectid}_hcp_asl_qc.wb_scene2.png
+T1w ASL ASLQC snapshots {subjectid}_hcp_asl_qc.wb_scene3.png
+T1w ASL ASLQC snapshots {subjectid}_hcp_asl_qc.wb_scene4.png
 T1w ASL ASLQC {subjectid}_hcp_asl_qc.wb_scene
 T1w ASL ASLQC {subjectid}_hcp_asl_report.ipynb
 T1w ASL Calib Calib0 calib0_corr.nii.gz
@@ -285,60 +269,60 @@ T1w ASL Calib Calib0 SEbased SubcorticalGreyMatter.nii.gz
 T1w ASL calib_corr.nii.gz
 T1w ASL CIFTIPrepare arrival.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare arrival.L.native.func.gii
+T1w ASL CIFTIPrepare arrival_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare arrival_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare arrival_precision.nii.gz
 T1w ASL CIFTIPrepare arrival.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare arrival.R.native.func.gii
-T1w ASL CIFTIPrepare arrival_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare arrival_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare arrival_var.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare arrival_var.L.native.func.gii
+T1w ASL CIFTIPrepare arrival_var_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare arrival_var_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare arrival_var_precision.nii.gz
 T1w ASL CIFTIPrepare arrival_var.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare arrival_var.R.native.func.gii
-T1w ASL CIFTIPrepare arrival_var_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare arrival_var_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare perfusion_calib.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare perfusion_calib.L.native.func.gii
+T1w ASL CIFTIPrepare perfusion_calib_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare perfusion_calib_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare perfusion_calib_precision.nii.gz
 T1w ASL CIFTIPrepare perfusion_calib.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare perfusion_calib.R.native.func.gii
-T1w ASL CIFTIPrepare perfusion_calib_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare perfusion_calib_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare perfusion_var_calib.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare perfusion_var_calib.L.native.func.gii
+T1w ASL CIFTIPrepare perfusion_var_calib_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare perfusion_var_calib_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare perfusion_var_calib_precision.nii.gz
 T1w ASL CIFTIPrepare perfusion_var_calib.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare perfusion_var_calib.R.native.func.gii
-T1w ASL CIFTIPrepare perfusion_var_calib_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare perfusion_var_calib_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival.L.native.func.gii
+T1w ASL CIFTIPrepare pvcorr arrival_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare pvcorr arrival_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival_precision.nii.gz
 T1w ASL CIFTIPrepare pvcorr arrival.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival.R.native.func.gii
-T1w ASL CIFTIPrepare pvcorr arrival_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare pvcorr arrival_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival_var.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival_var.L.native.func.gii
+T1w ASL CIFTIPrepare pvcorr arrival_var_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare pvcorr arrival_var_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival_var_precision.nii.gz
 T1w ASL CIFTIPrepare pvcorr arrival_var.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr arrival_var.R.native.func.gii
-T1w ASL CIFTIPrepare pvcorr arrival_var_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare pvcorr arrival_var_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_calib.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_calib.L.native.func.gii
+T1w ASL CIFTIPrepare pvcorr perfusion_calib_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare pvcorr perfusion_calib_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_calib_precision.nii.gz
 T1w ASL CIFTIPrepare pvcorr perfusion_calib.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_calib.R.native.func.gii
-T1w ASL CIFTIPrepare pvcorr perfusion_calib_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare pvcorr perfusion_calib_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_var_calib.L.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_var_calib.L.native.func.gii
+T1w ASL CIFTIPrepare pvcorr perfusion_var_calib_MSMAll_s2.atlasroi.L.32k_fs_LR.func.gii
+T1w ASL CIFTIPrepare pvcorr perfusion_var_calib_MSMAll_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_var_calib_precision.nii.gz
 T1w ASL CIFTIPrepare pvcorr perfusion_var_calib.R.badvert_ribbonroi.native.func.gii
 T1w ASL CIFTIPrepare pvcorr perfusion_var_calib.R.native.func.gii
-T1w ASL CIFTIPrepare pvcorr perfusion_var_calib_s2.atlasroi.L.32k_fs_LR.func.gii
-T1w ASL CIFTIPrepare pvcorr perfusion_var_calib_s2.atlasroi.R.32k_fs_LR.func.gii
 T1w ASL OxfordASL calib logfile
 T1w ASL OxfordASL calib M0.txt
 T1w ASL OxfordASL calib refmask.nii.gz
@@ -433,6 +417,7 @@ T1w ASL roi_stats fsl_identity.txt
 T1w ASL roi_stats roi_stats.csv
 T1w ASL roi_stats roi_stats_gm.csv
 T1w ASL roi_stats roi_stats_wm.csv
+T1w ASL {subjectid}_hcp_asl.log
 T1w ASL TIs asl_corr.nii.gz
 T1w ASL TIs asl_noncorr.nii.gz
 T1w ASL TIs combined_scaling_factors.nii.gz
