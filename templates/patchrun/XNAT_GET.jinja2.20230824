@@ -1,16 +1,12 @@
 {% extends "generic/XNAT_GET.py" %}
 {% block get_data %} 
 print("Getting prereq data for the reapplyfix pipeline.")
-resources.get_asl_unproc_data()
-resources.get_asl_processed_data()
+resources.get_ptfcmm_processed_data()
+resources.get_tica_processed_data()
+resources.get_reapplyfix_processed_data()
 resources.get_msmall_processed_data()
 resources.get_icafix_data()
 resources.get_functional_preproc_data()
 resources.get_supplemental_structural_preproc_data()
 resources.get_structural_preproc_data()
 {% endblock get_data %}
-{% block post %}
-{{ super() }}
-print("Moving ASL root directories to location qunex expects it")
-os.system("mv %s/ASL %s" % (session_dir, destination))
-{% endblock post %}

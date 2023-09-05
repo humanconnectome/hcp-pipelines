@@ -7,7 +7,8 @@ DEFAULT: &default
   TIMESTAMP: $TIMESTAMP
   PYTHON: $AUX_DIR/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
-  PIPELINE_REPO: $HOME/hcp-pipelines
+  #PIPELINE_REPO: $HOME/hcp-pipelines
+  PIPELINE_REPO: $HOME/hcp-pipelines-aslpatch
   #PIPELINE_REPO: $HOME/hcp-pipelines-patch
   #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
   ASSETS_DIR: $PIPELINE_REPO/assets
@@ -53,6 +54,7 @@ DEFAULT: &default
   #BREAKPOINT: process
   #BREAKPOINT: check
   BREAKPOINT: run_all
+  #BREAKPOINT: get
 
 #defaults from scripts.yaml:
   SINGULARITY_BIND_PATH: $BUILD_DIR,$ARCHIVE_ROOT
@@ -177,9 +179,13 @@ patch_run:
   <<: *default
   MEM_LIMIT_GBS: 24
   WALLTIME_LIMIT_HOURS: 24
-  OUTPUT_RESOURCE_NAME: PatchFiles
-  USE_CUSTOM_BATCH: True
-  PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/patch_runs
+  QUNEX_VERSION: 0.98.6a
+  #OUTPUT_RESOURCE_NAME: PatchFiles
+  OUTPUT_RESOURCE_NAME: PatchFiles_Asl
+  #USE_CUSTOM_BATCH: False
+  #PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/patch_runs
+  #PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/home/NRG-SVC-HCPi/qunex_repo/hcp-asl:/opt/HCP/hcp-asl
+  #PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/home/NRG-SVC-HCPi/qunex_repo/qunex/python/qx_utilities/hcp:/opt/qunex/python/qx_utilities/hcp
 
 # 
 # REAPPLY FIX PROCESSING 
@@ -213,7 +219,7 @@ asl_process:
   <<: *default
   MEM_LIMIT_GBS: 16
   WALLTIME_LIMIT_HOURS: 12
-  QUNEX_VERSION: 0.98.3a_RC
+  QUNEX_VERSION: 0.98.6a
   #PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/home/NRG-SVC-HCPi/qunex_repo/hcp-asl:/opt/HCP/hcp-asl
   OUTPUT_RESOURCE_NAME: ASL_proc
 

@@ -153,6 +153,9 @@ class PipelineResources:
         self.mirror_folders_in_output("Diffusion_preproc")
 
     # get processed data
+    def get_asl_processed_data(self):
+        self.mirror_folders_in_output("ASL_proc")
+
     def get_msmall_processed_data(self):
         self.mirror_folders_in_output("MsmAll_proc")
 

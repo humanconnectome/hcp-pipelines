@@ -423,7 +423,7 @@ PatchProcessing:
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
-      template: generic/get_data.jinja2
+      template: patchrun/get_data.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
       variable: GET_DATA_JOB_SCRIPT_NAME
   - generate_file:
