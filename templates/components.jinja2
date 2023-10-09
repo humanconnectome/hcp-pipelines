@@ -30,7 +30,9 @@
 #SBATCH --job-name="{{ job_name }}.{{ timestamp }}"
 #SBATCH --nodes={{ nodes|int }} --ntasks-per-node={{ ppn|int }}
 {%- if gpu %}
-#SBATCH --partition=gpu --gres=gpu:{{ gpu }}
+#SBATCH --account=hcp --partition=tier2_gpu --gres=gpu:{{ gpu }}
+{%- else %}
+#SBATCH --account=hcp --partition=tier2_cpu 
 {%- endif %}
 #SBATCH --time={{ walltime|int }}:00:00 --mem={{ mem|int }}000
 #SBATCH --output="{{ log_dir }}/{{ job_name }}.%j.stdout"
