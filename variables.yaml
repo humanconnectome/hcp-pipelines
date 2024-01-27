@@ -8,7 +8,6 @@ DEFAULT: &default
   PYTHON: $AUX_DIR/virtualenv/bin/python
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
-  #PIPELINE_REPO: $HOME/hcp-pipelines-patch
   #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
   ASSETS_DIR: $PIPELINE_REPO/assets
   PYTHON_IMPORT_DIR: $PIPELINE_REPO/lib
@@ -205,6 +204,18 @@ tica_process:
   USE_CUSTOM_BATCH: True
   QUNEX_VERSION: 0.96.4a
   PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/tICA
+
+# 
+# AUTO RECLEAN PROCESSING 
+# 
+
+autoreclean_process:
+  <<: *default
+  MEM_LIMIT_GBS: 48
+  WALLTIME_LIMIT_HOURS: 24
+  QUNEX_VERSION: 0.99.2d
+  OUTPUT_RESOURCE_NAME: AutoReclean_proc
+  USE_CUSTOM_BATCH: True
 
 #
 # ASL PROCESSING

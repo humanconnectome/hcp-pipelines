@@ -643,6 +643,92 @@ TicaProcessing:
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script 
 
+AutoRecleanProcessing:
+  - function: generate_timestamp
+  - function: split_subject_components
+  - load_variables: autoreclean_process
+  #- function: ticafix_process_overrides
+  - function: check_required_files_are_available
+  - function: set_study_folder
+  - function: make_directories
+  - generate_file:
+      template: generic/batch_parameters.txt.jinja2
+      filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
+      variable: BATCH_PARAMETERS_FILE
+
+  # Only for msmall and multirunicafix (and now reapplyfix and tica and auto_reclean)
+  - function: available_bold_dirs
+  ## AUTO reclean needs all_bold list??????  (see batch.txt template)
+  #- function: set_all_bolds
+  - function: set_bold_list_order
+  - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER_NAME}
+  - function: set_qunex_scanlist_bold
+  - generate_file:
+      template: autoreclean/batch.txt.jinja2
+      filepath: ${CHECK_DATA_DIR}/batch.txt
+      variable: BATCH_FILE
+
+  - generate_file:
+      template: generic/shared_values.py
+      filepath: "${CHECK_DATA_DIR}/shared_values.py"
+  - generate_file:
+      template: autoreclean/run_qunex.jinja2
+      filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
+      variable: RUN_QUNEX_SCRIPT
+  - generate_file:
+      template: autoreclean/XNAT_GET.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
+      variable: GET_DATA_RUNPATH
+  - generate_file:
+      template: autoreclean/get_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.sh"
+      variable: GET_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/process_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PROCESS}.sh"
+      variable: PROCESS_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CLEAN.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.py"
+      variable: CLEAN_DATA_RUNPATH
+  - generate_file:
+      template: generic/clean_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CLEAN}.sh"
+      variable: CLEAN_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_PUT_CLEAN_DATA_DIR.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.py"
+      variable: PUT_DATA_RUNPATH
+  - generate_file:
+      template: generic/put_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_PUT}.sh"
+      variable: PUT_DATA_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_CHECK.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.py"
+      variable: CHECK_DATA_RUNPATH
+  - generate_file:
+      template: generic/check_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_CHECK}.sh"
+      variable: CHECK_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/XNAT_MARK_RUNNING_STATUS.py
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.py"
+      variable: MARK_RUNNING_STATUS_RUNPATH
+  - generate_file:
+      template: generic/mark_complete.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_MARK_STATUS}.sh"
+      variable: MARK_NO_LONGER_RUNNING_SCRIPT_NAME
+  - generate_file:
+      template: generic/runall_data.jinja2
+      filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_RUNALL}.sh"
+      variable: RUNALL_DATA_JOB_SCRIPT_NAME
+  - generate_file:
+      template: generic/submit_jobs.py
+      filepath: ${CHECK_DATA_DIR}/submit_jobs
+      variable: SUBMIT_TO_PBS_SCRIPT
+  - function: launch_main_script 
+
 
 BedpostxPreprocessing:
   - function: generate_timestamp

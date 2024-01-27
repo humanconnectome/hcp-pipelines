@@ -1,0 +1,16 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+{#  --sessions="${Session}" \ #}
+${QUNEXCOMMAND} hcp_apply_auto_reclean \
+	--sessionsfolder="${StudyFolder}/sessions" \
+	--batchfile="${BatchFile}" \
+	--hcp_autoreclean_timepoints="976" \
+	--hcp_autoreclean_model_to_use="RandomForest@MLP@Xgboost@XgboostEnsemble" \
+	--hcp_autoreclean_vote_threshold=4 \
+	--parsessions="2"
+
+{% endblock pipeline_specific %}
+
+
+
