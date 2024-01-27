@@ -3,6 +3,10 @@
 
 {% block pre %}{% endblock pre -%}
 
+exec 3>&1
+
+exec > {{ CHECK_DATA_DIR }}/{{ SCRIPTNAME_RUNALL }}.{{ TIMESTAMP }}.stdout
+
 {{ GET_DATA_JOB_SCRIPT_NAME }}
 
 {{ PROCESS_DATA_JOB_SCRIPT_NAME }}
@@ -15,4 +19,5 @@
 
 {{ MARK_NO_LONGER_RUNNING_SCRIPT_NAME }}
 
+exec >&3
 

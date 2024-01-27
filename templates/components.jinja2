@@ -23,7 +23,14 @@
 
 {%- endmacro %}
 
-
+{% macro get_parent_dir(path) -%}
+    {%- set path_parts = path.split('/') %}
+    {%- if path_parts|length > 1 %}
+        {{- path_parts[:-1]|join('/') -}}
+    {%- else %}
+        {{- '.' -}}
+    {%- endif %}
+{%- endmacro %}
 
 {% macro slurm_head(job_name, log_dir, timestamp, nodes=1, ppn=1, gpu=0, walltime=4, mem=4) -%}
 #!/bin/bash
@@ -35,8 +42,13 @@
 #SBATCH --account=hcp --partition=tier2_cpu 
 {%- endif %}
 #SBATCH --time={{ walltime|int }}:00:00 --mem={{ mem|int }}000
+{%- if "RUNALL" in job_name %}
+#SBATCH --output="{{ get_parent_dir(log_dir) }}/{{ job_name }}.%j.slurmlog"
+#SBATCH --error="{{ log_dir }}/{{ job_name }}.{{ timestamp }}.stderr"
+{%- else %}
 #SBATCH --output="{{ log_dir }}/{{ job_name }}.%j.stdout"
 #SBATCH --error="{{ log_dir }}/{{ job_name }}.%j.stderr"
+{%- endif %}
 {#- NOTE: ADD TEMPORARY SBATCH to exclude specific problematic nodes (NOTE: Code as #SBATCH --exclude=node15,node16 
 #SBATCH --reservation=nrg-svc-hcpi_232
 #SBATCH --exclude=node15,node16,node17
@@ -55,8 +67,6 @@
     {%- endfor -%}
 {%- endif %}
 {%- endmacro %}
-
-
 
 
 {% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.7.0") -%}
