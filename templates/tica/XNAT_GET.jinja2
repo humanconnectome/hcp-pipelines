@@ -1,6 +1,7 @@
 {% extends "generic/XNAT_GET.py" %}
 {% block get_data %} 
 print("Getting prereq data for the reapplyfix pipeline.")
+resources.get_autoreclean_processed_data()
 resources.get_reapplyfix_processed_data()
 resources.get_msmall_processed_data()
 resources.get_icafix_data()

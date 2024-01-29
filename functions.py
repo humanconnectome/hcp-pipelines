@@ -60,6 +60,8 @@ def split_subject_components(_1):
     # find the unique project identifier e.g., HCA, HCD, MDD, ECP, BWH, BANDA
     if proj.startswith("CCF_"):
         pid = proj[4:proj.find("_", 4)]
+    elif proj.startswith("AABC_"):
+        pid = "HCA"
     else:
         pid = "UNKNOWN"
 

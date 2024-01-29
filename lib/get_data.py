@@ -153,6 +153,10 @@ class PipelineResources:
         self.mirror_folders_in_output("Diffusion_preproc")
 
     # get processed data
+    def get_autoreclean_processed_data(self):
+        self.mirror_folders_in_output("AutoReclean_proc")
+
+    # get processed data
     def get_msmall_processed_data(self):
         self.mirror_folders_in_output("MsmAll_proc")
 
