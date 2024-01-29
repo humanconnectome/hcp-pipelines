@@ -22,8 +22,8 @@ MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica original_fix_featur
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica rclean_fix_prediction_proba.csv
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica reclean_features.csv
 MNINonLinear Results fMRI_CONCAT_ALL fMRI_CONCAT_ALL_hp0.ica reclean_features.mat
-MNINonLinear Results fMRI_CONCAT_ALL ReclassifyAsNoiseRecleanVote.txt
-MNINonLinear Results fMRI_CONCAT_ALL ReclassifyAsSignalRecleanVote.txt
+MNINonLinear Results fMRI_CONCAT_ALL ReclassifyAsNoiseRecleanVote4.txt
+MNINonLinear Results fMRI_CONCAT_ALL ReclassifyAsSignalRecleanVote4.txt
 MNINonLinear ROIs CSFReg.2.nii.gz
 MNINonLinear ROIs NonGrey.2.nii.gz
 MNINonLinear ROIs VolumeSmoothROIs.2.nii.gz
