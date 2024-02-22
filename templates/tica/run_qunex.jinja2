@@ -5,6 +5,7 @@
 #        the one we compute.  Per 2023-06-06 e-mail, this is okay because these values aren't doing anything anyway with the 
 #        steps we run (because we are not rerunning MIGP with REUSE). 
 #
+
 {%- if PROJECT_ID == "HCA" %}
 
 GROUP_NAME="HCA1798_MSMAll"
@@ -33,6 +34,22 @@ CLEAN_FOLDER="/ceph/intradb/chpc_resources/XXXXXX/$GROUP_NAME"
 
 {%- endif %}
 
+## TO DO:  This is a total hack carried over from an old patch.   There's got to be a better way to get the FIX_TO_USE values.
+CINAB="/ceph/intradb/archive/CinaB"
+PROJECT=`echo "${StudyFolder}" | sed -e "s/\/TicaProcessing[^\/].*$//" -e "s/^.*\///"`
+STUDY_FOLDER="${StudyFolder}/sessions/${Session}/hcp"
+MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}' grep "\-\-multirun-fix-names" {} | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
+MULTI_RUN_FIX_NAMES=`echo "$MULTI_RUN_FIX_NAMES" | sed -e "s/^.*=//" -e "s/\"//g"`
+MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}'  grep "\-\-multirun-fix-names-to-use" {} | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
+## different parameter name for tip, assigned later
+MULTI_RUN_FIX_TO_USE=`echo "$MULTI_RUN_FIX_TO_USE" | sed -e "s/^.*=//" -e "s/\"//g"`
+echo -e "\nCOMPUTED VARIABLES:\n"
+echo "CINAB=$CINAB"
+echo "PROJECT=$PROJECT"
+echo "STUDY_FOLDER=$STUDY_FOLDER"
+echo "MULTI_RUN_FIX_NAMES=$MULTI_RUN_FIX_NAMES"
+echo "MULTI_RUN_FIX_TO_USE=$MULTI_RUN_FIX_TO_USE"
+
 TICA_STUDYFOLDER="`dirname $StudyFolder`"
 TICA_TIMEPOINTS=`${WORKBENCHDIR}/wb_command -file-information ${StudyFolder}/sessions/${Session}/hcp/${Session}/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas.dtseries.nii -only-number-of-maps`
 
@@ -42,6 +59,8 @@ ${QUNEXCOMMAND} hcp_temporal_ica \
 	--sessions="${Session}" \
 	--batchfile="${BatchFile}" \
 	--overwrite="yes" \
+	--hcp_tica_extract_fmri_name_list="$MULTI_RUN_FIX_TO_USE" \
+	--hcp_tica_extract_fmri_out="rfMRI_REST" \
 	--hcp_tica_outfmriname="fMRI_CONCAT_ALL" \
 	--hcp_tica_procstring="_Atlas_MSMAll_hp0_clean_rclean" \
 	--hcp_icafix_highpass="0" \
