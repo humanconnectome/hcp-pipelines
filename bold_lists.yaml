@@ -84,3 +84,18 @@ hcd_8_and_up:
     - tfMRI_EMOTION_PA
     - rfMRI_REST2_AP
     - rfMRI_REST2_PA
+
+anxpe:
+  BOLD_LIST_ORDER:
+    - rfMRI_REST1_AP
+    - rfMRI_REST1_PA
+    - rfMRI_REST2_AP
+    - rfMRI_REST2_PA
+    - tfMRI_FACES_AP
+    - tfMRI_FACES_PA
+    - tfMRI_GAMBLING_AP
+    - tfMRI_GAMBLING_PA
+    - tfMRI_CONFLICT1_AP
+    - tfMRI_CONFLICT1_PA
+    - tfMRI_CONFLICT2_AP
+    - tfMRI_CONFLICT2_PA

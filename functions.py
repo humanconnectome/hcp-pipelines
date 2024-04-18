@@ -238,6 +238,21 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "rfMRI_REST4_PE1",
                 "rfMRI_REST4_PE2"
             ]
+        elif "CCF_ANXPE" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA",
+                "tfMRI_FACES_AP",
+                "tfMRI_FACES_PA",
+                "tfMRI_GAMBLING_AP",
+                "tfMRI_GAMBLING_PA",
+                "tfMRI_CONFLICT1_AP",
+                "tfMRI_CONFLICT1_PA",
+                "tfMRI_CONFLICT2_AP",
+                "tfMRI_CONFLICT2_PA"
+            ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
 
@@ -270,6 +285,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_ECP = "ecp"
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
+    BLO_ANXPE = "anxpe"
 
     if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST" or PROJECT == "AABC_STG":
         bold_list_order = BLO_HCA
@@ -288,6 +304,8 @@ def set_bold_list_order(PROJECT, SCAN):
             bold_list_order = BLO_HCD_OLDER
         else:
             raise ValueError("The subject subgroup should be YOUNGER or OLDER.")
+    elif PROJECT == "CCF_ANXPE_STG":
+        bold_list_order = BLO_ANXPE
     else:
         raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 
