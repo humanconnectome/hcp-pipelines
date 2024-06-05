@@ -253,6 +253,23 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "tfMRI_CONFLICT2_AP",
                 "tfMRI_CONFLICT2_PA"
             ]
+        elif "CCF_CBA" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA",
+                "tfMRI_WM1_AP",
+                "tfMRI_WM2_PA",
+                "rfMRI_REST3_AP",
+                "rfMRI_REST3_PA",
+                "rfMRI_REST4_AP",
+                "rfMRI_REST4_PA",
+                "tfMRI_LANGUAGE1_AP",
+                "tfMRI_LANGUAGE2_PA",
+                "tfMRI_MOTOR1_AP",
+                "tfMRI_MOTOR2_PA"
+            ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
 
@@ -286,6 +303,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCD_YOUNG = "hcd_5_to_7"
     BLO_HCD_OLDER = "hcd_8_and_up"
     BLO_ANXPE = "anxpe"
+    BLO_CBA = "cba"
 
     if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST" or PROJECT == "AABC_STG":
         bold_list_order = BLO_HCA
@@ -306,6 +324,8 @@ def set_bold_list_order(PROJECT, SCAN):
             raise ValueError("The subject subgroup should be YOUNGER or OLDER.")
     elif PROJECT == "CCF_ANXPE_STG":
         bold_list_order = BLO_ANXPE
+    elif PROJECT == "CCF_CBA_STG":
+        bold_list_order = BLO_CBA
     else:
         raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 
