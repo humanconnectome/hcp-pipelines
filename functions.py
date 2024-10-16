@@ -259,16 +259,16 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "rfMRI_REST1_PA",
                 "rfMRI_REST2_AP",
                 "rfMRI_REST2_PA",
-                "tfMRI_WM1_AP",
-                "tfMRI_WM2_PA",
+                "tfMRI_WM_AP",
+                "tfMRI_WM_PA",
                 "rfMRI_REST3_AP",
                 "rfMRI_REST3_PA",
                 "rfMRI_REST4_AP",
                 "rfMRI_REST4_PA",
                 "tfMRI_LANGUAGE1_AP",
                 "tfMRI_LANGUAGE2_PA",
-                "tfMRI_MOTOR1_AP",
-                "tfMRI_MOTOR2_PA"
+                "tfMRI_MOTOR_AP",
+                "tfMRI_MOTOR_PA"
             ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
