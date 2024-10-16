@@ -126,13 +126,17 @@ functional_preprocess:
 diffusion_preprocess:
   <<: *default
   PROCESS_PBS_K20X: True
-  # Specifically request the older V100S, since the newer GPUs require CUDA 11.1
-  PROCESS_PBS_GPU: "tesla_v100S:1"
+  # Formerly: Specifically request the older V100S, since the newer GPUs require CUDA 11.1
+  # PROCESS_PBS_GPU: "tesla_v100S:1"
+  # MPH and PL resolved cuda library issue for newer gpu
+  PROCESS_PBS_GPU: "tesla_a100:1"
   PROCESS_NVIDIA: True
   OUTPUT_RESOURCE_NAME: Diffusion_preproc
   MEM_LIMIT_GBS: 32
   WALLTIME_LIMIT_HOURS: 24
   #WALLTIME_LIMIT_HOURS: 60
+  QUNEX_VERSION: 0.100.0
+
 
 bedpostx:
   <<: *default
@@ -151,8 +155,8 @@ bedpostx:
 multirunicafix:
   <<: *default
   MEM_LIMIT_GBS: 48
-  WALLTIME_LIMIT_HOURS: 24
-  #WALLTIME_LIMIT_HOURS: 60
+  #WALLTIME_LIMIT_HOURS: 24
+  WALLTIME_LIMIT_HOURS: 120
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   USE_CUSTOM_BATCH: True
 

@@ -49,6 +49,7 @@
 #SBATCH --output="{{ log_dir }}/{{ job_name }}.%j.stdout"
 #SBATCH --error="{{ log_dir }}/{{ job_name }}.%j.stderr"
 {%- endif %}
+#SBATCH --exclude=node15,node16,node18
 {#- NOTE: ADD TEMPORARY SBATCH to exclude specific problematic nodes (NOTE: Code as #SBATCH --exclude=node15,node16 
 #SBATCH --reservation=nrg-svc-hcpi_232
 #SBATCH --exclude=node15,node16,node17
@@ -78,7 +79,8 @@ singularity exec \
     --bind {{ path }} \
     {%- endfor -%}
 {%- endif -%}
-
+    
+    --cleanenv \
 {%- if nvidia %}
     --nv \
 {%- endif %}
