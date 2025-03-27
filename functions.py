@@ -268,7 +268,20 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "tfMRI_LANGUAGE1_AP",
                 "tfMRI_LANGUAGE2_PA",
                 "tfMRI_MOTOR_AP",
-                "tfMRI_MOTOR_PA"
+                "tfMRI_MOTOR_PA",
+            ]
+        elif "CCF_STACT" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "tfMRI_GAMBLING_AP",
+                "tfMRI_GAMBLING_PA",
+                "tfMRI_EMOTION_AP",
+                "tfMRI_EMOTION_PA",
+                "tfMRI_WM_AP",
+                "tfMRI_WM_PA"
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA"
             ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
