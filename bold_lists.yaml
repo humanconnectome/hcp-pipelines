@@ -1,3 +1,16 @@
+stact:
+  BOLD_LIST_ORDER:
+    - rfMRI_REST1_AP
+    - rfMRI_REST1_PA
+    - tfMRI_GAMBLING_AP
+    - tfMRI_GAMBLING_PA
+    - tfMRI_EMOTION_AP
+    - tfMRI_EMOTION_PA
+    - tfMRI_WM_AP
+    - tfMRI_WM_PA
+    - rfMRI_REST2_AP
+    - rfMRI_REST2_PA
+
 banda:
   BOLD_LIST_ORDER:
     - rfMRI_REST1_AP
