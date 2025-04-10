@@ -279,7 +279,7 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "tfMRI_EMOTION_AP",
                 "tfMRI_EMOTION_PA",
                 "tfMRI_WM_AP",
-                "tfMRI_WM_PA"
+                "tfMRI_WM_PA",
                 "rfMRI_REST2_AP",
                 "rfMRI_REST2_PA"
             ]
