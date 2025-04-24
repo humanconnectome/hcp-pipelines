@@ -70,10 +70,10 @@
 {%- endmacro %}
 
 
-{% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.7.0") -%}
-module load singularity/{{ version }}
+{% macro apptainer(container, runpath, bindpath="", nvidia=False, params={}) -%}
+module load apptainer
 
-singularity exec \
+apptainer exec \
 {%- if bindpath|trim -%}
     {%- for path in bindpath.split(",") %}
     --bind {{ path }} \
