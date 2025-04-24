@@ -138,6 +138,7 @@ diffusion_preprocess:
   QUNEX_VERSION: 0.100.0
 
 
+
 bedpostx:
   <<: *default
   PROCESS_PBS_K20X: True
@@ -154,7 +155,7 @@ bedpostx:
 
 multirunicafix:
   <<: *default
-  MEM_LIMIT_GBS: 48
+  MEM_LIMIT_GBS: 48 # MJM note: for CBA, increase to 56
   #WALLTIME_LIMIT_HOURS: 24
   WALLTIME_LIMIT_HOURS: 120
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
@@ -166,7 +167,7 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  MEM_LIMIT_GBS: 20
+  MEM_LIMIT_GBS: 20 # MJM note: for CBA, increase to 28
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
@@ -215,7 +216,7 @@ tica_process:
 
 autoreclean_process:
   <<: *default
-  MEM_LIMIT_GBS: 48
+  MEM_LIMIT_GBS: 48 # for CBA, have to change from 48 to 64
   WALLTIME_LIMIT_HOURS: 24
   QUNEX_VERSION: 0.99.2d
   OUTPUT_RESOURCE_NAME: AutoReclean_proc

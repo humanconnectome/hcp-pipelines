@@ -317,6 +317,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCD_OLDER = "hcd_8_and_up"
     BLO_ANXPE = "anxpe"
     BLO_CBA = "cba"
+    BLO_STACT = "stact"
 
     if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST" or PROJECT == "AABC_STG":
         bold_list_order = BLO_HCA
@@ -339,6 +340,8 @@ def set_bold_list_order(PROJECT, SCAN):
         bold_list_order = BLO_ANXPE
     elif PROJECT == "CCF_CBA_STG":
         bold_list_order = BLO_CBA
+    elif PROJECT == "CCF_STACT_STG":
+        bold_list_order = BLO_STACT
     else:
         raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 
