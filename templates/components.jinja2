@@ -73,7 +73,7 @@
 {% macro apptainer(container, runpath, bindpath="", nvidia=False, params={}) -%}
 module load apptainer
 
-apptainer exec \
+apptainer exec --bind /dev/pts:/dev/pts --bind /dev/ptmx:/dev/ptmx\
 {%- if bindpath|trim -%}
     {%- for path in bindpath.split(",") %}
     --bind {{ path }} \
