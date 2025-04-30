@@ -167,7 +167,7 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  MEM_LIMIT_GBS: 20 # MJM note: for CBA, increase to 28
+  MEM_LIMIT_GBS: 28 # MJM note: for CBA, increase to 28
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
@@ -216,9 +216,9 @@ tica_process:
 
 autoreclean_process:
   <<: *default
-  MEM_LIMIT_GBS: 48 # for CBA, have to change from 48 to 64
+  MEM_LIMIT_GBS: 64 # for CBA, have to change from 48 to 64
   WALLTIME_LIMIT_HOURS: 24
-  QUNEX_VERSION: 0.100.0 # MJM note: experimenting with switch from 0.99.2d
+  QUNEX_VERSION: 1.1.1 # MJM note: experimenting with switch from 0.99.2d
   OUTPUT_RESOURCE_NAME: AutoReclean_proc
   USE_CUSTOM_BATCH: True
 
