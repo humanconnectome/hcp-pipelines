@@ -155,11 +155,13 @@ bedpostx:
 
 multirunicafix:
   <<: *default
-  MEM_LIMIT_GBS: 48 # MJM note: for CBA, increase to 56
+  MEM_LIMIT_GBS: 56 # MJM note: for CBA, increase from 48 to 56
   #WALLTIME_LIMIT_HOURS: 24
   WALLTIME_LIMIT_HOURS: 120
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   USE_CUSTOM_BATCH: True
+  WALLTIME_LIMIT_HOURS: 48
+  QUNEX_VERSION: 1.1.1 # MJM added
 
 # 
 # MSM-ALL PROCESSING 
@@ -167,11 +169,12 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  MEM_LIMIT_GBS: 28 # MJM note: for CBA, increase to 28
+  MEM_LIMIT_GBS: 28 # MJM note: for CBA, increase from 20 to 28
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
   USE_CUSTOM_BATCH: True
+  QUNEX_VERSION: 1.1.1 # MJM added
 
 # 
 # PATCH PROCESSING 
