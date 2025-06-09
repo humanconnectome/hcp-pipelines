@@ -73,10 +73,21 @@
 {% macro apptainer(container, runpath, bindpath="", nvidia=False, params={}) -%}
 module load apptainer
 
+test1="/tmp/inject.so"
+test2="/tmp/preload.conf"
+if [ ! -f "$test1" ]; then
+	cp $HOME/inject.so /tmp/inject.so
+fi
+if [ ! -f "$test2" ]; then
+	echo "/mnt/inject.so" > /tmp/preload.conf
+fi
+
 apptainer exec \
 {%- if bindpath|trim -%}
     {%- for path in bindpath.split(",") %}
     --bind {{ path }} \
+    --bind /tmp/inject.so:/mnt/inject.so \
+    --bind /tmp/preload.conf:/etc/ld.so.preload \
     {%- endfor -%}
 {%- endif -%}
     
