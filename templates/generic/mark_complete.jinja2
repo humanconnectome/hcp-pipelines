@@ -1,10 +1,6 @@
 {% from 'components.jinja2' import slurm_head, apptainer -%}
 {{ slurm_head(job_name=SCRIPTNAME_MARK_STATUS, log_dir=LOG_DIR, timestamp=TIMESTAMP) }}
 
-. /scratch/nrg-svc-hcpi/miniconda3/bin/activate
-conda activate hcp-pipelines
-PYTHON="$HOME/conda/envs/hcp-pipelines/bin/python"
-
 {{ PYTHON }} \
     {{ MARK_RUNNING_STATUS_RUNPATH }}
 
