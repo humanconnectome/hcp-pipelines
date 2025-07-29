@@ -7,6 +7,10 @@ fi
 
 cp {{ CHECK_DATA_DIR }}/* {{ CLEAN_DATA_DIR }}/{{ SESSION }}/ProcessingInfo
 
+. /scratch/nrg-svc-hcpi/miniconda3/bin/activate
+conda activate hcp-pipelines
+PYTHON="$HOME/conda/envs/hcp-pipelines/bin/python"
+
 {{ PYTHON }} \
     {{ PUT_DATA_RUNPATH }}
 

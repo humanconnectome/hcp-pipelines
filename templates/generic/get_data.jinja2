@@ -1,6 +1,10 @@
 {% from 'components.jinja2' import slurm_head, apptainer -%}
 {{ slurm_head(job_name=SCRIPTNAME_GET, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP) }}
 
+. /scratch/nrg-svc-hcpi/miniconda3/bin/activate
+conda activate hcp-pipelines
+PYTHON="$HOME/conda/envs/hcp-pipelines/bin/python"
+
 {{ PYTHON }} \
     {{ GET_DATA_RUNPATH }}
 

@@ -7,6 +7,10 @@ if [ `find {{ BUILD_SPACE }}/{{WORKING_DIR_BASENAME }}/{{SESSION}}/processing/lo
 	exit 1
 fi
 
+. /scratch/nrg-svc-hcpi/miniconda3/bin/activate
+conda activate hcp-pipelines
+PYTHON="$HOME/conda/envs/hcp-pipelines/bin/python"
+
 {{ PYTHON }} \
     {{ CHECK_DATA_RUNPATH }}
 
