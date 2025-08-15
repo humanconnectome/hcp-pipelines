@@ -12,7 +12,6 @@ GROUP_NAME="HCA1798_MSMAll"
 PCA_INTERNAL_DIM="2721"
 PCA_OUT_DIM="2721"
 SICADIM_OVERRIDE="86"
-CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCA/$GROUP_NAME"
 
 {%- elif PROJECT_ID == "HCD" %}
 
@@ -20,7 +19,36 @@ GROUP_NAME="HCD1695_MSMAll"
 PCA_INTERNAL_DIM="3200"
 PCA_OUT_DIM="3200"
 SICADIM_OVERRIDE="122"
-CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/HCD/$GROUP_NAME"
+
+{%- elif PROJECT_ID == "ANXPE" %}
+
+GROUP_NAME="ANXPE_MSMAll240"
+PCA_INTERNAL_DIM="3856"
+PCA_OUT_DIM="3856"
+SICADIM_OVERRIDE="103"
+
+{%- elif PROJECT_ID == "BANDA" %}
+
+GROUP_NAME="BANDA_MSMAll172"
+PCA_INTERNAL_DIM="3940"
+PCA_OUT_DIM="3940"
+SICADIM_OVERRIDE="119"
+
+{%- elif PROJECT_ID == "CBA" %}
+
+GROUP_NAME="CBA_MSMAll193"
+PCA_INTERNAL_DIM="4504"
+PCA_OUT_DIM="4504"
+SICADIM_OVERRIDE="98"
+MULTI_RUN_FIX_TO_USE="rfMRI_REST1_AP@rfMRI_REST1_PA@rfMRI_REST2_AP@rfMRI_REST2_PA@rfMRI_REST3_AP@rfMRI_REST3_PA@rfMRI_REST4_AP@rfMRI_REST4_PA"
+
+{%- elif PROJECT_ID == "MDD" %}
+
+GROUP_NAME="MDD_MSMAll442"
+PCA_INTERNAL_DIM="2878"
+PCA_OUT_DIM="2878"
+SICADIM_OVERRIDE="92"
+MULTI_RUN_FIX_TO_USE="rfMRI_REST1_AP@rfMRI_REST1_PA"
 
 {%- else %}
 
@@ -30,9 +58,11 @@ PCA_INTERNAL_DIM="0"
 PCA_OUT_DIM="0"
 TICA_TIMEPOINTS="0"
 SICADIM_OVERRIDE="0"
-CLEAN_FOLDER="/ceph/intradb/chpc_resources/XXXXXX/$GROUP_NAME"
 
 {%- endif %}
+
+# MM note: moved this out of the if/else logic because it always follows this pattern
+CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/{{PROJECT_ID}}/$GROUP_NAME"
 
 ## TO DO:  This is a total hack carried over from an old patch.   There's got to be a better way to get the FIX_TO_USE values.
 CINAB="/ceph/intradb/archive/CinaB"
@@ -52,7 +82,6 @@ echo "MULTI_RUN_FIX_TO_USE=$MULTI_RUN_FIX_TO_USE"
 
 TICA_STUDYFOLDER="`dirname $StudyFolder`"
 TICA_TIMEPOINTS=`${WORKBENCHDIR}/wb_command -file-information ${StudyFolder}/sessions/${Session}/hcp/${Session}/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas.dtseries.nii -only-number-of-maps`
-
 
 ${QUNEXCOMMAND} hcp_temporal_ica \
 	--sessionsfolder="${StudyFolder}/sessions" \
