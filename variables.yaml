@@ -5,7 +5,7 @@ DEFAULT: &default
   USER: $ENV_USER
   HOME: $ENV_HOME
   TIMESTAMP: $TIMESTAMP
-  PYTHON: ". /scratch/nrg-svc-hcpi/miniconda3/bin/activate; conda activate hcp-pipelines; $HOME/.conda/envs/hcp-pipelines/bin/python"
+  PYTHON: ". /ceph/scratch/intradb/tmp/miniconda3/bin/activate; conda activate hcp-pipelines; $HOME/.conda/envs/hcp-pipelines/bin/python"
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
   #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
