@@ -643,10 +643,10 @@ TicaProcessing:
       variable: SUBMIT_TO_PBS_SCRIPT
   - function: launch_main_script 
 
-TransmitProcessing:
+TransmitBiasProcessing:
   - function: generate_timestamp
   - function: split_subject_components
-  - load_variables: transmit_process
+  - load_variables: transmitbias
   - function: check_required_files_are_available
   - function: set_study_folder
   - function: make_directories
