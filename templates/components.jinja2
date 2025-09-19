@@ -86,9 +86,9 @@ apptainer exec \
 {%- if bindpath|trim -%}
     {%- for path in bindpath.split(",") %}
     --bind {{ path }} \
+    {%- endfor -%}
     --bind /tmp/inject.so:/mnt/inject.so \
     --bind /tmp/preload.conf:/etc/ld.so.preload \
-    {%- endfor -%}
 {%- endif -%}
     
     --cleanenv \
