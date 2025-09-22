@@ -216,14 +216,12 @@ tica_process:
 
 transmitbias:
   <<: *default
-  MEM_LIMIT_GBS: 24 # MM note: placeholder
-  WALLTIME_LIMIT_HOURS: 4 # MM note: placeholder
+  MEM_LIMIT_GBS: 8
+  WALLTIME_LIMIT_HOURS: 6
   OUTPUT_RESOURCE_NAME: TransmitBias_proc
   USE_CUSTOM_BATCH: True # MM note: what is this?
   QUNEX_VERSION: 1.3.5
-# MM note: this is apparently for additional precomputed global things that
-# you may need to pass in
-#  PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/TransmitBias
+  PROCESS_DATA_BINDPATH: $AUX_DIR/TransmitBias
 
 # 
 # AUTO RECLEAN PROCESSING 
