@@ -1,122 +1,26 @@
 {% extends "generic/run_qunex.sh" %}
 {% block pipeline_specific %}
-#
-# NOTE:  The PCA_INTERNAL_DIM and PCA_OUT_DIM values match the exptected TICA_TIMEPOINTS (complete subjects) value rather than 
-#        the one we compute.  Per 2023-06-06 e-mail, this is okay because these values aren't doing anything anyway with the 
-#        steps we run (because we are not rerunning MIGP with REUSE). 
-#
 
-{%- if PROJECT_ID == "HCA" %}
+echo "AUX_DIR is $AUX_DIR"
+AUX_DIR=/ceph/intradb/chpc_resources
 
-GROUP_NAME="HCA1798_MSMAll"
-PCA_INTERNAL_DIM="2721"
-PCA_OUT_DIM="2721"
-SICADIM_OVERRIDE="86"
-
-{%- elif PROJECT_ID == "HCD" %}
-
-GROUP_NAME="HCD1695_MSMAll"
-PCA_INTERNAL_DIM="3200"
-PCA_OUT_DIM="3200"
-SICADIM_OVERRIDE="122"
-
-{%- elif PROJECT_ID == "ANXPE" %}
-
-GROUP_NAME="ANXPE_MSMAll240"
-PCA_INTERNAL_DIM="3856"
-PCA_OUT_DIM="3856"
-SICADIM_OVERRIDE="103"
-
-{%- elif PROJECT_ID == "BANDA" %}
-
-GROUP_NAME="BANDA_MSMAll172"
-PCA_INTERNAL_DIM="3940"
-PCA_OUT_DIM="3940"
-SICADIM_OVERRIDE="119"
-
-{%- elif PROJECT_ID == "CBA" %}
-
-GROUP_NAME="CBA_MSMAll193"
-PCA_INTERNAL_DIM="4504"
-PCA_OUT_DIM="4504"
-SICADIM_OVERRIDE="98"
-MULTI_RUN_FIX_TO_USE="rfMRI_REST1_AP@rfMRI_REST1_PA@rfMRI_REST2_AP@rfMRI_REST2_PA@rfMRI_REST3_AP@rfMRI_REST3_PA@rfMRI_REST4_AP@rfMRI_REST4_PA"
-
-{%- elif PROJECT_ID == "MDD" %}
-
-GROUP_NAME="MDD_MSMAll442"
-PCA_INTERNAL_DIM="2878"
-PCA_OUT_DIM="2878"
-SICADIM_OVERRIDE="92"
-MULTI_RUN_FIX_TO_USE="rfMRI_REST1_AP@rfMRI_REST1_PA"
-
-{%- else %}
-
-# HOPEFULLY FORCE A FAILURE
-GROUP_NAME="XXXXXX"
-PCA_INTERNAL_DIM="0"
-PCA_OUT_DIM="0"
-TICA_TIMEPOINTS="0"
-SICADIM_OVERRIDE="0"
-
-{%- endif %}
-
-# MM note: moved this out of the if/else logic because it always follows this pattern
-CLEAN_FOLDER="/ceph/intradb/chpc_resources/tICA/{{PROJECT_ID}}/$GROUP_NAME"
-
-## TO DO:  This is a total hack carried over from an old patch.   There's got to be a better way to get the FIX_TO_USE values.
-CINAB="/ceph/intradb/archive/CinaB"
-PROJECT=`echo "${StudyFolder}" | sed -e "s/\/TicaProcessing[^\/].*$//" -e "s/^.*\///"`
-STUDY_FOLDER="${StudyFolder}/sessions/${Session}/hcp"
-MULTI_RUN_FIX_NAMES=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}' grep "\-\-multirun-fix-names" {} | sed -e "s/^.*--multirun-fix-names=/--multirun-fix-names=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
-MULTI_RUN_FIX_NAMES=`echo "$MULTI_RUN_FIX_NAMES" | sed -e "s/^.*=//" -e "s/\"//g"`
-MULTI_RUN_FIX_TO_USE=`find $CINAB/$PROJECT/${Session} -name "done*" | xargs grep -il "dedrift" | xargs -I '{}'  grep "\-\-multirun-fix-names-to-use" {} | sed -e "s/^.*--multirun-fix-names-to-use=/--multirun-fix-names-to-use=/" -e "s/ .*$//" | sort -u | grep "\-\-multirun" | head -1`
-## different parameter name for tip, assigned later
-MULTI_RUN_FIX_TO_USE=`echo "$MULTI_RUN_FIX_TO_USE" | sed -e "s/^.*=//" -e "s/\"//g"`
-echo -e "\nCOMPUTED VARIABLES:\n"
-echo "CINAB=$CINAB"
-echo "PROJECT=$PROJECT"
-echo "STUDY_FOLDER=$STUDY_FOLDER"
-echo "MULTI_RUN_FIX_NAMES=$MULTI_RUN_FIX_NAMES"
-echo "MULTI_RUN_FIX_TO_USE=$MULTI_RUN_FIX_TO_USE"
-
-TICA_STUDYFOLDER="`dirname $StudyFolder`"
-TICA_TIMEPOINTS=`${WORKBENCHDIR}/wb_command -file-information ${StudyFolder}/sessions/${Session}/hcp/${Session}/MNINonLinear/Results/fMRI_CONCAT_ALL/fMRI_CONCAT_ALL_Atlas.dtseries.nii -only-number-of-maps`
-
-${QUNEXCOMMAND} hcp_temporal_ica \
-	--sessionsfolder="${StudyFolder}/sessions" \
-	--sessions="${Session}" \
-	--batchfile="${BatchFile}" \
-	--overwrite="yes" \
-	--hcp_tica_extract_fmri_name_list="$MULTI_RUN_FIX_TO_USE" \
-	--hcp_tica_extract_fmri_out="rfMRI_REST" \
-	--hcp_tica_outfmriname="fMRI_CONCAT_ALL" \
-	--hcp_tica_procstring="_Atlas_MSMAll_hp0_clean_rclean" \
-	--hcp_icafix_highpass="0" \
-	--hcp_outgroupname="$GROUP_NAME" \
-	--hcp_tica_surfregname="MSMAll" \
-	--hcp_tica_icamode="REUSE_TICA" \
-	--hcp_tica_pca_internal_dim="$PCA_INTERNAL_DIM" \
-	--hcp_tica_pca_out_dim="$PCA_OUT_DIM" \
-	--hcp_tica_num_wishart="6" \
-	--hcp_tica_sicadim_override="$SICADIM_OVERRIDE" \
-	--hcp_tica_timepoints="$TICA_TIMEPOINTS" \
-	--hcp_tica_reclean_mode="YES" \
-	--hcp_tica_starting_step="MIGP" \
-	--hcp_tica_stop_after_step="CleanData" \
-	--hcp_tica_fix_legacy_bias="NO" \
-	--hcp_tica_precomputed_clean_folder="$CLEAN_FOLDER" \
-	--hcp_tica_precomputed_fmri_name="fMRI_CONCAT_ALL" \
-	--hcp_tica_precomputed_group_name="$GROUP_NAME" \
-	--hcp_parallel_limit="4"
-
-#--------------------------->	--hcp_tica_studyfolder="$TICA_STUDYFOLDER" \
-#--------------------------->	--hcp_tica_bolds="fMRI_CONCAT_ALL" \
-#--------------------------->     --batchfile=<path_to_batch_file> \
-#--------------------------->     --hcp_icafix_bolds=<same_as_for_initial_icafix_run> \
-#---------------------------> --hcp_icafix_regname=<MSMAll if needed, NONE is default>
+${QUNEXCOMMAND} hcp_transmit_bias_individual \
+	--sessionsfolder="$StudyFolder/sessions" \
+	--batchfile="$StudyFolder/processing/batch.txt" \
+	--sessions="$Session" \
+	--hcp_transmit_mode="PseudoTransmit" \
+	--hcp_pt_fmri_names="rfMRI_REST1_AP,rfMRI_REST1_PA" \
+	--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+	--hcp_group_uncorrected_myelin="$AUX_DIR/TransmitBias/HCA722_Winter2021.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+	--hcp_pt_reference_value_file="$AUX_DIR/TransmitBias/pt_reference_value.txt" \
+	--hcp_gmwm_template="$AUX_DIR/TransmitBias/HCA722_Winter2021_GMWMTemplate.nii.gz" \
+	--hcp_unproc_t1w_list="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/${Session}_T1w_MPR_vNav_4e_RMS.nii.gz" \
+	--hcp_unproc_t2w_list="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.nii.gz" \
+	--hcp_raw_psn_t1w="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/${Session}_T1w_MPR_vNav_Norm_4e_RMS.nii.gz" \
+	--hcp_raw_nopsn_t1w="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/OTHER_FILES/${Session}_T1w_MPR_vNav_4e_RMS.nii.gz" \
+	--hcp_regname="MSMAll" \
+	--hcp_low_res_mesh=32 \
+	--hcp_grayordinates_res=2
 
 {% endblock pipeline_specific %}
-
-
 

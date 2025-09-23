@@ -654,28 +654,24 @@ TransmitBiasProcessing:
       template: generic/batch_parameters.txt.jinja2
       filepath: "${CHECK_DATA_DIR}/batch_parameters.txt"
       variable: BATCH_PARAMETERS_FILE
-
-  # Only for msmall and multirunicafix (and now reapplyfix and tica) # MM note: what about transmit?
   - function: available_bold_dirs
-  # TICA needs all_bold list.  (see batch.txt template) # MM note: what about transmit?
   - function: set_all_bolds
   - function: set_bold_list_order
   - load_variables: bold_lists.yaml#${BOLD_LIST_ORDER_NAME}
   - function: set_qunex_scanlist_bold
   - generate_file:
-      template: tica/batch.txt.jinja2
+      template: transmitbias/batch.txt.jinja2
       filepath: ${CHECK_DATA_DIR}/batch.txt
       variable: BATCH_FILE
-
   - generate_file:
       template: generic/shared_values.py
       filepath: "${CHECK_DATA_DIR}/shared_values.py"
   - generate_file:
-      template: tica/run_qunex.jinja2
+      template: transmitbias/run_qunex.jinja2
       filepath: "${CHECK_DATA_DIR}/run_qunex.sh"
       variable: RUN_QUNEX_SCRIPT
   - generate_file:
-      template: tica/XNAT_GET.jinja2
+      template: transmitbias/XNAT_GET.jinja2
       filepath: "${CHECK_DATA_DIR}/${SCRIPTNAME_GET}.py"
       variable: GET_DATA_RUNPATH
   - generate_file:
