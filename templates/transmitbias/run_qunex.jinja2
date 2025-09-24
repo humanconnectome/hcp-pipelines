@@ -4,6 +4,12 @@
 echo "AUX_DIR is $AUX_DIR"
 AUX_DIR=/ceph/intradb/chpc_resources
 
+# MM note: need to link these things per Qunex expectations that
+# are not sufficiently handled by `hcp-pipelines/lib/get_data.py
+ln -s $StudyFolder/rfMRI_REST1_AP $StudyFolder/sessions/$Session/hcp/$Session/
+ln -s $StudyFolder/rfMRI_REST1_PA $StudyFolder/sessions/$Session/hcp/$Session/
+
+
 ${QUNEXCOMMAND} hcp_transmit_bias_individual \
 	--sessionsfolder="$StudyFolder/sessions" \
 	--batchfile="$StudyFolder/processing/batch.txt" \
