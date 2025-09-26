@@ -229,7 +229,7 @@ transmitbias:
 
 autoreclean_process:
   <<: *default
-  MEM_LIMIT_GBS: 64 # for CBA, have to change from 48 to 64
+  MEM_LIMIT_GBS: 48 # MM note: for CBA, have to change from 48 to 64
   WALLTIME_LIMIT_HOURS: 24
   QUNEX_VERSION: 0.99.2d
   OUTPUT_RESOURCE_NAME: AutoReclean_proc
