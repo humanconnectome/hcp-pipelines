@@ -4,18 +4,43 @@
 echo "AUX_DIR is $AUX_DIR"
 AUX_DIR=/ceph/intradb/chpc_resources
 
+## MM note: the following selects a pair of resting state scans that are
+## from the same sessions as the structuals, per requirements for this pipeline
+t1_json="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.json"
+t2_json="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.json"
+ref_shim="$(jq -c '.ShimSetting' "$t1_json")"
+pick_pair() {
+	local bold_ap bold_pa
+	bold_aps=($(find $StudyFolder -maxdepth 1 -type d -printf "%f\n" | grep "rfMRI_REST.*AP$" | sort))
+	for bold_ap in "${bold_aps[@]}"; do
+		bold_pa=$(echo "$bold_ap" | sed 's/_AP$/_PA/')
+		[[ -d "$StudyFolder/unprocessed/$bold_pa" ]] || continue
+		ap_json="$(find "$StudyFolder/unprocessed/$bold_ap" | grep json$ | sort | head -n1)"
+		pa_json="$(find "$StudyFolder/unprocessed/$bold_pa" | grep json$ | sort | head -n1)"
+		[[ -n "$ap_json" && -n "$pa_json" ]] || continue
+		ap_shim="$(jq -c '.ShimSetting' "$ap_json")"
+		pa_shim="$(jq -c '.ShimSetting' "$pa_json")"
+		if [[ "$ap_shim" == "$ref_shim" && "$pa_shim" == "$ref_shim" ]]; then
+			echo "$bold_ap $bold_pa"
+			return 0
+		fi
+	done
+	return 1
+}
+
+read bold_ap bold_pa < <(pick_pair)
+
 # MM note: need to link these things per Qunex expectations that
 # are not sufficiently handled by `hcp-pipelines/lib/get_data.py
-ln -s $StudyFolder/rfMRI_REST1_AP $StudyFolder/sessions/$Session/hcp/$Session/
-ln -s $StudyFolder/rfMRI_REST1_PA $StudyFolder/sessions/$Session/hcp/$Session/
-
+ln -s "$StudiedFolder/$bold_ap" "$StudyFolder/sessions/$Session/hcp/$Session/"
+ln -s "$StudiedFolder/$bold_pa" "$StudyFolder/sessions/$Session/hcp/$Session/"
 
 ${QUNEXCOMMAND} hcp_transmit_bias_individual \
 	--sessionsfolder="$StudyFolder/sessions" \
 	--batchfile="$StudyFolder/processing/batch.txt" \
 	--sessions="$Session" \
 	--hcp_transmit_mode="PseudoTransmit" \
-	--hcp_pt_fmri_names="rfMRI_REST1_AP,rfMRI_REST1_PA" \
+	--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
 	--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
 	--hcp_group_uncorrected_myelin="$AUX_DIR/TransmitBias/HCA722_Winter2021.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
 	--hcp_pt_reference_value_file="$AUX_DIR/TransmitBias/pt_reference_value.txt" \
