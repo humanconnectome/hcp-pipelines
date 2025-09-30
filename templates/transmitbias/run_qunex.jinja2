@@ -30,10 +30,72 @@ pick_pair() {
 
 read bold_ap bold_pa < <(pick_pair)
 
+t1_json="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.json"
+t2_json="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.json"
+ref_shim="$(jq -c '.ShimSetting' "$t1_json")"
+t1_time="$(jq -r '.AcquisitionTime' "$t1_json")"
+t2_time="$(jq -r '.AcquisitionTime' "$t2_json")"
+
+to_sec() {
+	local t="${1%%.*}"   # strip off everything after the dot
+	IFS=':' read -r h m s <<<"$t"
+	echo $((10#$h*3600 + 10#$m*60 + 10#$s))
+}
+
+
+t1_sec=$(to_sec "$t1_time")
+t2_sec=$(to_sec "$t2_time")
+target_sec=$(( (t1_sec + t2_sec) / 2 ))
+
+best_ap=""
+best_pa=""
+best_diff=999999999
+
+bold_aps=($(find "$StudyFolder" -maxdepth 1 -type d -printf "%f\n" | grep "rfMRI_REST.*AP$" | sort))
+echo "ref_shim=$ref_shim"
+echo "t1_time=$t1_time, t2_time=$t2_time, target_sec=$target_sec"
+
+for ap in "${bold_aps[@]}"; do
+	echo "test"
+	pa=$(echo "$ap" | sed 's/_AP$/_PA/')
+	[[ -d "$StudyFolder/unprocessed/$pa" ]] || continue
+	ap_json="$(find "$StudyFolder/unprocessed/$ap" | grep json$ | sort | head -n1)"
+	pa_json="$(find "$StudyFolder/unprocessed/$pa" | grep json$ | sort | head -n1)"
+	[[ -n "$ap_json" && -n "$pa_json" ]] || continue
+	ap_shim="$(jq -c '.ShimSetting' "$ap_json")"
+	pa_shim="$(jq -c '.ShimSetting' "$pa_json")"
+	if [[ "$ap_shim" == "$ref_shim" && "$pa_shim" == "$ref_shim" ]]; then
+		ap_time="$(jq -r '.AcquisitionTime' "$ap_json")"
+		pa_time="$(jq -r '.AcquisitionTime' "$pa_json")"
+		ap_sec=$(to_sec "$ap_time")
+		pa_sec=$(to_sec "$pa_time")
+		echo $ap_sec
+		echo $pa_sec
+		mid_sec=$(( (ap_sec + pa_sec) / 2 ))
+		diff=$(( mid_sec > target_sec ? mid_sec - target_sec : target_sec - mid_sec ))
+		echo "pair $ap / $pa: ap_time=$ap_time pa_time=$pa_time mid_sec=$mid_sec diff=$diff"
+		if (( diff < best_diff )); then
+			best_diff=$diff
+			best_ap=$ap
+			best_pa=$pa
+		fi
+	fi
+done
+
+if [[ -n "$best_ap" && -n "$best_pa" ]]; then
+	echo "chosen pair: $best_ap $best_pa (diff=$best_diff seconds)"
+	bold_ap="$best_ap"
+	bold_pa="$best_pa"
+else
+	echo "no suitable AP/PA pair found"
+	exit -1
+fi
+
+
 # MM note: need to link these things per Qunex expectations that
 # are not sufficiently handled by `hcp-pipelines/lib/get_data.py
-ln -s "$StudiedFolder/$bold_ap" "$StudyFolder/sessions/$Session/hcp/$Session/"
-ln -s "$StudiedFolder/$bold_pa" "$StudyFolder/sessions/$Session/hcp/$Session/"
+ln -s "$StudyFolder/$bold_ap" "$StudyFolder/sessions/$Session/hcp/$Session/"
+ln -s "$StudyFolder/$bold_pa" "$StudyFolder/sessions/$Session/hcp/$Session/"
 
 ${QUNEXCOMMAND} hcp_transmit_bias_individual \
 	--sessionsfolder="$StudyFolder/sessions" \
