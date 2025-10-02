@@ -4,31 +4,7 @@
 echo "AUX_DIR is $AUX_DIR"
 AUX_DIR=/ceph/intradb/chpc_resources
 
-## MM note: the following selects a pair of resting state scans that are
-## from the same sessions as the structuals, per requirements for this pipeline
-t1_json="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.json"
-t2_json="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.json"
-ref_shim="$(jq -c '.ShimSetting' "$t1_json")"
-pick_pair() {
-	local bold_ap bold_pa
-	bold_aps=($(find $StudyFolder -maxdepth 1 -type d -printf "%f\n" | grep "rfMRI_REST.*AP$" | sort))
-	for bold_ap in "${bold_aps[@]}"; do
-		bold_pa=$(echo "$bold_ap" | sed 's/_AP$/_PA/')
-		[[ -d "$StudyFolder/unprocessed/$bold_pa" ]] || continue
-		ap_json="$(find "$StudyFolder/unprocessed/$bold_ap" | grep json$ | sort | head -n1)"
-		pa_json="$(find "$StudyFolder/unprocessed/$bold_pa" | grep json$ | sort | head -n1)"
-		[[ -n "$ap_json" && -n "$pa_json" ]] || continue
-		ap_shim="$(jq -c '.ShimSetting' "$ap_json")"
-		pa_shim="$(jq -c '.ShimSetting' "$pa_json")"
-		if [[ "$ap_shim" == "$ref_shim" && "$pa_shim" == "$ref_shim" ]]; then
-			echo "$bold_ap $bold_pa"
-			return 0
-		fi
-	done
-	return 1
-}
-
-read bold_ap bold_pa < <(pick_pair)
+session_report="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/session_report.csv"
 
 t1_json="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.json"
 t2_json="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.json"
@@ -37,7 +13,7 @@ t1_time="$(jq -r '.AcquisitionTime' "$t1_json")"
 t2_time="$(jq -r '.AcquisitionTime' "$t2_json")"
 
 to_sec() {
-	local t="${1%%.*}"   # strip off everything after the dot
+	local t="${1%%.*}"	# strip off everything after the dot
 	IFS=':' read -r h m s <<<"$t"
 	echo $((10#$h*3600 + 10#$m*60 + 10#$s))
 }
@@ -87,9 +63,32 @@ if [[ -n "$best_ap" && -n "$best_pa" ]]; then
 	bold_ap="$best_ap"
 	bold_pa="$best_pa"
 else
-	echo "no suitable AP/PA pair found"
-	exit -1
+	# no matching shim group; so find a REST pair by a different method
+	session_report="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/session_report.csv"
+	t1_line=$(grep -n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | head -n1)
+	t1_lineno=${t1_line%%:*}
+	t1_day=$(echo "${t1_line#*:}" | cut -d',' -f1 | tr -d '"')
+	echo "T1 line=$t1_lineno day=$t1_day"
+	n=1
+	while [[ -z "$bold_ap" && $n -lt 50 ]]; do
+		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
+		if [ ! -z "$line" ]; then
+			bold_ap=$(echo "$line" | cut -d',' -f14 | tr -d '"')
+			bold_pa=$(echo "$bold_ap" | sed 's/AP$/PA/')
+			break
+		fi
+		n=$((n+1))
+	done
+	if [[ -n "$bold_ap" ]]; then
+		echo "chosen by fallback: bold_ap=$bold_ap bold_pa=$bold_pa"
+	else
+		echo "no AP found near T1"
+		echo "no suitable AP/PA pair found"
+		exit -1
+	fi
 fi
+
+
 
 
 # MM note: need to link these things per Qunex expectations that
