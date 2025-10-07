@@ -73,9 +73,18 @@ else
 	while [[ -z "$bold_ap" && $n -lt 50 ]]; do
 		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
 		if [ ! -z "$line" ]; then
-			bold_ap=$(echo "$line" | cut -d',' -f14 | tr -d '"')
+			bold_ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
+			if [[ ! "$bold_ap" =~ ^rfMRI_REST[0-9]+_AP$ ]]; then
+				echo "Failed to parse session_report.csv"
+				exit -1
+			fi
 			bold_pa=$(echo "$bold_ap" | sed 's/AP$/PA/')
-			break
+			test=$(grep "$bold_pa" "$session_report" | wc -l)
+			if [ "$test" -gt 0 ]; then
+				break
+			else
+				bold_ap=""
+			fi
 		fi
 		n=$((n+1))
 	done
