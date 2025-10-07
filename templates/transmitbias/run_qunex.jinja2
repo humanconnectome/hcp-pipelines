@@ -93,7 +93,9 @@ else
 	else
 		echo "no AP found near T1"
 		echo "no suitable AP/PA pair found"
-		exit -1
+		bold_ap="rfMRI_REST1_AP"
+		bold_pa="rfMRI_REST1_PA"
+		echo "chosen by default: bold_ap=$bold_ap bold_pa=$bold_pa"
 	fi
 fi
 
