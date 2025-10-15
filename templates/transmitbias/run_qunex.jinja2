@@ -70,32 +70,37 @@ else
 	t1_day=$(echo "${t1_line#*:}" | cut -d',' -f1 | tr -d '"')
 	echo "T1 line=$t1_lineno day=$t1_day"
 	n=1
-	while [[ -z "$bold_ap" && $n -lt 50 ]]; do
+	while [ $n -lt 50 ]; do
 		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
 		if [ ! -z "$line" ]; then
-			bold_ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
-			if [[ ! "$bold_ap" =~ ^rfMRI_REST[0-9]+_AP$ ]]; then
+			ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
+			if [[ ! "$ap" =~ ^rfMRI_REST[0-9]+_AP$ ]]; then
 				echo "Failed to parse session_report.csv"
 				exit -1
 			fi
-			bold_pa=$(echo "$bold_ap" | sed 's/AP$/PA/')
-			test=$(grep "$bold_pa" "$session_report" | wc -l)
-			if [ "$test" -gt 0 ]; then
-				break
-			else
-				bold_ap=""
-			fi
+			pa=$(echo "$bold_ap" | sed 's/AP$/PA/')
+			[[ -d "$StudyFolder/unprocessed/$ap" ]] || continue
+			[[ -d "$StudyFolder/unprocessed/$pa" ]] || continue
+			bold_ap="$ap"
+			bold_pa="$pa"
+			break
 		fi
 		n=$((n+1))
 	done
-	if [[ -n "$bold_ap" ]]; then
+	if [[ -n "$bold_ap" && -n "$bold_pa" ]]; then
 		echo "chosen by fallback: bold_ap=$bold_ap bold_pa=$bold_pa"
 	else
 		echo "no AP found near T1"
 		echo "no suitable AP/PA pair found"
-		bold_ap="rfMRI_REST1_AP"
-		bold_pa="rfMRI_REST1_PA"
-		echo "chosen by default: bold_ap=$bold_ap bold_pa=$bold_pa"
+		candidates=(1 2 3 4)
+		for r in "${candidates[@]}"; do
+			bold_ap="rfMRI_REST${r}_AP"
+			bold_pa="rfMRI_REST${r}_PA"
+			[[ -d "$StudyFolder/unprocessed/$bold_ap" ]] || continue
+			[[ -d "$StudyFolder/unprocessed/$bold_pa" ]] || continue
+			echo "chosen by first available pair: bold_ap=$bold_ap bold_pa=$bold_pa"
+			break
+		done
 	fi
 fi
 
