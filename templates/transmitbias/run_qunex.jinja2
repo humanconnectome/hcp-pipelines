@@ -104,7 +104,31 @@ else
 	fi
 fi
 
+# copying or adapting relevant lines from ../tica/run_qunex.sh logic for this:
+{%- if PROJECT_ID == "HCA" %}
+group_name="HCA1798_MSMAll"
+{%- elif PROJECT_ID == "HCD" %}
+group_name="HCD1695_MSMAll"
+{%- elif PROJECT_ID == "ANXPE" %}
+group_name="ANXPE_MSMAll240"
+{%- elif PROJECT_ID == "BANDA" %}
+group_name="BANDA_MSMAll172"
+{%- elif PROJECT_ID == "CBA" %}
+group_name="CBA_MSMAll193"
+{%- elif PROJECT_ID == "MDD" %}
+group_name="MDD_MSMAll442"
+{%- elif PROJECT_ID == "STACT" %}
+group_name="STACT_MSMAll261"
+{%- else %}
+# HOPEFULLY FORCE A FAILURE
+group_name="XXXXXX"
+{%- endif %}
 
+clean_folder="$AUX_DIR/TransmitBias/{{PROJECT_ID}}/$group_name"
+if [ ! -d "$clean_folder" ]; then
+	echo "clean_folder $clean_folder does not exist; exiting"
+	exit 1
+fi
 
 
 # MM note: need to link these things per Qunex expectations that
@@ -122,10 +146,10 @@ if [ -f "$test_file" ]; then
 		--sessions="$Session" \
 		--hcp_transmit_mode="PseudoTransmit" \
 		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
-		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_group_uncorrected_myelin="$AUX_DIR/TransmitBias/HCA722_Winter2021.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_pt_reference_value_file="$AUX_DIR/TransmitBias/pt_reference_value.txt" \
-		--hcp_gmwm_template="$AUX_DIR/TransmitBias/HCA722_Winter2021_GMWMTemplate.nii.gz" \
+		--hcp_myelin_template="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
+		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
 		--hcp_unproc_t1w_list="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.nii.gz" \
 		--hcp_unproc_t2w_list="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.nii.gz" \
 		--hcp_raw_psn_t1w="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/${Session}_T1w_MPR_vNav_Norm_4e_RMS.nii.gz" \
@@ -142,10 +166,10 @@ else
 		--sessions="$Session" \
 		--hcp_transmit_mode="PseudoTransmit" \
 		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
-		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_group_uncorrected_myelin="$AUX_DIR/TransmitBias/HCA722_Winter2021.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_pt_reference_value_file="$AUX_DIR/TransmitBias/pt_reference_value.txt" \
-		--hcp_gmwm_template="$AUX_DIR/TransmitBias/HCA722_Winter2021_GMWMTemplate.nii.gz" \
+		--hcp_myelin_template="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
+		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
 		--hcp_regname="MSMAll" \
 		--hcp_low_res_mesh=32 \
 		--hcp_grayordinates_res=2
