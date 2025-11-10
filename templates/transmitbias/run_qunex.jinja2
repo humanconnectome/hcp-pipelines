@@ -4,10 +4,60 @@
 echo "AUX_DIR is $AUX_DIR"
 AUX_DIR=/ceph/intradb/chpc_resources
 
-session_report="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/session_report.csv"
+project="CCF_{{PROJECT_ID}}_STG"  # todo: is there a better way to get this?
+cinab="/ceph/intradb/archive/CinaB/$project"
+structural_batch_file="$cinab/$Session/ProcessingInfo/processing/batch_Structural_preproc.txt"
+if [ ! -f "$structural_batch_file" ]; then
+	echo "ERROR: couldn't find Structural_preproc batch file in the CinaB directory."
+	exit 1
+fi
 
-t1_json="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.json"
-t2_json="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.json"
+t1_line=$(grep -E "^[0-9]+: T1w\b" $structural_batch_file)
+test=$(echo "$t1_line" | wc -l)
+if [ $test -ne 1 ]; then
+	echo "ERROR: expected to find one and only one T1w line in batch_Structural_preproc.txt"
+	exit 1
+fi
+t1_dirname=$(echo $t1_line | cut -d: -f 3 | sed -r 's/\s+//g' | sed 's/_Norm//')
+t1_filename=$(echo $t1_line | sed -r 's/.*\bfilename\((.*)\).*/\1/')
+t1_filename="${Session}_$t1_filename"
+
+t2_line=$(grep -E "^[0-9]+: T2w\b" $structural_batch_file)
+test=$(echo "$t2_line" | wc -l)
+if [ $test -ne 1 ]; then
+	echo "ERROR: expected to find one and only one T2w line in batch_Structural_preproc.txt"
+	exit 1
+fi
+t2_dirname=$(echo $t2_line | cut -d: -f 3 | sed -r 's/\s+//g' | sed 's/_Norm//')
+t2_filename=$(echo $t2_line | sed -r 's/.*\bfilename\((.*)\).*/\1/')
+t2_filename="${Session}_$t2_filename"
+
+t1_dir="$StudyFolder/unprocessed/$t1_dirname"
+t2_dir="$StudyFolder/unprocessed/$t2_dirname"
+
+if [ ! -d "$t1_dir" ]; then
+	echo "ERROR: t1_dir $t1_dir does not exist"
+	exit 1
+fi
+if [ ! -d "$t2_dir" ]; then
+	echo "ERROR: t2_dir $t2_dir does not exist"
+	exit 1
+fi
+
+# need to determine two things that have a bearing on qunex args to use:
+# - whether structurals were single or multi-echo
+# - whether pre-scan-normalized (PSN) structurals were used in Qunex processing
+
+if [[ "$t1_filename" =~ _Norm ]]; then
+	echo "Found a T1 with PSN"
+	has_psn=1
+else
+	echo "Found a T1 without PSN"
+	has_psn=0
+fi
+
+t1_json="$t1_dir/$t1_filename.json"
+t2_json="$t2_dir/$t2_filename.json"
 ref_shim="$(jq -c '.ShimSetting' "$t1_json")"
 t1_time="$(jq -r '.AcquisitionTime' "$t1_json")"
 t2_time="$(jq -r '.AcquisitionTime' "$t2_json")"
@@ -64,21 +114,21 @@ if [[ -n "$best_ap" && -n "$best_pa" ]]; then
 	bold_pa="$best_pa"
 else
 	# no matching shim group; so find a REST pair by a different method
-	session_report="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/session_report.csv"
-	t1_line=$(grep -n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | head -n1)
+	session_report="$t1_dir/OTHER_FILES/session_report.csv"
+	t1_line=$(grep -n -E ',.*,.*,.*,.*,.*,.*T1w_MPR' "$session_report" | head -n1)
 	t1_lineno=${t1_line%%:*}
 	t1_day=$(echo "${t1_line#*:}" | cut -d',' -f1 | tr -d '"')
 	echo "T1 line=$t1_lineno day=$t1_day"
 	n=1
 	while [ $n -lt 50 ]; do
-		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR_vNav_4e\b' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
+		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
 		if [ ! -z "$line" ]; then
 			ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
 			if [[ ! "$ap" =~ ^rfMRI_REST[0-9]+_AP$ ]]; then
 				echo "Failed to parse session_report.csv"
 				exit -1
 			fi
-			pa=$(echo "$bold_ap" | sed 's/AP$/PA/')
+			pa=$(echo "$ap" | sed 's/AP$/PA/')
 			[[ -d "$StudyFolder/unprocessed/$ap" ]] || continue
 			[[ -d "$StudyFolder/unprocessed/$pa" ]] || continue
 			bold_ap="$ap"
@@ -136,18 +186,15 @@ fi
 ln -s "$StudyFolder/$bold_ap" "$StudyFolder/sessions/$Session/hcp/$Session/"
 ln -s "$StudyFolder/$bold_pa" "$StudyFolder/sessions/$Session/hcp/$Session/"
 
-# need to use args depending on whether pre-scan normalization (PSN)
-# it was used or not (we can test this by existence of e1e2 files)
-test_file="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.nii.gz"
-if [ -f "$test_file" ]; then
+if [ $has_psn -eq 0 ]; then
 	${QUNEXCOMMAND} hcp_transmit_bias_individual \
 		--sessionsfolder="$StudyFolder/sessions" \
 		--batchfile="$StudyFolder/processing/batch.txt" \
 		--sessions="$Session" \
 		--hcp_transmit_mode="PseudoTransmit" \
 		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
-		--hcp_myelin_template="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
 		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
 		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
 		--hcp_unproc_t1w_list="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.nii.gz" \
@@ -166,8 +213,8 @@ else
 		--sessions="$Session" \
 		--hcp_transmit_mode="PseudoTransmit" \
 		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
-		--hcp_myelin_template="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
-		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.All.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
 		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
 		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
 		--hcp_regname="MSMAll" \
