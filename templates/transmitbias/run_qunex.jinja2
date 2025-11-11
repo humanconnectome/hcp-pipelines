@@ -119,8 +119,7 @@ else
 	t1_lineno=${t1_line%%:*}
 	t1_day=$(echo "${t1_line#*:}" | cut -d',' -f1 | tr -d '"')
 	echo "T1 line=$t1_lineno day=$t1_day"
-	n=1
-	while [ $n -lt 50 ]; do
+	for n in $(seq 1 50); do
 		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
 		if [ ! -z "$line" ]; then
 			ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
@@ -135,7 +134,6 @@ else
 			bold_pa="$pa"
 			break
 		fi
-		n=$((n+1))
 	done
 	if [[ -n "$bold_ap" && -n "$bold_pa" ]]; then
 		echo "chosen by fallback: bold_ap=$bold_ap bold_pa=$bold_pa"
