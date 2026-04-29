@@ -1,8 +1,8 @@
-{% from 'components.jinja2' import slurm_head, singularity -%}
+{% from 'components.jinja2' import slurm_head, apptainer -%}
 {{ slurm_head(job_name=SCRIPTNAME_PROCESS, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP, gpu=PROCESS_PBS_GPU, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 {#-
 ### Temporary SBATCH to exclude specific problematic nodes (PROCESS STEP ONLY) NOTE: Code as #SBATCH --exclude=node15,node16
-#SBATCH --exclude=node16,node16
+#SBATCH --exclude=node16
 #}
 
 {% block pre %}{% endblock pre -%}
@@ -24,7 +24,7 @@ mkdir -p {{ SCRATCH_TMP_DIR }}
 {%- if SCRATCH_TMP_DIR is defined and SCRATCH_TMP_DIR %}
 	{% set PROCESS_DATA_BINDPATH = PROCESS_DATA_BINDPATH + "," + SCRATCH_TMP_DIR + ":/tmp" %}
 {% endif -%}
-{{ singularity(
+{{ apptainer(
         container=QUNEX_CONTAINER,
         runpath=RUN_QUNEX_SCRIPT,
         bindpath=PROCESS_DATA_BINDPATH,

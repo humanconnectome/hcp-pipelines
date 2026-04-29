@@ -1,0 +1,224 @@
+{% extends "generic/run_qunex.sh" %}
+{% block pipeline_specific %}
+
+echo "AUX_DIR is $AUX_DIR"
+AUX_DIR=/ceph/intradb/chpc_resources
+
+project="CCF_{{PROJECT_ID}}_STG"  # todo: is there a better way to get this?
+cinab="/ceph/intradb/archive/CinaB/$project"
+structural_batch_file="$cinab/$Session/ProcessingInfo/processing/batch_Structural_preproc.txt"
+if [ ! -f "$structural_batch_file" ]; then
+	echo "ERROR: couldn't find Structural_preproc batch file in the CinaB directory."
+	exit 1
+fi
+
+t1_line=$(grep -E "^[0-9]+: T1w\b" $structural_batch_file)
+test=$(echo "$t1_line" | wc -l)
+if [ $test -ne 1 ]; then
+	echo "ERROR: expected to find one and only one T1w line in batch_Structural_preproc.txt"
+	exit 1
+fi
+t1_dirname=$(echo $t1_line | cut -d: -f 3 | sed -r 's/\s+//g' | sed 's/_Norm//')
+t1_filename=$(echo $t1_line | sed -r 's/.*\bfilename\((.*)\).*/\1/')
+t1_filename="${Session}_$t1_filename"
+
+t2_line=$(grep -E "^[0-9]+: T2w\b" $structural_batch_file)
+test=$(echo "$t2_line" | wc -l)
+if [ $test -ne 1 ]; then
+	echo "ERROR: expected to find one and only one T2w line in batch_Structural_preproc.txt"
+	exit 1
+fi
+t2_dirname=$(echo $t2_line | cut -d: -f 3 | sed -r 's/\s+//g' | sed 's/_Norm//')
+t2_filename=$(echo $t2_line | sed -r 's/.*\bfilename\((.*)\).*/\1/')
+t2_filename="${Session}_$t2_filename"
+
+t1_dir="$StudyFolder/unprocessed/$t1_dirname"
+t2_dir="$StudyFolder/unprocessed/$t2_dirname"
+
+if [ ! -d "$t1_dir" ]; then
+	echo "ERROR: t1_dir $t1_dir does not exist"
+	exit 1
+fi
+if [ ! -d "$t2_dir" ]; then
+	echo "ERROR: t2_dir $t2_dir does not exist"
+	exit 1
+fi
+
+# need to determine two things that have a bearing on qunex args to use:
+# - whether structurals were single or multi-echo
+# - whether pre-scan-normalized (PSN) structurals were used in Qunex processing
+
+if [[ "$t1_filename" =~ _Norm ]]; then
+	echo "Found a T1 with PSN"
+	has_psn=1
+else
+	echo "Found a T1 without PSN"
+	has_psn=0
+fi
+
+t1_json="$t1_dir/$t1_filename.json"
+t2_json="$t2_dir/$t2_filename.json"
+ref_shim="$(jq -c '.ShimSetting' "$t1_json")"
+t1_time="$(jq -r '.AcquisitionTime' "$t1_json")"
+t2_time="$(jq -r '.AcquisitionTime' "$t2_json")"
+
+to_sec() {
+	local t="${1%%.*}"	# strip off everything after the dot
+	IFS=':' read -r h m s <<<"$t"
+	echo $((10#$h*3600 + 10#$m*60 + 10#$s))
+}
+
+
+t1_sec=$(to_sec "$t1_time")
+t2_sec=$(to_sec "$t2_time")
+target_sec=$(( (t1_sec + t2_sec) / 2 ))
+
+best_ap=""
+best_pa=""
+best_diff=999999999
+
+bold_aps=($(find "$StudyFolder" -maxdepth 1 -type d -printf "%f\n" | grep "rfMRI_REST.*AP$" | sort))
+echo "ref_shim=$ref_shim"
+echo "t1_time=$t1_time, t2_time=$t2_time, target_sec=$target_sec"
+
+for ap in "${bold_aps[@]}"; do
+	echo "test"
+	pa=$(echo "$ap" | sed 's/_AP$/_PA/')
+	[[ -d "$StudyFolder/unprocessed/$pa" ]] || continue
+	ap_json="$(find "$StudyFolder/unprocessed/$ap" | grep json$ | sort | head -n1)"
+	pa_json="$(find "$StudyFolder/unprocessed/$pa" | grep json$ | sort | head -n1)"
+	[[ -n "$ap_json" && -n "$pa_json" ]] || continue
+	ap_shim="$(jq -c '.ShimSetting' "$ap_json")"
+	pa_shim="$(jq -c '.ShimSetting' "$pa_json")"
+	if [[ "$ap_shim" == "$ref_shim" && "$pa_shim" == "$ref_shim" ]]; then
+		ap_time="$(jq -r '.AcquisitionTime' "$ap_json")"
+		pa_time="$(jq -r '.AcquisitionTime' "$pa_json")"
+		ap_sec=$(to_sec "$ap_time")
+		pa_sec=$(to_sec "$pa_time")
+		echo $ap_sec
+		echo $pa_sec
+		mid_sec=$(( (ap_sec + pa_sec) / 2 ))
+		diff=$(( mid_sec > target_sec ? mid_sec - target_sec : target_sec - mid_sec ))
+		echo "pair $ap / $pa: ap_time=$ap_time pa_time=$pa_time mid_sec=$mid_sec diff=$diff"
+		if (( diff < best_diff )); then
+			best_diff=$diff
+			best_ap=$ap
+			best_pa=$pa
+		fi
+	fi
+done
+
+if [[ -n "$best_ap" && -n "$best_pa" ]]; then
+	echo "chosen pair: $best_ap $best_pa (diff=$best_diff seconds)"
+	bold_ap="$best_ap"
+	bold_pa="$best_pa"
+else
+	# no matching shim group; so find a REST pair by a different method
+	session_report="$t1_dir/OTHER_FILES/session_report.csv"
+	t1_line=$(grep -n -E ',.*,.*,.*,.*,.*,.*T1w_MPR' "$session_report" | head -n1)
+	t1_lineno=${t1_line%%:*}
+	t1_day=$(echo "${t1_line#*:}" | cut -d',' -f1 | tr -d '"')
+	echo "T1 line=$t1_lineno day=$t1_day"
+	for n in $(seq 1 50); do
+		line=$(grep -A$n -B$n -E ',.*,.*,.*,.*,.*,.*T1w_MPR' "$session_report" | grep -E "^.?$t1_day.*,.*,.*,.*,.*,.*,.*rfMRI_REST[0-9]+_AP\b" | head -n1)
+		if [ ! -z "$line" ]; then
+			ap=$(echo "$line" | sed -r 's/.*(rfMRI_REST[0-9]+_AP\b).*/\1/')
+			if [[ ! "$ap" =~ ^rfMRI_REST[0-9]+_AP$ ]]; then
+				echo "Failed to parse session_report.csv"
+				exit -1
+			fi
+			pa=$(echo "$ap" | sed 's/AP$/PA/')
+			[[ -d "$StudyFolder/unprocessed/$ap" ]] || continue
+			[[ -d "$StudyFolder/unprocessed/$pa" ]] || continue
+			bold_ap="$ap"
+			bold_pa="$pa"
+			break
+		fi
+	done
+	if [[ -n "$bold_ap" && -n "$bold_pa" ]]; then
+		echo "chosen by fallback: bold_ap=$bold_ap bold_pa=$bold_pa"
+	else
+		echo "no AP found near T1"
+		echo "no suitable AP/PA pair found"
+		candidates=(1 2 3 4)
+		for r in "${candidates[@]}"; do
+			bold_ap="rfMRI_REST${r}_AP"
+			bold_pa="rfMRI_REST${r}_PA"
+			[[ -d "$StudyFolder/unprocessed/$bold_ap" ]] || continue
+			[[ -d "$StudyFolder/unprocessed/$bold_pa" ]] || continue
+			echo "chosen by first available pair: bold_ap=$bold_ap bold_pa=$bold_pa"
+			break
+		done
+	fi
+fi
+
+# copying or adapting relevant lines from ../tica/run_qunex.sh logic for this:
+{%- if PROJECT_ID == "HCA" %}
+group_name="HCA1798_MSMAll"
+{%- elif PROJECT_ID == "HCD" %}
+group_name="HCD1695_MSMAll"
+{%- elif PROJECT_ID == "ANXPE" %}
+group_name="ANXPE_MSMAll240"
+{%- elif PROJECT_ID == "BANDA" %}
+group_name="BANDA_MSMAll172"
+{%- elif PROJECT_ID == "CBA" %}
+group_name="CBA_MSMAll193"
+{%- elif PROJECT_ID == "MDD" %}
+group_name="MDD_MSMAll442"
+{%- elif PROJECT_ID == "STACT" %}
+group_name="STACT_MSMAll261"
+{%- else %}
+# HOPEFULLY FORCE A FAILURE
+group_name="XXXXXX"
+{%- endif %}
+
+clean_folder="$AUX_DIR/TransmitBias/{{PROJECT_ID}}/$group_name"
+if [ ! -d "$clean_folder" ]; then
+	echo "clean_folder $clean_folder does not exist; exiting"
+	exit 1
+fi
+
+
+# MM note: need to link these things per Qunex expectations that
+# are not sufficiently handled by `hcp-pipelines/lib/get_data.py
+ln -s "$StudyFolder/$bold_ap" "$StudyFolder/sessions/$Session/hcp/$Session/"
+ln -s "$StudyFolder/$bold_pa" "$StudyFolder/sessions/$Session/hcp/$Session/"
+
+if [ $has_psn -eq 0 ]; then
+	${QUNEXCOMMAND} hcp_transmit_bias_individual \
+		--sessionsfolder="$StudyFolder/sessions" \
+		--batchfile="$StudyFolder/processing/batch.txt" \
+		--sessions="$Session" \
+		--hcp_transmit_mode="PseudoTransmit" \
+		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
+		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
+		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
+		--hcp_unproc_t1w_list="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/${Session}_T1w_MPR_vNav_4e_e1e2_mean.nii.gz" \
+		--hcp_unproc_t2w_list="$StudyFolder/unprocessed/T2w_SPC_vNav/${Session}_T2w_SPC_vNav.nii.gz" \
+		--hcp_raw_psn_t1w="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_RMS/OTHER_FILES/${Session}_T1w_MPR_vNav_Norm_4e_RMS.nii.gz" \
+		--hcp_raw_nopsn_t1w="$StudyFolder/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/OTHER_FILES/${Session}_T1w_MPR_vNav_4e_RMS.nii.gz" \
+		--hcp_regname="MSMAll" \
+		--hcp_low_res_mesh=32 \
+		--hcp_grayordinates_res=2
+else
+	# per Tim: "If [your data] used PSN for the structurals [...],
+	# then receive bias correction is not needed, and you shouldn't specify any unproc or psn/nopsn arguments.
+	${QUNEXCOMMAND} hcp_transmit_bias_individual \
+		--sessionsfolder="$StudyFolder/sessions" \
+		--batchfile="$StudyFolder/processing/batch.txt" \
+		--sessions="$Session" \
+		--hcp_transmit_mode="PseudoTransmit" \
+		--hcp_pt_fmri_names="$bold_ap,$bold_pa" \
+		--hcp_myelin_template="$AUX_DIR/TransmitBias/Partial.MyelinMap_GroupCorr_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_group_uncorrected_myelin="$clean_folder/MNINonLinear/fsaverage_LR32k/$group_name.MyelinMap_MSMAll.32k_fs_LR.dscalar.nii" \
+		--hcp_pt_reference_value_file="$clean_folder/PT_refval.txt" \
+		--hcp_gmwm_template="$clean_folder/MNINonLinear/GMWMTemplate.nii.gz" \
+		--hcp_regname="MSMAll" \
+		--hcp_low_res_mesh=32 \
+		--hcp_grayordinates_res=2
+fi
+
+{% endblock pipeline_specific %}
+

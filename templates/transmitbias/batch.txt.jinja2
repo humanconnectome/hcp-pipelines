@@ -1,0 +1,12 @@
+{% extends "generic/batch.txt.jinja2" %}
+{% block additional_params %}
+_hcp_tica_bolds                   : {{ ALL_BOLDS }}
+_hcp_tica_mrfix_concat_name       : fMRI_CONCAT_ALL
+#{% if MSM_ALL_BOLDS is defined %}
+## -------------------------> MSMAll parameters
+#
+#_hcp_tica_bolds                   : {{ MSM_ALL_BOLDS }}
+#_hcp_tica_mrfix_concat_name       : fMRI_CONCAT_ALL
+#
+#{% endif %}
+{% endblock additional_params %}

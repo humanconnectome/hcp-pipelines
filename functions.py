@@ -268,7 +268,20 @@ def available_bold_dirs(RESOURCES_ROOT, PROJECT):
                 "tfMRI_LANGUAGE1_AP",
                 "tfMRI_LANGUAGE2_PA",
                 "tfMRI_MOTOR_AP",
-                "tfMRI_MOTOR_PA"
+                "tfMRI_MOTOR_PA",
+            ]
+        elif "CCF_STACT" in PROJECT:
+            priority = [
+                "rfMRI_REST1_AP",
+                "rfMRI_REST1_PA",
+                "tfMRI_GAMBLING_AP",
+                "tfMRI_GAMBLING_PA",
+                "tfMRI_EMOTION_AP",
+                "tfMRI_EMOTION_PA",
+                "tfMRI_WM_AP",
+                "tfMRI_WM_PA",
+                "rfMRI_REST2_AP",
+                "rfMRI_REST2_PA"
             ]
         else:
             sys.exit("ERROR (available_bolds_dir):  Unexpected project value (" + PROJECT + ")")
@@ -304,6 +317,7 @@ def set_bold_list_order(PROJECT, SCAN):
     BLO_HCD_OLDER = "hcd_8_and_up"
     BLO_ANXPE = "anxpe"
     BLO_CBA = "cba"
+    BLO_STACT = "stact"
 
     if PROJECT == "CCF_HCA_STG" or PROJECT == "CCF_HCA_TST" or PROJECT == "AABC_STG":
         bold_list_order = BLO_HCA
@@ -326,6 +340,8 @@ def set_bold_list_order(PROJECT, SCAN):
         bold_list_order = BLO_ANXPE
     elif PROJECT == "CCF_CBA_STG":
         bold_list_order = BLO_CBA
+    elif PROJECT == "CCF_STACT_STG":
+        bold_list_order = BLO_STACT
     else:
         raise ValueError("The BOLD LIST ORDER for this project has not yet been defined")
 

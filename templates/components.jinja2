@@ -37,7 +37,7 @@
 #SBATCH --job-name="{{ job_name }}.{{ timestamp }}"
 #SBATCH --nodes={{ nodes|int }} --ntasks-per-node={{ ppn|int }}
 {%- if gpu %}
-#SBATCH --account=hcp --partition=tier2_gpu --gres=gpu:{{ gpu }}
+#SBATCH --account=hcp --partition=tier2_gpu --gres=gpu:{{ gpu }} --qos=normal_gpu
 {%- else %}
 #SBATCH --account=hcp --partition=tier2_cpu 
 {%- endif %}
@@ -52,7 +52,7 @@
 #SBATCH --exclude=node15,node16,node18
 {#- NOTE: ADD TEMPORARY SBATCH to exclude specific problematic nodes (NOTE: Code as #SBATCH --exclude=node15,node16 
 #SBATCH --reservation=nrg-svc-hcpi_232
-#SBATCH --exclude=node15,node16,node17
+#SBATCH --exclude=node26
 #}
 {%- endmacro %}
 
@@ -70,16 +70,26 @@
 {%- endmacro %}
 
 
-{% macro singularity(container, runpath, bindpath="", nvidia=False, params={}, version="3.7.0") -%}
-module load singularity/{{ version }}
+{% macro apptainer(container, runpath, bindpath="", nvidia=False, params={}) -%}
+module load apptainer
 
-singularity exec \
+test1="/tmp/inject.so"
+test2="/tmp/preload.conf"
+if [ ! -f "$test1" ]; then
+	cp $HOME/inject.so /tmp/inject.so
+fi
+if [ ! -f "$test2" ]; then
+	echo "/mnt/inject.so" > /tmp/preload.conf
+fi
+
+apptainer exec \
 {%- if bindpath|trim -%}
     {%- for path in bindpath.split(",") %}
     --bind {{ path }} \
-    {%- endfor -%}
-{%- endif -%}
-    
+    {%- endfor %}
+    --bind /tmp/inject.so:/mnt/inject.so \
+    --bind /tmp/preload.conf:/etc/ld.so.preload \
+{%- endif %}
     --cleanenv \
 {%- if nvidia %}
     --nv \

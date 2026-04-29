@@ -1,4 +1,4 @@
-{% from 'components.jinja2' import slurm_head, singularity -%}
+{% from 'components.jinja2' import slurm_head, apptainer -%}
 {{ slurm_head(job_name=SCRIPTNAME_CLEAN, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP) }}
 
 {{ PYTHON }} \

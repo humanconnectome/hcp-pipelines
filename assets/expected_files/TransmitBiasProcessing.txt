@@ -1,0 +1,67 @@
+T1w T1wDividedByT2w_PseudoCorr_ribbon.nii.gz
+T1w T1wDividedByT2w_PseudoCorr.nii.gz
+T1w T1w_acpc_dc_restore.2.nii.gz
+T1w SE.nii.gz
+T1w SBRef_gdc_dc_reg.nii.gz
+T1w SBRef_fov_all.nii.gz
+T1w SBRef_fov_all_min.nii.gz
+T1w rPseudoTransmitField_Norm.nii.gz
+T1w rPseudoTransmitField_Norm.2.nii.gz
+T1w ROIs wmparc.2.nii.gz
+T1w ROIs TransmitBias_ROI.2.nii.gz
+T1w ROIs ThalamusJunctionTemplate.2.nii.gz
+T1w ROIs R_TransmitBias_ROI.2.nii.gz
+T1w ROIs R_ThalamusTemplate.2.nii.gz
+T1w ROIs R_GMWMTemplate.2.nii.gz
+T1w ROIs MidBrainTemplate.2.nii.gz
+T1w ROIs L_TransmitBias_ROI.2.nii.gz
+T1w ROIs L_ThalamusTemplate.2.nii.gz
+T1w ROIs L_GMWMTemplate.2.nii.gz
+T1w ROIs H_TransmitBias_ROI.2.nii.gz
+T1w ROIs HindBrainTemplate.2.nii.gz
+T1w ROIs HindBrainJunctionTemplate.2.nii.gz
+T1w ROIs GMWMTemplate.2.nii.gz
+T1w ROIs CorpusCallosumTemplate.2.nii.gz
+T1w ROIs brainmask_fs.2.nii.gz
+T1w PseudoTransmit_stats.txt
+T1w PseudoTransmit_fov_all_min.nii.gz
+T1w PseudoTransmitField_Raw.nii.gz
+T1w PseudoTransmitField_Raw.2.nii.gz
+T1w PhaseTwo_gdc_dc_reg.nii.gz
+T1w PhaseTwo_gdc_dc_reg_mean.nii.gz
+T1w PhaseTwo_fov_all.nii.gz
+T1w PhaseTwo_fov_all_min.nii.gz
+T1w PhaseOne_gdc_dc_reg.nii.gz
+T1w PhaseOne_gdc_dc_reg_mean.nii.gz
+T1w PhaseOne_fov_all.nii.gz
+T1w PhaseOne_fov_all_min.nii.gz
+T1w Head.nii.gz
+T1w Head.2.nii.gz
+T1w GRE.nii.gz
+T1w GMWMTemplate.nii.gz
+MNINonLinear T1wDividedByT2w_PseudoCorr.nii.gz
+MNINonLinear T1wDividedByT2w_PseudoCorr_Atlas.nii.gz
+MNINonLinear T1wDividedByT2w.nii.gz
+MNINonLinear T1wDividedByT2w_Atlas.nii.gz
+MNINonLinear rPseudoTransmitField_Norm.nii.gz
+MNINonLinear rPseudoTransmitField_Norm_Atlas.nii.gz
+MNINonLinear rPseudoTransmitField_Norm.2.nii.gz
+MNINonLinear ROIs GMWMTemplate.2.nii.gz
+MNINonLinear PureCSF.nii.gz
+MNINonLinear PseudoTransmitField_Raw.nii.gz
+MNINonLinear PseudoTransmitField_Raw_Atlas.nii.gz
+MNINonLinear PseudoTransmitField_Raw.2.nii.gz
+MNINonLinear PseudoTransmitField_Norm_Atlas.nii.gz
+MNINonLinear PseudoTransmit_CSFStats.txt
+MNINonLinear LateralVentricles.nii.gz
+MNINonLinear Head.nii.gz
+MNINonLinear Head.2.nii.gz
+MNINonLinear GMWMTemplate.nii.gz
+MNINonLinear fsaverage_LR32k {subjectid}.R.rPseudoTransmitField_Norm_MSMAll.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.R.PseudoTransmitField_Raw_MSMAll.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.rPseudoTransmitField_Norm_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.PseudoTransmitField_Raw_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.PseudoTransmitField_Norm_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.MyelinMap_PseudoCorr_MSMAll.32k_fs_LR.dscalar.nii
+MNINonLinear fsaverage_LR32k {subjectid}.L.rPseudoTransmitField_Norm_MSMAll.32k_fs_LR.func.gii
+MNINonLinear fsaverage_LR32k {subjectid}.L.PseudoTransmitField_Raw_MSMAll.32k_fs_LR.func.gii

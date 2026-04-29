@@ -1,4 +1,4 @@
-{% from 'components.jinja2' import slurm_head, singularity -%}
+{% from 'components.jinja2' import slurm_head, apptainer -%}
 {{ slurm_head(job_name=SCRIPTNAME_RUNALL, log_dir=CHECK_DATA_DIR, timestamp=TIMESTAMP, gpu=PROCESS_PBS_GPU, walltime=WALLTIME_LIMIT_HOURS, mem=MEM_LIMIT_GBS) }}
 
 {% block pre %}{% endblock pre -%}

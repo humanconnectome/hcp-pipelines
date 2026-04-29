@@ -5,7 +5,7 @@ DEFAULT: &default
   USER: $ENV_USER
   HOME: $ENV_HOME
   TIMESTAMP: $TIMESTAMP
-  PYTHON: $AUX_DIR/virtualenv/bin/python
+  PYTHON: ". /ceph/scratch/intradb/tmp/miniconda3/bin/activate; conda activate hcp-pipelines; $HOME/.conda/envs/hcp-pipelines/bin/python"
   XNAT_CREDENTIALS_FILE: $HOME/.xnat_credentials
   PIPELINE_REPO: $HOME/hcp-pipelines
   #PIPELINE_REPO: $HOME/hcp-pipelines-newpipelines
@@ -44,7 +44,7 @@ DEFAULT: &default
   USE_SCRATCH_FOR_PROCESSING: False
   RUN_COMBINED_STEPS: False
   # MRH:  Now for default, we're binding /tmp to /scratch.  We were often filling up tmp space which caused silent failures.
-  SCRATCH_TMP_DIR: /scratch/$USER/singularity/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
+  SCRATCH_TMP_DIR: /scratch/$USER/containers/tmp/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   #SCRATCH_TMP_DIR: /ceph/scratch/intradb/tmp/chpc_runs/$USER/${PIPELINE_NAME}.$SESSION.${TIMESTAMP}.TMPDIR
   AUTOLAUNCH_AT_END: True
   #AUTOLAUNCH_AT_END: False
@@ -138,6 +138,7 @@ diffusion_preprocess:
   QUNEX_VERSION: 0.100.0
 
 
+
 bedpostx:
   <<: *default
   PROCESS_PBS_K20X: True
@@ -154,11 +155,12 @@ bedpostx:
 
 multirunicafix:
   <<: *default
-  MEM_LIMIT_GBS: 48
+  MEM_LIMIT_GBS: 56 # MJM note: for CBA, increase from 48 to 56
   #WALLTIME_LIMIT_HOURS: 24
   WALLTIME_LIMIT_HOURS: 120
   OUTPUT_RESOURCE_NAME: MultiRunIcaFix_proc
   USE_CUSTOM_BATCH: True
+  WALLTIME_LIMIT_HOURS: 48
 
 # 
 # MSM-ALL PROCESSING 
@@ -166,7 +168,7 @@ multirunicafix:
 
 msmall_process:
   <<: *default
-  MEM_LIMIT_GBS: 20
+  MEM_LIMIT_GBS: 28 # MJM note: for CBA, increase from 20 to 28
   WALLTIME_LIMIT_HOURS: 48
   #WALLTIME_LIMIT_HOURS: 60
   OUTPUT_RESOURCE_NAME: MsmAll_proc
@@ -202,12 +204,24 @@ reapplyfix_process:
 
 tica_process:
   <<: *default
-  MEM_LIMIT_GBS: 24
+  MEM_LIMIT_GBS: 24 # MM note: need to change from 24 to 48 for CBA, BANDA, ANXPE
   WALLTIME_LIMIT_HOURS: 4
   OUTPUT_RESOURCE_NAME: tICA_proc
   USE_CUSTOM_BATCH: True
   QUNEX_VERSION: 0.99.3_RC2
   PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/tICA
+
+# TICA FIX PROCESSING 
+# 
+
+transmitbias:
+  <<: *default
+  MEM_LIMIT_GBS: 8
+  WALLTIME_LIMIT_HOURS: 6
+  OUTPUT_RESOURCE_NAME: TransmitBias_proc
+  USE_CUSTOM_BATCH: True # MM note: what is this?
+  QUNEX_VERSION: 1.3.5
+  PROCESS_DATA_BINDPATH: $GRADIENT_COEFFICIENT_PATH,$SINGULARITY_BIND_PATH,/$AUX_DIR/TransmitBias
 
 # 
 # AUTO RECLEAN PROCESSING 
@@ -215,7 +229,7 @@ tica_process:
 
 autoreclean_process:
   <<: *default
-  MEM_LIMIT_GBS: 48
+  MEM_LIMIT_GBS: 48 # MM note: for CBA, have to change from 48 to 64
   WALLTIME_LIMIT_HOURS: 24
   QUNEX_VERSION: 0.99.2d
   OUTPUT_RESOURCE_NAME: AutoReclean_proc
